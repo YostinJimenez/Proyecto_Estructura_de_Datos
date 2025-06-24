@@ -25,6 +25,7 @@ public:
     void setContrasena(const string& nuevaContrasena);
     Cuenta* getCuenta() const;
     void setCuenta(Cuenta* c);
+    string serializar() const;
     ~Cliente();
 };
 #endif

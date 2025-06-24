@@ -36,3 +36,24 @@ string Cliente::getContrasena() const { return contrasena; }
 void Cliente::setContrasena(const string& nuevaContrasena) { contrasena = nuevaContrasena; }
 Cuenta* Cliente::getCuenta() const { return cuenta; }
 void Cliente::setCuenta(Cuenta* c) { cuenta = c; }
+
+// En Cliente.h o Cliente.cpp
+string Cliente::serializar() const {
+    stringstream fechaNac;
+    fechaNac << getFechaNacimiento().getDia() << "/"
+             << getFechaNacimiento().getMes() << "/"
+             << getFechaNacimiento().getAnio();
+    string datos = getCedula() + "|" +
+                   getPrimerNombre() + "|" +
+                   getSegundoNombre() + "|" +
+                   getPrimerApellido() + "|" +
+                   getSegundoApellido() + "|" +
+                   getTelefono() + "|" +
+                   getCorreo() + "|" +
+                   getUsuario() + "|" +
+                   getContrasena() + "|" +
+                   getCuenta()->getNumero() + "|" +
+                   to_string(getCuenta()->getSaldo()) + "|" +
+                   fechaNac.str();
+    return datos;
+}

@@ -27,6 +27,7 @@ public:
     static std::string validarHora(const std::string& hora);
     static bool validar_hora_minuto_segundo(int hora, int minuto, int segundo);
     static bool es_fecha_valida(int dia, int mes, int anio);
+    static std::string validarCaracter(std::string& opcion);
 };
 
 #endif

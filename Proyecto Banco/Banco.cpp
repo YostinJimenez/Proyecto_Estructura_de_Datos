@@ -136,7 +136,7 @@ bool Banco::mostrarConfirmacion(double monto, const string& operacion) {
     system("cls");
     const char* opciones[] = {"Aceptar", "Cancelar"};
     cout <<"\t=====================================\n";
-    cout << "\t==== CONFIRMAR " << operacion << " ====\n";
+    cout << "\t======= CONFIRMAR " << operacion << " =======\n";
     cout <<"\t=====================================\n";
 
     cout << "\tMonto: $" << fixed << setprecision(2) << monto << "\n";
@@ -219,7 +219,7 @@ void Banco::mostrarMenuUsuario() {
     system("cls");
     try {
         cout<<"\t=====================================\n";
-        cout << "\t======= INICIO DE SESION =======\n";
+        cout << "\t======= INICIO DE SESION ===========\n";
         cout << "\t=====================================\n";
         cout << "Presione Esc para volver al menú principal.\n\n";
         string usuario = ValidacionDatos::capturarEntrada(ValidacionDatos::USUARIO, "Usuario: ", 20);
@@ -273,7 +273,7 @@ void Banco::mostrarMenuUsuario(Cliente* cliente) {
                     if (mostrarConfirmacion(monto, "TRANSFERENCIA")) {
                         if (cliente->getCuenta()->retirar(monto, Fecha(), true, cuentaDestino)) {
                             destino->getCuenta()->depositar(monto, Fecha(), true, cliente->getCuenta()->getNumero());
-                            cout << "\nTransferencia de $" << fixed << setprecision(2) << monto << " realizada con éxito.\n";
+                            cout << "\n\n\tTransferencia de $" << fixed << setprecision(2) << monto << " realizada con éxito.\n";
                         }
                     } else {
                         cout << "\nTransferencia cancelada o abortada.\n";
@@ -334,19 +334,22 @@ void Banco::mostrarMenuUsuario(Cliente* cliente) {
                     const char* opciones_Transacciones[] = {"Rango de Fechas", "Monto Mínimo", "General", "Atrás"};
                     seleccion = seleccionar_opcion("\t\t=== CONSULTAR TRANSACCIONES ===\n\n", opciones_Transacciones, 4, 2);
                     string tituloConsulta = "=== CONSULTAR TRANSACCIONES ===\n\nPresione Esc para volver al menú de usuario.\n\n";
-                    system("cls");
                     switch (seleccion) {
                         case 1: { // Rango de Fechas
+                            system("cls");
                             Fecha inicio = ValidacionDatos::capturarFechaInteractiva("Ingrese fecha de inicio (dd/mm/aaaa):");
                             if (!inicio.esValida()) break; // Atrás
                             Fecha fin = ValidacionDatos::capturarFechaInteractiva("Fecha de fin (dd/mm/aaaa):", false, &inicio);
+                            cout << "\n\n";
                             if (!fin.esValida()) break;
                             cliente->getCuenta()->consultaRangoFechas(inicio, fin, [](const Transaccion<double>* t) {
                                 cout << t->resumenTransaccion() << endl;
                             });
+                            getch(); // Esperar a que el usuario vea las transacciones
                             break;
                         }
                         case 2: { // Monto Mínimo
+                            system("cls");
                             cout << tituloConsulta;
                             string inputMonto = ValidacionDatos::capturarEntrada(ValidacionDatos::MONTO, "Monto mínimo: $", 20);
                             if (inputMonto.empty()) break;
@@ -354,9 +357,11 @@ void Banco::mostrarMenuUsuario(Cliente* cliente) {
                             cliente->getCuenta()->consultaPersonalizada(minMonto, [](const Transaccion<double>* t) {
                                 cout << t->resumenTransaccion() << endl;
                             });
+                            getch(); // Esperar a que el usuario vea las transacciones
                             break;
                         }
                         case 3: { // General
+                            system("cls");
                             cout << tituloConsulta;
                             cliente->getCuenta()->consultaGeneral([](const Transaccion<double>* t) {
                                 cout << t->resumenTransaccion() << endl;
@@ -533,15 +538,15 @@ void Banco::ordenarCuentas(const vector<Cliente*>& resultados, CampoBusqueda cam
 }
 
 void Banco::mostrarMenuAdmin() {
-    const char* opciones[] = {"Backup", "Restaurar Backup", "Gestionar", "Cifrado","Descifrado","Base Datos","Atrás"};
+    const char* opciones[] = {"Backup", "Restaurar Backup", "Gestionar", "Cifrado", "Descifrado", "Base Datos", "Verificar Integridad","Atrás"};
     const char* camposBusqueda[] = {"Cédula", "Primer Nombre", "Segundo Nombre", "Primer Apellido", "Segundo Apellido", "Saldo", "Atrás"};
     const char* camposOrdenamiento[] = {"Cédula", "Primer Nombre", "Segundo Nombre", "Primer Apellido", "Segundo Apellido", "Saldo"};
     bool salir = false;
 
     while (!salir) {
         system("cls");
-        int seleccion = seleccionar_opcion("\t\t=== PANEL ADMINISTRADOR ===\n\n", opciones, 7, 2);
-        if (seleccion == 7) { // Atrás
+        int seleccion = seleccionar_opcion("\t\t=== PANEL ADMINISTRADOR ===\n\n", opciones, 8, 2);
+        if (seleccion == 8) { // Atrás
             salir = true;
             continue;
         }
@@ -558,7 +563,7 @@ void Banco::mostrarMenuAdmin() {
                     }
                     system("cls");
                     cout << "\t\t=== BÚSQUEDA POR " << camposBusqueda[campoBusqueda - 1] << " ===\n\n";
-                    cout << "Presione Esc para volver a la selección de campo.\n\n";
+                    cout << "• Presione Esc para volver a la selección de campo.\n\n";
                     string entrada;
                     vector<Cliente*> resultados;
                     if (campoBusqueda - 1 == SALDO) {
@@ -588,11 +593,11 @@ void Banco::mostrarMenuAdmin() {
                         cout << endl << endl;
                         // Mostrar tabla ordenada
                         if (resultados.empty()) {
-                            cout << "No se encontraron coincidencias." << endl;
+                            cout << "• No se encontraron coincidencias." << endl;
                         } else {
                             ordenarCuentas(resultados, static_cast<CampoBusqueda>(campoOrdenamiento));
                         }
-                        cout << "\nUse flechas izquierda/derecha para ordenar, Enter o Esc para volver.";
+                        cout << "\n• Use flechas izquierda/derecha para ordenar, Enter o Esc para volver.";
                         int tecla = _getch();
                         if (tecla == 224 || tecla == 0) {
                             tecla = _getch();
@@ -610,61 +615,79 @@ void Banco::mostrarMenuAdmin() {
                 cout << "Presione Esc para volver al menú de administrador.\n";
                 if (clientes.estaVacia()) {
                     cout << "No hay clientes registrados. No se puede realizar el backup.\n";
+                } else if(BackupManager::validarArchivoExistente(clientes)) {
+                    cout << "\t======================================================\n";
+                    cout << "\t  ERROR AL REALIZAR BACKUP: Ya existe un backup igual.\n";
+                    cout << "\t======================================================\n";
                 } else {
                     string nombreArchivo = BackupManager::guardarBackup(clientes);
-                    cout << "Backup realizado con éxito en: " << nombreArchivo << endl;
+                    cout << "\t======================================================\n";
+                    cout << "\t  BACKUP REALIZADO CON ÉXITO: "<<nombreArchivo << endl;
+                    cout << "\t======================================================\n";
                 }
             } else if (seleccion == 2) { // Restaurar Backup
                 string fecha, fecha_hora;
-                int horas=0, minutos=0, segundos=0,dia=0, mes=0, anio=0;
-                    try {
+                int horas=999, minutos=999, segundos=999,dia=0, mes=0, anio=0;
+                try {
                 cout << "\t\t========================\n";
                 cout << "\t\t=== RESTAURAR BACKUP ===\n";
                 cout << "\t\t========================\n";
-                cout << "Presione Esc para volver al menú de administrador.\n";
+                cout << "• Presione Esc para volver al menú de administrador.\n";
                 do {
-                    ValidacionDatos::limpiar_linea("➤ Ingrese la fecha del backup (DD/MM/YYYY): ");
+                    ValidacionDatos::limpiar_linea("• Ingrese la fecha del backup (DD/MM/YYYY): ");
                     fecha = ValidacionDatos::validarFecha("");
                     if (fecha == "__ESC__") break; // Atrás 
-                     while (fecha.length() < 8) fecha += "0";
-                    dia = stoi(fecha.substr(0, 2));
-                    mes = stoi(fecha.substr(2, 2));
-                    anio = stoi(fecha.substr(4, 4));
+                    if (fecha.length() == 8) {
+                        dia = stoi(fecha.substr(0, 2));
+                        mes = stoi(fecha.substr(2, 2));
+                        anio = stoi(fecha.substr(4, 4));
+                    }
                 } while (!ValidacionDatos::es_fecha_valida(anio, mes, dia));
                 cout << endl;
                 do {
-                    ValidacionDatos::limpiar_linea("➤ Ingrese la hora del backup (HH:MM:SS): ");
+                    ValidacionDatos::limpiar_linea("• Ingrese la hora del backup (HH:MM:SS): ");
                     fecha_hora = ValidacionDatos::validarHora("");
-                    if (fecha_hora == "__ESC__") break; // Atrás o vacío
-                    while (fecha_hora.length() < 6) fecha_hora += "0";
-                    horas = stoi(fecha_hora.substr(0, 2));
-                    minutos = stoi(fecha_hora.substr(2, 2));
-                    segundos = stoi(fecha_hora.substr(4, 2));
+                    if (fecha_hora == "__ESC__") break; // Atrás
+                    if (fecha_hora.length() == 6){
+                        horas = stoi(fecha_hora.substr(0, 2));
+                        minutos = stoi(fecha_hora.substr(2, 2));
+                        segundos = stoi(fecha_hora.substr(4, 2));
+                    }
                 } while (!ValidacionDatos::validar_hora_minuto_segundo(horas, minutos, segundos));
                 cout << endl;
-            char buffer[100];
-            snprintf(buffer, sizeof(buffer), "backup_%02d%02d%04d_%02d%02d%02d.bin", dia, mes, anio, horas, minutos, segundos);
-            string nombreArchivo = buffer;
-                //string nombreArchivo = ValidacionDatos::capturarEntrada(ValidacionDatos::NOMBRE_ARCHIVO, "Nombre del archivo de backup: ", 50);
-                if (nombreArchivo.empty()) continue; // Atrás
-                BackupManager::restaurarBackup(nombreArchivo, clientes);
-                cout << "\n\t\t===================================================\n";
-                cout << "\t\t=== BACKUP RESTAURADO: " << nombreArchivo << " ===\n";
-                cout << "\t\t===================================================\n";
-                cout << "Backup restaurado con éxito.\n";
-            } catch (const BancoException& e) 
-            {
-                cout << "\t===================================================\n";
-                cout << "\t  ERROR AL RECUPERAR BACKUP: " << e.what() << endl;
-                cout << "\t===================================================\n";
-                cout << "Regresando al menú principal...\n";
-            }
+                    char buffer[100];
+                    snprintf(buffer, sizeof(buffer), "backup_%02d%02d%04d_%02d%02d%02d.txt", dia, mes, anio, horas, minutos, segundos);
+                    string nombreArchivo = buffer;
+                    //string nombreArchivo = ValidacionDatos::capturarEntrada(ValidacionDatos::NOMBRE_ARCHIVO, "Nombre del archivo de backup: ", 50);
+                    if (nombreArchivo.empty()) continue; // Atrás
+                    BackupManager::restaurarBackup(nombreArchivo, clientes);
+                    cout << "\n\t\t===================================================\n";
+                    cout << "\t\t=== BACKUP RESTAURADO: " << nombreArchivo << " ===\n";
+                    cout << "\t\t===================================================\n";
+                    cout << "Backup restaurado con éxito.\n";
+                } catch (const BancoException& e) 
+                {
+                    cout << "\t===================================================\n";
+                    cout << "\t  ERROR AL RECUPERAR BACKUP: " << e.what() << endl;
+                    cout << "\t===================================================\n";
+                    cout << "Regresando al menú principal...\n";
+                }
             } else if (seleccion == 4) { // Cifrado
                 CifradoCesar::cifrar_archivos_txt();
             } else if (seleccion == 5) { // Descifrado
                CifradoCesar::descifrar_archivos_txt();
             } else if (seleccion == 6) { // Base Datos
                 mostrarBaseDatos();
+            } else if (seleccion == 7) { // Verificar Integridad
+                cout << "\t\t========================\n";
+                cout << "\t\t=== VERIFICAR INTEGRIDAD ===\n";
+                cout << "\t\t========================\n";
+                cout << "Presione Esc para volver al menú de administrador.\n";
+                if (clientes.estaVacia()) {
+                    cout << "No hay clientes registrados. No se puede verificar la integridad.\n";
+                } else {
+                    CifradoCesar::verificarIntegridadCifrados();
+                }
             }
         } catch (const BancoException& e) {
             cout << "\nError: " << e.what() << endl;
@@ -717,9 +740,6 @@ void Banco::mostrarBaseDatos() {
     cout << "---------------------------------------------------------------------------------------------------------------\n";
     cout << "\nTotal de clientes: " << i - 1 << endl;
     cout << "===========================================\n";
-    cout << "\nPresiona Enter para volver...";
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    cin.get();
 }
 
 string Banco::generarNumeroCuenta(const string& tipoCuenta) {
@@ -791,9 +811,9 @@ void Banco::ejecutar() {
                     cout << "2) Ingresar como Usuario: Inicie sesión con su usuario y contraseña.\n";
                     cout << "3) Crear Cuenta: Registre una nueva cuenta de ahorros o corriente.\n";
                     cout << "4) Recuperar Cuenta: Solicite la recuperación de su cuenta.\n";
-                    cout << "5) Salir: Cierre el sistema.\n";
-                    cout << "6) Más Información: Consulte la documentación detallada en el navegador.\n";
-                    cout << "7) Ayuda: Vea esta información.\n";
+                    cout << "5) Más Información: Consulte la documentación detallada en el navegador.\n";
+                    cout << "6) Ayuda: Vea esta información.\n";
+                    cout << "7) Salir: Cierre el sistema.\n";
                     cout << "\nUse las flechas arriba/abajo para navegar y Enter para seleccionar.\n";
                     cout << "\nPresiona Enter para volver...";
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');

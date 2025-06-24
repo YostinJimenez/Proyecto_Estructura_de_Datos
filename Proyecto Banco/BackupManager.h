@@ -12,6 +12,8 @@ public:
     static string generarNombreArchivo();
     static string guardarBackup(const ListaDobleCircular<Cliente>& clientes); // Cambiado a devolver string
     static void restaurarBackup(const string& nombreArchivo, ListaDobleCircular<Cliente>& clientes);
+    static bool validarArchivoExistente(const ListaDobleCircular<Cliente>& clientes);
+    static string normalizar(const string& s);
 };
 
 #endif

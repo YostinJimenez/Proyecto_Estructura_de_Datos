@@ -5,7 +5,9 @@
 #include "CuentaAhorros.h"
 #include "CuentaCorriente.h"
 #include "ValidacionDatos.h"
+#include <filesystem>
 #include <ctime>
+#include <regex>
 using namespace std;
 
 string BackupManager::generarNombreArchivo() {
@@ -19,7 +21,7 @@ string BackupManager::generarNombreArchivo() {
        << setfill('0') << setw(2) << tiempo->tm_hour
        << setfill('0') << setw(2) << tiempo->tm_min
        << setfill('0') << setw(2) << tiempo->tm_sec
-       << ".bin";
+       << ".txt";
     return ss.str();
 }
 
@@ -130,4 +132,36 @@ void BackupManager::restaurarBackup(const string& nombreArchivo, ListaDobleCircu
     } catch (const BancoException& e) {
         throw;
     }
+}
+
+string BackupManager::normalizar(const string& s) {
+    string out = std::regex_replace(s, std::regex("\r\n"), "\n");
+    // Elimina espacios al final de cada línea
+    out = std::regex_replace(out, std::regex("[ \t]+(\n|$)"), "\n");
+    // Elimina saltos de línea al final
+    while (!out.empty() && (out.back() == '\n' || out.back() == '\r')) out.pop_back();
+    return out;
+}
+
+
+bool BackupManager::validarArchivoExistente(const ListaDobleCircular<Cliente>& clientes) {
+    stringstream ssActual;
+    clientes.recorrer([&](Cliente* c) {
+        ssActual << c->serializar() << "\n";
+    });
+    string datosActuales = normalizar(ssActual.str());
+
+    for (const auto& entry : filesystem::directory_iterator(".")) {
+        string nombre = entry.path().filename().string();
+        if (nombre.find("backup_") == 0 && nombre.substr(nombre.size() - 4) == ".txt") {
+            ifstream file(nombre);
+            stringstream ssArchivo;
+            ssArchivo << file.rdbuf();
+            string contenidoBackup = normalizar(ssArchivo.str());
+            if (contenidoBackup == datosActuales) {
+                return true; // Ya existe un backup igual
+            }
+        }
+    }
+    return false;
 }

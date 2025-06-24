@@ -670,3 +670,11 @@ bool ValidacionDatos::es_fecha_valida(int anio, int mes, int dia) {
 
     return true;
 }
+
+string ValidacionDatos::validarCaracter(string& opcion) {
+    opcion[0] = toupper(opcion[0]);
+    for (int i = 1; i < opcion.length(); i++) {
+        opcion[i] = tolower(opcion[i]);
+    }
+    return opcion;
+}

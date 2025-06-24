@@ -22,6 +22,7 @@ public:
     T* buscar(std::function<bool(T*)> criterio) const;
     int contar() const;
     bool estaVacia() const;
+    void eliminar(T* dato);
 };
 
 template<typename T>
@@ -84,4 +85,29 @@ template <typename T>
 bool ListaDobleCircular<T>::estaVacia() const {
     return inicio == nullptr || tamano == 0;
 }
+// ...existing code...
+template <typename T>
+void ListaDobleCircular<T>::eliminar(T* dato) {
+    if (!inicio) return;
+    Nodo<T>* actual = inicio;
+    do {
+        if (actual->dato == dato) {
+            if (actual->siguiente == actual) { // Solo un nodo
+                delete actual->dato;
+                delete actual;
+                inicio = nullptr;
+            } else {
+                actual->anterior->siguiente = actual->siguiente;
+                actual->siguiente->anterior = actual->anterior;
+                if (actual == inicio) inicio = actual->siguiente;
+                delete actual->dato;
+                delete actual;
+            }
+            tamano--;
+            return;
+        }
+        actual = actual->siguiente;
+    } while (actual != inicio);
+}
+// ...existing code...
 #endif
