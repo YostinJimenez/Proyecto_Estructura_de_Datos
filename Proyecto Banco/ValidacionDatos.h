@@ -15,6 +15,7 @@ public:
     static void validarCedula(const std::string& cedula);
     static void validarCedulaPrefijo(const std::string& cedula);
     static void limpiar_linea(const std::string& mensaje);
+    static void limpiar_linea_Error(const string& mensaje, size_t longitud_extra);
     static void validarNombre(const std::string& nombre);
     static void validarCorreo(const std::string& correo);
     static void validarTelefono(const std::string& telefono);

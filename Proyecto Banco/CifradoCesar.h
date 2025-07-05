@@ -20,7 +20,7 @@ public:
     static void descifrar_archivos_txt();
     static void cifrar_archivos_txt();
     static bool verificarIntegridadCifrados();
-    static bool verificarIntegridad(const string& archivoCifrado);
+    static void createPDF(const string& txtFile, const string& pdfFile);
 };
 
 #endif

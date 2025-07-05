@@ -83,7 +83,9 @@
     "thread": "cpp",
     "variant": "cpp",
     "filesystem": "cpp",
-    "cinttypes": "cpp"
+    "cinttypes": "cpp",
+    "mutex": "cpp",
+    "condition_variable": "cpp"
   },
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",

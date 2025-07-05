@@ -1,4 +1,6 @@
 #include "ValidacionDatos.h"
+#include "Marquesina.h"
+#include "Banco.h"
 #include <regex>
 #include <cmath>
 #include <iomanip>
@@ -9,7 +11,7 @@
 #include <ctime>
 #include <set>
 using namespace std;
-
+extern Marquesina marquesina;
 static bool esBisiesto(int anio) {
     return (anio % 4 == 0 && anio % 100 != 0) || (anio % 400 == 0);
 }
@@ -160,12 +162,16 @@ void ValidacionDatos::validarFecha(const Fecha& fecha, bool esFechaNacimiento) {
 
 string ValidacionDatos::capturarEntrada(TipoDato tipo, const string& mensaje, size_t maxLongitud) {
     string entrada;
+    Banco banco; // Asegúrate de que Banco esté definido y tenga el método mover_cursor
+    int fila_entrada = marquesina.get_cursor_row(); // O pásala como parámetro si tienes control
+    banco.mover_cursor(0, fila_entrada);
     cout << mensaje;
     cout.flush();
 
     while (true) {
         int tecla = _getch();
         if (tecla == 27) { // Esc
+            banco.mover_cursor(0, fila_entrada);
             cout << "\r" << string(mensaje.length() + entrada.length(), ' ') << "\r";
             return ""; // Retorna cadena vacía para indicar "Atrás"
         }
@@ -210,8 +216,15 @@ string ValidacionDatos::capturarEntrada(TipoDato tipo, const string& mensaje, si
                 cout << endl;
                 return entrada;
             } catch (const BancoException& e) {
-                cout << "\r" << string(mensaje.length() + entrada.length(), ' ') << "\r";
-                cout << "Error: " << e.what() << ". Intente de nuevo o presione Esc para volver: ";
+                banco.mover_cursor(40, fila_entrada);
+                cout << "\r\033[K" << "Error: " << e.what(); // Limpia y muestra el error
+                banco.mover_cursor(0 + mensaje.length() + entrada.length(), fila_entrada);
+                getch(); // Espera a que el usuario vea el error
+                banco.mover_cursor(40, fila_entrada);
+                cout << "\r\033[K"; // Limpia la línea del error
+                banco.mover_cursor(0, fila_entrada);
+                cout << "\r\033[K" << mensaje; // Limpia y vuelve a mostrar el mensaje de entrada
+                banco.mover_cursor(0 + mensaje.length(), fila_entrada);
                 entrada.clear();
                 cout.flush();
                 continue;
@@ -234,7 +247,7 @@ string ValidacionDatos::capturarEntrada(TipoDato tipo, const string& mensaje, si
                     }
                     break;
                 case NOMBRE:
-                    valido = isalpha(c) || c == ' ';
+                    valido = isalpha(c) ;
                     break;
                 case CORREO:
                     valido = isalnum(c) || c == '@' || c == '.' || c == '-' || c == '_';
@@ -278,12 +291,12 @@ string ValidacionDatos::capturarEntrada(TipoDato tipo, const string& mensaje, si
 void ValidacionDatos::validarCedula(const string& entrada) {
     try {
         if (entrada.length() != 10 && entrada.length() != 22) {
-            throw BancoException("Entrada inválida: debe ser cédula (10 dígitos) o IBAN (22 caracteres).");
+            throw BancoException("Debe ser cédula (10 dígitos) o IBAN (22 caracteres).");
         }
         if (entrada.length() == 22) {
             // Validación de IBAN
             if (!regex_match(entrada, regex("^EC\\d{2}30100001(22|23)\\d{8}$"))) {
-                throw BancoException("IBAN inválido: formato incorrecto. Debe ser ECXX30100001(22|23)XXXXXXXX.");
+                throw BancoException("Formato incorrecto. Debe ser ECXX30100001(22|23)XXXXXXXX.");
             }
             string cadena = entrada.substr(4) + "EC00";
             string numero = "";
@@ -301,25 +314,25 @@ void ValidacionDatos::validarCedula(const string& entrada) {
             int codigo = 98 - resto;
             int codigoEntrada = stoi(entrada.substr(2, 2));
             if (codigo != codigoEntrada) {
-                throw BancoException("IBAN inválido: código de control incorrecto.");
+                throw BancoException("Código de control incorrecto.");
             }
         } else {
             // Validación de cédula
             if (!regex_match(entrada, regex("\\d{10}"))) {
-                throw BancoException("Cédula inválida: debe proporcionar 10 dígitos numéricos.");
+                throw BancoException("Debe proporcionar 10 dígitos numéricos.");
             }
 
             // Validar código de provincia
             int provincia = stoi(entrada.substr(0, 2));
             set<int> provinciasValidas = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 30};
             if (provinciasValidas.find(provincia) == provinciasValidas.end()) {
-                throw BancoException("Cédula inválida: código de provincia inválido.");
+                throw BancoException("Código de provincia inválido.");
             }
 
             // Validar tercer dígito
             int tercerDigito = entrada[2] - '0';
             if (tercerDigito >= 6) {
-                throw BancoException("Cédula inválida: tercer dígito debe ser menor a 6.");
+                throw BancoException("Tercer dígito debe ser menor a 6.");
             }
 
             // Evitar dígitos todos iguales
@@ -332,7 +345,7 @@ void ValidacionDatos::validarCedula(const string& entrada) {
                 }
             }
             if (todosIguales) {
-                throw BancoException("Cédula inválida: no se permiten dígitos todos iguales.");
+                throw BancoException("No se permiten dígitos todos iguales.");
             }
 
             // Evitar patrones repetitivos simples (e.g., 1212121212)
@@ -344,7 +357,7 @@ void ValidacionDatos::validarCedula(const string& entrada) {
                 }
             }
             if (repetitivo) {
-                throw BancoException("Cédula inválida: no se permiten patrones repetitivos.");
+                throw BancoException("No se permiten patrones repetitivos.");
             }
 
             // Validar dígito verificador
@@ -359,7 +372,7 @@ void ValidacionDatos::validarCedula(const string& entrada) {
             }
             int digitoVerificador = (10 - (suma % 10)) % 10;
             if (digitoVerificador != (entrada[9] - '0')) {
-                throw BancoException("Cédula inválida: dígito verificador incorrecto.");
+                throw BancoException("Dígito verificador incorrecto.");
             }
         }
     } catch (const regex_error& e) {
@@ -370,10 +383,10 @@ void ValidacionDatos::validarCedula(const string& entrada) {
 void ValidacionDatos::validarCedulaPrefijo(const string& numero) {
     try {
         if (numero.empty() || numero.length() > 50) {
-            throw BancoException("Prefijo inválido: debe tener entre 1 y 50 dígitos.");
+            throw BancoException("Debe tener entre 1 y 50 dígitos.");
         }
         if (!regex_match(numero, regex("\\d+"))) {
-            throw BancoException("Prefijo inválido: solo se permiten dígitos numéricos.");
+            throw BancoException("Solo se permiten dígitos numéricos.");
         }
 
         // Validar código de provincia si hay al menos 2 dígitos
@@ -381,7 +394,7 @@ void ValidacionDatos::validarCedulaPrefijo(const string& numero) {
             int provincia = stoi(numero.substr(0, 2));
             set<int> provinciasValidas = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 30};
             if (provinciasValidas.find(provincia) == provinciasValidas.end()) {
-                throw BancoException("Prefijo inválido: código de provincia inválido.");
+                throw BancoException("Código de provincia inválido.");
             }
         }
 
@@ -389,7 +402,7 @@ void ValidacionDatos::validarCedulaPrefijo(const string& numero) {
         if (numero.length() >= 3) {
             int tercerDigito = numero[2] - '0';
             if (tercerDigito >= 6) {
-                throw BancoException("Prefijo inválido: tercer dígito debe ser menor a 6.");
+                throw BancoException("Tercer dígito debe ser menor a 6.");
             }
         }
 
@@ -403,7 +416,7 @@ void ValidacionDatos::validarCedulaPrefijo(const string& numero) {
             }
         }
         if (todosIguales) {
-            throw BancoException("Prefijo inválido: no se permiten dígitos todos iguales.");
+            throw BancoException("No se permiten dígitos todos iguales.");
         }
 
         // Evitar patrones repetitivos si hay suficientes dígitos (e.g., >= 5)
@@ -416,7 +429,7 @@ void ValidacionDatos::validarCedulaPrefijo(const string& numero) {
                 }
             }
             if (repetitivo) {
-                throw BancoException("Prefijo inválido: no se permiten patrones repetitivos.");
+                throw BancoException("No se permiten patrones repetitivos.");
             }
         }
 
@@ -433,7 +446,7 @@ void ValidacionDatos::validarCedulaPrefijo(const string& numero) {
             }
             int digitoVerificador = (10 - (suma % 10)) % 10;
             if (digitoVerificador != (numero[9] - '0')) {
-                throw BancoException("Cédula inválida: dígito verificador incorrecto.");
+                throw BancoException("Dígito verificador incorrecto.");
             }
         }
     } catch (const regex_error& e) {
@@ -445,14 +458,14 @@ void ValidacionDatos::validarTelefono(const string& telefono) {
     try {
         // Validar formato básico: 10 dígitos comenzando con 09
         if (!regex_match(telefono, regex("^09[0-9]{8}$"))) {
-            throw BancoException("Teléfono inválido: debe proporcionar 10 dígitos numéricos comenzando con 09.");
+            throw BancoException("Debe proporcionar 10 dígitos numéricos comenzando con 09.");
         }
 
         // Validar códigos de operadoras móviles válidas
         string codigoOperadora = telefono.substr(0, 3);
         set<string> codigosValidos = {"094", "096", "097", "098", "099", "085", "086", "087", "088", "089"};
         if (codigosValidos.find(codigoOperadora) == codigosValidos.end()) {
-            throw BancoException("Teléfono inválido: código de operadora no válido.");
+            throw BancoException("Código de operadora no válido.");
         }
 
         // Evitar dígitos todos iguales
@@ -465,7 +478,7 @@ void ValidacionDatos::validarTelefono(const string& telefono) {
             }
         }
         if (todosIguales) {
-            throw BancoException("Teléfono inválido: no se permiten dígitos todos iguales.");
+            throw BancoException("No se permiten dígitos todos iguales.");
         }
 
         // Evitar patrones repetitivos simples (e.g., 0981231231)
@@ -477,7 +490,7 @@ void ValidacionDatos::validarTelefono(const string& telefono) {
             }
         }
         if (repetitivo) {
-            throw BancoException("Teléfono inválido: no se permiten patrones repetitivos.");
+            throw BancoException("No se permiten patrones repetitivos.");
         }
     } catch (const regex_error& e) {
         throw BancoException("Error en la validación de teléfono.");
@@ -487,10 +500,10 @@ void ValidacionDatos::validarTelefono(const string& telefono) {
 void ValidacionDatos::validarUsuario(const string& usuario) {
     try {
         if (!regex_match(usuario, regex("^[a-zA-Z0-9._%+-]+$"))) {
-            throw BancoException("Usuario inválido: solo letras, números y ciertos caracteres permitidos.");
+            throw BancoException("Solo letras, números y ciertos caracteres permitidos.");
         }
         if (usuario.length() < 6 || usuario.length() > 20) {
-            throw BancoException("Usuario debe tener entre 6 y 20 caracteres.");
+            throw BancoException("Debe tener entre 6 y 20 caracteres.");
         }
     } catch (const regex_error& e) {
         throw BancoException("Error en la validación de usuario.");
@@ -500,10 +513,10 @@ void ValidacionDatos::validarUsuario(const string& usuario) {
 void ValidacionDatos::validarContrasena(const string& contrasenia) {
     try {
         if (contrasenia.length() < 8 || contrasenia.length() > 20) {
-            throw BancoException("Contraseña debe tener entre 8 y 20 caracteres.");
+            throw BancoException("Debe tener entre 8 y 20 caracteres.");
         }
         if (!regex_match(contrasenia, regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=]).+$"))) {
-            throw BancoException("Contraseña debe incluir al menos una mayúscula, una minúscula, un número y un caracter especial (@#$%^&+=).");
+            throw BancoException("Debe incluir al menos una mayúscula, una minúscula, un número y un caracter especial (@#$%^&+=).");
         }
     } catch (const regex_error& e) {
         throw BancoException("Error en la validación de contraseña.");
@@ -512,7 +525,7 @@ void ValidacionDatos::validarContrasena(const string& contrasenia) {
 
 void ValidacionDatos::validarMonto(double monto, bool permitirCero) {
     if (!isfinite(monto)) {
-        throw BancoException("Monto inválido: valor no numérico.");
+        throw BancoException("Valor no numérico.");
     }
     if (!permitirCero && monto <= 0) {
         throw BancoException("El monto debe ser positivo.");
@@ -521,24 +534,24 @@ void ValidacionDatos::validarMonto(double monto, bool permitirCero) {
         throw BancoException("El monto no puede ser negativo.");
     }
     if (abs(monto) > 1000000.0) {
-        throw BancoException("El monto inválido: excede el límite de $1,000,000.");
+        throw BancoException("Excede el límite de $1,000,000.");
     }
     ostringstream oss;
     oss << fixed << setprecision(2) << monto;
     string montoStr = oss.str();
     size_t punto = montoStr.find('.');
     if (punto != string::npos && montoStr.length() - punto - 1 > 2) {
-        throw BancoException("El monto inválido: máximo de 2 decimales.");
+        throw BancoException("Máximo de 2 decimales.");
     }
 }
 
 void ValidacionDatos::validarNombreArchivo(const string& entrada) {
     try {
         if (entrada.empty() || entrada.length() > 50) {
-            throw BancoException("Nombre de archivo inválido: debe tener entre 1 y 50 caracteres.");
+            throw BancoException("Debe tener entre 1 y 50 caracteres.");
         }
         if (!regex_match(entrada, regex("^[a-zA-Z0-9._-]+\\.bin$"))) {
-            throw BancoException("Nombre de archivo inválido: solo letras, números, puntos, guiones y extensión .bin.");
+            throw BancoException("Solo letras, números, puntos, guiones y extensión .bin.");
         }
     } catch (const regex_error& e) {
         throw BancoException("Error en la validación de nombre de archivo.");
@@ -548,10 +561,10 @@ void ValidacionDatos::validarNombreArchivo(const string& entrada) {
 void ValidacionDatos::validarNombre(const string& nombre) {
     try {
         if (nombre.empty() || nombre.length() > 50) {
-            throw BancoException("Nombre inválido: debe tener entre 1 y 50 caracteres.");
+            throw BancoException("Debe tener entre 3 y 50 caracteres.");
         }
         if (!regex_match(nombre, regex("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$"))) {
-            throw BancoException("Nombre inválido: solo se permiten letras y espacios.");
+            throw BancoException("Solo se permiten letras y espacios.");
         }
     } catch (const regex_error& e) {
         throw BancoException("Error en la validación de nombre.");
@@ -561,10 +574,10 @@ void ValidacionDatos::validarNombre(const string& nombre) {
 void ValidacionDatos::validarCorreo(const string& correo) {
     try {
         if (correo.empty() || correo.length() > 254) {
-            throw BancoException("Correo inválido: debe tener entre 1 y 254 caracteres.");
+            throw BancoException("Debe tener entre 1 y 254 caracteres.");
         }
         if (!regex_match(correo, regex("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"))) {
-            throw BancoException("Correo inválido: formato incorrecto.");
+            throw BancoException("Formato incorrecto.");
         }
     } catch (const regex_error& e) {
         throw BancoException("Error en la validacion de correo.");

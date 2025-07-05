@@ -14,7 +14,6 @@ private:
     ListaDobleCircular<Cliente> clientes;
     enum CampoBusqueda { CEDULA, PRIMER_NOMBRE, SEGUNDO_NOMBRE, PRIMER_APELLIDO, SEGUNDO_APELLIDO, SALDO };
     
-    void imprimirLogo();
     bool mostrarConfirmacion(double monto, const string& operacion);
     string seleccionarTipoCuenta();
     void mostrarMenuUsuario(Cliente* cliente);
@@ -22,11 +21,12 @@ private:
     void buscarPorRangoSaldo(double valor, vector<Cliente*>& resultados);
     void ordenarCuentas(const vector<Cliente*>& resultados, CampoBusqueda campo);
     void mostrar_ayuda_tecnica();
-    void mover_cursor(int x, int y);
     void mostrarBaseDatos();
+    public:
+    void mover_cursor_opciones(int x, int y);
     int seleccionar_opcion(const char* titulo, const char* opciones[], int n, int fila_inicio);
-public:
     Banco();
+    void mover_cursor(int x, int y);
     void crearCuenta();
     void mostrarMenuUsuario();
     void mostrarMenuAdmin();

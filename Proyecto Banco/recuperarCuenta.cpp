@@ -1,12 +1,14 @@
 #include "recuperarCuenta.h"
+#include "Marquesina.h"
 #include <iostream>
 #include <conio.h>
 #include "ValidacionDatos.h"
 using namespace std;
-
+extern Marquesina marquesina;
 void recuperarCuenta(ListaDobleCircular<Cliente>& clientes) {
+    marquesina.pausar(); // Pausar marquesina antes de pedir datos
     system("cls");
-    cout << "=== RECUPERAR CUENTA ===\n\n";
+    cout << "\n=== RECUPERAR CUENTA ===\n\n";
     try {
         string cedula = ValidacionDatos::capturarEntrada(ValidacionDatos::CEDULA, "Cedula: ", 10);
         string primerNombre = ValidacionDatos::capturarEntrada(ValidacionDatos::NOMBRE, "Primer nombre: ", 50);
@@ -37,4 +39,5 @@ void recuperarCuenta(ListaDobleCircular<Cliente>& clientes) {
     }
     cout << "\nPresiona Enter para volver...";
     _getch();
+    marquesina.reanudar(); // Reanudar marquesina después de recuperar cuenta
 }

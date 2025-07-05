@@ -148,7 +148,7 @@ void CifradoCesar::listarArchivosTxt(int index) {
 
 void CifradoCesar::cifrar_archivos_txt() {
     system("cls");
-    cout << "\n\t\t===========================================" << endl;
+    cout << "\t\t===========================================" << endl;
     cout << "\t\t===    CIFRAR ARCHIVO DE RESPALDO    ===" << endl;
     cout << "\t\t===========================================" << endl;
     cout << "Presione Esc para volver al menú de administrador.\n\n";
@@ -189,12 +189,18 @@ void CifradoCesar::cifrar_archivos_txt() {
     // Generar nombre para el archivo cifrado (igual que en guardarBackup)
     string nombre_cifrado = "cifrado_" + nombre_archivo.substr(7); // Quita "backup_"
     codificarArchivo(nombre_archivo, nombre_cifrado, numCesar);
-    string hash = Hash::calcularMD5(nombre_cifrado);
+    ifstream file(nombre_cifrado, ios::binary);
+    stringstream buffer;
+    buffer << file.rdbuf();
+    string hash = Hash::calcularMD5(buffer.str());
+
     string base = nombre_cifrado.substr(8, nombre_cifrado.size() - 8 - 4); // Quita "cifrado_" y ".txt"
     string nombre_hash = "Hash_" + base + ".txt";
     ofstream hashFile(nombre_hash);
     hashFile << hash;
     hashFile.close();
+    string nombre_pdf= "PDF_" + base + ".pdf";
+    createPDF(nombre_cifrado, nombre_pdf);
     cout << "-------------------------------------------" << endl;
     cout << "=== ¡CIFRADO COMPLETADO CON ÉXITO! ===" << endl;
     cout << "El archivo ha sido cifrado y guardado como: " << nombre_cifrado << endl;
@@ -203,7 +209,7 @@ void CifradoCesar::cifrar_archivos_txt() {
 
 void CifradoCesar::descifrar_archivos_txt() {
     system("cls");
-    cout << "\n\t\t===========================================" << endl;
+    cout << "\t\t===========================================" << endl;
     cout << "\t\t===   DESCIFRAR ARCHIVO DE RESPALDO   ===" << endl;
     cout << "\t\t===========================================" << endl;
     cout << "Presione Esc para volver al menú de administrador.\n\n";
@@ -250,42 +256,140 @@ void CifradoCesar::descifrar_archivos_txt() {
     cout << "===========================================" << endl;
 }
 
-bool CifradoCesar::verificarIntegridad(const string& archivoCifrado) {
-    string hashActual = Hash::calcularMD5(archivoCifrado);
-    ifstream hashFile(archivoCifrado + ".txt");
-    string hashGuardado;
-    getline(hashFile, hashGuardado);
-    return hashActual == hashGuardado;
-}
-
-
 bool CifradoCesar::verificarIntegridadCifrados() {
     bool todoOk = true;
     for (const auto& entry : filesystem::directory_iterator(".")) {
         string nombre = entry.path().filename().string();
-        if (nombre.find("cifrado_") == 0 && nombre.substr(nombre.size() - 4) == ".txt") {
-            // Si tienes archivos con fechas de longitud variable, mejor usa:
-            size_t pos_punto = nombre.rfind('.');
-            string base = nombre.substr(8, pos_punto - 8); // Quita "cifrado_" y ".txt"
-            string nombre_hash = "Hash_" + base + ".txt";
-            ifstream hashFile(nombre_hash);
-            if (!hashFile.is_open()) {
-                cout << "No se encontró el hash para: " << nombre << endl;
-                todoOk = false;
-                continue;
-            }
-            string hashGuardado;
-            getline(hashFile, hashGuardado);
-            hashFile.close();
+    if (nombre.find("cifrado_") == 0 && nombre.substr(nombre.size() - 4) == ".txt") {
+        size_t pos_punto = nombre.rfind('.');
+        string base = nombre.substr(8, pos_punto - 8);
+        string nombre_hash = "Hash_" + base + ".txt";
+        ifstream hashFile(nombre_hash);
+        if (!hashFile.is_open()) {
+            cout << "No se encontró el hash para: " << nombre << endl;
+            todoOk = false;
+            continue;
+        }
+        string hashGuardado;
+        getline(hashFile, hashGuardado);
+        hashFile.close();
 
-            string hashActual = Hash::calcularMD5(nombre);
-            if (hashActual == hashGuardado) {
-                cout << nombre << ": INTEGRIDAD OK" << endl;
-            } else {
-                cout << nombre << ": ¡INTEGRIDAD VULNERADA!" << endl;
-                todoOk = false;
-            }
+        // CORRECTO: calcular hash del CONTENIDO
+        ifstream file(nombre, ios::binary);
+        stringstream buffer;
+        buffer << file.rdbuf();
+        string hashActual = Hash::calcularMD5(buffer.str());
+
+        if (hashActual == hashGuardado) {
+            cout << nombre << ": INTEGRIDAD OK" << endl;
+        } else {
+            cout << nombre << ": ¡INTEGRIDAD VULNERADA!" << endl;
+            todoOk = false;
         }
     }
+}
     return todoOk;
 }
+
+void CifradoCesar::createPDF(const string& txtFile, const string& pdfFile) {
+    // Leer el archivo .txt
+    ifstream inFile(txtFile);
+    if (!inFile.is_open()) {
+        cerr << "Error: No se pudo abrir el archivo " << txtFile << endl;
+        return;
+    }
+
+    // Almacenar las líneas del archivo .txt
+    vector<string> lines;
+    string line;
+    while (getline(inFile, line)) {
+        lines.push_back(line);
+    }
+    inFile.close();
+
+    // Crear el archivo .pdf
+    ofstream outFile(pdfFile, ios::binary);
+    if (!outFile.is_open()) {
+        cerr << "Error: No se pudo crear el archivo " << pdfFile << endl;
+        return;
+    }
+
+    // Escribir el encabezado del PDF
+    outFile << "%PDF-1.4\n";
+    outFile << "%\xE2\xE3\xCF\xD3\n"; // Comentario binario para indicar que es un archivo binario
+
+    // Objetos del PDF
+    int objCount = 1;
+    std::vector<long> offsets;
+
+    // Objeto 1: Catálogo
+    offsets.push_back(outFile.tellp());
+    outFile << objCount++ << " 0 obj\n";
+    outFile << "<< /Type /Catalog /Pages 2 0 R >>\n";
+    outFile << "endobj\n";
+
+    // Objeto 2: Páginas
+    offsets.push_back(outFile.tellp());
+    outFile << objCount++ << " 0 obj\n";
+    outFile << "<< /Type /Pages /Kids [3 0 R] /Count 1 >>\n";
+    outFile << "endobj\n";
+
+    // Objeto 3: Página
+    offsets.push_back(outFile.tellp());
+    outFile << objCount++ << " 0 obj\n";
+    outFile << "<< /Type /Page /Parent 2 0 R /Resources << /Font << /F1 4 0 R >> >> /MediaBox [0 0 595 842] /Contents 5 0 R >>\n";
+    outFile << "endobj\n";
+
+    // Objeto 4: Fuente (Helvetica, estándar en PDF)
+    offsets.push_back(outFile.tellp());
+    outFile << objCount++ << " 0 obj\n";
+    outFile << "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>\n";
+    outFile << "endobj\n";
+
+    // Objeto 5: Contenido de la página
+    offsets.push_back(outFile.tellp());
+    outFile << objCount++ << " 0 obj\n";
+    outFile << "<< /Length " << (lines.size() * 50 + 50) << " >>\n"; // Estimación aproximada de la longitud
+    outFile << "stream\n";
+    outFile << "BT\n";
+    outFile << "/F1 12 Tf\n"; // Fuente Helvetica, tamaño 12
+    outFile << "50 800 TD\n"; // Posición inicial (x=50, y=800)
+    
+    // Escribir cada línea del texto
+    for (const auto& text : lines) {
+        // Escapar caracteres especiales en el texto
+        string escapedText = "(";
+        for (char c : text) {
+            if (c == '(' || c == ')' || c == '\\') {
+                escapedText += '\\';
+            }
+            escapedText += c;
+        }
+        escapedText += ")";
+        outFile << escapedText << " Tj\n";
+        outFile << "0 -14 TD\n"; // Mover hacia abajo para la siguiente línea
+    }
+    
+    outFile << "ET\n";
+    outFile << "endstream\n";
+    outFile << "endobj\n";
+
+    // Tabla de referencias cruzadas
+    long xrefOffset = outFile.tellp();
+    outFile << "xref\n";
+    outFile << "0 " << objCount << "\n";
+    outFile << "0000000000 65535 f \n";
+    for (long offset : offsets) {
+        outFile << setfill('0') << setw(10) << offset << " 00000 n \n";
+    }
+
+    // Tráiler
+    outFile << "trailer\n";
+    outFile << "<< /Size " << objCount << " /Root 1 0 R >>\n";
+    outFile << "startxref\n";
+    outFile << xrefOffset << "\n";
+    outFile << "%%EOF\n";
+
+    outFile.close();
+    cout << "PDF creado exitosamente: " << pdfFile << endl;
+    }
