@@ -13,6 +13,13 @@
 #include <png.h>
 
 using namespace std;
+/**
+ * @brief Renderiza un objeto QRcode en un archivo de imagen PNG.
+ * @param codigoQr Puntero a la estructura QRcode a guardar.
+ * @param nombreArchivo Nombre del archivo PNG de salida.
+ * @param escala Factor de multiplicación para el tamaño de cada módulo del QR.
+ * @return true si el archivo se guardó correctamente, false en caso contrario.
+ */
 
 // --- Implementación de Funciones Auxiliares ---
 
@@ -104,8 +111,12 @@ bool guardarQrComoPng(const QRcode *codigoQr, const string& nombreArchivo, int e
 }
 
 /**
- * @brief Intenta convertir un archivo de imagen a PDF usando ImageMagick.
+ * @brief Convierte una imagen a PDF ejecutando el comando `convert` de ImageMagick.
+ * @param nombreArchivoEntrada Ruta del archivo de imagen a convertir.
+ * @param nombreArchivoSalida Ruta del archivo PDF que se creará.
+ * @return true si el comando del sistema se ejecuta con éxito, false si falla.
  */
+
 bool convertirImagenAPdf(const string& nombreArchivoEntrada, const string& nombreArchivoSalida) {
     string comando = "convert \"" + nombreArchivoEntrada + "\" \"" + nombreArchivoSalida + "\"";
     cout << "Intentando generar PDF usando ImageMagick: " << comando << endl;
@@ -123,11 +134,14 @@ bool convertirImagenAPdf(const string& nombreArchivoEntrada, const string& nombr
     }
 }
 
-// --- Implementación de la Función Principal para Generar el QR ---
-
 /**
- * @brief Genera un código QR con información personal y lo guarda como PNG y PDF.
+ * @brief Orquesta la generación de un QR, lo guarda como PNG y lo convierte a PDF.
+ * @param nombres Nombre(s) a incluir en el QR.
+ * @param apellidos Apellido(s) a incluir en el QR.
+ * @param cuentaBancaria Cuenta bancaria a incluir en el QR.
+ * @return true si la generación del PNG fue exitosa, independientemente del PDF.
  */
+
 bool generarQrPersonal(
     const string& nombres,
     const string& apellidos,
