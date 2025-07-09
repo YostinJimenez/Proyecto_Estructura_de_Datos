@@ -1,0 +1,38 @@
+\doxysection{Persona.\+h}
+\hypertarget{_persona_8h_source}{}\label{_persona_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PERSONA\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PERSONA\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}Fecha.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}BancoException.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}ValidacionDatos.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }Persona\ \{}
+\DoxyCodeLine{00010\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keywordtype}{string}\ cedula;}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{string}\ primerNombre;}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{string}\ segundoNombre;}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{string}\ primerApellido;}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{string}\ segundoApellido;}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{string}\ telefono;}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{string}\ direccion;}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{class_fecha}{Fecha}}\ fechaNacimiento;}
+\DoxyCodeLine{00019\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ \ \ \ \ Persona(\textcolor{keywordtype}{string}\ cedula,\ \textcolor{keywordtype}{string}\ primerNombre,\ \textcolor{keywordtype}{string}\ segundoNombre,\ \textcolor{keywordtype}{string}\ primerApellido,\ \textcolor{keywordtype}{string}\ segundoApellido,}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ telefono,\ \textcolor{keywordtype}{string}\ direccion,\ \mbox{\hyperlink{class_fecha}{Fecha}}\ fechaNacimiento);}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{string}\ mostrarInformacion()\ =\ 0;}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{virtual}\ \string~Persona();}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{string}\ getCedula()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ cedula;\ \}}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{string}\ getPrimerNombre()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ primerNombre;\ \}}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{string}\ getSegundoNombre()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ segundoNombre;\ \}}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{string}\ getPrimerApellido()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ primerApellido;\ \}}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{string}\ getSegundoApellido()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ segundoApellido;\ \}}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{string}\ getTelefono()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ telefono;\ \}}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{string}\ getDireccion()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ direccion;\ \}}
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{class_fecha}{Fecha}}\ getFechaNacimiento()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ fechaNacimiento;\ \}}
+\DoxyCodeLine{00032\ \};}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

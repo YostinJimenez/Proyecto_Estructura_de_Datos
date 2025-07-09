@@ -9,7 +9,10 @@
 #include <ctime>
 #include <regex>
 using namespace std;
-
+/**
+ * @brief Genera un nombre de archivo para el backup basado en la fecha y hora actual.
+ * @return Nombre del archivo de backup en formato "backup_DDMMYYYY_HHMMSS.txt".
+ */
 string BackupManager::generarNombreArchivo() {
     time_t ahora = time(nullptr);
     tm* tiempo = localtime(&ahora);
@@ -25,6 +28,11 @@ string BackupManager::generarNombreArchivo() {
     return ss.str();
 }
 
+/**
+ * @brief Guarda un backup de la lista de clientes en un archivo.
+ * @param clientes Lista de clientes a respaldar.
+ * @return Nombre del archivo de backup creado.
+ */
 string BackupManager::guardarBackup(const ListaDobleCircular<Cliente>& clientes) {
     try {
         string nombreArchivo = generarNombreArchivo();
@@ -55,6 +63,13 @@ string BackupManager::guardarBackup(const ListaDobleCircular<Cliente>& clientes)
         throw;
     }
 }
+
+/**
+ * @brief Restaura un backup desde un archivo y actualiza la lista de clientes.
+ * @param nombreArchivo Nombre del archivo de backup a restaurar.
+ * @param clientes Lista de clientes donde se restaurarán los datos.
+ * @throws BancoException Si hay un error al abrir el archivo o al procesar los datos.
+ */
 
 void BackupManager::restaurarBackup(const string& nombreArchivo, ListaDobleCircular<Cliente>& clientes) {
     try {

@@ -1,5 +1,6 @@
 #include "ValidacionDatos.h"
 #include "Marquesina.h"
+#include "Utilidades.h"
 #include "Banco.h"
 #include <regex>
 #include <cmath>
@@ -118,7 +119,7 @@ Fecha ValidacionDatos::capturarFechaInteractiva(const string& mensaje, bool esFe
             try {
                 Fecha fecha(dia, mes, anio);
                 validarFecha(fecha, esFechaNacimiento);
-                if (!fecha.esValida()) throw BancoException("Fecha inválida.");
+                //if (!fecha.esValida()) throw BancoException("Fecha inválida.");
                 return fecha;
             } catch (const BancoException& e) {
                 cout << "\nError: " << e.what() << "\n";
@@ -141,13 +142,22 @@ void ValidacionDatos::validarFecha(const Fecha& fecha, bool esFechaNacimiento) {
     int mes = fecha.getMes();
     int anio = fecha.getAnio();
 
-    if (anio < 1900 || anio > (esFechaNacimiento ? 2007 : 2100)) {
-        throw BancoException("Año inválido: debe estar entre 1900 y " + string(esFechaNacimiento ? "2007" : "2100") + ".");
+    int maxAnio = esFechaNacimiento ? 2007 : 2100;
+    if (anio < 1900 || anio > maxAnio) {
+        throw BancoException("Año inválido: debe estar entre 1900 y " + std::to_string(maxAnio) + ".");
     }
+
+    // Validar mes
     if (mes < 1 || mes > 12) {
         throw BancoException("Mes inválido: debe estar entre 1 y 12.");
     }
-    if (dia < 1 || dia > diasEnMes(mes, anio)) {
+
+    // Validar día usando la lógica de es_fecha_valida
+    int dias_en_mes[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+    if (mes == 2 && ((anio % 4 == 0 && anio % 100 != 0) || anio % 400 == 0)) {
+        dias_en_mes[1] = 29;
+    }
+    if (dia < 1 || dia > dias_en_mes[mes - 1]) {
         throw BancoException("Día inválido para el mes y año proporcionados.");
     }
     if (esFechaNacimiento) {
@@ -162,16 +172,15 @@ void ValidacionDatos::validarFecha(const Fecha& fecha, bool esFechaNacimiento) {
 
 string ValidacionDatos::capturarEntrada(TipoDato tipo, const string& mensaje, size_t maxLongitud) {
     string entrada;
-    Banco banco; // Asegúrate de que Banco esté definido y tenga el método mover_cursor
     int fila_entrada = marquesina.get_cursor_row(); // O pásala como parámetro si tienes control
-    banco.mover_cursor(0, fila_entrada);
+    Utilidades::gotoxy(0, fila_entrada);
     cout << mensaje;
     cout.flush();
 
     while (true) {
         int tecla = _getch();
         if (tecla == 27) { // Esc
-            banco.mover_cursor(0, fila_entrada);
+            Utilidades::gotoxy(0, fila_entrada);
             cout << "\r" << string(mensaje.length() + entrada.length(), ' ') << "\r";
             return ""; // Retorna cadena vacía para indicar "Atrás"
         }
@@ -216,15 +225,15 @@ string ValidacionDatos::capturarEntrada(TipoDato tipo, const string& mensaje, si
                 cout << endl;
                 return entrada;
             } catch (const BancoException& e) {
-                banco.mover_cursor(40, fila_entrada);
+                Utilidades::gotoxy(40, fila_entrada);
                 cout << "\r\033[K" << "Error: " << e.what(); // Limpia y muestra el error
-                banco.mover_cursor(0 + mensaje.length() + entrada.length(), fila_entrada);
+                Utilidades::gotoxy(0 + mensaje.length() + entrada.length(), fila_entrada);
                 getch(); // Espera a que el usuario vea el error
-                banco.mover_cursor(40, fila_entrada);
+                Utilidades::gotoxy(40, fila_entrada);
                 cout << "\r\033[K"; // Limpia la línea del error
-                banco.mover_cursor(0, fila_entrada);
+                Utilidades::gotoxy(0, fila_entrada);
                 cout << "\r\033[K" << mensaje; // Limpia y vuelve a mostrar el mensaje de entrada
-                banco.mover_cursor(0 + mensaje.length(), fila_entrada);
+                Utilidades::gotoxy(0 + mensaje.length(), fila_entrada);
                 entrada.clear();
                 cout.flush();
                 continue;
@@ -634,7 +643,7 @@ string ValidacionDatos::validarHora(const string& mensaje) {
     }
 }
 
-string ValidacionDatos::validarFecha(const string& mensaje) {
+string ValidacionDatos::validar_Fecha(const string& mensaje) {
     char buffer[11] = {0};
     char* palabra = buffer;
     char c;

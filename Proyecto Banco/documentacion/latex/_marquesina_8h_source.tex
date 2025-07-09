@@ -1,0 +1,60 @@
+\doxysection{Marquesina.\+h}
+\hypertarget{_marquesina_8h_source}{}\label{_marquesina_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#ifndef\ NOMINMAX}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#define\ NOMINMAX}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#define\ byte\ win\_byte}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <windows.h>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#undef\ byte}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <atomic>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00013\ \textcolor{keyword}{extern}\ std::mutex\ consola\_mutex;}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_elemento_marquesina}{ElementoMarquesina}}\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ std::string\ texto;}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{int}\ colorTexto;\ \ \ \textcolor{comment}{//\ Código\ de\ color\ del\ texto}}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{int}\ colorFondo;\ \ \ \textcolor{comment}{//\ Código\ de\ color\ del\ fondo}}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{bool}\ negrita;\ \ \ \ \ \textcolor{comment}{//\ Texto\ en\ negrita}}
+\DoxyCodeLine{00020\ \};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{class\ }Marquesina\ \{}
+\DoxyCodeLine{00023\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00024\ \ \ \ \ std::vector<ElementoMarquesina>\ elementos;}
+\DoxyCodeLine{00025\ \ \ \ \ std::thread\ hiloMarquesina;}
+\DoxyCodeLine{00026\ \ \ \ \ std::atomic<bool>\ ejecutando;}
+\DoxyCodeLine{00027\ \ \ \ \ std::atomic<bool>\ pausado;}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{int}\ posX,\ posY;}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{int}\ ancho;}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{int}\ velocidad;}
+\DoxyCodeLine{00031\ \ \ \ \ std::string\ archivoHTML;}
+\DoxyCodeLine{00032\ \ \ \ \ std::mutex\ mtx;}
+\DoxyCodeLine{00033\ \ \ \ \ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{comment}{//\ Método\ para\ leer\ y\ parsear\ HTML\ simple}}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ cargarDesdeHTML();}
+\DoxyCodeLine{00036\ \ \ \ \ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{comment}{//\ Método\ que\ ejecuta\ el\ hilo\ de\ la\ marquesina}}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ ejecutarMarquesina();}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{comment}{//\ Método\ para\ analizar\ etiquetas\ simples\ de\ HTML}}
+\DoxyCodeLine{00040\ \ \ \ \ std::vector<ElementoMarquesina>\ parsearHTML(\textcolor{keyword}{const}\ std::string\&\ contenido);}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{comment}{//\ Verificar\ tiempo\ modificación\ archivo\ (usando\ API\ Windows\ en\ vez\ de\ std::filesystem)}}
+\DoxyCodeLine{00042\ \ \ \ \ FILETIME\ ultimaModificacion;}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{bool}\ archivoModificado();}
+\DoxyCodeLine{00044\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{int}\ get\_cursor\_row();\ \textcolor{comment}{//\ Función\ para\ obtener\ la\ fila\ actual\ del\ cursor}}
+\DoxyCodeLine{00046\ \ \ \ \ Marquesina(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ \textcolor{keywordtype}{int}\ ancho,\ \textcolor{keyword}{const}\ std::string\&\ archivoHTML,\ \textcolor{keywordtype}{int}\ velocidad\ =\ 100);}
+\DoxyCodeLine{00047\ \ \ \ \ \string~Marquesina();}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{comment}{//void\ limpiarMenu(int\ desde,\ int\ hasta);}}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{void}\ iniciar();}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ detener();}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{void}\ pausar();}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{void}\ reanudar();}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{void}\ actualizarTexto(\textcolor{keyword}{const}\ std::string\&\ nuevoTexto);}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{void}\ mostrarRutaArchivo();}
+\DoxyCodeLine{00055\ \};}
+
+\end{DoxyCode}

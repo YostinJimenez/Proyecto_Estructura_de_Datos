@@ -1,0 +1,94 @@
+\doxysection{Cuenta\+Ahorros Class Reference}
+\hypertarget{class_cuenta_ahorros}{}\label{class_cuenta_ahorros}\index{CuentaAhorros@{CuentaAhorros}}
+Inheritance diagram for Cuenta\+Ahorros\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_cuenta_ahorros}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_cuenta_ahorros_a4aa4ef1a3c8a38e882670e9fdcbf7902}\label{class_cuenta_ahorros_a4aa4ef1a3c8a38e882670e9fdcbf7902} 
+{\bfseries Cuenta\+Ahorros} (string numero, \mbox{\hyperlink{class_cliente}{Cliente}} \texorpdfstring{$\ast$}{*}c, \mbox{\hyperlink{class_fecha}{Fecha}} fecha, double tasa, int limite)
+\item 
+void \mbox{\hyperlink{class_cuenta_ahorros_ab3e6b7b590a23d7abe73815c9522cb14}{depositar}} (double monto, \mbox{\hyperlink{class_fecha}{Fecha}} fecha=\mbox{\hyperlink{class_fecha}{Fecha}}(), bool es\+Transferencia=false, string cuenta\+Origen="{}"{}) override
+\item 
+bool \mbox{\hyperlink{class_cuenta_ahorros_a15ff1e916665a24e66575e8bc396d33e}{retirar}} (double monto, \mbox{\hyperlink{class_fecha}{Fecha}} fecha=\mbox{\hyperlink{class_fecha}{Fecha}}(), bool es\+Transferencia=false, string cuenta\+Destino="{}"{}) override
+\item 
+string \mbox{\hyperlink{class_cuenta_ahorros_af39c05cc01980f9cf24d0b4c1eb522ae}{mostrar\+Resumen}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_cuenta}{Cuenta}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Cuenta} (string numero, \mbox{\hyperlink{class_cliente}{Cliente}} \texorpdfstring{$\ast$}{*}c, \mbox{\hyperlink{class_fecha}{Fecha}} fecha)
+\item 
+string {\bfseries get\+Numero} () const
+\item 
+\mbox{\hyperlink{class_cliente}{Cliente}} \texorpdfstring{$\ast$}{*} {\bfseries get\+Cliente} () const
+\item 
+double {\bfseries get\+Saldo} () const
+\item 
+\mbox{\hyperlink{class_fecha}{Fecha}} {\bfseries get\+Fecha} () const
+\item 
+void {\bfseries consulta\+Rango\+Fechas} (\mbox{\hyperlink{class_fecha}{Fecha}} inicio, \mbox{\hyperlink{class_fecha}{Fecha}} fin, function$<$ void(const \mbox{\hyperlink{class_transaccion}{Transaccion}}$<$ double $>$ \texorpdfstring{$\ast$}{*})$>$ callback) const
+\item 
+void {\bfseries consulta\+Personalizada} (double min\+Monto, function$<$ void(const \mbox{\hyperlink{class_transaccion}{Transaccion}}$<$ double $>$ \texorpdfstring{$\ast$}{*})$>$ callback) const
+\item 
+void {\bfseries consulta\+General} (function$<$ void(const \mbox{\hyperlink{class_transaccion}{Transaccion}}$<$ double $>$ \texorpdfstring{$\ast$}{*})$>$ callback) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_cuenta}{Cuenta}}}
+\begin{DoxyCompactItemize}
+\item 
+string {\bfseries numero\+Cuenta}
+\item 
+double {\bfseries saldo}
+\item 
+\mbox{\hyperlink{class_cliente}{Cliente}} \texorpdfstring{$\ast$}{*} {\bfseries cliente}
+\item 
+\mbox{\hyperlink{class_fecha}{Fecha}} {\bfseries fecha\+Apertura}
+\item 
+\mbox{\hyperlink{class_lista_doble_circular}{Lista\+Doble\+Circular}}$<$ \mbox{\hyperlink{class_transaccion}{Transaccion}}$<$ double $>$ $>$ {\bfseries transacciones}
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{class_cuenta_ahorros_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_cuenta_ahorros_ab3e6b7b590a23d7abe73815c9522cb14}\index{CuentaAhorros@{CuentaAhorros}!depositar@{depositar}}
+\index{depositar@{depositar}!CuentaAhorros@{CuentaAhorros}}
+\doxysubsubsection{\texorpdfstring{depositar()}{depositar()}}
+{\footnotesize\ttfamily \label{class_cuenta_ahorros_ab3e6b7b590a23d7abe73815c9522cb14} 
+void Cuenta\+Ahorros\+::depositar (\begin{DoxyParamCaption}\item[{double}]{monto}{, }\item[{\mbox{\hyperlink{class_fecha}{Fecha}}}]{fecha}{ = {\ttfamily \mbox{\hyperlink{class_fecha}{Fecha}}()}, }\item[{bool}]{es\+Transferencia}{ = {\ttfamily false}, }\item[{string}]{cuenta\+Origen}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_cuenta}{Cuenta}}.
+
+\Hypertarget{class_cuenta_ahorros_af39c05cc01980f9cf24d0b4c1eb522ae}\index{CuentaAhorros@{CuentaAhorros}!mostrarResumen@{mostrarResumen}}
+\index{mostrarResumen@{mostrarResumen}!CuentaAhorros@{CuentaAhorros}}
+\doxysubsubsection{\texorpdfstring{mostrarResumen()}{mostrarResumen()}}
+{\footnotesize\ttfamily \label{class_cuenta_ahorros_af39c05cc01980f9cf24d0b4c1eb522ae} 
+string Cuenta\+Ahorros\+::mostrar\+Resumen (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_cuenta}{Cuenta}}.
+
+\Hypertarget{class_cuenta_ahorros_a15ff1e916665a24e66575e8bc396d33e}\index{CuentaAhorros@{CuentaAhorros}!retirar@{retirar}}
+\index{retirar@{retirar}!CuentaAhorros@{CuentaAhorros}}
+\doxysubsubsection{\texorpdfstring{retirar()}{retirar()}}
+{\footnotesize\ttfamily \label{class_cuenta_ahorros_a15ff1e916665a24e66575e8bc396d33e} 
+bool Cuenta\+Ahorros\+::retirar (\begin{DoxyParamCaption}\item[{double}]{monto}{, }\item[{\mbox{\hyperlink{class_fecha}{Fecha}}}]{fecha}{ = {\ttfamily \mbox{\hyperlink{class_fecha}{Fecha}}()}, }\item[{bool}]{es\+Transferencia}{ = {\ttfamily false}, }\item[{string}]{cuenta\+Destino}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_cuenta}{Cuenta}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Cuenta\+Ahorros.\+h\item 
+Cuenta\+Ahorros.\+cpp\end{DoxyCompactItemize}

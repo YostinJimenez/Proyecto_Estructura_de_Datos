@@ -15,7 +15,6 @@ public:
     static void validarCedula(const std::string& cedula);
     static void validarCedulaPrefijo(const std::string& cedula);
     static void limpiar_linea(const std::string& mensaje);
-    static void limpiar_linea_Error(const string& mensaje, size_t longitud_extra);
     static void validarNombre(const std::string& nombre);
     static void validarCorreo(const std::string& correo);
     static void validarTelefono(const std::string& telefono);
@@ -24,7 +23,7 @@ public:
     static void validarMonto(double monto, bool permitirCero);
     static void validarNombreArchivo(const std::string& entrada);
     static std::string ingresar_dni(const std::string& mensaje);
-    static std::string validarFecha(const std::string& fecha);
+    static std::string validar_Fecha(const std::string& fecha);
     static std::string validarHora(const std::string& hora);
     static bool validar_hora_minuto_segundo(int hora, int minuto, int segundo);
     static bool es_fecha_valida(int dia, int mes, int anio);

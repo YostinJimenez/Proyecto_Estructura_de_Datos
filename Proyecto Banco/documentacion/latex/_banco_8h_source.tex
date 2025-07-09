@@ -1,0 +1,45 @@
+\doxysection{Banco.\+h}
+\hypertarget{_banco_8h_source}{}\label{_banco_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ BANCO\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ BANCO\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <cstdlib>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}Cliente.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}ListaDobleCircular.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ TECLA\_ARRIBA\ 72}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ TECLA\_ABAJO\ 80}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ ENTER\ 13}}
+\DoxyCodeLine{00011\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }Banco\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{class_lista_doble_circular}{ListaDobleCircular<Cliente>}}\ clientes;}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{enum}\ CampoBusqueda\ \{\ CEDULA,\ PRIMER\_NOMBRE,\ SEGUNDO\_NOMBRE,\ PRIMER\_APELLIDO,\ SEGUNDO\_APELLIDO,\ SALDO\ \};}
+\DoxyCodeLine{00017\ \ \ \ \ }
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{bool}\ mostrarConfirmacion(\textcolor{keywordtype}{double}\ monto,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ operacion);}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{string}\ seleccionarTipoCuenta();}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{void}\ mostrarMenuUsuario(\mbox{\hyperlink{class_cliente}{Cliente}}*\ cliente);}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{void}\ buscarPorPrefijo(CampoBusqueda\ campo,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ valor,\ vector<Cliente*>\&\ resultados);}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{void}\ buscarPorRangoSaldo(\textcolor{keywordtype}{double}\ valor,\ vector<Cliente*>\&\ resultados);}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{void}\ ordenarCuentas(\textcolor{keyword}{const}\ vector<Cliente*>\&\ resultados,\ CampoBusqueda\ campo);}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{void}\ mostrar\_ayuda\_tecnica();}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{void}\ mostrarBaseDatos();}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{void}\ generarDocumentacion();}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{void}\ generarQRL();}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{void}\ mover\_cursor\_opciones(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{int}\ seleccionar\_opcion(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ titulo,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ opciones[],\ \textcolor{keywordtype}{int}\ n,\ \textcolor{keywordtype}{int}\ fila\_inicio);}
+\DoxyCodeLine{00031\ \ \ \ \ Banco();}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ mover\_cursor(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{void}\ crearCuenta();}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ mostrarMenuUsuario();}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ mostrarMenuAdmin();}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{void}\ ejecutar();}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{string}\ generarNumeroCuenta(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ tipoCuenta);}
+\DoxyCodeLine{00038\ \};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

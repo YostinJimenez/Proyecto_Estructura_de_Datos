@@ -1,0 +1,22 @@
+\doxysection{Cuenta\+Ahorros.\+h}
+\hypertarget{_cuenta_ahorros_8h_source}{}\label{_cuenta_ahorros_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ CUENTAAHORROS\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ CUENTAAHORROS\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}Cuenta.h"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{class\ }CuentaAhorros\ :\ \textcolor{keyword}{public}\ Cuenta\ \{}
+\DoxyCodeLine{00006\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00007\ \ \ \ \ \textcolor{keywordtype}{double}\ tasaInteres;}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{keywordtype}{int}\ limiteMensualRetiros;}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keywordtype}{int}\ retirosRealizados;}
+\DoxyCodeLine{00010\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00011\ \ \ \ \ CuentaAhorros(\textcolor{keywordtype}{string}\ numero,\ \mbox{\hyperlink{class_cliente}{Cliente}}*\ c,\ \mbox{\hyperlink{class_fecha}{Fecha}}\ fecha,\ \textcolor{keywordtype}{double}\ tasa,\ \textcolor{keywordtype}{int}\ limite);}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{void}\ depositar(\textcolor{keywordtype}{double}\ monto,\ \mbox{\hyperlink{class_fecha}{Fecha}}\ fecha\ =\ \mbox{\hyperlink{class_fecha}{Fecha}}(),\ \textcolor{keywordtype}{bool}\ esTransferencia\ =\ \textcolor{keyword}{false},\ \textcolor{keywordtype}{string}\ cuentaOrigen\ =\ \textcolor{stringliteral}{"{}"{}})\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{bool}\ retirar(\textcolor{keywordtype}{double}\ monto,\ \mbox{\hyperlink{class_fecha}{Fecha}}\ fecha\ =\ \mbox{\hyperlink{class_fecha}{Fecha}}(),\ \textcolor{keywordtype}{bool}\ esTransferencia\ =\ \textcolor{keyword}{false},\ \textcolor{keywordtype}{string}\ cuentaDestino\ =\ \textcolor{stringliteral}{"{}"{}})\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{string}\ mostrarResumen()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00015\ \};}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,24 +1,41 @@
 #define WIN32_LEAN_AND_MEAN
 #include "Banco.h"
-#include "Marquesina.h"
-#include <iostream>
-#include <string>
-#include <limits>
-#include <conio.h>
-#include <windows.h>
-#include <shellapi.h>
-#include <iomanip>
-#include <sstream>
-#include <algorithm>
+#include "GeneradorQr.h"
+#include "PDFCreator.h"
+#include "Utilidades.h"
 #include "ValidacionDatos.h"
 #include "CuentaAhorros.h"
 #include "CuentaCorriente.h"
 #include "recuperarCuenta.h"
 #include "ListaDobleCircular.h"
 #include "BackupManager.h"
+#include <iostream>
+#include <string>
+#include <limits>
+#include <conio.h>
+#include <shellapi.h>
+#include <iomanip>
+#include <sstream>
+#include <algorithm>
+#include "Marquesina.h"
 using namespace std;
-extern Marquesina marquesina;
-// Función auxiliar para calcular el código de control del IBAN
+/** @brief Puntero global a la marquesina utilizada en la aplicación */
+Marquesina* marquesinaGlobal=nullptr;
+
+/** @brief Instancia global de la marquesina para mostrar mensajes en la consola */
+Marquesina marquesina(0, 0, 200, "marquesina.html", 50);
+
+/** @brief Bandera atómica para coordinar actualizaciones entre menú y marquesina */
+std::atomic<bool> actualizandoMenu(false);
+
+/** @brief Mutex para sincronización entre hilos */
+std::mutex mtxActualizacion;
+
+/**
+ * @brief Calcula el código de control para un IBAN ecuatoriano.
+ * @param ibanSinControl IBAN sin el código de control.
+ * @return Código de control de dos dígitos como string.
+ */
 static string calcularCodigoControl(const string& ibanSinControl) {
     string cadena = ibanSinControl.substr(4) + "EC00";
     string numero = "";
@@ -38,18 +55,25 @@ static string calcularCodigoControl(const string& ibanSinControl) {
     oss << setw(2) << setfill('0') << codigo;
     return oss.str();
 }
-// Constructor de Banco
+
+/**
+ * @brief Constructor de la clase Banco.
+ * Inicializa la lista de clientes y otros recursos.
+ */
 Banco::Banco() {
     // Inicialización por defecto de clientes (ListaDobleCircular ya se inicializa sola)
 }
 
+/**
+ * @brief Muestra el manual de ayuda técnica del banco.
+ * Abre el archivo de ayuda AyudaTecnicaBanco.chm.
+ */
 void Banco::mostrar_ayuda_tecnica()
 {
-    marquesina.pausar();
     system("cls");
     try
     {
-        cout << "\n\n\t\t===========================================" << endl;
+        cout << "\n\t\t===========================================" << endl;
         cout << "\t\t===    MANUAL DE AYUDA TÉCNICA BANCO    ===" << endl;
         cout << "\t\t===========================================" << endl;
         HINSTANCE result = ShellExecute(NULL, "open", "AyudaTecnicaBanco.chm", NULL, NULL, SW_SHOWNORMAL);
@@ -58,7 +82,6 @@ void Banco::mostrar_ayuda_tecnica()
             throw runtime_error("No se pudo abrir el archivo de ayuda. Asegúrese de que 'AyudaTecnicaBanco.chm' esté en el directorio del programa.");
         }
         cout << "Manual de Ayuda Técnica abierto exitosamente.\n";
-        marquesina.reanudar(); // Reanudar marquesina después de abrir ayuda
         getch(); // Esperar a que el usuario vea el mensaje
     }
     catch (const exception& e)
@@ -70,35 +93,40 @@ void Banco::mostrar_ayuda_tecnica()
     }
 }
 
-void Banco::mover_cursor(int x, int y){
-    lock_guard<mutex> lock(consola_mutex);
-    HANDLE manejo_consola = GetStdHandle(STD_OUTPUT_HANDLE);
-    COORD pos = {static_cast<SHORT>(x), static_cast<SHORT>(y)};
-    SetConsoleCursorPosition(manejo_consola, pos);
+/**
+ * @brief Genera la documentación del proyecto usando Doxygen y la abre en el navegador.
+ */
+void Banco::generarDocumentacion() {
+    system("cls");
+    cout << "\n\t\t=====================================\n";
+    cout << "\t\t=== GENERANDO DOCUMENTACIÓN... ====\n";
+    cout << "\t\t=====================================\n";
+    cout <<"Generando documentación del proyecto Banco...\n";
+    ShellExecute(NULL, "open", "documentacion\\html\\index.html", NULL, NULL, SW_SHOWNORMAL);
+    getch(); // Esperar a que el usuario vea el mensaje
 }
 
-void Banco::mover_cursor_opciones(int x, int y){
-    marquesina.iniciar(); // Asegurarse de que la marquesina esté activa
-    marquesina.pausar(); // Pausar marquesina antes de mover el cursor
-    lock_guard<mutex> lock(consola_mutex);
-    HANDLE manejo_consola = GetStdHandle(STD_OUTPUT_HANDLE);
-    COORD pos = {static_cast<SHORT>(x), static_cast<SHORT>(y)};
-    SetConsoleCursorPosition(manejo_consola, pos);
-    marquesina.reanudar(); // Reanudar marquesina después de mover el cursor
-}
-
+/**
+ * @brief Permite seleccionar una opción de un menú usando el teclado.
+ * @param titulo Título del menú.
+ * @param opciones Arreglo de strings con las opciones.
+ * @param n Número de opciones.
+ * @param fila_inicio Fila inicial para mostrar el menú.
+ * @return Índice de la opción seleccionada (1-based).
+ */
 int Banco::seleccionar_opcion(const char *titulo, const char *opciones[], int n, int fila_inicio) {
     system("chcp 65001 > nul");
     int opcionSeleccionada = 1;
     int tecla;
 
-    // Dibujar el título, alineado a la izquierda, en la fila especificada
-    mover_cursor_opciones(1, fila_inicio);
+    std::lock_guard<std::mutex> lock(mtxActualizacion);
+
+    Utilidades::gotoxy(1, fila_inicio);
     cout << titulo;
 
     // Dibujar las opciones iniciales, empezando justo debajo del título
     for (int e = 0; e < n; e++) {
-        mover_cursor_opciones(10, fila_inicio + 2 + e); // +2 para dejar un espacio entre título y opciones
+        Utilidades::gotoxy(10, fila_inicio + 2 + e); // +2 para dejar un espacio entre título y opciones
         if (e + 1 == opcionSeleccionada) {
             cout << " ➤ " << e + 1 << " " << opciones[e];
         } else {
@@ -111,60 +139,107 @@ int Banco::seleccionar_opcion(const char *titulo, const char *opciones[], int n,
         switch (tecla) {
             case TECLA_ARRIBA:
                 // Actualizar la opción seleccionada
-                mover_cursor_opciones(10, fila_inicio + 2 + (opcionSeleccionada - 1));
+                Utilidades::gotoxy(10, fila_inicio + 2 + (opcionSeleccionada - 1));
                 cout << "    " << opcionSeleccionada << " " << opciones[opcionSeleccionada - 1];
 
                 opcionSeleccionada--;
                 if (opcionSeleccionada < 1) opcionSeleccionada = n;
 
-                mover_cursor_opciones(10, fila_inicio + 2 + (opcionSeleccionada - 1));
+                Utilidades::gotoxy(10, fila_inicio + 2 + (opcionSeleccionada - 1));
                 cout << " ➤ " << opcionSeleccionada << " " << opciones[opcionSeleccionada - 1];
                 break;
 
             case TECLA_ABAJO:
                 // Actualizar la opción seleccionada
-                mover_cursor_opciones(10, fila_inicio + 2 + (opcionSeleccionada - 1));
+                Utilidades::gotoxy(10, fila_inicio + 2 + (opcionSeleccionada - 1));
                 cout << "    " << opcionSeleccionada << " " << opciones[opcionSeleccionada - 1];
 
                 opcionSeleccionada++;
                 if (opcionSeleccionada > n) opcionSeleccionada = 1;
 
-                mover_cursor_opciones(10, fila_inicio + 2 + (opcionSeleccionada - 1));
+                Utilidades::gotoxy(10, fila_inicio + 2 + (opcionSeleccionada - 1));
                 cout << " ➤ " << opcionSeleccionada << " " << opciones[opcionSeleccionada - 1];
                 break;
             }
     } while (tecla != ENTER);
+    Sleep(2);
+	actualizandoMenu = false;
 
     return opcionSeleccionada;
 }
 
+/**
+ * @brief Pausa temporalmente la marquesina durante operaciones críticas
+ */
+static void pausarMarquesina() {
+	if (marquesinaGlobal) {
+		marquesinaGlobal->pausar();
+	}
+}
+
+/**
+ * @brief Reanuda la marquesina después de una operación crítica
+ */
+static void reanudarMarquesina() {
+	if (marquesinaGlobal) {
+		marquesinaGlobal->reanudar();
+	}
+}
+
+/**
+ * @brief Detiene la marquesina global si está activa.
+ */
+static void detenerMarquesina() {
+	if (marquesinaGlobal) {
+		marquesinaGlobal->detener();
+	}
+}
+
+/**
+ * @brief Muestra un cuadro de confirmación para operaciones monetarias.
+ * @param monto Monto de la operación.
+ * @param operacion Nombre de la operación (ej: "TRANSFERENCIA").
+ * @return true si el usuario acepta, false si cancela.
+ */
 bool Banco::mostrarConfirmacion(double monto, const string& operacion) {
     system("cls");
     const char* opciones[] = {"Aceptar", "Cancelar"};
-    cout <<"\t=====================================\n";
+    cout <<"\n\t=====================================\n";
     cout << "\t======= CONFIRMAR " << operacion << " =======\n";
     cout <<"\t=====================================\n";
 
     cout << "\tMonto: $" << fixed << setprecision(2) << monto << "\n";
     cout << "\t¿Está seguro?\n\n";
-    int seleccion = seleccionar_opcion("", opciones, 2, 3);
+    pausarMarquesina(); // Pausar marquesina antes de mostrar confirmación
+    int seleccion = seleccionar_opcion("", opciones, 5, 3);
+    reanudarMarquesina(); // Reanudar marquesina después de la confirmación
     if (seleccion == 2) return false; // Atrás
     return (seleccion == 1); // Aceptar (true), Cancelar (false)
 }
 
+/**
+ * @brief Permite al usuario seleccionar el tipo de cuenta (Ahorros/Corriente).
+ * @return Tipo de cuenta seleccionado o vacío si cancela.
+ */
 string Banco::seleccionarTipoCuenta() {
     system("cls");
     const char* opciones[] = {"Ahorros", "Corriente", "Atrás"};
+    pausarMarquesina(); // Pausar marquesina antes de mostrar opciones
     int seleccion = seleccionar_opcion("\t\t=== SELECCIONE TIPO DE CUENTA ===\n\n", opciones, 3, 2);
+    reanudarMarquesina(); // Reanudar marquesina después de la selección
     if (seleccion == 3) return ""; // Atrás
     return opciones[seleccion - 1];
 }
 
+/**
+ * @brief Crea una nueva cuenta bancaria y la agrega a la lista de clientes.
+ */
 void Banco::crearCuenta() {
-    marquesina.pausar(); // Pausar marquesina antes de pedir datos
     system("cls");
-    cout << "=== CREACION DE CUENTA ===\n\n";
-    cout << "Presione Esc para volver al menú principal.\n\n";
+    cout <<"\n\t_________________________________\n";
+    cout << "\t||    CREACION DE CUENTA       ||\n";
+    cout << "\t||_____________________________||\n";
+    cout << "• Presione Esc para volver al menú principal.\n\n";
     string primerNombre, segundoNombre, primerApellido, segundoApellido, cedula, telefono, correo, tipoCuenta, usuario, contrasena, repetirContrasena;
     Fecha fechaNacimiento;
     try {
@@ -193,9 +268,11 @@ void Banco::crearCuenta() {
         if (!fechaNacimiento.esValida()) return; // Atrás
         tipoCuenta = seleccionarTipoCuenta();
         if (tipoCuenta.empty()) return;
-        marquesina.pausar(); // Pausar marquesina antes de continuar
         system("cls");
-        cout << "=== CREACION DE CUENTA ===\n\n";
+        cout <<"\n\t_________________________________\n";
+        cout << "\t||    CREACION DE CUENTA       ||\n";
+        cout << "\t||_____________________________||\n";
+        cout << "• Presione Esc para volver al menú principal.\n\n";
         usuario = ValidacionDatos::capturarEntrada(ValidacionDatos::USUARIO, "Usuario: ", 20);
         if (usuario.empty()) return;
         Cliente* existeUsuario = clientes.buscar([&](Cliente* c) { return c->getUsuario() == usuario; });
@@ -225,14 +302,33 @@ void Banco::crearCuenta() {
     }
     cout << "\nPresiona Enter para volver...";
     getch();
-    marquesina.reanudar(); 
 }
 
+/**
+ * @brief Imprime un cuadro de búsqueda con el texto centrado.
+ * @param texto Texto a mostrar en el cuadro.
+ * @param ancho Ancho del cuadro (por defecto 46).
+ */
+void Banco::imprimirCuadroBusqueda(const std::string& texto, int ancho = 46) {
+    std::string titulo = "BÚSQUEDA POR " + texto;
+    int espacios = ancho - 4 - titulo.size(); // 4 por los bordes y espacios
+    int espaciosIzq = espacios / 2;
+    int espaciosDer = espacios - espaciosIzq;
+    std::cout << "\n\t\t";
+    for (int i = 0; i < ancho; ++i) std::cout << "_";
+    std::cout << "\n\t\t||" << std::string(espaciosIzq + 1, ' ') << titulo << std::string(espaciosDer + 1, ' ') << "||\n";
+    std::cout << "\t\t||";
+    for (int i = 0; i < ancho - 4; ++i) std::cout << "_";
+    std::cout << "||\n";
+}
+
+ /**
+ * @brief Muestra el menú de usuario para iniciar sesión y operar sobre su cuenta.
+ */
 void Banco::mostrarMenuUsuario() {
-    marquesina.pausar(); // Pausar marquesina antes de pedir datos
     system("cls");
     try {
-        cout<<"\t=====================================\n";
+        cout<<"\n\t=====================================\n";
         cout << "\t======= INICIO DE SESION ===========\n";
         cout << "\t=====================================\n";
         cout << "Presione Esc para volver al menú principal.\n\n";
@@ -247,28 +343,35 @@ void Banco::mostrarMenuUsuario() {
         Cliente* cliente = clientes.buscar([&](Cliente* c) {
             return c->getUsuario() == usuario && c->getContrasena() == contrasena;
         });
-        if (!cliente) throw BancoException("Usuario o contrasena incorrectos.");
+        if (!cliente) throw BancoException("USUARIO O CONTRASENA INCORRECTOS.");
         mostrarMenuUsuario(cliente);
     } catch (const BancoException& e) {
-        cout << "\nError: " << e.what() << "\n";
+        cout << "\n================================================\n";
+        cout << "=== ERROR: " << e.what() << " ===\n";
+        cout << "================================================\n";
         cout << "\nPresiona Enter para volver...";
         getch();
     }
 }
 
+/**
+ * @brief Muestra el menú de usuario autenticado y permite realizar operaciones.
+ * @param cliente Puntero al cliente autenticado.
+ */
 void Banco::mostrarMenuUsuario(Cliente* cliente) {
     const char* opciones[] = {"Transferir", "Depositar", "Retirar", "Consultar Transacciones", "Atrás"};
     bool salir = false;
     while (!salir) {
         system("cls");
-        cout << "\t\t=== MENU USUARIO ===\n\n";
+        cout << "\n\n\t\t=== MENU USUARIO ===\n\n";
         Cuenta* cuenta = cliente->getCuenta();
         string tipoCuenta = dynamic_cast<CuentaAhorros*>(cuenta) ? "Ahorros" : "Corriente";
         cout << "\tNúmero de cuenta: " << cuenta->getNumero() << "\n";
         cout << "\tTipo de cuenta: " << tipoCuenta << "\n";
         cout << "\tSaldo: $" << fixed << setprecision(2) << cuenta->getSaldo() << "\n\n";
-        int seleccion = seleccionar_opcion("", opciones, 5, 4);
-        marquesina.pausar();
+        pausarMarquesina(); // Pausar marquesina antes de mostrar opciones
+        int seleccion = seleccionar_opcion("", opciones, 5, 6);
+        reanudarMarquesina(); // Reanudar marquesina después de la selección
         if (seleccion == 5) {
             salir = true;
             continue; // Atrás
@@ -277,7 +380,7 @@ void Banco::mostrarMenuUsuario(Cliente* cliente) {
         try {
             switch (seleccion) {
                 case 1: { // Transferir
-                    cout << "=== REALIZAR TRANSFERENCIA ===\n\n";
+                    cout << "\n=== REALIZAR TRANSFERENCIA ===\n\n";
                     cout << "Presione Esc para volver al menú de usuario.\n\n";
                     string cuentaDestino = ValidacionDatos::capturarEntrada(ValidacionDatos::CEDULA, "Número de cuenta bancaria: ", 22);
                     if (cuentaDestino.empty()) break; // Atrás
@@ -295,12 +398,13 @@ void Banco::mostrarMenuUsuario(Cliente* cliente) {
                             cout << "\n\n\tTransferencia de $" << fixed << setprecision(2) << monto << " realizada con éxito.\n";
                         }
                     } else {
+
                         cout << "\nTransferencia cancelada o abortada.\n";
                     }
                     break;
                 }
                 case 2: { // Depositar
-                    cout << "=== REALIZAR DEPOSITO ===\n\n";
+                    cout << "\n=== REALIZAR DEPOSITO ===\n\n";
                     cout << "Presione Esc para volver al menú de usuario.\n\n";
                     bool depositoRealizado = false;
                     while (!depositoRealizado) {
@@ -323,7 +427,7 @@ void Banco::mostrarMenuUsuario(Cliente* cliente) {
                     break;
                 }
                 case 3: { // Retirar
-                    cout << "=== REALIZAR RETIRO ===\n\n";
+                    cout << "\n=== REALIZAR RETIRO ===\n\n";
                     cout << "Presione Esc para volver al menú de usuario.\n\n";
                     bool retiroRealizado = false;
                     while (!retiroRealizado) {
@@ -351,9 +455,10 @@ void Banco::mostrarMenuUsuario(Cliente* cliente) {
                 do {
                     system("cls");
                     const char* opciones_Transacciones[] = {"Rango de Fechas", "Monto Mínimo", "General", "Atrás"};
+                    pausarMarquesina();
                     seleccion = seleccionar_opcion("\t\t=== CONSULTAR TRANSACCIONES ===\n\n", opciones_Transacciones, 4, 2);
-                    marquesina.pausar();
-                    string tituloConsulta = "=== CONSULTAR TRANSACCIONES ===\n\nPresione Esc para volver al menú de usuario.\n\n";
+                    reanudarMarquesina();
+                    string tituloConsulta = "\n\t=== CONSULTAR TRANSACCIONES ===\n\nPresione Esc para volver al menú de usuario.\n\n";
                     switch (seleccion) {
                         case 1: { // Rango de Fechas
                             system("cls");
@@ -406,6 +511,12 @@ void Banco::mostrarMenuUsuario(Cliente* cliente) {
     }
 }
 
+/**
+ * @brief Busca clientes cuyo campo comienza con un prefijo dado.
+ * @param campo Campo a buscar (ej: CEDULA, PRIMER_NOMBRE).
+ * @param valor Prefijo a buscar.
+ * @param resultados Vector donde se almacenan los clientes encontrados.
+ */
 void Banco::buscarPorPrefijo(CampoBusqueda campo, const string& valor, vector<Cliente*>& resultados) {
     // Extraer clientes a un vector
     vector<Cliente*> clientesVector;
@@ -468,6 +579,11 @@ void Banco::buscarPorPrefijo(CampoBusqueda campo, const string& valor, vector<Cl
     }
 }
 
+/**
+ * @brief Busca clientes cuyo saldo está dentro de un rango ±10% del valor dado.
+ * @param valor Saldo base para el rango.
+ * @param resultados Vector donde se almacenan los clientes encontrados.
+ */
 void Banco::buscarPorRangoSaldo(double valor, vector<Cliente*>& resultados) {
     // Extraer clientes a un vector
     vector<Cliente*> clientesVector;
@@ -502,6 +618,11 @@ void Banco::buscarPorRangoSaldo(double valor, vector<Cliente*>& resultados) {
     }
 }
 
+/**
+ * @brief Ordena y muestra una lista de clientes según el campo especificado.
+ * @param resultados Vector de clientes a ordenar.
+ * @param campo Campo por el que se ordena.
+ */
 void Banco::ordenarCuentas(const vector<Cliente*>& resultados, CampoBusqueda campo) {
     vector<Cliente*> clientesOrdenados = resultados; // Copia para ordenar
 
@@ -554,37 +675,121 @@ void Banco::ordenarCuentas(const vector<Cliente*>& resultados, CampoBusqueda cam
     }
 }
 
+/**
+ * @brief Permite seleccionar un cliente y generar su código QR y PDF asociado.
+ */
+void Banco::generarQR() {
+    while (true) {
+        system("cls");
+        if (clientes.estaVacia()) {
+            cout << "\n\t\t===================================\n";
+            cout << "\t\t=== NO HAY CLIENTES REGISTRADOS ===\n";
+            cout << "\t\t===================================\n";
+            cout << "Presiona Enter para volver...";
+            getch();
+            return;
+        }
+        // Mostrar lista de clientes numerada
+        vector<Cliente*> listaClientes;
+        clientes.recorrer([&](Cliente* c) { listaClientes.push_back(c); });
+        cout << "\n\t\t===============================================\n";
+        cout << "\t\t==== SELECCIONE UN CLIENTE PARA GENERAR QR ====\n";
+        cout << "\t\t===============================================\n\n";
+        cout << left<< "| " << setw(4)  << "#" << "| " << setw(12) << "Cédula" << "| " << setw(35) << "Nombre Completo" << "| " << setw(22) << "Cuenta" << "|" << endl;
+        cout << "-------------------------------------------------------------------------------\n";
+        for (size_t i = 0; i < listaClientes.size(); ++i) {
+            Cliente* c = listaClientes[i];
+            cout << left<< "| " << setw(4)  << (i + 1)<< "| " << setw(12) << c->getCedula()<< "| " << setw(35) << (c->getPrimerNombre() + " " + c->getSegundoNombre() + " " + c->getPrimerApellido() + " " + c->getSegundoApellido()) << "| " << setw(22) << c->getCuenta()->getNumero()<< "|" << endl;
+        }
+        cout << "-------------------------------------------------------------------------------\n";
+        string numero;
+        int seleccion = 0;
+        do {
+            ValidacionDatos::limpiar_linea("• Ingrese el número del cliente (o ESC para volver): ");
+            numero = ValidacionDatos::ingresar_dni("");
+            if (numero == "__ESC__") return; // Volver
+            if (!numero.empty()) {
+                try {
+                    seleccion = stoi(numero);
+                } catch (...) {
+                    seleccion = 0;
+                }
+            }
+        } while (seleccion < 1 || seleccion > static_cast<int>(listaClientes.size()));
+        cout << endl;
+        // Validar selección
+        Cliente* cliente = listaClientes[seleccion - 1];
+        string nombres = cliente->getPrimerNombre() + " " + cliente->getSegundoNombre();
+        string apellidos = cliente->getPrimerApellido() + " " + cliente->getSegundoApellido();
+        string cuenta = cliente->getCuenta()->getNumero();
+        string cedula = cliente->getCedula();
+        // Carpeta de salida
+        string carpeta = "QRCodes";
+        CreateDirectoryA(carpeta.c_str(), NULL);
+
+        string archivoPng = carpeta + "\\QR_" + cedula + ".png";
+        string archivoPdf = carpeta + "\\QR_" + cedula + ".pdf";
+
+        bool exito = generarQrPersonal(nombres, apellidos, cuenta, archivoPng, archivoPdf, 8);
+        getch();
+        while (true) {
+            system("cls");
+            const char* opciones[] = {"Sí, generar PDF", "Volver a la lista de clientes", "Atrás"};
+            cout<<"\n\n\t\t=====================================\n";
+            cout << "\t\t====== DESEA GENERAR PDF DEL QR =====\n";
+            cout << "\t\t=====================================\n";
+            cout << "\t\t SELECCIONE UNA OPCIÓN:\n";
+            pausarMarquesina(); // Pausar marquesina antes de mostrar opciones
+            int opcion = seleccionar_opcion("", opciones, 3, 4);
+            reanudarMarquesina(); // Reanudar marquesina después de la selección
+            if (opcion == 1) {
+                PDFCreator pdf;
+                pdf.crearPDFPersonal(cliente, carpeta,archivoPng);
+            } else if (opcion == 2) {
+                break; // Volver a la lista
+            } else if (opcion == 3 || opcion == 27) {
+                return; // Volver al menú admin
+            }
+        }
+    }
+}
+
+/**
+ * @brief Muestra el menú de administrador y permite gestionar el sistema.
+ * @details Permite realizar backup, restaurar, gestionar clientes, cifrado, descifrado, verificar integridad, generar QR y PDF.
+ */
 void Banco::mostrarMenuAdmin() {
-    const char* opciones[] = {"Backup", "Restaurar Backup", "Gestionar", "Cifrado", "Descifrado", "Base Datos", "Verificar Integridad","Atrás"};
+    const char* opciones[] = {"Backup", "Restaurar Backup", "Gestionar", "Cifrado", "Descifrado", "Base Datos", "Verificar Integridad", "Generar QR", "Generar PDF", "Atrás"};
     const char* camposBusqueda[] = {"Cédula", "Primer Nombre", "Segundo Nombre", "Primer Apellido", "Segundo Apellido", "Saldo", "Atrás"};
     const char* camposOrdenamiento[] = {"Cédula", "Primer Nombre", "Segundo Nombre", "Primer Apellido", "Segundo Apellido", "Saldo"};
     bool salir = false;
     while (!salir) {
         system("cls");
-        int seleccion = seleccionar_opcion("\t\t=== PANEL ADMINISTRADOR ===\n\n", opciones, 8, 2);
-        if (seleccion == 8) { // Atrás
+        pausarMarquesina(); // Pausar marquesina antes de mostrar el menú
+        int seleccion = seleccionar_opcion("\t\t=== PANEL ADMINISTRADOR ===\n\n", opciones, 10, 2);
+        reanudarMarquesina(); // Reanudar marquesina después de mostrar el menú
+        if (seleccion == 10) { // Atrás
             salir = true;
             continue;
         }
-        marquesina.pausar(); // Pausar marquesina antes de mostrar el menú
         system("cls");
         try {
             if (seleccion == 3) { // Gestionar
                 bool campoElegido = false;
                 while (!campoElegido) {
                     system("cls");
+                    pausarMarquesina(); // Pausar marquesina antes de mostrar el menú
                     int campoBusqueda = seleccionar_opcion("\t\t=== SELECCIONE CAMPO DE BÚSQUEDA ===\n\n", camposBusqueda, 7, 2);
+                    reanudarMarquesina(); // Reanudar marquesina después de mostrar el menú
                     if (campoBusqueda == 7) {
                         campoElegido = true; // Atrás
                         continue;
                     }
-                    marquesina.pausar(); // Pausar marquesina antes de mostrar el menú
                     system("cls");
                     string campoOriginal = camposBusqueda[campoBusqueda - 1];
                     string camposMayusculas = campoOriginal;
                     for (char& c : camposMayusculas) c = toupper((unsigned char)c);
-                    cout << "\t\t=== BÚSQUEDA POR " << camposMayusculas << " ===\n\n";
-                    cout << "• Presione Esc para volver a la selección de campo.\n\n";
+                    imprimirCuadroBusqueda(camposMayusculas);
                     string entrada;
                     vector<Cliente*> resultados;
                     if (campoBusqueda - 1 == SALDO) {
@@ -604,7 +809,9 @@ void Banco::mostrarMenuAdmin() {
                     int campoOrdenamiento = 0;
                     while (mostrarResultados) {
                         system("cls");
-                        cout << "=== RESULTADOS DE BÚSQUEDA ===\n\n";
+                        cout << "\n\t___________________________________\n";
+                        cout << "\t||     RESULTADOS DE LA BUSQUEDA   ||\n";
+                        cout << "\t||_________________________________||\n";
                         // Mostrar menú horizontal
                         cout << "Ordenar por: ";
                         for (int i = 0; i < 6; ++i) {
@@ -630,12 +837,14 @@ void Banco::mostrarMenuAdmin() {
                     }
                 }
             }  else if (seleccion == 1) { // Backup
-                cout << "\n\n\t\t========================\n";
+                cout << "\n\t\t========================\n";
                 cout << "\t\t=== REALIZAR BACKUP ====\n";
                 cout << "\t\t=========================\n";
                 cout << "Presione Esc para volver al menú de administrador.\n";
                 if (clientes.estaVacia()) {
-                    cout << "No hay clientes registrados. No se puede realizar el backup.\n";
+                    cout << "\t======================================================\n";
+                    cout << "\t  ERROR AL REALIZAR BACKUP: No hay clientes registrados.\n";
+                    cout << "\t======================================================\n";   
                 } else if(BackupManager::validarArchivoExistente(clientes)) {
                     cout << "\t======================================================\n";
                     cout << "\t  ERROR AL REALIZAR BACKUP: Ya existe un backup igual.\n";
@@ -646,18 +855,17 @@ void Banco::mostrarMenuAdmin() {
                     cout << "\t  BACKUP REALIZADO CON ÉXITO: "<<nombreArchivo << endl;
                     cout << "\t======================================================\n";
                 }
-                marquesina.reanudar(); // Reanudar marquesina después de mostrar el menú
             } else if (seleccion == 2) { // Restaurar Backup
                 string fecha, fecha_hora;
                 int horas=999, minutos=999, segundos=999,dia=0, mes=0, anio=0;
                 try {
-                cout << "\t\t========================\n";
+                cout << "\n\t\t========================\n";
                 cout << "\t\t=== RESTAURAR BACKUP ===\n";
                 cout << "\t\t========================\n";
                 cout << "• Presione Esc para volver al menú de administrador.\n";
                 do {
                     ValidacionDatos::limpiar_linea("• Ingrese la fecha del backup (DD/MM/YYYY): ");
-                    fecha = ValidacionDatos::validarFecha("");
+                    fecha = ValidacionDatos::validar_Fecha("");
                     if (fecha == "__ESC__") break; // Atrás 
                     if (fecha.length() == 8) {
                         dia = stoi(fecha.substr(0, 2));
@@ -683,7 +891,7 @@ void Banco::mostrarMenuAdmin() {
                     //string nombreArchivo = ValidacionDatos::capturarEntrada(ValidacionDatos::NOMBRE_ARCHIVO, "Nombre del archivo de backup: ", 50);
                     if (nombreArchivo.empty()) continue; // Atrás
                     BackupManager::restaurarBackup(nombreArchivo, clientes);
-                    cout << "\n\t\t===================================================\n";
+                    cout << "\t\t===================================================\n";
                     cout << "\t\t=== BACKUP RESTAURADO: " << nombreArchivo << " ===\n";
                     cout << "\t\t===================================================\n";
                     cout << "Backup restaurado con éxito.\n";
@@ -700,15 +908,17 @@ void Banco::mostrarMenuAdmin() {
                 CifradoCesar::descifrar_archivos_txt();
             } else if (seleccion == 6) { // Base Datos
                 mostrarBaseDatos();
-                marquesina.reanudar();
             } else if (seleccion == 7) { // Verificar Integridad
-                cout << "\n\n\t\t============================\n";
+                cout << "\n\t\t============================\n";
                 cout << "\t\t=== VERIFICAR INTEGRIDAD ===\n";
                 cout << "\t\t============================\n";
                 cout << "Presione Esc para volver al menú de administrador.\n";
                 CifradoCesar::verificarIntegridadCifrados();
-                marquesina.reanudar();
-            }   
+            } else if (seleccion == 8) { // Generar QR
+                generarQR();
+            } else if (seleccion == 9) { // Generar PDF
+                CifradoCesar::generar_txt_a_pdf();
+            }
         } catch (const BancoException& e) {
             cout << "\nError: " << e.what() << endl;
         }
@@ -717,10 +927,13 @@ void Banco::mostrarMenuAdmin() {
     }
 }
 
+/**
+ * @brief Muestra la base de datos de clientes y cuentas en formato tabular.
+ */
 void Banco::mostrarBaseDatos() {
     system("cls");
     if (clientes.estaVacia()) {
-        cout << "\n\n\t\t===================================\n";
+        cout << "\n\t\t===================================\n";
         cout << "\t\t=== NO HAY CLIENTES REGISTRADOS ===\n";
         cout << "\t\t===================================\n";
         return;
@@ -731,24 +944,12 @@ void Banco::mostrarBaseDatos() {
     cout << "\t\t===========================================\n";
     cout << "Presione Esc para volver al menú de administrador.\n";
     cout << "---------------------------------------------------------------------------------------------------------------\n";
-    cout << left
-         << "| " << setw(4)  << "#" 
-         << "| " << setw(12) << "Cédula" 
-         << "| " << setw(16) << "Nombre" 
-         << "| " << setw(18) << "Apellido" 
-         << "| " << setw(12) << "Teléfono" 
-         << "| " << setw(25) << "Correo" 
-         << "| " << setw(22) << "Cuenta" 
-         << "| " << setw(10) << "Saldo"
-         << "|" << endl;
+    cout << left << "| " << setw(4)  << "#"  << "| " << setw(12) << "Cédula" << "| " << setw(16) << "Nombre" << "| " << setw(18) << "Apellido" << "| " << setw(12) << "Teléfono" << "| " << setw(25) << "Correo" << "| " << setw(22) << "Cuenta" << "| " << setw(10) << "Saldo" << "|" << endl;
     cout << "---------------------------------------------------------------------------------------------------------------\n";
 
     int i = 1;
     clientes.recorrer([&](Cliente* cliente) {
-        cout << left
-             << "| " << setw(4)  << i++
-             << "| " << setw(12) << cliente->getCedula()
-             << "| " << setw(16) << (cliente->getPrimerNombre() + " " + cliente->getSegundoNombre())
+        cout << left << "| " << setw(4)  << i++ << "| " << setw(12) << cliente->getCedula()<< "| " << setw(16) << (cliente->getPrimerNombre() + " " + cliente->getSegundoNombre())
              << "| " << setw(18) << (cliente->getPrimerApellido() + " " + cliente->getSegundoApellido())
              << "| " << setw(12) << cliente->getTelefono()
              << "| " << setw(25) << cliente->getCorreo()
@@ -762,6 +963,11 @@ void Banco::mostrarBaseDatos() {
     cout << "===========================================\n";
 }
 
+/**
+ * @brief Genera un número de cuenta único y válido para un tipo de cuenta.
+ * @param tipoCuenta "Ahorros" o "Corriente".
+ * @return Número de cuenta generado (formato IBAN).
+ */
 string Banco::generarNumeroCuenta(const string& tipoCuenta) {
     static long long contador = 10000000; // Iniciar en 10000000
     string prefijo = (tipoCuenta == "Ahorros") ? "22" : "23";
@@ -787,6 +993,9 @@ string Banco::generarNumeroCuenta(const string& tipoCuenta) {
     }
 }
 
+/**
+ * @brief Ejecuta el menú principal del sistema bancario.
+ */
 void Banco::ejecutar() {
     const int NUM_OPCIONES = 7;
     int contador = 6; 
@@ -796,21 +1005,23 @@ void Banco::ejecutar() {
         "Crear Cuenta",
         "Recuperar Cuenta",
         "Más Información",
-        "Ayuda",
+        "Documentación",
         "Salir"
     };
+    marquesina.iniciar(); // Iniciar marquesina
 
     try {
     int opcion;
     do {
-        marquesina.pausar();
         system("cls");
-        cout << "\n\n\t\t  _________________________________\n";
+        cout << "\n\t\t  _________________________________\n";
         cout << "\t\t  ||        BANCO CONFIANZA      ||\n";
         cout << "\t\t  ||    Bienvenido al sistema    ||\n";
         cout << "\t\t  ||_____________________________||\n";
-        cout << "\n\t\t=== MENÚ PRINCIPAL ===\n\n";
+        cout << "\n\t\t=== MENÚ PRINCIPAL ===\n";
+        pausarMarquesina();
         opcion = seleccionar_opcion("", OPCIONES, NUM_OPCIONES, contador);
+		reanudarMarquesina();
         switch (opcion) {
                 case 1: // Administrador
                     mostrarMenuAdmin();
@@ -827,26 +1038,13 @@ void Banco::ejecutar() {
                 case 5: // Más Información
                     mostrar_ayuda_tecnica();
                     break;
-                case 6: // Ayuda
-                    system("cls");
-                    cout << "\n\n\t\t========================\n";
-                    cout << "\t\t=== AYUDA TÉCNICA ====\n";
-                    cout << "\t\t========================\n";
-                    cout << "Bienvenido al sistema del Banco Confianza.\n";
-                    cout << "1) Ingresar como Admin: Acceso al panel de administrador para backups.\n";
-                    cout << "2) Ingresar como Usuario: Inicie sesión con su usuario y contraseña.\n";
-                    cout << "3) Crear Cuenta: Registre una nueva cuenta de ahorros o corriente.\n";
-                    cout << "4) Recuperar Cuenta: Solicite la recuperación de su cuenta.\n";
-                    cout << "5) Más Información: Consulte la documentación detallada en el navegador.\n";
-                    cout << "6) Ayuda: Vea esta información.\n";
-                    cout << "7) Salir: Cierre el sistema.\n";
-                    cout << "\nUse las flechas arriba/abajo para navegar y Enter para seleccionar.\n";
-                    cout << "\nPresiona Enter para volver...";
-                    getch();
+                case 6: // Documentación
+                    generarDocumentacion();
                     break;
                 case 7: // Salir
                     return;
             }
+            reanudarMarquesina();
         } while (opcion != NUM_OPCIONES); // 7 = Salir
     } catch (const BancoException& e) {
         cout << "\nError: " << e.what() << endl;

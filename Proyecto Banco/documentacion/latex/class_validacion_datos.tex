@@ -1,0 +1,93 @@
+\doxysection{Validacion\+Datos Class Reference}
+\hypertarget{class_validacion_datos}{}\label{class_validacion_datos}\index{ValidacionDatos@{ValidacionDatos}}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_validacion_datos_a5455e8c098f1577d3e843ba8b21174ea}\label{class_validacion_datos_a5455e8c098f1577d3e843ba8b21174ea} 
+enum {\bfseries Tipo\+Dato} \{ \newline
+{\bfseries CEDULA}
+, {\bfseries NOMBRE}
+, {\bfseries CORREO}
+, {\bfseries TELEFONO}
+, \newline
+{\bfseries USUARIO}
+, {\bfseries CONTRASENA}
+, {\bfseries FECHA}
+, {\bfseries MONTO}
+, \newline
+{\bfseries NOMBRE\+\_\+\+ARCHIVO}
+, {\bfseries CEDULA\+\_\+\+PREFIJO}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_validacion_datos_a47faaa03577241411f73b864cea84ee6}\label{class_validacion_datos_a47faaa03577241411f73b864cea84ee6} 
+static std\+::string {\bfseries capturar\+Entrada} (Tipo\+Dato tipo, const std\+::string \&mensaje, size\+\_\+t max\+Longitud)
+\item 
+\Hypertarget{class_validacion_datos_aa365ecc734065f4e2ae8c7c2cee02535}\label{class_validacion_datos_aa365ecc734065f4e2ae8c7c2cee02535} 
+static \mbox{\hyperlink{class_fecha}{Fecha}} {\bfseries capturar\+Fecha\+Interactiva} (const std\+::string \&mensaje, bool es\+Fecha\+Nacimiento=false)
+\item 
+\Hypertarget{class_validacion_datos_a9415859e92181d46b3be06446c2cbad1}\label{class_validacion_datos_a9415859e92181d46b3be06446c2cbad1} 
+static \mbox{\hyperlink{class_fecha}{Fecha}} {\bfseries capturar\+Fecha\+Interactiva} (const std\+::string \&mensaje, bool es\+Fecha\+Nacimiento, const \mbox{\hyperlink{class_fecha}{Fecha}} \texorpdfstring{$\ast$}{*}min\+Fecha)
+\item 
+\Hypertarget{class_validacion_datos_a4e64f8618fb12247ba4fa0c720cf4b03}\label{class_validacion_datos_a4e64f8618fb12247ba4fa0c720cf4b03} 
+static void {\bfseries validar\+Fecha} (const \mbox{\hyperlink{class_fecha}{Fecha}} \&fecha, bool es\+Fecha\+Nacimiento=false)
+\item 
+\Hypertarget{class_validacion_datos_a773a653191f44403694fa4b92ab6ee01}\label{class_validacion_datos_a773a653191f44403694fa4b92ab6ee01} 
+static void {\bfseries validar\+Cedula} (const std\+::string \&cedula)
+\item 
+\Hypertarget{class_validacion_datos_aa12b93790ecb6efdcea090d71f27e46a}\label{class_validacion_datos_aa12b93790ecb6efdcea090d71f27e46a} 
+static void {\bfseries validar\+Cedula\+Prefijo} (const std\+::string \&cedula)
+\item 
+\Hypertarget{class_validacion_datos_a517cf8329255dcd237c9f2e5e4379e22}\label{class_validacion_datos_a517cf8329255dcd237c9f2e5e4379e22} 
+static void {\bfseries limpiar\+\_\+linea} (const std\+::string \&mensaje)
+\item 
+\Hypertarget{class_validacion_datos_a08c750b493cf5c7fdbec9dcbb3803633}\label{class_validacion_datos_a08c750b493cf5c7fdbec9dcbb3803633} 
+static void {\bfseries limpiar\+\_\+linea\+\_\+\+Error} (const string \&mensaje, size\+\_\+t longitud\+\_\+extra)
+\item 
+\Hypertarget{class_validacion_datos_a53745c6f147d472db072e7c352cf1b3a}\label{class_validacion_datos_a53745c6f147d472db072e7c352cf1b3a} 
+static void {\bfseries validar\+Nombre} (const std\+::string \&nombre)
+\item 
+\Hypertarget{class_validacion_datos_ad140ac3eeb37961f495e18a59e62e090}\label{class_validacion_datos_ad140ac3eeb37961f495e18a59e62e090} 
+static void {\bfseries validar\+Correo} (const std\+::string \&correo)
+\item 
+\Hypertarget{class_validacion_datos_a2918d90fe06ff16fab531fdc06e0098b}\label{class_validacion_datos_a2918d90fe06ff16fab531fdc06e0098b} 
+static void {\bfseries validar\+Telefono} (const std\+::string \&telefono)
+\item 
+\Hypertarget{class_validacion_datos_adc79b38a2dc406578487dc14aa43de9b}\label{class_validacion_datos_adc79b38a2dc406578487dc14aa43de9b} 
+static void {\bfseries validar\+Usuario} (const std\+::string \&usuario)
+\item 
+\Hypertarget{class_validacion_datos_abf3adc805a57494354718166dfa9f9a7}\label{class_validacion_datos_abf3adc805a57494354718166dfa9f9a7} 
+static void {\bfseries validar\+Contrasena} (const std\+::string \&contrasena)
+\item 
+\Hypertarget{class_validacion_datos_a05dfef4490a6e3869cfe7cfd570a0744}\label{class_validacion_datos_a05dfef4490a6e3869cfe7cfd570a0744} 
+static void {\bfseries validar\+Monto} (double monto, bool permitir\+Cero)
+\item 
+\Hypertarget{class_validacion_datos_ac070056b297e9f3a231cd6e162737f48}\label{class_validacion_datos_ac070056b297e9f3a231cd6e162737f48} 
+static void {\bfseries validar\+Nombre\+Archivo} (const std\+::string \&entrada)
+\item 
+\Hypertarget{class_validacion_datos_a4089730b7345c5998e77bb906831ee6d}\label{class_validacion_datos_a4089730b7345c5998e77bb906831ee6d} 
+static std\+::string {\bfseries ingresar\+\_\+dni} (const std\+::string \&mensaje)
+\item 
+\Hypertarget{class_validacion_datos_abd0afd86a0c18b94fa0de63c4659e46e}\label{class_validacion_datos_abd0afd86a0c18b94fa0de63c4659e46e} 
+static std\+::string {\bfseries validar\+Fecha} (const std\+::string \&fecha)
+\item 
+\Hypertarget{class_validacion_datos_a75b783f08e36184bef1fd344fd290853}\label{class_validacion_datos_a75b783f08e36184bef1fd344fd290853} 
+static std\+::string {\bfseries validar\+Hora} (const std\+::string \&hora)
+\item 
+\Hypertarget{class_validacion_datos_aca6cf1bfdeb2c23589caf7a1c453b74c}\label{class_validacion_datos_aca6cf1bfdeb2c23589caf7a1c453b74c} 
+static bool {\bfseries validar\+\_\+hora\+\_\+minuto\+\_\+segundo} (int hora, int minuto, int segundo)
+\item 
+\Hypertarget{class_validacion_datos_a49b1b7678cf89680006fbd119d76b817}\label{class_validacion_datos_a49b1b7678cf89680006fbd119d76b817} 
+static bool {\bfseries es\+\_\+fecha\+\_\+valida} (int dia, int mes, int anio)
+\item 
+\Hypertarget{class_validacion_datos_ac97e5da546b73e0c77dd4bfd5a77ebfd}\label{class_validacion_datos_ac97e5da546b73e0c77dd4bfd5a77ebfd} 
+static std\+::string {\bfseries validar\+Caracter} (std\+::string \&opcion)
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Validacion\+Datos.\+h\item 
+Validacion\+Datos.\+cpp\end{DoxyCompactItemize}

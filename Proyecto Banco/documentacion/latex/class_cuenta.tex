@@ -1,0 +1,68 @@
+\doxysection{Cuenta Class Reference}
+\hypertarget{class_cuenta}{}\label{class_cuenta}\index{Cuenta@{Cuenta}}
+Inheritance diagram for Cuenta\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_cuenta}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_cuenta_ae02b129463861b4d350dc83a9a435a1b}\label{class_cuenta_ae02b129463861b4d350dc83a9a435a1b} 
+{\bfseries Cuenta} (string numero, \mbox{\hyperlink{class_cliente}{Cliente}} \texorpdfstring{$\ast$}{*}c, \mbox{\hyperlink{class_fecha}{Fecha}} fecha)
+\item 
+\Hypertarget{class_cuenta_a1d2db6af463a10f0a6b17e3eeb73b389}\label{class_cuenta_a1d2db6af463a10f0a6b17e3eeb73b389} 
+virtual void {\bfseries depositar} (double monto, \mbox{\hyperlink{class_fecha}{Fecha}} fecha=\mbox{\hyperlink{class_fecha}{Fecha}}(), bool es\+Transferencia=false, string cuenta\+Origen="{}"{})=0
+\item 
+\Hypertarget{class_cuenta_a70dd6d35851819694d526c7ba9b8281a}\label{class_cuenta_a70dd6d35851819694d526c7ba9b8281a} 
+virtual bool {\bfseries retirar} (double monto, \mbox{\hyperlink{class_fecha}{Fecha}} fecha=\mbox{\hyperlink{class_fecha}{Fecha}}(), bool es\+Transferencia=false, string cuenta\+Destino="{}"{})=0
+\item 
+\Hypertarget{class_cuenta_abc1d6163f03236db1355fbff6857ae17}\label{class_cuenta_abc1d6163f03236db1355fbff6857ae17} 
+virtual string {\bfseries mostrar\+Resumen} ()=0
+\item 
+\Hypertarget{class_cuenta_ae9357af432a4d0d0c5570f3fae54dc4c}\label{class_cuenta_ae9357af432a4d0d0c5570f3fae54dc4c} 
+string {\bfseries get\+Numero} () const
+\item 
+\Hypertarget{class_cuenta_a26b447d438eeb34c7abe6a56dba98a3f}\label{class_cuenta_a26b447d438eeb34c7abe6a56dba98a3f} 
+\mbox{\hyperlink{class_cliente}{Cliente}} \texorpdfstring{$\ast$}{*} {\bfseries get\+Cliente} () const
+\item 
+\Hypertarget{class_cuenta_af2bc71359af1d0a3e7d647428fd99aef}\label{class_cuenta_af2bc71359af1d0a3e7d647428fd99aef} 
+double {\bfseries get\+Saldo} () const
+\item 
+\Hypertarget{class_cuenta_a0a62a1943bf4ec3deb68b49e5df0536c}\label{class_cuenta_a0a62a1943bf4ec3deb68b49e5df0536c} 
+\mbox{\hyperlink{class_fecha}{Fecha}} {\bfseries get\+Fecha} () const
+\item 
+\Hypertarget{class_cuenta_afec05016d3a20d65de66b72f54f4e847}\label{class_cuenta_afec05016d3a20d65de66b72f54f4e847} 
+void {\bfseries consulta\+Rango\+Fechas} (\mbox{\hyperlink{class_fecha}{Fecha}} inicio, \mbox{\hyperlink{class_fecha}{Fecha}} fin, function$<$ void(const \mbox{\hyperlink{class_transaccion}{Transaccion}}$<$ double $>$ \texorpdfstring{$\ast$}{*})$>$ callback) const
+\item 
+\Hypertarget{class_cuenta_ad85321190c93b63ced2e843a9433ccda}\label{class_cuenta_ad85321190c93b63ced2e843a9433ccda} 
+void {\bfseries consulta\+Personalizada} (double min\+Monto, function$<$ void(const \mbox{\hyperlink{class_transaccion}{Transaccion}}$<$ double $>$ \texorpdfstring{$\ast$}{*})$>$ callback) const
+\item 
+\Hypertarget{class_cuenta_a9b911d4072c6cce0faaad53985645b43}\label{class_cuenta_a9b911d4072c6cce0faaad53985645b43} 
+void {\bfseries consulta\+General} (function$<$ void(const \mbox{\hyperlink{class_transaccion}{Transaccion}}$<$ double $>$ \texorpdfstring{$\ast$}{*})$>$ callback) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_cuenta_a5215bad1937cf3a0581c49b339262044}\label{class_cuenta_a5215bad1937cf3a0581c49b339262044} 
+string {\bfseries numero\+Cuenta}
+\item 
+\Hypertarget{class_cuenta_abbd98bd9fd88a93f86ee367297d9dc02}\label{class_cuenta_abbd98bd9fd88a93f86ee367297d9dc02} 
+double {\bfseries saldo}
+\item 
+\Hypertarget{class_cuenta_a461babf2ac63fc0ed772d536f161a3f2}\label{class_cuenta_a461babf2ac63fc0ed772d536f161a3f2} 
+\mbox{\hyperlink{class_cliente}{Cliente}} \texorpdfstring{$\ast$}{*} {\bfseries cliente}
+\item 
+\Hypertarget{class_cuenta_ae6024cba6c35f16805de93d25c8b734b}\label{class_cuenta_ae6024cba6c35f16805de93d25c8b734b} 
+\mbox{\hyperlink{class_fecha}{Fecha}} {\bfseries fecha\+Apertura}
+\item 
+\Hypertarget{class_cuenta_ad06207e132a518a89b561702932d7358}\label{class_cuenta_ad06207e132a518a89b561702932d7358} 
+\mbox{\hyperlink{class_lista_doble_circular}{Lista\+Doble\+Circular}}$<$ \mbox{\hyperlink{class_transaccion}{Transaccion}}$<$ double $>$ $>$ {\bfseries transacciones}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Cuenta.\+h\item 
+Cuenta.\+cpp\end{DoxyCompactItemize}
