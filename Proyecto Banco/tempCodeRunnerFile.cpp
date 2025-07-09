@@ -1,3 +1,12 @@
+/**
+ * @brief Función principal del sistema bancario.
+ * 
+ * Muestra un menú principal con opciones para ingresar como administrador o usuario,
+ * crear una nueva cuenta, recuperar credenciales o salir del sistema.
+ * Controla el flujo principal del programa llamando a las funciones correspondientes
+ * según la selección del usuario.
+ */
+
 #include <iostream>
 #include <conio.h>
 #include "menuAdmin.h"

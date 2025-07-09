@@ -1,3 +1,8 @@
+/**
+ * @brief Implementación de la clase Persona 
+ * con constructor y destructor para gestionar 
+ * datos personales validados.
+ */
 #include "Persona.h"
 using namespace std;
 

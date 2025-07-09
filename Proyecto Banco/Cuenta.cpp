@@ -1,3 +1,14 @@
+/**
+ * @brief Implementa la clase base abstracta Cuenta, manejando 
+ * la inicialización, consulta de datos y transacciones.
+ * @param numero Número identificador único de la cuenta.
+ * @param c Puntero al cliente asociado a la cuenta.
+ * @param fecha Fecha de apertura de la cuenta.
+ * Inicializa el saldo en cero y valida la fecha de apertura. 
+ * Ofrece métodos para obtener número, cliente, saldo y fecha,
+ * además de consultas de transacciones por rango de fechas, 
+ * monto mínimo y general, mostrando mensajes si no hay resultados.
+ */
 #include "Cuenta.h"
 #include <iostream>
 #include <iomanip>

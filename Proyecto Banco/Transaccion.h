@@ -1,3 +1,14 @@
+/**
+ * @brief Representa una transacción bancaria que puede incluir depósitos, retiros o transferencias.
+ *
+ * @tparam T Tipo de dato para el monto (puede ser float, double, etc.).
+ * @param tipo Tipo de transacción ("Depósito", "Retiro", etc.).
+ * @param monto Monto de la transacción.
+ * @param fecha Fecha en la que se realiza la transacción.
+ * @param numCuenta Número de cuenta asociada a la transacción.
+ * @param esTransferencia Indica si la transacción es una transferencia (por defecto false).
+ * @param cuentaRelacionada Cuenta de destino o fuente en caso de transferencia (opcional).
+ */
 #ifndef TRANSACCION_H
 #define TRANSACCION_H
 #include <string>

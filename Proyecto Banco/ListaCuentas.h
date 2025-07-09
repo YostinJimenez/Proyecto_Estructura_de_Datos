@@ -1,3 +1,12 @@
+/**
+ * @brief Clase plantilla que implementa 
+ * una lista circular doblemente enlazada para 
+ * gestionar cuentas de tipo genérico T. Ofrece 
+ * métodos para insertar, recorrer, buscar y contar 
+ * cuentas, utilizando nodos con punteros anterior y 
+ * siguiente. Incluye un contador de tamaño y maneja una 
+ * estructura dinámica con memoria gestionada eficientemente.
+ */
 // ==== ListaCuentas.h ====
 #ifndef LISTACUENTAS_H
 #define LISTACUENTAS_H

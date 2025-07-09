@@ -1,3 +1,16 @@
+/**
+ * @brief Define una clase base abstracta para manejar cuentas 
+ * bancarias, incluyendo saldo, transacciones y datos del 
+ * cliente.
+ * @param numero Número identificador único de la cuenta.
+ * @param c Puntero al cliente asociado a la cuenta.
+ * @param fecha Fecha de apertura de la cuenta.
+ * Proporciona métodos virtuales puros para depositar, retirar 
+ * y mostrar resúmenes, además de consultas de transacciones 
+ * por rango de fechas, monto mínimo y general.
+ * Incluye manejo de excepciones y una lista doble circular 
+ * para almacenar transacciones.
+ */
 #ifndef CUENTA_H
 #define CUENTA_H
 #include <string>

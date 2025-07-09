@@ -1,3 +1,14 @@
+/**
+ * @brief Clase plantilla que implementa 
+ * una lista doblemente enlazada circular para 
+ * gestionar elementos de tipo genérico T. 
+ * Proporciona métodos para insertar, recorrer, 
+ * buscar, contar, verificar vacíos y eliminar nodos, 
+ * utilizando una estructura dinámica con punteros anterior 
+ * y siguiente. Incluye un contador de tamaño y un nodo inicial, 
+ * con manejo de memoria en el destructor para liberar recursos 
+ * eficientemente.
+ */
 #ifndef LISTADOBLECIRCULAR_H
 #define LISTADOBLECIRCULAR_H
 #include "Nodo.h"

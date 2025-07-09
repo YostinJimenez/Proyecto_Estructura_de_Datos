@@ -1,3 +1,27 @@
+/**
+ * @brief Clase principal que gestiona las operaciones bancarias,
+ *  permitiendo crear cuentas, realizar transacciones,
+ * buscar clientes, generar reportes y administrar el sistema 
+ * bancario.
+ * @param monto Monto de la operación en funciones como 
+ * confirmación.
+ * @param operacion Nombre de la operación 
+ * (ej. "TRANSFERENCIA") en confirmación.
+ * @param cliente Puntero al cliente autenticado para el 
+ * menú de usuario.
+ * @param campo Campo de búsqueda (CEDULA, PRIMER_NOMBRE, etc.) 
+ * para buscar clientes.
+ * @param valor Prefijo o valor base para la búsqueda de 
+ * clientes.
+ * @param resultados Vector donde se almacenan los clientes 
+ * encontrados.
+ * @param tipoCuenta Tipo de cuenta ("Ahorros" o "Corriente") 
+ * para generar número.
+ * Incluye métodos para confirmaciones, selección de cuentas, 
+ * búsqueda por prefijo o saldo, ordenación,
+ * ayuda técnica, base de datos, cuadros de búsqueda, 
+ * documentación, QR/PDF, y ejecución del menú principal.
+ */
 #ifndef BANCO_H
 #define BANCO_H
 #include "Cliente.h"

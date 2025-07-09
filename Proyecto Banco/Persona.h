@@ -1,3 +1,10 @@
+/**
+ * @brief Clase base abstracta diseñada para encapsular 
+ * y gestionar los datos personales de una persona, 
+ * incluyendo cédula, nombres, apellidos, teléfono, 
+ * dirección y fecha de nacimiento, con métodos virtuales 
+ * para su manejo.
+ */
 #ifndef PERSONA_H
 #define PERSONA_H
 #include <string>

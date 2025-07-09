@@ -1,3 +1,11 @@
+/**
+ * @brief Define una clase para cuentas corrientes, heredada de la clase Cuenta, que incluye un límite de sobregiro permitido.
+ * @param numero Número identificador de la cuenta.
+ * @param c Puntero al cliente asociado a la cuenta.
+ * @param fecha Fecha de creación o modificación de la cuenta.
+ * @param sobregiro Límite de sobregiro permitido para la cuenta.
+ * Proporciona métodos para depositar, retirar fondos y mostrar un resumen, con soporte para transferencias y fechas personalizadas.
+ */
 #ifndef CUENTACORRIENTE_H
 #define CUENTACORRIENTE_H
 #include "Cuenta.h"

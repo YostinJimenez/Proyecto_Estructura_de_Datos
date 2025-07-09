@@ -1,3 +1,14 @@
+/**
+ * @brief Gestiona y opera con fechas, permitiendo la 
+ * creación y manipulación de objetos que representan 
+ * días, meses y años. 
+ * @param dia Día de la fecha, un valor entero entre 1 y 
+ * 31 según el mes.
+ * @param mes Mes de la fecha, un valor entero entre 1 y 12.
+ * @param anio Año de la fecha, un valor entero mayor o 
+ * igual a 1900.
+ * Proporciona métodos para validar fechas, convertirlas a string, compararlas y obtener sus componentes individuales.
+ */
 #include "Fecha.h"
 #include <ctime>
 #include <sstream>

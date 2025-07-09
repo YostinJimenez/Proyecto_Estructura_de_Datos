@@ -1,3 +1,17 @@
+/**
+ * @brief Implementa las operaciones de una cuenta de 
+ * ahorros, incluyendo depósitos, retiros con límite mensual y 
+ * resumen, con aplicación de tasa de interés.
+ * @param numero Número identificador de la cuenta.
+ * @param c Puntero al cliente asociado a la cuenta.
+ * @param fecha Fecha de la transacción o creación.
+ * @param tasa Tasa de interés aplicada a la cuenta.
+ * @param limite Límite máximo de retiros permitidos por mes.
+ * Permite depositar fondos, retirar hasta el saldo disponible 
+ * (respetando el límite de retiros), y genera un resumen 
+ * con el saldo actual.
+ * Incluye validación de montos y redondeo a dos decimales.
+ */
 #include "CuentaAhorros.h"
 #include "ValidacionDatos.h"
 #include <cmath>

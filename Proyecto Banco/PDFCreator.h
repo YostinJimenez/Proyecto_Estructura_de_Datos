@@ -1,3 +1,9 @@
+/**
+ * @brief Clase para crear archivos 
+ * PDF con datos personales y tablas a 
+ * partir de texto plano, gestionando objetos 
+ * y contenido del documento.
+ */
 #include "Banco.h"
 #include "Cliente.h"
 #include "Utilidades.h"

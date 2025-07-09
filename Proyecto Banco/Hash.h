@@ -1,3 +1,11 @@
+/**
+ * @brief Clase Hash para gestionar valores originales, 
+ * hash (MD5) y valores numéricos, con métodos para obtener y 
+ * modificar datos. Incluye TablaHash, una estructura basada en 
+ * vector de listas doblemente enlazadas circulares para manejar 
+ * colisiones, con funciones de inserción, búsqueda y eliminación 
+ * usando un hash simple.
+ */
 #ifndef HASH_H
 #define HASH_H
 #include "ListaDobleCircular.h"

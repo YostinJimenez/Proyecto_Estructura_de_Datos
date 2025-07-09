@@ -1,3 +1,12 @@
+/**
+ * @brief Implementa las operaciones de una cuenta corriente, incluyendo depósitos, retiros y resumen, con manejo de sobregiro.
+ * @param numero Número identificador de la cuenta.
+ * @param c Puntero al cliente asociado a la cuenta.
+ * @param fecha Fecha de la transacción o creación.
+ * @param sobregiro Límite de sobregiro permitido para la cuenta.
+ * Permite depositar fondos, retirar hasta el saldo más el sobregiro, y genera un resumen con el saldo actual.
+ * Incluye validación de montos y redondeo a dos decimales.
+ */
 #include "CuentaCorriente.h"
 #include "ValidacionDatos.h"
 #include <cmath>

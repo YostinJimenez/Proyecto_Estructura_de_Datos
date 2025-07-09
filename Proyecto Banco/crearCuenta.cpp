@@ -1,3 +1,13 @@
+/**
+ * @brief Implementa la funcionalidad para crear una nueva cuenta 
+ * bancaria con validación de datos.
+ * Recoge nombre, apellido, cédula, usuario y contraseña, 
+ * validando que la cédula tenga 10 dígitos numéricos,
+ * la contraseña al menos 6 caracteres y que ambas contraseñas 
+ * coincidan. Muestra mensajes de error o éxito,
+ * y espera una tecla para regresar al menú principal. 
+ * Incluye funciones auxiliares para validar cédula y contraseña.
+ */
 #include <iostream>
 #include <conio.h>
 #include <string>

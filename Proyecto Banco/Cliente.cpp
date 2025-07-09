@@ -1,3 +1,23 @@
+/**
+ * @brief Implementa la clase Cliente, heredada de Persona, 
+ * manejando datos personales, acceso y cuenta asociada.
+ * @param cedula Identificador único del cliente.
+ * @param primerNombre Primer nombre del cliente.
+ * @param segundoNombre Segundo nombre del cliente (opcional).
+ * @param primerApellido Primer apellido del cliente.
+ * @param segundoApellido Segundo apellido del cliente (opcional).
+ * @param telefono Número de teléfono del cliente.
+ * @param direccion Dirección de residencia del cliente.
+ * @param fechaNacimiento Fecha de nacimiento del cliente.
+ * @param codigo Código único del cliente.
+ * @param correo Correo electrónico del cliente.
+ * @param usuario Nombre de usuario para acceso.
+ * @param contrasena Contraseña para acceso.
+ * Inicializa con validación de correo, usuario y contraseña, y 
+ * gestiona la cuenta asociada.
+ * Incluye métodos para mostrar información, obtener/modificar 
+ * datos y serializar la información del cliente.
+ */
 #include "Cliente.h"
 #include "Cuenta.h"
 #include <sstream>

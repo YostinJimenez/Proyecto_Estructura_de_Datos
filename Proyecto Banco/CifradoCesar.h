@@ -1,3 +1,15 @@
+/**
+ * @brief Define una clase para gestionar el cifrado y descifrado 
+ * de archivos utilizando el algoritmo de César.
+ * @param archivoEntrada Ruta del archivo de entrada a codificar 
+ * o decodificar.
+ * @param archivoSalida Ruta del archivo de salida tras el 
+ * proceso.
+ * @param clave Clave numérica para el desplazamiento en el 
+ * cifrado/des cifrado.
+ * Proporciona métodos para codificar y decodificar archivos, listar archivos .txt, descifrar y cifrar todos los .txt,
+ * generar PDFs a partir de .txt, y verificar la integridad de los archivos cifrados.
+ */
 #ifndef CIFRADOCESAR_H
 #define CIFRADOCESAR_H
 #include "Marquesina.h"

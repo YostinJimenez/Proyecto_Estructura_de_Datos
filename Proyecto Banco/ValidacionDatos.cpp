@@ -1,3 +1,7 @@
+/**
+ * @brief Clase encargada de validar y capturar distintos tipos de datos ingresados por el usuario,
+ *        como cédula, nombre, correo, fecha, monto, entre otros, asegurando que cumplan con un formato y lógica correctos.
+ */
 #include "ValidacionDatos.h"
 #include "Marquesina.h"
 #include "Utilidades.h"

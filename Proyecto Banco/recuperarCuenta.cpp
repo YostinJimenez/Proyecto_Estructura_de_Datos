@@ -1,3 +1,7 @@
+/**
+ * @brief Declaración externa del objeto marquesina para controlar la visualización de mensajes.
+ */
+
 #include "recuperarCuenta.h"
 #include "Marquesina.h"
 #include <iostream>

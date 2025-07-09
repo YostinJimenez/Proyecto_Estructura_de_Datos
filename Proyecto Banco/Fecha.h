@@ -1,3 +1,9 @@
+/**
+ * @brief Clase Fecha para representar y gestionar 
+ * fechas con día, mes y año, incluyendo validación, 
+ * conversión a string y comparación, con métodos para acceder 
+ * a sus componentes.
+ */
 #ifndef FECHA_H
 #define FECHA_H
 #include <string>

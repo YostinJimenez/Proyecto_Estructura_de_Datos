@@ -1,3 +1,23 @@
+/**
+ * @brief Implementa la clase Banco, gestionando las operaciones 
+ * principales del sistema bancario con soporte para 
+ * administración, usuarios y transacciones.
+ * @param monto Monto de la operación en confirmaciones y 
+ * transferencias.
+ * @param operacion Nombre de la operación (ej. "TRANSFERENCIA") 
+ * en confirmaciones.
+ * @param cliente Puntero al cliente autenticado para el menú 
+ * de usuario.
+ * @param tipoCuenta Tipo de cuenta ("Ahorros" o "Corriente") 
+ * para generar número.
+ * @param ibanSinControl IBAN parcial sin código de control 
+ * para su cálculo.
+ * Inicializa recursos como clientes y marquesina, y ofrece 
+ * métodos para crear cuentas, realizar transacciones,
+ * generar IBAN, mostrar ayuda, documentación, QR/PDF, 
+ * backup/restauración, cifrado/descifrado, y ejecutar el 
+ * menú principal.
+ */
 #define WIN32_LEAN_AND_MEAN
 #include "Banco.h"
 #include "GeneradorQr.h"
