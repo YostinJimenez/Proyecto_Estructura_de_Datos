@@ -16,8 +16,10 @@ var files_dup =
     [ "ListaDobleCircular.h", "_lista_doble_circular_8h_source.html", null ],
     [ "Marquesina.h", "_marquesina_8h_source.html", null ],
     [ "Nodo.h", "_nodo_8h_source.html", null ],
+    [ "PDFCreator.h", "_p_d_f_creator_8h_source.html", null ],
     [ "Persona.h", "_persona_8h_source.html", null ],
     [ "recuperarCuenta.h", "recuperar_cuenta_8h_source.html", null ],
     [ "Transaccion.h", "_transaccion_8h_source.html", null ],
+    [ "Utilidades.h", "_utilidades_8h_source.html", null ],
     [ "ValidacionDatos.h", "_validacion_datos_8h_source.html", null ]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sistema Bancario: BackupManager Class Reference</title>
+<title>Proyecto Banco: BackupManager Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Sistema Bancario
+   <div id="projectname">Proyecto Banco<span id="projectnumber">&#160;v 1.0</span>
    </div>
+   <div id="projectbrief">Proyecto Banco</div>
   </td>
  </tr>
  </tbody>
@@ -94,17 +95,124 @@ $(function(){initNavTree('class_backup_manager.html','','class_backup_manager-me
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:aad2af5a3125ae4e315cd09ef348ccf1c" id="r_aad2af5a3125ae4e315cd09ef348ccf1c"><td class="memItemLeft" align="right" valign="top"><a id="aad2af5a3125ae4e315cd09ef348ccf1c" name="aad2af5a3125ae4e315cd09ef348ccf1c"></a>
-static string&#160;</td><td class="memItemRight" valign="bottom"><b>generarNombreArchivo</b> ()</td></tr>
-<tr class="memitem:a84bf9d1e525ff6af516043c08f0dcc7f" id="r_a84bf9d1e525ff6af516043c08f0dcc7f"><td class="memItemLeft" align="right" valign="top"><a id="a84bf9d1e525ff6af516043c08f0dcc7f" name="a84bf9d1e525ff6af516043c08f0dcc7f"></a>
-static string&#160;</td><td class="memItemRight" valign="bottom"><b>guardarBackup</b> (const <a class="el" href="class_lista_doble_circular.html">ListaDobleCircular</a>&lt; <a class="el" href="class_cliente.html">Cliente</a> &gt; &amp;clientes)</td></tr>
-<tr class="memitem:ad068842b75617551eb93ae85d1187fe6" id="r_ad068842b75617551eb93ae85d1187fe6"><td class="memItemLeft" align="right" valign="top"><a id="ad068842b75617551eb93ae85d1187fe6" name="ad068842b75617551eb93ae85d1187fe6"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>restaurarBackup</b> (const string &amp;nombreArchivo, <a class="el" href="class_lista_doble_circular.html">ListaDobleCircular</a>&lt; <a class="el" href="class_cliente.html">Cliente</a> &gt; &amp;clientes)</td></tr>
+<tr class="memitem:aad2af5a3125ae4e315cd09ef348ccf1c" id="r_aad2af5a3125ae4e315cd09ef348ccf1c"><td class="memItemLeft" align="right" valign="top">static string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aad2af5a3125ae4e315cd09ef348ccf1c">generarNombreArchivo</a> ()</td></tr>
+<tr class="memdesc:aad2af5a3125ae4e315cd09ef348ccf1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Genera un nombre de archivo para el backup basado en la fecha y hora actual.  <br /></td></tr>
+<tr class="memitem:a84bf9d1e525ff6af516043c08f0dcc7f" id="r_a84bf9d1e525ff6af516043c08f0dcc7f"><td class="memItemLeft" align="right" valign="top">static string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a84bf9d1e525ff6af516043c08f0dcc7f">guardarBackup</a> (const <a class="el" href="class_lista_doble_circular.html">ListaDobleCircular</a>&lt; <a class="el" href="class_cliente.html">Cliente</a> &gt; &amp;clientes)</td></tr>
+<tr class="memdesc:a84bf9d1e525ff6af516043c08f0dcc7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Guarda un backup de la lista de clientes en un archivo.  <br /></td></tr>
+<tr class="memitem:ad068842b75617551eb93ae85d1187fe6" id="r_ad068842b75617551eb93ae85d1187fe6"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad068842b75617551eb93ae85d1187fe6">restaurarBackup</a> (const string &amp;nombreArchivo, <a class="el" href="class_lista_doble_circular.html">ListaDobleCircular</a>&lt; <a class="el" href="class_cliente.html">Cliente</a> &gt; &amp;clientes)</td></tr>
+<tr class="memdesc:ad068842b75617551eb93ae85d1187fe6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restaura un backup desde un archivo y actualiza la lista de clientes.  <br /></td></tr>
 <tr class="memitem:ab6361daca3ff8aa8dc01a19043c63845" id="r_ab6361daca3ff8aa8dc01a19043c63845"><td class="memItemLeft" align="right" valign="top"><a id="ab6361daca3ff8aa8dc01a19043c63845" name="ab6361daca3ff8aa8dc01a19043c63845"></a>
 static bool&#160;</td><td class="memItemRight" valign="bottom"><b>validarArchivoExistente</b> (const <a class="el" href="class_lista_doble_circular.html">ListaDobleCircular</a>&lt; <a class="el" href="class_cliente.html">Cliente</a> &gt; &amp;clientes)</td></tr>
 <tr class="memitem:a63ad7316d6ef9b702a326fbbe3224b0e" id="r_a63ad7316d6ef9b702a326fbbe3224b0e"><td class="memItemLeft" align="right" valign="top"><a id="a63ad7316d6ef9b702a326fbbe3224b0e" name="a63ad7316d6ef9b702a326fbbe3224b0e"></a>
 static string&#160;</td><td class="memItemRight" valign="bottom"><b>normalizar</b> (const string &amp;s)</td></tr>
 </table>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="aad2af5a3125ae4e315cd09ef348ccf1c" name="aad2af5a3125ae4e315cd09ef348ccf1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad2af5a3125ae4e315cd09ef348ccf1c">&#9670;&#160;</a></span>generarNombreArchivo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">string BackupManager::generarNombreArchivo </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Genera un nombre de archivo para el backup basado en la fecha y hora actual. </p>
+<dl class="section return"><dt>Returns</dt><dd>Nombre del archivo de backup en formato "backup_DDMMYYYY_HHMMSS.txt". </dd></dl>
+
+</div>
+</div>
+<a id="a84bf9d1e525ff6af516043c08f0dcc7f" name="a84bf9d1e525ff6af516043c08f0dcc7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84bf9d1e525ff6af516043c08f0dcc7f">&#9670;&#160;</a></span>guardarBackup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">string BackupManager::guardarBackup </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_lista_doble_circular.html">ListaDobleCircular</a>&lt; <a class="el" href="class_cliente.html">Cliente</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>clientes</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Guarda un backup de la lista de clientes en un archivo. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">clientes</td><td>Lista de clientes a respaldar. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Nombre del archivo de backup creado. </dd></dl>
+
+</div>
+</div>
+<a id="ad068842b75617551eb93ae85d1187fe6" name="ad068842b75617551eb93ae85d1187fe6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad068842b75617551eb93ae85d1187fe6">&#9670;&#160;</a></span>restaurarBackup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BackupManager::restaurarBackup </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;</td>          <td class="paramname"><span class="paramname"><em>nombreArchivo</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_lista_doble_circular.html">ListaDobleCircular</a>&lt; <a class="el" href="class_cliente.html">Cliente</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>clientes</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Restaura un backup desde un archivo y actualiza la lista de clientes. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nombreArchivo</td><td>Nombre del archivo de backup a restaurar. </td></tr>
+    <tr><td class="paramname">clientes</td><td>Lista de clientes donde se restaurarán los datos. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="class_banco_exception.html">BancoException</a></td><td>Si hay un error al abrir el archivo o al procesar los datos. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="_backup_manager_8h_source.html">BackupManager.h</a></li>
 <li><b>BackupManager.cpp</b></li>

@@ -1,5 +1,14 @@
 \doxysection{Cuenta\+Ahorros Class Reference}
 \hypertarget{class_cuenta_ahorros}{}\label{class_cuenta_ahorros}\index{CuentaAhorros@{CuentaAhorros}}
+
+
+Define una clase para cuentas de ahorros, heredada de \doxylink{class_cuenta}{Cuenta}, con tasa de interés y límite de retiros mensuales.  
+
+
+
+
+{\ttfamily \#include $<$Cuenta\+Ahorros.\+h$>$}
+
 Inheritance diagram for Cuenta\+Ahorros\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -9,9 +18,8 @@ Inheritance diagram for Cuenta\+Ahorros\+:\begin{figure}[H]
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{class_cuenta_ahorros_a4aa4ef1a3c8a38e882670e9fdcbf7902}\label{class_cuenta_ahorros_a4aa4ef1a3c8a38e882670e9fdcbf7902} 
-{\bfseries Cuenta\+Ahorros} (string numero, \mbox{\hyperlink{class_cliente}{Cliente}} \texorpdfstring{$\ast$}{*}c, \mbox{\hyperlink{class_fecha}{Fecha}} fecha, double tasa, int limite)
-\item 
+\mbox{\hyperlink{class_cuenta_ahorros_a4aa4ef1a3c8a38e882670e9fdcbf7902}{Cuenta\+Ahorros}} (string numero, \mbox{\hyperlink{class_cliente}{Cliente}} \texorpdfstring{$\ast$}{*}c, \mbox{\hyperlink{class_fecha}{Fecha}} fecha, double tasa, int limite)
+\begin{DoxyCompactList}\small\item\em Implementa las operaciones de una cuenta de ahorros, incluyendo depósitos, retiros con límite mensual y resumen, con aplicación de tasa de interés. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_cuenta_ahorros_ab3e6b7b590a23d7abe73815c9522cb14}{depositar}} (double monto, \mbox{\hyperlink{class_fecha}{Fecha}} fecha=\mbox{\hyperlink{class_fecha}{Fecha}}(), bool es\+Transferencia=false, string cuenta\+Origen="{}"{}) override
 \item 
 bool \mbox{\hyperlink{class_cuenta_ahorros_a15ff1e916665a24e66575e8bc396d33e}{retirar}} (double monto, \mbox{\hyperlink{class_fecha}{Fecha}} fecha=\mbox{\hyperlink{class_fecha}{Fecha}}(), bool es\+Transferencia=false, string cuenta\+Destino="{}"{}) override
@@ -51,6 +59,52 @@ double {\bfseries saldo}
 \item 
 \mbox{\hyperlink{class_lista_doble_circular}{Lista\+Doble\+Circular}}$<$ \mbox{\hyperlink{class_transaccion}{Transaccion}}$<$ double $>$ $>$ {\bfseries transacciones}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Define una clase para cuentas de ahorros, heredada de \doxylink{class_cuenta}{Cuenta}, con tasa de interés y límite de retiros mensuales. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em numero} & Número identificador de la cuenta. \\
+\hline
+{\em c} & Puntero al cliente asociado a la cuenta. \\
+\hline
+{\em fecha} & \doxylink{class_fecha}{Fecha} de creación o modificación de la cuenta. \\
+\hline
+{\em tasa} & Tasa de interés aplicada a la cuenta. \\
+\hline
+{\em limite} & Límite máximo de retiros permitidos por mes. Incluye métodos para depositar, retirar fondos (respetando el límite) y mostrar un resumen del estado de la cuenta. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-constructors}
+\Hypertarget{class_cuenta_ahorros_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_cuenta_ahorros_a4aa4ef1a3c8a38e882670e9fdcbf7902}\index{CuentaAhorros@{CuentaAhorros}!CuentaAhorros@{CuentaAhorros}}
+\index{CuentaAhorros@{CuentaAhorros}!CuentaAhorros@{CuentaAhorros}}
+\doxysubsubsection{\texorpdfstring{CuentaAhorros()}{CuentaAhorros()}}
+{\footnotesize\ttfamily \label{class_cuenta_ahorros_a4aa4ef1a3c8a38e882670e9fdcbf7902} 
+Cuenta\+Ahorros\+::\+Cuenta\+Ahorros (\begin{DoxyParamCaption}\item[{string}]{numero}{, }\item[{\mbox{\hyperlink{class_cliente}{Cliente}} \texorpdfstring{$\ast$}{*}}]{c}{, }\item[{\mbox{\hyperlink{class_fecha}{Fecha}}}]{fecha}{, }\item[{double}]{tasa}{, }\item[{int}]{limite}{}\end{DoxyParamCaption})}
+
+
+
+Implementa las operaciones de una cuenta de ahorros, incluyendo depósitos, retiros con límite mensual y resumen, con aplicación de tasa de interés. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em numero} & Número identificador de la cuenta. \\
+\hline
+{\em c} & Puntero al cliente asociado a la cuenta. \\
+\hline
+{\em fecha} & \doxylink{class_fecha}{Fecha} de la transacción o creación. \\
+\hline
+{\em tasa} & Tasa de interés aplicada a la cuenta. \\
+\hline
+{\em limite} & Límite máximo de retiros permitidos por mes. Permite depositar fondos, retirar hasta el saldo disponible (respetando el límite de retiros), y genera un resumen con el saldo actual. Incluye validación de montos y redondeo a dos decimales. \\
+\hline
+\end{DoxyParams}
 
 
 \label{doc-func-members}

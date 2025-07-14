@@ -1,73 +1,74 @@
 \doxysection{Transaccion.\+h}
 \hypertarget{_transaccion_8h_source}{}\label{_transaccion_8h_source}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ TRANSACCION\_H}}
-\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ TRANSACCION\_H}}
-\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <string>}}
-\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <sstream>}}
-\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <iomanip>}}
-\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}Fecha.h"{}}}
-\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}BancoException.h"{}}}
-\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}ValidacionDatos.h"{}}}
-\DoxyCodeLine{00009\ \textcolor{keyword}{using\ namespace\ }std;}
-\DoxyCodeLine{00010\ }
-\DoxyCodeLine{00011\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
-\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }Transaccion\ \{}
-\DoxyCodeLine{00013\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{string}\ tipo;}
-\DoxyCodeLine{00015\ \ \ \ \ T\ monto;}
-\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{class_fecha}{Fecha}}\ fecha;}
-\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{string}\ numeroCuenta;}
-\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{bool}\ esTransferencia;}
-\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{string}\ cuentaRelacionada;}
-\DoxyCodeLine{00020\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00021\ \ \ \ \ Transaccion(\textcolor{keywordtype}{string}\ tipo,\ T\ monto,\ \mbox{\hyperlink{class_fecha}{Fecha}}\ fecha,\ \textcolor{keywordtype}{string}\ numCuenta,\ \textcolor{keywordtype}{bool}\ esTransferencia\ =\ \textcolor{keyword}{false},\ \textcolor{keywordtype}{string}\ cuentaRelacionada\ =\ \textcolor{stringliteral}{"{}"{}});}
-\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{string}\ resumenTransaccion()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{class_fecha}{Fecha}}\ getFecha()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{string}\ getTipo()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00025\ \ \ \ \ T\ getMonto()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{string}\ getNumeroCuenta()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00027\ \};}
-\DoxyCodeLine{00028\ }
-\DoxyCodeLine{00029\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
-\DoxyCodeLine{00030\ Transaccion<T>::Transaccion(\textcolor{keywordtype}{string}\ tipo,\ T\ monto,\ \mbox{\hyperlink{class_fecha}{Fecha}}\ fecha,\ \textcolor{keywordtype}{string}\ numCuenta,\ \textcolor{keywordtype}{bool}\ esTransferencia,\ \textcolor{keywordtype}{string}\ cuentaRelacionada)}
-\DoxyCodeLine{00031\ \ \ \ \ :\ tipo(tipo),\ monto(monto),\ fecha(fecha),\ numeroCuenta(numCuenta),\ esTransferencia(esTransferencia),\ cuentaRelacionada(cuentaRelacionada)\ \{}
-\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
-\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ ValidacionDatos::validarMonto(monto,\ \textcolor{keyword}{false});}
-\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ ValidacionDatos::validarFecha(fecha);}
-\DoxyCodeLine{00035\ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ BancoException\&\ e)\ \{}
-\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw};}
-\DoxyCodeLine{00037\ \ \ \ \ \}}
-\DoxyCodeLine{00038\ \}}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#ifndef\ TRANSACCION\_H}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ TRANSACCION\_H}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <iomanip>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}Fecha.h"{}}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}BancoException.h"{}}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}ValidacionDatos.h"{}}}
+\DoxyCodeLine{00020\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00023\ \textcolor{keyword}{class\ }Transaccion\ \{}
+\DoxyCodeLine{00024\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{string}\ tipo;}
+\DoxyCodeLine{00026\ \ \ \ \ T\ monto;}
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{class_fecha}{Fecha}}\ fecha;}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{string}\ numeroCuenta;}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{bool}\ esTransferencia;}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{string}\ cuentaRelacionada;}
+\DoxyCodeLine{00031\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00032\ \ \ \ \ Transaccion(\textcolor{keywordtype}{string}\ tipo,\ T\ monto,\ \mbox{\hyperlink{class_fecha}{Fecha}}\ fecha,\ \textcolor{keywordtype}{string}\ numCuenta,\ \textcolor{keywordtype}{bool}\ esTransferencia\ =\ \textcolor{keyword}{false},\ \textcolor{keywordtype}{string}\ cuentaRelacionada\ =\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{string}\ resumenTransaccion()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{class_fecha}{Fecha}}\ getFecha()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{string}\ getTipo()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00036\ \ \ \ \ T\ getMonto()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{string}\ getNumeroCuenta()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00038\ \};}
 \DoxyCodeLine{00039\ }
 \DoxyCodeLine{00040\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
-\DoxyCodeLine{00041\ \textcolor{keywordtype}{string}\ Transaccion<T>::resumenTransaccion()\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{00042\ \ \ \ \ ostringstream\ oss;}
-\DoxyCodeLine{00043\ \ \ \ \ oss\ <<\ fixed\ <<\ setprecision(2);}
-\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordflow}{if}\ (esTransferencia)\ \{}
-\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ oss\ <<\ (tipo\ ==\ \textcolor{stringliteral}{"{}Retiro"{}}\ ?\ \textcolor{stringliteral}{"{}Transferencia\ Enviada"{}}\ :\ \textcolor{stringliteral}{"{}Transferencia\ Recibida"{}})\ }
-\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{},\ Monto:\ \$"{}}\ <<\ monto\ <<\ \textcolor{stringliteral}{"{},\ Fecha:\ "{}}\ <<\ fecha.toString()\ }
-\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{},\ Cuenta:\ "{}}\ <<\ numeroCuenta;}
-\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ oss\ <<\ (tipo\ ==\ \textcolor{stringliteral}{"{}Retiro"{}}\ ?\ \textcolor{stringliteral}{"{}\ a\ "{}}\ :\ \textcolor{stringliteral}{"{}\ desde\ "{}})\ <<\ cuentaRelacionada;}
-\DoxyCodeLine{00049\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ oss\ <<\ \textcolor{stringliteral}{"{}Transaccion:\ "{}}\ <<\ tipo\ <<\ \textcolor{stringliteral}{"{},\ Monto:\ \$"{}}\ <<\ monto\ }
-\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{},\ Fecha:\ "{}}\ <<\ fecha.toString()\ <<\ \textcolor{stringliteral}{"{},\ Cuenta:\ "{}}\ <<\ numeroCuenta;}
-\DoxyCodeLine{00052\ \ \ \ \ \}}
-\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordflow}{return}\ oss.str();}
-\DoxyCodeLine{00054\ \}}
-\DoxyCodeLine{00055\ }
-\DoxyCodeLine{00056\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
-\DoxyCodeLine{00057\ \mbox{\hyperlink{class_fecha}{Fecha}}\ Transaccion<T>::getFecha()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ fecha;\ \}}
-\DoxyCodeLine{00058\ }
-\DoxyCodeLine{00059\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
-\DoxyCodeLine{00060\ \textcolor{keywordtype}{string}\ Transaccion<T>::getTipo()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ tipo;\ \}}
-\DoxyCodeLine{00061\ }
-\DoxyCodeLine{00062\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
-\DoxyCodeLine{00063\ T\ Transaccion<T>::getMonto()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ monto;\ \}}
-\DoxyCodeLine{00064\ }
-\DoxyCodeLine{00065\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
-\DoxyCodeLine{00066\ \textcolor{keywordtype}{string}\ Transaccion<T>::getNumeroCuenta()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ numeroCuenta;\ \}}
-\DoxyCodeLine{00067\ }
-\DoxyCodeLine{00068\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00041\ Transaccion<T>::Transaccion(\textcolor{keywordtype}{string}\ tipo,\ T\ monto,\ \mbox{\hyperlink{class_fecha}{Fecha}}\ fecha,\ \textcolor{keywordtype}{string}\ numCuenta,\ \textcolor{keywordtype}{bool}\ esTransferencia,\ \textcolor{keywordtype}{string}\ cuentaRelacionada)}
+\DoxyCodeLine{00042\ \ \ \ \ :\ tipo(tipo),\ monto(monto),\ fecha(fecha),\ numeroCuenta(numCuenta),\ esTransferencia(esTransferencia),\ cuentaRelacionada(cuentaRelacionada)\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ ValidacionDatos::validarMonto(monto,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_validacion_datos_a4e64f8618fb12247ba4fa0c720cf4b03}{ValidacionDatos::validarFecha}}(fecha);}
+\DoxyCodeLine{00046\ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ BancoException\&\ e)\ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw};}
+\DoxyCodeLine{00048\ \ \ \ \ \}}
+\DoxyCodeLine{00049\ \}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00052\ \textcolor{keywordtype}{string}\ Transaccion<T>::resumenTransaccion()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00053\ \ \ \ \ ostringstream\ oss;}
+\DoxyCodeLine{00054\ \ \ \ \ oss\ <<\ fixed\ <<\ setprecision(2);}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordflow}{if}\ (esTransferencia)\ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ oss\ <<\ (tipo\ ==\ \textcolor{stringliteral}{"{}Retiro"{}}\ ?\ \textcolor{stringliteral}{"{}Transferencia\ Enviada"{}}\ :\ \textcolor{stringliteral}{"{}Transferencia\ Recibida"{}})\ }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{},\ Monto:\ \$"{}}\ <<\ monto\ <<\ \textcolor{stringliteral}{"{},\ Fecha:\ "{}}\ <<\ fecha.toString()\ }
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{},\ Cuenta:\ "{}}\ <<\ numeroCuenta;}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ oss\ <<\ (tipo\ ==\ \textcolor{stringliteral}{"{}Retiro"{}}\ ?\ \textcolor{stringliteral}{"{}\ a\ "{}}\ :\ \textcolor{stringliteral}{"{}\ desde\ "{}})\ <<\ cuentaRelacionada;}
+\DoxyCodeLine{00060\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ oss\ <<\ \textcolor{stringliteral}{"{}Transaccion:\ "{}}\ <<\ tipo\ <<\ \textcolor{stringliteral}{"{},\ Monto:\ \$"{}}\ <<\ monto\ }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{},\ Fecha:\ "{}}\ <<\ fecha.toString()\ <<\ \textcolor{stringliteral}{"{},\ Cuenta:\ "{}}\ <<\ numeroCuenta;}
+\DoxyCodeLine{00063\ \ \ \ \ \}}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordflow}{return}\ oss.str();}
+\DoxyCodeLine{00065\ \}}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00068\ \mbox{\hyperlink{class_fecha}{Fecha}}\ Transaccion<T>::getFecha()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ fecha;\ \}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00071\ \textcolor{keywordtype}{string}\ Transaccion<T>::getTipo()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ tipo;\ \}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00074\ T\ Transaccion<T>::getMonto()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ monto;\ \}}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00077\ \textcolor{keywordtype}{string}\ Transaccion<T>::getNumeroCuenta()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ numeroCuenta;\ \}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

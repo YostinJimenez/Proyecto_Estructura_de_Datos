@@ -1,118 +1,119 @@
 \doxysection{Lista\+Doble\+Circular.\+h}
 \hypertarget{_lista_doble_circular_8h_source}{}\label{_lista_doble_circular_8h_source}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ LISTADOBLECIRCULAR\_H}}
-\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ LISTADOBLECIRCULAR\_H}}
-\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}Nodo.h"{}}}
-\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <functional>}}
-\DoxyCodeLine{00005\ }
-\DoxyCodeLine{00006\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
-\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }ListaDobleCircular\ \{}
-\DoxyCodeLine{00008\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00009\ \ \ \ \ \mbox{\hyperlink{class_nodo}{Nodo<T>}}*\ inicio;}
-\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keywordtype}{int}\ tamano;}
-\DoxyCodeLine{00011\ }
-\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{int}\ contarRecursivo(\mbox{\hyperlink{class_nodo}{Nodo<T>}}*\ nodo,\ \mbox{\hyperlink{class_nodo}{Nodo<T>}}*\ origen,\ \textcolor{keywordtype}{int}\ contador\ =\ 0)\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!nodo\ ||\ nodo\ ==\ origen)\ \textcolor{keywordflow}{return}\ contador;}
-\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ contarRecursivo(nodo-\/>siguiente,\ origen,\ contador\ +\ 1);}
-\DoxyCodeLine{00015\ \ \ \ \ \}}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#ifndef\ LISTADOBLECIRCULAR\_H}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ LISTADOBLECIRCULAR\_H}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}Nodo.h"{}}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <functional>}}
 \DoxyCodeLine{00016\ }
-\DoxyCodeLine{00017\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00018\ \ \ \ \ ListaDobleCircular();}
-\DoxyCodeLine{00019\ \ \ \ \ \string~ListaDobleCircular();}
-\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{void}\ insertar(T*\ dato);}
-\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{void}\ recorrer(std::function<\textcolor{keywordtype}{void}(T*)>\ accion)\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00022\ \ \ \ \ T*\ buscar(std::function<\textcolor{keywordtype}{bool}(T*)>\ criterio)\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{int}\ contar()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{bool}\ estaVacia()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{void}\ eliminar(T*\ dato);}
-\DoxyCodeLine{00026\ \};}
+\DoxyCodeLine{00017\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }ListaDobleCircular\ \{}
+\DoxyCodeLine{00019\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{class_nodo}{Nodo<T>}}*\ inicio;}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{int}\ tamano;}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{int}\ contarRecursivo(\mbox{\hyperlink{class_nodo}{Nodo<T>}}*\ nodo,\ \mbox{\hyperlink{class_nodo}{Nodo<T>}}*\ origen,\ \textcolor{keywordtype}{int}\ contador\ =\ 0)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!nodo\ ||\ nodo\ ==\ origen)\ \textcolor{keywordflow}{return}\ contador;}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ contarRecursivo(nodo-\/>siguiente,\ origen,\ contador\ +\ 1);}
+\DoxyCodeLine{00026\ \ \ \ \ \}}
 \DoxyCodeLine{00027\ }
-\DoxyCodeLine{00028\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
-\DoxyCodeLine{00029\ ListaDobleCircular<T>::ListaDobleCircular()\ :\ inicio(nullptr),\ tamano(0)\ \{\}}
-\DoxyCodeLine{00030\ }
-\DoxyCodeLine{00031\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
-\DoxyCodeLine{00032\ ListaDobleCircular<T>::\string~ListaDobleCircular()\ \{}
-\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordflow}{if}\ (!inicio)\ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{class_nodo}{Nodo<T>}}*\ actual\ =\ inicio;}
-\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
-\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_nodo}{Nodo<T>}}*\ temp\ =\ actual;}
-\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ actual\ =\ actual-\/>siguiente;}
-\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ temp-\/>dato;}
-\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ temp;}
-\DoxyCodeLine{00040\ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (actual\ !=\ inicio);}
-\DoxyCodeLine{00041\ \}}
-\DoxyCodeLine{00042\ }
-\DoxyCodeLine{00043\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
-\DoxyCodeLine{00044\ \textcolor{keywordtype}{void}\ ListaDobleCircular<T>::insertar(T*\ dato)\ \{}
-\DoxyCodeLine{00045\ \ \ \ \ \mbox{\hyperlink{class_nodo}{Nodo<T>}}*\ nuevo\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_nodo}{Nodo<T>}}(dato);}
-\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordflow}{if}\ (!inicio)\ \{}
-\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ inicio\ =\ nuevo;}
-\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ inicio-\/>siguiente\ =\ inicio-\/>anterior\ =\ inicio;}
-\DoxyCodeLine{00049\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_nodo}{Nodo<T>}}*\ ultimo\ =\ inicio-\/>anterior;}
-\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ ultimo-\/>siguiente\ =\ nuevo;}
-\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ nuevo-\/>anterior\ =\ ultimo;}
-\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ nuevo-\/>siguiente\ =\ inicio;}
-\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ inicio-\/>anterior\ =\ nuevo;}
-\DoxyCodeLine{00055\ \ \ \ \ \}}
-\DoxyCodeLine{00056\ \ \ \ \ tamano++;}
-\DoxyCodeLine{00057\ \}}
-\DoxyCodeLine{00058\ }
-\DoxyCodeLine{00059\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
-\DoxyCodeLine{00060\ \textcolor{keywordtype}{void}\ ListaDobleCircular<T>::recorrer(std::function<\textcolor{keywordtype}{void}(T*)>\ accion)\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordflow}{if}\ (!inicio)\ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{00062\ \ \ \ \ \mbox{\hyperlink{class_nodo}{Nodo<T>}}*\ actual\ =\ inicio;}
-\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
-\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ accion(actual-\/>dato);}
-\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ actual\ =\ actual-\/>siguiente;}
-\DoxyCodeLine{00066\ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (actual\ !=\ inicio);}
-\DoxyCodeLine{00067\ \}}
-\DoxyCodeLine{00068\ }
-\DoxyCodeLine{00069\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
-\DoxyCodeLine{00070\ T*\ ListaDobleCircular<T>::buscar(std::function<\textcolor{keywordtype}{bool}(T*)>\ criterio)\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordflow}{if}\ (!inicio)\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{nullptr};}
-\DoxyCodeLine{00072\ \ \ \ \ \mbox{\hyperlink{class_nodo}{Nodo<T>}}*\ actual\ =\ inicio;}
-\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
-\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (criterio(actual-\/>dato))\ \textcolor{keywordflow}{return}\ actual-\/>dato;}
-\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ actual\ =\ actual-\/>siguiente;}
-\DoxyCodeLine{00076\ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (actual\ !=\ inicio);}
-\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00028\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00029\ \ \ \ \ ListaDobleCircular();}
+\DoxyCodeLine{00030\ \ \ \ \ \string~ListaDobleCircular();}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ insertar(T*\ dato);}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ recorrer(std::function<\textcolor{keywordtype}{void}(T*)>\ accion)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00033\ \ \ \ \ T*\ buscar(std::function<\textcolor{keywordtype}{bool}(T*)>\ criterio)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{int}\ contar()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{bool}\ estaVacia()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{void}\ eliminar(T*\ dato);}
+\DoxyCodeLine{00037\ \};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00040\ ListaDobleCircular<T>::ListaDobleCircular()\ :\ inicio(nullptr),\ tamano(0)\ \{\}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00043\ ListaDobleCircular<T>::\string~ListaDobleCircular()\ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordflow}{if}\ (!inicio)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00045\ \ \ \ \ \mbox{\hyperlink{class_nodo}{Nodo<T>}}*\ actual\ =\ inicio;}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_nodo}{Nodo<T>}}*\ temp\ =\ actual;}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ actual\ =\ actual-\/>siguiente;}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ temp-\/>dato;}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ temp;}
+\DoxyCodeLine{00051\ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (actual\ !=\ inicio);}
+\DoxyCodeLine{00052\ \}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00055\ \textcolor{keywordtype}{void}\ ListaDobleCircular<T>::insertar(T*\ dato)\ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \mbox{\hyperlink{class_nodo}{Nodo<T>}}*\ nuevo\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_nodo}{Nodo<T>}}(dato);}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordflow}{if}\ (!inicio)\ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ inicio\ =\ nuevo;}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ inicio-\/>siguiente\ =\ inicio-\/>anterior\ =\ inicio;}
+\DoxyCodeLine{00060\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_nodo}{Nodo<T>}}*\ ultimo\ =\ inicio-\/>anterior;}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ ultimo-\/>siguiente\ =\ nuevo;}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ nuevo-\/>anterior\ =\ ultimo;}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ nuevo-\/>siguiente\ =\ inicio;}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ inicio-\/>anterior\ =\ nuevo;}
+\DoxyCodeLine{00066\ \ \ \ \ \}}
+\DoxyCodeLine{00067\ \ \ \ \ tamano++;}
+\DoxyCodeLine{00068\ \}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00071\ \textcolor{keywordtype}{void}\ ListaDobleCircular<T>::recorrer(std::function<\textcolor{keywordtype}{void}(T*)>\ accion)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordflow}{if}\ (!inicio)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00073\ \ \ \ \ \mbox{\hyperlink{class_nodo}{Nodo<T>}}*\ actual\ =\ inicio;}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ accion(actual-\/>dato);}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ actual\ =\ actual-\/>siguiente;}
+\DoxyCodeLine{00077\ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (actual\ !=\ inicio);}
 \DoxyCodeLine{00078\ \}}
 \DoxyCodeLine{00079\ }
 \DoxyCodeLine{00080\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
-\DoxyCodeLine{00081\ \textcolor{keywordtype}{int}\ ListaDobleCircular<T>::contar()\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordflow}{return}\ contarRecursivo(inicio\ ?\ inicio-\/>siguiente\ :\ \textcolor{keyword}{nullptr},\ inicio);}
-\DoxyCodeLine{00083\ \}}
-\DoxyCodeLine{00084\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
-\DoxyCodeLine{00085\ \textcolor{keywordtype}{bool}\ ListaDobleCircular<T>::estaVacia()\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordflow}{return}\ inicio\ ==\ \textcolor{keyword}{nullptr}\ ||\ tamano\ ==\ 0;}
-\DoxyCodeLine{00087\ \}}
-\DoxyCodeLine{00088\ \textcolor{comment}{//\ ...existing\ code...}}
-\DoxyCodeLine{00089\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
-\DoxyCodeLine{00090\ \textcolor{keywordtype}{void}\ ListaDobleCircular<T>::eliminar(T*\ dato)\ \{}
-\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordflow}{if}\ (!inicio)\ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{00092\ \ \ \ \ \mbox{\hyperlink{class_nodo}{Nodo<T>}}*\ actual\ =\ inicio;}
-\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
-\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (actual-\/>dato\ ==\ dato)\ \{}
-\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (actual-\/>siguiente\ ==\ actual)\ \{\ \textcolor{comment}{//\ Solo\ un\ nodo}}
-\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ actual-\/>dato;}
-\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ actual;}
-\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inicio\ =\ \textcolor{keyword}{nullptr};}
-\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ actual-\/>anterior-\/>siguiente\ =\ actual-\/>siguiente;}
-\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ actual-\/>siguiente-\/>anterior\ =\ actual-\/>anterior;}
-\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (actual\ ==\ inicio)\ inicio\ =\ actual-\/>siguiente;}
-\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ actual-\/>dato;}
-\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ actual;}
-\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ tamano-\/-\/;}
-\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ actual\ =\ actual-\/>siguiente;}
-\DoxyCodeLine{00110\ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (actual\ !=\ inicio);}
-\DoxyCodeLine{00111\ \}}
-\DoxyCodeLine{00112\ \textcolor{comment}{//\ ...existing\ code...}}
-\DoxyCodeLine{00113\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00081\ T*\ ListaDobleCircular<T>::buscar(std::function<\textcolor{keywordtype}{bool}(T*)>\ criterio)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordflow}{if}\ (!inicio)\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00083\ \ \ \ \ \mbox{\hyperlink{class_nodo}{Nodo<T>}}*\ actual\ =\ inicio;}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (criterio(actual-\/>dato))\ \textcolor{keywordflow}{return}\ actual-\/>dato;}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ actual\ =\ actual-\/>siguiente;}
+\DoxyCodeLine{00087\ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (actual\ !=\ inicio);}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00089\ \}}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00092\ \textcolor{keywordtype}{int}\ ListaDobleCircular<T>::contar()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordflow}{return}\ contarRecursivo(inicio\ ?\ inicio-\/>siguiente\ :\ \textcolor{keyword}{nullptr},\ inicio);}
+\DoxyCodeLine{00094\ \}}
+\DoxyCodeLine{00095\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00096\ \textcolor{keywordtype}{bool}\ ListaDobleCircular<T>::estaVacia()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordflow}{return}\ inicio\ ==\ \textcolor{keyword}{nullptr}\ ||\ tamano\ ==\ 0;}
+\DoxyCodeLine{00098\ \}}
+\DoxyCodeLine{00099\ \textcolor{comment}{//\ ...existing\ code...}}
+\DoxyCodeLine{00100\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00101\ \textcolor{keywordtype}{void}\ ListaDobleCircular<T>::eliminar(T*\ dato)\ \{}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordflow}{if}\ (!inicio)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00103\ \ \ \ \ \mbox{\hyperlink{class_nodo}{Nodo<T>}}*\ actual\ =\ inicio;}
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (actual-\/>dato\ ==\ dato)\ \{}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (actual-\/>siguiente\ ==\ actual)\ \{\ \textcolor{comment}{//\ Solo\ un\ nodo}}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ actual-\/>dato;}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ actual;}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inicio\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ actual-\/>anterior-\/>siguiente\ =\ actual-\/>siguiente;}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ actual-\/>siguiente-\/>anterior\ =\ actual-\/>anterior;}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (actual\ ==\ inicio)\ inicio\ =\ actual-\/>siguiente;}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ actual-\/>dato;}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ actual;}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ tamano-\/-\/;}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ actual\ =\ actual-\/>siguiente;}
+\DoxyCodeLine{00121\ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (actual\ !=\ inicio);}
+\DoxyCodeLine{00122\ \}}
+\DoxyCodeLine{00123\ \textcolor{comment}{//\ ...existing\ code...}}
+\DoxyCodeLine{00124\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

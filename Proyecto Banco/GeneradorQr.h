@@ -1,6 +1,6 @@
 #ifndef GENERADORQR_H
 #define GENERADORQR_H
-
+//#include <Magick++.h>
 #include <string> // Para std::string
 #include <qrencode.h> //
 

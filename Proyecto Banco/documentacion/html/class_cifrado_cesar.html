@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sistema Bancario: CifradoCesar Class Reference</title>
+<title>Proyecto Banco: CifradoCesar Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Sistema Bancario
+   <div id="projectname">Proyecto Banco<span id="projectnumber">&#160;v 1.0</span>
    </div>
+   <div id="projectbrief">Proyecto Banco</div>
   </td>
  </tr>
  </tbody>
@@ -94,23 +95,176 @@ $(function(){initNavTree('class_cifrado_cesar.html','','class_cifrado_cesar-memb
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a19ce2c6dc89e11b62cfd6327bdb84264" id="r_a19ce2c6dc89e11b62cfd6327bdb84264"><td class="memItemLeft" align="right" valign="top"><a id="a19ce2c6dc89e11b62cfd6327bdb84264" name="a19ce2c6dc89e11b62cfd6327bdb84264"></a>
-static bool&#160;</td><td class="memItemRight" valign="bottom"><b>codificarArchivo</b> (const string &amp;archivoEntrada, const string &amp;archivoSalida, int clave)</td></tr>
-<tr class="memitem:a070b393b01e6d6ae6c75387fdc9346cf" id="r_a070b393b01e6d6ae6c75387fdc9346cf"><td class="memItemLeft" align="right" valign="top"><a id="a070b393b01e6d6ae6c75387fdc9346cf" name="a070b393b01e6d6ae6c75387fdc9346cf"></a>
-static bool&#160;</td><td class="memItemRight" valign="bottom"><b>decodificarArchivo</b> (const string &amp;archivoEntrada, const string &amp;archivoSalida, int clave)</td></tr>
-<tr class="memitem:a0702a6f5b69f742b593d5f5513c15014" id="r_a0702a6f5b69f742b593d5f5513c15014"><td class="memItemLeft" align="right" valign="top"><a id="a0702a6f5b69f742b593d5f5513c15014" name="a0702a6f5b69f742b593d5f5513c15014"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>listarArchivosTxt</b> (int index)</td></tr>
+<tr class="memitem:a19ce2c6dc89e11b62cfd6327bdb84264" id="r_a19ce2c6dc89e11b62cfd6327bdb84264"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a19ce2c6dc89e11b62cfd6327bdb84264">codificarArchivo</a> (const string &amp;archivoEntrada, const string &amp;archivoSalida, int clave)</td></tr>
+<tr class="memdesc:a19ce2c6dc89e11b62cfd6327bdb84264"><td class="mdescLeft">&#160;</td><td class="mdescRight">Codifica un archivo usando el Cifrado César.  <br /></td></tr>
+<tr class="memitem:a070b393b01e6d6ae6c75387fdc9346cf" id="r_a070b393b01e6d6ae6c75387fdc9346cf"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a070b393b01e6d6ae6c75387fdc9346cf">decodificarArchivo</a> (const string &amp;archivoEntrada, const string &amp;archivoSalida, int clave)</td></tr>
+<tr class="memdesc:a070b393b01e6d6ae6c75387fdc9346cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decodifica un archivo cifrado usando el Cifrado César. Utiliza la clave negativa para revertir el cifrado.  <br /></td></tr>
+<tr class="memitem:a0702a6f5b69f742b593d5f5513c15014" id="r_a0702a6f5b69f742b593d5f5513c15014"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0702a6f5b69f742b593d5f5513c15014">listarArchivosTxt</a> (int index)</td></tr>
+<tr class="memdesc:a0702a6f5b69f742b593d5f5513c15014"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lista los archivos de respaldo en el directorio actual. Permite al usuario seleccionar un archivo para cifrar o descifrar.  <br /></td></tr>
 <tr class="memitem:a5d9fd8680c0f9a458d7ad3db4d3c4fcd" id="r_a5d9fd8680c0f9a458d7ad3db4d3c4fcd"><td class="memItemLeft" align="right" valign="top"><a id="a5d9fd8680c0f9a458d7ad3db4d3c4fcd" name="a5d9fd8680c0f9a458d7ad3db4d3c4fcd"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>descifrar_archivos_txt</b> ()</td></tr>
+<tr class="memdesc:a5d9fd8680c0f9a458d7ad3db4d3c4fcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Descifra un archivo cifrado seleccionado por el usuario usando el cifrado César. Genera el archivo descifrado y muestra el resultado. <br /></td></tr>
 <tr class="memitem:abe586c08274aefb691ed0606cd73145e" id="r_abe586c08274aefb691ed0606cd73145e"><td class="memItemLeft" align="right" valign="top"><a id="abe586c08274aefb691ed0606cd73145e" name="abe586c08274aefb691ed0606cd73145e"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>cifrar_archivos_txt</b> ()</td></tr>
-<tr class="memitem:a851388cc2826c2b36f2da00a4d4a3a4c" id="r_a851388cc2826c2b36f2da00a4d4a3a4c"><td class="memItemLeft" align="right" valign="top"><a id="a851388cc2826c2b36f2da00a4d4a3a4c" name="a851388cc2826c2b36f2da00a4d4a3a4c"></a>
-static bool&#160;</td><td class="memItemRight" valign="bottom"><b>verificarIntegridadCifrados</b> ()</td></tr>
-<tr class="memitem:aeba8aaa739044f995948525a05e3207e" id="r_aeba8aaa739044f995948525a05e3207e"><td class="memItemLeft" align="right" valign="top"><a id="aeba8aaa739044f995948525a05e3207e" name="aeba8aaa739044f995948525a05e3207e"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createPDF</b> (const string &amp;txtFile, const string &amp;pdfFile)</td></tr>
-<tr class="memitem:a6c42baed98c9b1c241089d91ce479d03" id="r_a6c42baed98c9b1c241089d91ce479d03"><td class="memItemLeft" align="right" valign="top"><a id="a6c42baed98c9b1c241089d91ce479d03" name="a6c42baed98c9b1c241089d91ce479d03"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>crearPDFPersonal</b> (<a class="el" href="class_cliente.html">Cliente</a> *cliente, string carpeta)</td></tr>
+<tr class="memdesc:abe586c08274aefb691ed0606cd73145e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cifra un archivo de respaldo seleccionado por el usuario usando el cifrado César. Genera el archivo cifrado, su hash y un PDF del contenido cifrado. <br /></td></tr>
+<tr class="memitem:a9ad1aa06832f9f981f781e5cbe44ead7" id="r_a9ad1aa06832f9f981f781e5cbe44ead7"><td class="memItemLeft" align="right" valign="top"><a id="a9ad1aa06832f9f981f781e5cbe44ead7" name="a9ad1aa06832f9f981f781e5cbe44ead7"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>generar_txt_a_pdf</b> ()</td></tr>
+<tr class="memdesc:a9ad1aa06832f9f981f781e5cbe44ead7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Genera un PDF a partir de un archivo de respaldo cifrado. Permite al usuario seleccionar el archivo y genera un PDF con su contenido. <br /></td></tr>
+<tr class="memitem:a851388cc2826c2b36f2da00a4d4a3a4c" id="r_a851388cc2826c2b36f2da00a4d4a3a4c"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a851388cc2826c2b36f2da00a4d4a3a4c">verificarIntegridadCifrados</a> ()</td></tr>
+<tr class="memdesc:a851388cc2826c2b36f2da00a4d4a3a4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifica la integridad de los archivos cifrados comparando su hash actual con el guardado.  <br /></td></tr>
 </table>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a19ce2c6dc89e11b62cfd6327bdb84264" name="a19ce2c6dc89e11b62cfd6327bdb84264"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19ce2c6dc89e11b62cfd6327bdb84264">&#9670;&#160;</a></span>codificarArchivo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool CifradoCesar::codificarArchivo </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;</td>          <td class="paramname"><span class="paramname"><em>archivoEntrada</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;</td>          <td class="paramname"><span class="paramname"><em>archivoSalida</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>clave</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Codifica un archivo usando el Cifrado César. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">archivoEntrada</td><td>Ruta del archivo de entrada a codificar. </td></tr>
+    <tr><td class="paramname">archivoSalida</td><td>Ruta del archivo de salida codificado. </td></tr>
+    <tr><td class="paramname">clave</td><td>Clave de cifrado (número de posiciones a desplazar). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true si la operación fue exitosa, false en caso contrario. </dd></dl>
+
+</div>
+</div>
+<a id="a070b393b01e6d6ae6c75387fdc9346cf" name="a070b393b01e6d6ae6c75387fdc9346cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a070b393b01e6d6ae6c75387fdc9346cf">&#9670;&#160;</a></span>decodificarArchivo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool CifradoCesar::decodificarArchivo </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;</td>          <td class="paramname"><span class="paramname"><em>archivoEntrada</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;</td>          <td class="paramname"><span class="paramname"><em>archivoSalida</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>clave</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Decodifica un archivo cifrado usando el Cifrado César. Utiliza la clave negativa para revertir el cifrado. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">archivoEntrada</td><td>Ruta del archivo de entrada cifrado. </td></tr>
+    <tr><td class="paramname">archivoSalida</td><td>Ruta del archivo de salida descifrado. </td></tr>
+    <tr><td class="paramname">clave</td><td>Clave de cifrado utilizada originalmente. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true si la operación fue exitosa, false en caso contrario. </dd></dl>
+
+</div>
+</div>
+<a id="a0702a6f5b69f742b593d5f5513c15014" name="a0702a6f5b69f742b593d5f5513c15014"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0702a6f5b69f742b593d5f5513c15014">&#9670;&#160;</a></span>listarArchivosTxt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CifradoCesar::listarArchivosTxt </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>index</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Lista los archivos de respaldo en el directorio actual. Permite al usuario seleccionar un archivo para cifrar o descifrar. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>1 para cifrar, 2 para descifrar. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a851388cc2826c2b36f2da00a4d4a3a4c" name="a851388cc2826c2b36f2da00a4d4a3a4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a851388cc2826c2b36f2da00a4d4a3a4c">&#9670;&#160;</a></span>verificarIntegridadCifrados()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool CifradoCesar::verificarIntegridadCifrados </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Verifica la integridad de los archivos cifrados comparando su hash actual con el guardado. </p>
+<dl class="section return"><dt>Returns</dt><dd>true si todos los archivos tienen integridad OK, false si alguno falla. </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="_cifrado_cesar_8h_source.html">CifradoCesar.h</a></li>
 <li><b>CifradoCesar.cpp</b></li>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sistema Bancario: Banco Class Reference</title>
+<title>Proyecto Banco: Banco Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Sistema Bancario
+   <div id="projectname">Proyecto Banco<span id="projectnumber">&#160;v 1.0</span>
    </div>
+   <div id="projectbrief">Proyecto Banco</div>
   </td>
  </tr>
  </tbody>
@@ -91,30 +92,142 @@ $(function(){initNavTree('class_banco.html','','class_banco-members'); });
   <div class="headertitle"><div class="title">Banco Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Clase principal que gestiona las operaciones bancarias. Permite crear cuentas, realizar transacciones, buscar clientes, generar reportes y administrar el sistema.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_banco_8h_source.html">Banco.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a8b2579826f523f08509d51507c12ed99" id="r_a8b2579826f523f08509d51507c12ed99"><td class="memItemLeft" align="right" valign="top"><a id="a8b2579826f523f08509d51507c12ed99" name="a8b2579826f523f08509d51507c12ed99"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>generarDocumentacion</b> ()</td></tr>
-<tr class="memitem:a323cc9f9fe66949f9b92db30c50cacea" id="r_a323cc9f9fe66949f9b92db30c50cacea"><td class="memItemLeft" align="right" valign="top"><a id="a323cc9f9fe66949f9b92db30c50cacea" name="a323cc9f9fe66949f9b92db30c50cacea"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>generarQRL</b> ()</td></tr>
-<tr class="memitem:abcebda6bb1d9df0b384ec385817a40ba" id="r_abcebda6bb1d9df0b384ec385817a40ba"><td class="memItemLeft" align="right" valign="top"><a id="abcebda6bb1d9df0b384ec385817a40ba" name="abcebda6bb1d9df0b384ec385817a40ba"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>mover_cursor_opciones</b> (int x, int y)</td></tr>
-<tr class="memitem:a3522616922347c41e2163120f08744c8" id="r_a3522616922347c41e2163120f08744c8"><td class="memItemLeft" align="right" valign="top"><a id="a3522616922347c41e2163120f08744c8" name="a3522616922347c41e2163120f08744c8"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>seleccionar_opcion</b> (const char *titulo, const char *opciones[], int n, int fila_inicio)</td></tr>
-<tr class="memitem:aee077f3d465ed329312365846039ce61" id="r_aee077f3d465ed329312365846039ce61"><td class="memItemLeft" align="right" valign="top"><a id="aee077f3d465ed329312365846039ce61" name="aee077f3d465ed329312365846039ce61"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>mover_cursor</b> (int x, int y)</td></tr>
+<tr class="memdesc:a8b2579826f523f08509d51507c12ed99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Genera la documentación del proyecto usando Doxygen y la abre en el navegador. <br /></td></tr>
+<tr class="memitem:a06ad2ffd6ef3a935a2643ee01d0cdbe6" id="r_a06ad2ffd6ef3a935a2643ee01d0cdbe6"><td class="memItemLeft" align="right" valign="top"><a id="a06ad2ffd6ef3a935a2643ee01d0cdbe6" name="a06ad2ffd6ef3a935a2643ee01d0cdbe6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>generarQR</b> ()</td></tr>
+<tr class="memdesc:a06ad2ffd6ef3a935a2643ee01d0cdbe6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permite seleccionar un cliente y generar su código QR y PDF asociado. <br /></td></tr>
+<tr class="memitem:a3522616922347c41e2163120f08744c8" id="r_a3522616922347c41e2163120f08744c8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3522616922347c41e2163120f08744c8">seleccionar_opcion</a> (const char *titulo, const char *opciones[], int n, int fila_inicio)</td></tr>
+<tr class="memdesc:a3522616922347c41e2163120f08744c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permite seleccionar una opción de un menú usando el teclado (flechas, enter, esc).  <br /></td></tr>
+<tr class="memitem:a686e51b219dc175e432e91559298b259" id="r_a686e51b219dc175e432e91559298b259"><td class="memItemLeft" align="right" valign="top"><a id="a686e51b219dc175e432e91559298b259" name="a686e51b219dc175e432e91559298b259"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Banco</b> ()</td></tr>
+<tr class="memdesc:a686e51b219dc175e432e91559298b259"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor de la clase <a class="el" href="class_banco.html" title="Clase principal que gestiona las operaciones bancarias. Permite crear cuentas, realizar transacciones...">Banco</a>. Inicializa la lista de clientes y otros recursos. <br /></td></tr>
 <tr class="memitem:ac08f990d166e53475ee9591471ff0f91" id="r_ac08f990d166e53475ee9591471ff0f91"><td class="memItemLeft" align="right" valign="top"><a id="ac08f990d166e53475ee9591471ff0f91" name="ac08f990d166e53475ee9591471ff0f91"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>crearCuenta</b> ()</td></tr>
+<tr class="memdesc:ac08f990d166e53475ee9591471ff0f91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Crea una nueva cuenta bancaria y la agrega a la lista de clientes. <br /></td></tr>
 <tr class="memitem:aa516953aaefe8e32ae542bea0fc8177f" id="r_aa516953aaefe8e32ae542bea0fc8177f"><td class="memItemLeft" align="right" valign="top"><a id="aa516953aaefe8e32ae542bea0fc8177f" name="aa516953aaefe8e32ae542bea0fc8177f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>mostrarMenuUsuario</b> ()</td></tr>
-<tr class="memitem:a8ca8bef5c1e5a29b1f1eae3cf9b1996b" id="r_a8ca8bef5c1e5a29b1f1eae3cf9b1996b"><td class="memItemLeft" align="right" valign="top"><a id="a8ca8bef5c1e5a29b1f1eae3cf9b1996b" name="a8ca8bef5c1e5a29b1f1eae3cf9b1996b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>mostrarMenuAdmin</b> ()</td></tr>
+<tr class="memdesc:aa516953aaefe8e32ae542bea0fc8177f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Muestra el menú de usuario para iniciar sesión y operar sobre su cuenta. <br /></td></tr>
+<tr class="memitem:a8ca8bef5c1e5a29b1f1eae3cf9b1996b" id="r_a8ca8bef5c1e5a29b1f1eae3cf9b1996b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8ca8bef5c1e5a29b1f1eae3cf9b1996b">mostrarMenuAdmin</a> ()</td></tr>
+<tr class="memdesc:a8ca8bef5c1e5a29b1f1eae3cf9b1996b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Muestra el menú de administrador y permite gestionar el sistema.  <br /></td></tr>
 <tr class="memitem:a08eba9f2b3bb91a5fd59a919b99f1c83" id="r_a08eba9f2b3bb91a5fd59a919b99f1c83"><td class="memItemLeft" align="right" valign="top"><a id="a08eba9f2b3bb91a5fd59a919b99f1c83" name="a08eba9f2b3bb91a5fd59a919b99f1c83"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>ejecutar</b> ()</td></tr>
-<tr class="memitem:a612c2fea79fbda76961d2732d45ac1ba" id="r_a612c2fea79fbda76961d2732d45ac1ba"><td class="memItemLeft" align="right" valign="top"><a id="a612c2fea79fbda76961d2732d45ac1ba" name="a612c2fea79fbda76961d2732d45ac1ba"></a>
-string&#160;</td><td class="memItemRight" valign="bottom"><b>generarNumeroCuenta</b> (const string &amp;tipoCuenta)</td></tr>
+<tr class="memdesc:a08eba9f2b3bb91a5fd59a919b99f1c83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ejecuta el menú principal del sistema bancario. <br /></td></tr>
+<tr class="memitem:a612c2fea79fbda76961d2732d45ac1ba" id="r_a612c2fea79fbda76961d2732d45ac1ba"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a612c2fea79fbda76961d2732d45ac1ba">generarNumeroCuenta</a> (const string &amp;tipoCuenta)</td></tr>
+<tr class="memdesc:a612c2fea79fbda76961d2732d45ac1ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Genera un número de cuenta único y válido para un tipo de cuenta.  <br /></td></tr>
 </table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Clase principal que gestiona las operaciones bancarias. Permite crear cuentas, realizar transacciones, buscar clientes, generar reportes y administrar el sistema. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a612c2fea79fbda76961d2732d45ac1ba" name="a612c2fea79fbda76961d2732d45ac1ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a612c2fea79fbda76961d2732d45ac1ba">&#9670;&#160;</a></span>generarNumeroCuenta()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string Banco::generarNumeroCuenta </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;</td>          <td class="paramname"><span class="paramname"><em>tipoCuenta</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Genera un número de cuenta único y válido para un tipo de cuenta. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tipoCuenta</td><td>"Ahorros" o "Corriente". </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Número de cuenta generado (formato IBAN). </dd></dl>
+
+</div>
+</div>
+<a id="a8ca8bef5c1e5a29b1f1eae3cf9b1996b" name="a8ca8bef5c1e5a29b1f1eae3cf9b1996b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ca8bef5c1e5a29b1f1eae3cf9b1996b">&#9670;&#160;</a></span>mostrarMenuAdmin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Banco::mostrarMenuAdmin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Muestra el menú de administrador y permite gestionar el sistema. </p>
+<p>Permite realizar backup, restaurar, gestionar clientes, cifrado, descifrado, verificar integridad, generar QR y PDF. </p>
+
+</div>
+</div>
+<a id="a3522616922347c41e2163120f08744c8" name="a3522616922347c41e2163120f08744c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3522616922347c41e2163120f08744c8">&#9670;&#160;</a></span>seleccionar_opcion()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Banco::seleccionar_opcion </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>titulo</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>opciones</em></span>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>n</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>fila_inicio</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Permite seleccionar una opción de un menú usando el teclado (flechas, enter, esc). </p>
+<p>Permite seleccionar una opción de un menú usando el teclado.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">titulo</td><td>Título del menú. </td></tr>
+    <tr><td class="paramname">opciones</td><td>Arreglo de strings con las opciones. </td></tr>
+    <tr><td class="paramname">n</td><td>Número de opciones. </td></tr>
+    <tr><td class="paramname">fila_inicio</td><td>Fila inicial para mostrar el menú. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Índice de la opción seleccionada (1-based), o 0 si se presiona ESC.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">titulo</td><td>Título del menú. </td></tr>
+    <tr><td class="paramname">opciones</td><td>Arreglo de strings con las opciones. </td></tr>
+    <tr><td class="paramname">n</td><td>Número de opciones. </td></tr>
+    <tr><td class="paramname">fila_inicio</td><td>Fila inicial para mostrar el menú. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Índice de la opción seleccionada (1-based). </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="_banco_8h_source.html">Banco.h</a></li>
 <li><b>Banco.cpp</b></li>

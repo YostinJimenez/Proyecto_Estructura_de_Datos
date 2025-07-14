@@ -8,32 +8,32 @@
 \DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}Fecha.h"{}}}
 \DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}BancoException.h"{}}}
 \DoxyCodeLine{00007\ }
-\DoxyCodeLine{00008\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_validacion_datos}{ValidacionDatos}}\ \{}
-\DoxyCodeLine{00009\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keyword}{enum}\ TipoDato\ \{CEDULA,\ NOMBRE,\ CORREO,\ TELEFONO,\ USUARIO,\ CONTRASENA,\ FECHA,\ MONTO,\ NOMBRE\_ARCHIVO,\ CEDULA\_PREFIJO\};}
-\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ capturarEntrada(TipoDato\ tipo,\ \textcolor{keyword}{const}\ std::string\&\ mensaje,\ \textcolor{keywordtype}{size\_t}\ maxLongitud);}
-\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_fecha}{Fecha}}\ capturarFechaInteractiva(\textcolor{keyword}{const}\ std::string\&\ mensaje,\ \textcolor{keywordtype}{bool}\ esFechaNacimiento\ =\ \textcolor{keyword}{false});}
-\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_fecha}{Fecha}}\ capturarFechaInteractiva(\textcolor{keyword}{const}\ std::string\&\ mensaje,\ \textcolor{keywordtype}{bool}\ esFechaNacimiento,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_fecha}{Fecha}}*\ minFecha);}
-\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ validarFecha(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_fecha}{Fecha}}\&\ fecha,\ \textcolor{keywordtype}{bool}\ esFechaNacimiento\ =\ \textcolor{keyword}{false});}
-\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ validarCedula(\textcolor{keyword}{const}\ std::string\&\ cedula);}
-\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ validarCedulaPrefijo(\textcolor{keyword}{const}\ std::string\&\ cedula);}
-\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ limpiar\_linea(\textcolor{keyword}{const}\ std::string\&\ mensaje);}
-\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ limpiar\_linea\_Error(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ mensaje,\ \textcolor{keywordtype}{size\_t}\ longitud\_extra);}
-\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ validarNombre(\textcolor{keyword}{const}\ std::string\&\ nombre);}
-\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ validarCorreo(\textcolor{keyword}{const}\ std::string\&\ correo);}
-\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ validarTelefono(\textcolor{keyword}{const}\ std::string\&\ telefono);}
-\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ validarUsuario(\textcolor{keyword}{const}\ std::string\&\ usuario);}
-\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ validarContrasena(\textcolor{keyword}{const}\ std::string\&\ contrasena);}
-\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ validarMonto(\textcolor{keywordtype}{double}\ monto,\ \textcolor{keywordtype}{bool}\ permitirCero);}
-\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ validarNombreArchivo(\textcolor{keyword}{const}\ std::string\&\ entrada);}
-\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ ingresar\_dni(\textcolor{keyword}{const}\ std::string\&\ mensaje);}
-\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ validarFecha(\textcolor{keyword}{const}\ std::string\&\ fecha);}
-\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ validarHora(\textcolor{keyword}{const}\ std::string\&\ hora);}
-\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ validar\_hora\_minuto\_segundo(\textcolor{keywordtype}{int}\ hora,\ \textcolor{keywordtype}{int}\ minuto,\ \textcolor{keywordtype}{int}\ segundo);}
-\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ es\_fecha\_valida(\textcolor{keywordtype}{int}\ dia,\ \textcolor{keywordtype}{int}\ mes,\ \textcolor{keywordtype}{int}\ anio);}
-\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ validarCaracter(std::string\&\ opcion);}
-\DoxyCodeLine{00032\ \};}
-\DoxyCodeLine{00033\ }
-\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_validacion_datos}{ValidacionDatos}}\ \{}
+\DoxyCodeLine{00013\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{enum}\ TipoDato\ \{CEDULA,\ NOMBRE,\ CORREO,\ TELEFONO,\ USUARIO,\ CONTRASENA,\ FECHA,\ MONTO,\ NOMBRE\_ARCHIVO,\ CEDULA\_PREFIJO\};}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{class_validacion_datos_a47faaa03577241411f73b864cea84ee6}{capturarEntrada}}(TipoDato\ tipo,\ \textcolor{keyword}{const}\ std::string\&\ mensaje,\ \textcolor{keywordtype}{size\_t}\ maxLongitud);}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_fecha}{Fecha}}\ \mbox{\hyperlink{class_validacion_datos_aa365ecc734065f4e2ae8c7c2cee02535}{capturarFechaInteractiva}}(\textcolor{keyword}{const}\ std::string\&\ mensaje,\ \textcolor{keywordtype}{bool}\ esFechaNacimiento\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_fecha}{Fecha}}\ \mbox{\hyperlink{class_validacion_datos_a9415859e92181d46b3be06446c2cbad1}{capturarFechaInteractiva}}(\textcolor{keyword}{const}\ std::string\&\ mensaje,\ \textcolor{keywordtype}{bool}\ esFechaNacimiento,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_fecha}{Fecha}}*\ minFecha);}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_validacion_datos_a4e64f8618fb12247ba4fa0c720cf4b03}{validarFecha}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_fecha}{Fecha}}\&\ fecha,\ \textcolor{keywordtype}{bool}\ esFechaNacimiento\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_validacion_datos_a773a653191f44403694fa4b92ab6ee01}{validarCedula}}(\textcolor{keyword}{const}\ std::string\&\ cedula);}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ validarCedulaPrefijo(\textcolor{keyword}{const}\ std::string\&\ cedula);}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ limpiar\_linea(\textcolor{keyword}{const}\ std::string\&\ mensaje);}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ validarNombre(\textcolor{keyword}{const}\ std::string\&\ nombre);}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ validarCorreo(\textcolor{keyword}{const}\ std::string\&\ correo);}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ validarTelefono(\textcolor{keyword}{const}\ std::string\&\ telefono);}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ validarUsuario(\textcolor{keyword}{const}\ std::string\&\ usuario);}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ validarContrasena(\textcolor{keyword}{const}\ std::string\&\ contrasena);}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ validarMonto(\textcolor{keywordtype}{double}\ monto,\ \textcolor{keywordtype}{bool}\ permitirCero);}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ validarNombreArchivo(\textcolor{keyword}{const}\ std::string\&\ entrada);}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ ingresar\_dni(\textcolor{keyword}{const}\ std::string\&\ mensaje);}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ validar\_Fecha(\textcolor{keyword}{const}\ std::string\&\ fecha);}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ validarHora(\textcolor{keyword}{const}\ std::string\&\ hora);}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ validar\_hora\_minuto\_segundo(\textcolor{keywordtype}{int}\ hora,\ \textcolor{keywordtype}{int}\ minuto,\ \textcolor{keywordtype}{int}\ segundo);}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ es\_fecha\_valida(\textcolor{keywordtype}{int}\ dia,\ \textcolor{keywordtype}{int}\ mes,\ \textcolor{keywordtype}{int}\ anio);}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ validarCaracter(std::string\&\ opcion);}
+\DoxyCodeLine{00064\ \};}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sistema Bancario: CuentaAhorros Class Reference</title>
+<title>Proyecto Banco: CuentaAhorros Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Sistema Bancario
+   <div id="projectname">Proyecto Banco<span id="projectnumber">&#160;v 1.0</span>
    </div>
+   <div id="projectbrief">Proyecto Banco</div>
   </td>
  </tr>
  </tbody>
@@ -91,6 +92,11 @@ $(function(){initNavTree('class_cuenta_ahorros.html','','class_cuenta_ahorros-me
   <div class="headertitle"><div class="title">CuentaAhorros Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Define una clase para cuentas de ahorros, heredada de <a class="el" href="class_cuenta.html">Cuenta</a>, con tasa de interés y límite de retiros mensuales.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_cuenta_ahorros_8h_source.html">CuentaAhorros.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for CuentaAhorros:</div>
 <div class="dyncontent">
@@ -103,8 +109,8 @@ Inheritance diagram for CuentaAhorros:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4aa4ef1a3c8a38e882670e9fdcbf7902" id="r_a4aa4ef1a3c8a38e882670e9fdcbf7902"><td class="memItemLeft" align="right" valign="top"><a id="a4aa4ef1a3c8a38e882670e9fdcbf7902" name="a4aa4ef1a3c8a38e882670e9fdcbf7902"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>CuentaAhorros</b> (string numero, <a class="el" href="class_cliente.html">Cliente</a> *c, <a class="el" href="class_fecha.html">Fecha</a> fecha, double tasa, int limite)</td></tr>
+<tr class="memitem:a4aa4ef1a3c8a38e882670e9fdcbf7902" id="r_a4aa4ef1a3c8a38e882670e9fdcbf7902"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4aa4ef1a3c8a38e882670e9fdcbf7902">CuentaAhorros</a> (string numero, <a class="el" href="class_cliente.html">Cliente</a> *c, <a class="el" href="class_fecha.html">Fecha</a> fecha, double tasa, int limite)</td></tr>
+<tr class="memdesc:a4aa4ef1a3c8a38e882670e9fdcbf7902"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementa las operaciones de una cuenta de ahorros, incluyendo depósitos, retiros con límite mensual y resumen, con aplicación de tasa de interés.  <br /></td></tr>
 <tr class="memitem:ab3e6b7b590a23d7abe73815c9522cb14" id="r_ab3e6b7b590a23d7abe73815c9522cb14"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab3e6b7b590a23d7abe73815c9522cb14">depositar</a> (double monto, <a class="el" href="class_fecha.html">Fecha</a> fecha=<a class="el" href="class_fecha.html">Fecha</a>(), bool esTransferencia=false, string cuentaOrigen=&quot;&quot;) override</td></tr>
 <tr class="memitem:a15ff1e916665a24e66575e8bc396d33e" id="r_a15ff1e916665a24e66575e8bc396d33e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a15ff1e916665a24e66575e8bc396d33e">retirar</a> (double monto, <a class="el" href="class_fecha.html">Fecha</a> fecha=<a class="el" href="class_fecha.html">Fecha</a>(), bool esTransferencia=false, string cuentaDestino=&quot;&quot;) override</td></tr>
 <tr class="memitem:af39c05cc01980f9cf24d0b4c1eb522ae" id="r_af39c05cc01980f9cf24d0b4c1eb522ae"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af39c05cc01980f9cf24d0b4c1eb522ae">mostrarResumen</a> () override</td></tr>
@@ -140,6 +146,67 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>saldo</b></td></tr>
 <tr class="memitem:ad06207e132a518a89b561702932d7358 inherit pro_attribs_class_cuenta" id="r_ad06207e132a518a89b561702932d7358"><td class="memItemLeft" align="right" valign="top">
 <a class="el" href="class_lista_doble_circular.html">ListaDobleCircular</a>&lt; <a class="el" href="class_transaccion.html">Transaccion</a>&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>transacciones</b></td></tr>
 </table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Define una clase para cuentas de ahorros, heredada de <a class="el" href="class_cuenta.html">Cuenta</a>, con tasa de interés y límite de retiros mensuales. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">numero</td><td>Número identificador de la cuenta. </td></tr>
+    <tr><td class="paramname">c</td><td>Puntero al cliente asociado a la cuenta. </td></tr>
+    <tr><td class="paramname">fecha</td><td><a class="el" href="class_fecha.html">Fecha</a> de creación o modificación de la cuenta. </td></tr>
+    <tr><td class="paramname">tasa</td><td>Tasa de interés aplicada a la cuenta. </td></tr>
+    <tr><td class="paramname">limite</td><td>Límite máximo de retiros permitidos por mes. Incluye métodos para depositar, retirar fondos (respetando el límite) y mostrar un resumen del estado de la cuenta. </td></tr>
+  </table>
+  </dd>
+</dl>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a4aa4ef1a3c8a38e882670e9fdcbf7902" name="a4aa4ef1a3c8a38e882670e9fdcbf7902"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4aa4ef1a3c8a38e882670e9fdcbf7902">&#9670;&#160;</a></span>CuentaAhorros()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">CuentaAhorros::CuentaAhorros </td>
+          <td>(</td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>numero</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_cliente.html">Cliente</a> *</td>          <td class="paramname"><span class="paramname"><em>c</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_fecha.html">Fecha</a></td>          <td class="paramname"><span class="paramname"><em>fecha</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>tasa</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>limite</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Implementa las operaciones de una cuenta de ahorros, incluyendo depósitos, retiros con límite mensual y resumen, con aplicación de tasa de interés. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">numero</td><td>Número identificador de la cuenta. </td></tr>
+    <tr><td class="paramname">c</td><td>Puntero al cliente asociado a la cuenta. </td></tr>
+    <tr><td class="paramname">fecha</td><td><a class="el" href="class_fecha.html">Fecha</a> de la transacción o creación. </td></tr>
+    <tr><td class="paramname">tasa</td><td>Tasa de interés aplicada a la cuenta. </td></tr>
+    <tr><td class="paramname">limite</td><td>Límite máximo de retiros permitidos por mes. Permite depositar fondos, retirar hasta el saldo disponible (respetando el límite de retiros), y genera un resumen con el saldo actual. Incluye validación de montos y redondeo a dos decimales. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="ab3e6b7b590a23d7abe73815c9522cb14" name="ab3e6b7b590a23d7abe73815c9522cb14"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab3e6b7b590a23d7abe73815c9522cb14">&#9670;&#160;</a></span>depositar()</h2>

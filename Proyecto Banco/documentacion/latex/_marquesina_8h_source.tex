@@ -2,59 +2,117 @@
 \hypertarget{_marquesina_8h_source}{}\label{_marquesina_8h_source}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
-\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#ifndef\ NOMINMAX}}
-\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#define\ NOMINMAX}}
-\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#define\ byte\ win\_byte}}
-\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <windows.h>}}
-\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#undef\ byte}}
-\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <string>}}
-\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <vector>}}
-\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <thread>}}
-\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <atomic>}}
-\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <mutex>}}
-\DoxyCodeLine{00013\ \textcolor{keyword}{extern}\ std::mutex\ consola\_mutex;}
-\DoxyCodeLine{00014\ }
-\DoxyCodeLine{00015\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_elemento_marquesina}{ElementoMarquesina}}\ \{}
-\DoxyCodeLine{00016\ \ \ \ \ std::string\ texto;}
-\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{int}\ colorTexto;\ \ \ \textcolor{comment}{//\ Código\ de\ color\ del\ texto}}
-\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{int}\ colorFondo;\ \ \ \textcolor{comment}{//\ Código\ de\ color\ del\ fondo}}
-\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{bool}\ negrita;\ \ \ \ \ \textcolor{comment}{//\ Texto\ en\ negrita}}
-\DoxyCodeLine{00020\ \};}
-\DoxyCodeLine{00021\ }
-\DoxyCodeLine{00022\ \textcolor{keyword}{class\ }Marquesina\ \{}
-\DoxyCodeLine{00023\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00024\ \ \ \ \ std::vector<ElementoMarquesina>\ elementos;}
-\DoxyCodeLine{00025\ \ \ \ \ std::thread\ hiloMarquesina;}
-\DoxyCodeLine{00026\ \ \ \ \ std::atomic<bool>\ ejecutando;}
-\DoxyCodeLine{00027\ \ \ \ \ std::atomic<bool>\ pausado;}
-\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{int}\ posX,\ posY;}
-\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{int}\ ancho;}
-\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{int}\ velocidad;}
-\DoxyCodeLine{00031\ \ \ \ \ std::string\ archivoHTML;}
-\DoxyCodeLine{00032\ \ \ \ \ std::mutex\ mtx;}
-\DoxyCodeLine{00033\ \ \ \ \ }
-\DoxyCodeLine{00034\ \ \ \ \ \textcolor{comment}{//\ Método\ para\ leer\ y\ parsear\ HTML\ simple}}
-\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ cargarDesdeHTML();}
-\DoxyCodeLine{00036\ \ \ \ \ }
-\DoxyCodeLine{00037\ \ \ \ \ \textcolor{comment}{//\ Método\ que\ ejecuta\ el\ hilo\ de\ la\ marquesina}}
-\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ ejecutarMarquesina();}
-\DoxyCodeLine{00039\ \ \ \ \ \textcolor{comment}{//\ Método\ para\ analizar\ etiquetas\ simples\ de\ HTML}}
-\DoxyCodeLine{00040\ \ \ \ \ std::vector<ElementoMarquesina>\ parsearHTML(\textcolor{keyword}{const}\ std::string\&\ contenido);}
-\DoxyCodeLine{00041\ \ \ \ \ \textcolor{comment}{//\ Verificar\ tiempo\ modificación\ archivo\ (usando\ API\ Windows\ en\ vez\ de\ std::filesystem)}}
-\DoxyCodeLine{00042\ \ \ \ \ FILETIME\ ultimaModificacion;}
-\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{bool}\ archivoModificado();}
-\DoxyCodeLine{00044\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{int}\ get\_cursor\_row();\ \textcolor{comment}{//\ Función\ para\ obtener\ la\ fila\ actual\ del\ cursor}}
-\DoxyCodeLine{00046\ \ \ \ \ Marquesina(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ \textcolor{keywordtype}{int}\ ancho,\ \textcolor{keyword}{const}\ std::string\&\ archivoHTML,\ \textcolor{keywordtype}{int}\ velocidad\ =\ 100);}
-\DoxyCodeLine{00047\ \ \ \ \ \string~Marquesina();}
-\DoxyCodeLine{00048\ \ \ \ \ \textcolor{comment}{//void\ limpiarMenu(int\ desde,\ int\ hasta);}}
-\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{void}\ iniciar();}
-\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ detener();}
-\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{void}\ pausar();}
-\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{void}\ reanudar();}
-\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{void}\ actualizarTexto(\textcolor{keyword}{const}\ std::string\&\ nuevoTexto);}
-\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{void}\ mostrarRutaArchivo();}
-\DoxyCodeLine{00055\ \};}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#ifndef\ MARQUESINA\_H}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#define\ MARQUESINA\_H}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ NOMINMAX}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ NOMINMAX}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ byte\ win\_byte}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <windows.h>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#undef\ byte}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <atomic>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_elemento_marquesina}{ElementoMarquesina}}\ \{}
+\DoxyCodeLine{00027\ \ \ \ \ std::string\ \mbox{\hyperlink{struct_elemento_marquesina_a1a8b66051ad02504929c0b43c01caedc}{texto}};}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct_elemento_marquesina_ab12be6634b46c51caa27c8efa616665d}{colorTexto}};}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct_elemento_marquesina_a01dc23d7e54ca696bd40f3f7427b40ca}{colorFondo}};}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{struct_elemento_marquesina_ae90fb96361345ec1a3b61ff7964bb965}{negrita}};}
+\DoxyCodeLine{00034\ \};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00044\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_marquesina_a81c06f5292b77d7bd169a9e38bf653ca}{Marquesina}}\ \{}
+\DoxyCodeLine{00045\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00047\ \ \ \ \ std::vector<ElementoMarquesina>\ elementos;}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00050\ \ \ \ \ std::thread\ hiloMarquesina;}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00053\ \ \ \ \ std::atomic<bool>\ ejecutando;}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00056\ \ \ \ \ std::atomic<bool>\ pausado;}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00059\ \ \ \ \ std::atomic<bool>\ bloqueado;}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00062\ \ \ \ \ std::atomic<bool>\ operacionCritica;}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{int}\ posX;}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{int}\ posY;}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{int}\ ancho;}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{int}\ velocidad;}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00077\ \ \ \ \ std::string\ archivoHTML;}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00080\ \ \ \ \ std::mutex\ mtx;}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00083\ \ \ \ \ std::mutex\ mtxPantalla;}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00086\ \ \ \ \ std::string\ bufferMarquesina;}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00089\ \ \ \ \ std::atomic<bool>\ bufferActualizado;}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00092\ \ \ \ \ std::vector<std::pair<char,\ WORD>>\ bufferPrimario;}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00095\ \ \ \ \ std::vector<std::pair<char,\ WORD>>\ bufferSecundario;}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00098\ \ \ \ \ std::atomic<bool>\ bufferListo;}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00101\ \ \ \ \ std::mutex\ bufferMutex;}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00104\ \ \ \ \ FILETIME\ ultimaModificacion;}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordtype}{void}\ cargarDesdeHTML();}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordtype}{void}\ ejecutarMarquesina();}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00121\ \ \ \ \ std::vector<ElementoMarquesina>\ parsearHTML(\textcolor{keyword}{const}\ std::string\&\ contenido);}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{keywordtype}{bool}\ archivoModificado();}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keywordtype}{bool}\ esSafeZone(\textcolor{keywordtype}{int}\ fila)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keywordtype}{void}\ actualizarBuffer();}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keywordtype}{void}\ renderizarMarquesina();}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00155\ \ \ \ \ \mbox{\hyperlink{class_marquesina_a81c06f5292b77d7bd169a9e38bf653ca}{Marquesina}}(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ \textcolor{keywordtype}{int}\ ancho,\ \textcolor{keyword}{const}\ std::string\&\ archivoHTML,\ \textcolor{keywordtype}{int}\ velocidad\ =\ 100);}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00162\ \ \ \ \ \mbox{\hyperlink{class_marquesina_aa0c9f691911680b2ce26646e8283b046}{\string~Marquesina}}();}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_marquesina_a42a7b6c33db1deb208a381eda083a476}{iniciar}}();}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00172\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_marquesina_a9fed251582657d7454cb3a06fbb1ee16}{detener}}();}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00177\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_marquesina_ae33595e3e65b83e199e04e79739989eb}{pausar}}();}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00182\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_marquesina_aaaa028056dca12f370ea4d828bd40171}{reanudar}}();}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00188\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_marquesina_a281562e225650be428afa5808b093653}{actualizarTexto}}(\textcolor{keyword}{const}\ std::string\&\ nuevoTexto);}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00195\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_marquesina_a173dc18c06673f9fb83e7bd1012dd41a}{bloquear}}();}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00202\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_marquesina_a1e8de27731a32d4dc7a31c10625466c0}{desbloquear}}();}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00209\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_marquesina_a4d1b8d42abcf0a8dea37049c159446d6}{marcarOperacionCritica}}();}
+\DoxyCodeLine{00210\ }
+\DoxyCodeLine{00214\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_marquesina_a6d1b94cc50c3785f9f7a99196204fa65}{finalizarOperacionCritica}}();}
+\DoxyCodeLine{00215\ }
+\DoxyCodeLine{00219\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_marquesina_a62f40a4d1b82ec2c3bb5fc9ec298aec9}{forzarActualizacion}}();}
+\DoxyCodeLine{00220\ }
+\DoxyCodeLine{00224\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_marquesina_a35d47b3670a39652ab61ee262340ee2a}{mostrarRutaArchivo}}();}
+\DoxyCodeLine{00225\ }
+\DoxyCodeLine{00230\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_marquesina_a2f4a7ec9c37da4db63663b178089570e}{estaVisible}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ ejecutando\ \&\&\ !pausado\ \&\&\ !bloqueado;\ \}}
+\DoxyCodeLine{00231\ }
+\DoxyCodeLine{00236\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_marquesina_a82c916074abbd0b8fb68239dcd198fe3}{get\_cursor\_row}}();}
+\DoxyCodeLine{00237\ }
+\DoxyCodeLine{00238\ \};}
+\DoxyCodeLine{00239\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ MARQUESINA\_H}}
 
 \end{DoxyCode}

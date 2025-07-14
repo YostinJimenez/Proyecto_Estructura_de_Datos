@@ -139,13 +139,16 @@ void Marquesina::actualizarTexto(const std::string& nuevoTexto)
 		archivo << "  " << nuevoTexto << "\n";
 		archivo << "</marquesina>";
 		archivo.close();
-
 		// Recargar el contenido
 		cargarDesdeHTML();
 	}
 }
 
-
+/**
+ * @brief Convierte un string a un wide string.
+ * @param str String a convertir.
+ * @return Wide string convertido.
+ */
 std::wstring stringToWideString(const std::string& str)
 {
 	if (str.empty())
@@ -157,6 +160,9 @@ std::wstring stringToWideString(const std::string& str)
 	return wstr;
 }
 
+/**
+ * @brief Muestra la ruta completa del archivo HTML de la marquesina.
+ */
 void Marquesina::mostrarRutaArchivo()
 {
 	char path[MAX_PATH];
@@ -164,7 +170,9 @@ void Marquesina::mostrarRutaArchivo()
 	std::cout << "Ruta completa del archivo HTML: " << path << std::endl;
 }
 
-// Modificar la funcion cargarDesdeHTML
+/**
+ * @brief Carga el contenido de la marquesina desde un archivo HTML.
+ */
 void Marquesina::cargarDesdeHTML()
 {
 	std::ifstream archivo(archivoHTML);
@@ -175,7 +183,6 @@ void Marquesina::cargarDesdeHTML()
 		{
 			crear << "<marquesina>\n";
 			crear << "  <color=white bg=blue>Bienvenido al Sistema Bancario</color> - ";
-			crear << "<color=yellow>Desarrolladores: Uriel Andrade, Kerly Chuqui, Abner Proano</color>\n";
 			crear << "</marquesina>";
 			crear.close();
 			archivo.open(archivoHTML);
@@ -210,6 +217,10 @@ void Marquesina::cargarDesdeHTML()
 	}
 }
 
+/**
+ * @brief Verifica si el archivo de la marquesina ha sido modificado.
+ * @return true si el archivo ha sido modificado, false en caso contrario.
+ */
 bool Marquesina::archivoModificado()
 {
 	FILETIME nuevoTiempo;
@@ -240,6 +251,11 @@ bool Marquesina::archivoModificado()
 	return false;
 }
 
+/**
+ * @brief Parsea el contenido HTML de la marquesina.
+ * @param contenido Contenido HTML a parsear.
+ * @return Vector de elementos de la marquesina.
+ */
 std::vector<ElementoMarquesina> Marquesina::parsearHTML(const std::string& contenido)
 {
 	std::vector<ElementoMarquesina> resultado;
@@ -319,6 +335,9 @@ std::vector<ElementoMarquesina> Marquesina::parsearHTML(const std::string& conte
 	return resultado;
 }
 
+/**
+ * @brief Renderiza el contenido de la marquesina en la consola.
+ */
 void Marquesina::renderizarMarquesina()
 {
 	// Fase 1: Preparar el contenido en el buffer primario
@@ -401,6 +420,9 @@ void Marquesina::renderizarMarquesina()
 	}
 }
 
+/**
+ * @brief Actualiza el buffer de la marquesina.
+ */
 void Marquesina::actualizarBuffer()
 {
 	std::lock_guard<std::mutex> lock(mtx);
@@ -412,6 +434,9 @@ void Marquesina::actualizarBuffer()
 	bufferActualizado = true;
 }
 
+/**
+ * @brief Ejecuta el bucle principal de la marquesina.
+ */
 void Marquesina::ejecutarMarquesina()
 {
 	while (ejecutando)
@@ -442,6 +467,10 @@ void Marquesina::ejecutarMarquesina()
 	}
 }
 
+/**
+ * @brief Obtiene la fila actual del cursor en la consola.
+ * @return Fila actual del cursor.
+ */
 int Marquesina::get_cursor_row() {
     CONSOLE_SCREEN_BUFFER_INFO csbi;
     GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);

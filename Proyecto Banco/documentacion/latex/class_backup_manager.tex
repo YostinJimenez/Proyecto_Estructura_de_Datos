@@ -3,21 +3,76 @@
 \doxysubsubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{class_backup_manager_aad2af5a3125ae4e315cd09ef348ccf1c}\label{class_backup_manager_aad2af5a3125ae4e315cd09ef348ccf1c} 
-static string {\bfseries generar\+Nombre\+Archivo} ()
-\item 
-\Hypertarget{class_backup_manager_a84bf9d1e525ff6af516043c08f0dcc7f}\label{class_backup_manager_a84bf9d1e525ff6af516043c08f0dcc7f} 
-static string {\bfseries guardar\+Backup} (const \mbox{\hyperlink{class_lista_doble_circular}{Lista\+Doble\+Circular}}$<$ \mbox{\hyperlink{class_cliente}{Cliente}} $>$ \&clientes)
-\item 
-\Hypertarget{class_backup_manager_ad068842b75617551eb93ae85d1187fe6}\label{class_backup_manager_ad068842b75617551eb93ae85d1187fe6} 
-static void {\bfseries restaurar\+Backup} (const string \&nombre\+Archivo, \mbox{\hyperlink{class_lista_doble_circular}{Lista\+Doble\+Circular}}$<$ \mbox{\hyperlink{class_cliente}{Cliente}} $>$ \&clientes)
-\item 
+static string \mbox{\hyperlink{class_backup_manager_aad2af5a3125ae4e315cd09ef348ccf1c}{generar\+Nombre\+Archivo}} ()
+\begin{DoxyCompactList}\small\item\em Genera un nombre de archivo para el backup basado en la fecha y hora actual. \end{DoxyCompactList}\item 
+static string \mbox{\hyperlink{class_backup_manager_a84bf9d1e525ff6af516043c08f0dcc7f}{guardar\+Backup}} (const \mbox{\hyperlink{class_lista_doble_circular}{Lista\+Doble\+Circular}}$<$ \mbox{\hyperlink{class_cliente}{Cliente}} $>$ \&clientes)
+\begin{DoxyCompactList}\small\item\em Guarda un backup de la lista de clientes en un archivo. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_backup_manager_ad068842b75617551eb93ae85d1187fe6}{restaurar\+Backup}} (const string \&nombre\+Archivo, \mbox{\hyperlink{class_lista_doble_circular}{Lista\+Doble\+Circular}}$<$ \mbox{\hyperlink{class_cliente}{Cliente}} $>$ \&clientes)
+\begin{DoxyCompactList}\small\item\em Restaura un backup desde un archivo y actualiza la lista de clientes. \end{DoxyCompactList}\item 
 \Hypertarget{class_backup_manager_ab6361daca3ff8aa8dc01a19043c63845}\label{class_backup_manager_ab6361daca3ff8aa8dc01a19043c63845} 
 static bool {\bfseries validar\+Archivo\+Existente} (const \mbox{\hyperlink{class_lista_doble_circular}{Lista\+Doble\+Circular}}$<$ \mbox{\hyperlink{class_cliente}{Cliente}} $>$ \&clientes)
 \item 
 \Hypertarget{class_backup_manager_a63ad7316d6ef9b702a326fbbe3224b0e}\label{class_backup_manager_a63ad7316d6ef9b702a326fbbe3224b0e} 
 static string {\bfseries normalizar} (const string \&s)
 \end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{class_backup_manager_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_backup_manager_aad2af5a3125ae4e315cd09ef348ccf1c}\index{BackupManager@{BackupManager}!generarNombreArchivo@{generarNombreArchivo}}
+\index{generarNombreArchivo@{generarNombreArchivo}!BackupManager@{BackupManager}}
+\doxysubsubsection{\texorpdfstring{generarNombreArchivo()}{generarNombreArchivo()}}
+{\footnotesize\ttfamily \label{class_backup_manager_aad2af5a3125ae4e315cd09ef348ccf1c} 
+string Backup\+Manager\+::generar\+Nombre\+Archivo (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Genera un nombre de archivo para el backup basado en la fecha y hora actual. 
+
+\begin{DoxyReturn}{Returns}
+Nombre del archivo de backup en formato "{}backup\+\_\+\+DDMMYYYY\+\_\+\+HHMMSS.\+txt"{}. 
+\end{DoxyReturn}
+\Hypertarget{class_backup_manager_a84bf9d1e525ff6af516043c08f0dcc7f}\index{BackupManager@{BackupManager}!guardarBackup@{guardarBackup}}
+\index{guardarBackup@{guardarBackup}!BackupManager@{BackupManager}}
+\doxysubsubsection{\texorpdfstring{guardarBackup()}{guardarBackup()}}
+{\footnotesize\ttfamily \label{class_backup_manager_a84bf9d1e525ff6af516043c08f0dcc7f} 
+string Backup\+Manager\+::guardar\+Backup (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_lista_doble_circular}{Lista\+Doble\+Circular}}$<$ \mbox{\hyperlink{class_cliente}{Cliente}} $>$ \&}]{clientes}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Guarda un backup de la lista de clientes en un archivo. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em clientes} & Lista de clientes a respaldar. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nombre del archivo de backup creado. 
+\end{DoxyReturn}
+\Hypertarget{class_backup_manager_ad068842b75617551eb93ae85d1187fe6}\index{BackupManager@{BackupManager}!restaurarBackup@{restaurarBackup}}
+\index{restaurarBackup@{restaurarBackup}!BackupManager@{BackupManager}}
+\doxysubsubsection{\texorpdfstring{restaurarBackup()}{restaurarBackup()}}
+{\footnotesize\ttfamily \label{class_backup_manager_ad068842b75617551eb93ae85d1187fe6} 
+void Backup\+Manager\+::restaurar\+Backup (\begin{DoxyParamCaption}\item[{const string \&}]{nombre\+Archivo}{, }\item[{\mbox{\hyperlink{class_lista_doble_circular}{Lista\+Doble\+Circular}}$<$ \mbox{\hyperlink{class_cliente}{Cliente}} $>$ \&}]{clientes}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Restaura un backup desde un archivo y actualiza la lista de clientes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nombre\+Archivo} & Nombre del archivo de backup a restaurar. \\
+\hline
+{\em clientes} & Lista de clientes donde se restaurarán los datos. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \doxylink{class_banco_exception}{Banco\+Exception}} & Si hay un error al abrir el archivo o al procesar los datos. \\
+\hline
+\end{DoxyExceptions}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

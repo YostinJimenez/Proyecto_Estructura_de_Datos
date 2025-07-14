@@ -17,6 +17,7 @@ var hierarchy =
     [ "ListaDobleCircular< T >", "class_lista_doble_circular.html", null ],
     [ "Marquesina", "class_marquesina.html", null ],
     [ "Nodo< T >", "class_nodo.html", null ],
+    [ "PDFCreator", "class_p_d_f_creator.html", null ],
     [ "Persona", "class_persona.html", [
       [ "Cliente", "class_cliente.html", null ]
     ] ],

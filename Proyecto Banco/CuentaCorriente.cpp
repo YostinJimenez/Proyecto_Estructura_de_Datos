@@ -22,7 +22,7 @@ void CuentaCorriente::depositar(double monto, Fecha fecha, bool esTransferencia,
         ValidacionDatos::validarMonto(monto, false);
         monto = round(monto * 100) / 100;
         saldo += monto;
-        string tipo = esTransferencia ? "Deposito" : "Deposito";
+        string tipo = esTransferencia ? "Transferencia desde " + cuentaOrigen : "Depósito";
         transacciones.insertar(new Transaccion<double>(tipo, monto, fecha, numeroCuenta, esTransferencia, cuentaOrigen));
     } catch (const BancoException& e) {
         throw;

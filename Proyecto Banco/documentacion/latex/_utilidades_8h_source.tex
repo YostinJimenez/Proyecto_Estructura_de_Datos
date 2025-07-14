@@ -1,0 +1,17 @@
+\doxysection{Utilidades.\+h}
+\hypertarget{_utilidades_8h_source}{}\label{_utilidades_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <windows.h>}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_utilidades}{Utilidades}}\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ gotoxy(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y)\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ COORD\ coord;}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ coord.X\ =\ x;}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ coord.Y\ =\ y;}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ SetConsoleCursorPosition(GetStdHandle(STD\_OUTPUT\_HANDLE),\ coord);}
+\DoxyCodeLine{00018\ \ \ \ \ \}}
+\DoxyCodeLine{00019\ \}}
+
+\end{DoxyCode}

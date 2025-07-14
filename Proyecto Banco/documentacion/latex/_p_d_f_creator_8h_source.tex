@@ -1,0 +1,287 @@
+\doxysection{PDFCreator.\+h}
+\hypertarget{_p_d_f_creator_8h_source}{}\label{_p_d_f_creator_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}Banco.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}Cliente.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}Utilidades.h"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <conio.h>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <filesystem>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <iomanip>}}
+\DoxyCodeLine{00017\ \textcolor{keyword}{namespace\ }fs\ =\ std::filesystem;}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_p_d_f_creator_a2c97794a4e98c44ca659d2a5a175dd96}{PDFCreator}}\ \{}
+\DoxyCodeLine{00020\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{class_p_d_f_creator_a2c97794a4e98c44ca659d2a5a175dd96}{PDFCreator}}(\textcolor{keyword}{const}\ std::string\&\ filename)\ :\ file(filename,\ std::ios::binary),\ current\_object\_number(1)\ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ offsets.push\_back(0);\ \textcolor{comment}{//\ Objeto\ 0\ no\ se\ usa}}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_p_d_f_creator_a78bb764b6ca53115ef4ebbfd541f1cbf}{write\_header}}();}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Reservar\ números\ de\ objeto}}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ catalog\_obj\ =\ \mbox{\hyperlink{class_p_d_f_creator_a692f35f487eb13864784b25c9758451f}{reserve\_object}}();}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ pages\_obj\ =\ \mbox{\hyperlink{class_p_d_f_creator_a692f35f487eb13864784b25c9758451f}{reserve\_object}}();}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ font\_obj\ =\ \mbox{\hyperlink{class_p_d_f_creator_a692f35f487eb13864784b25c9758451f}{reserve\_object}}();}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Añadir\ el\ objeto\ de\ fuente}}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_p_d_f_creator_aac5614e8a7d50b17758f86b9aba7df52}{add\_object}}(font\_obj,\ \textcolor{stringliteral}{"{}<<\ /Type\ /Font\ /Subtype\ /Type1\ /BaseFont\ /Helvetica\ >>"{}});}
+\DoxyCodeLine{00034\ \ \ \ \ \}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00039\ \ \ \ \ \mbox{\hyperlink{class_p_d_f_creator_aa14006fc338fcc999b4acc79c72aa133}{PDFCreator}}()\ :\ current\_object\_number(1)\ \{\}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00044\ \ \ \ \ \mbox{\hyperlink{class_p_d_f_creator_ae911b9f76828ab9361b3429e25836972}{\string~PDFCreator}}()\ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ file.close();}
+\DoxyCodeLine{00046\ \ \ \ \ \}}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_d_f_creator_a08a40b2069090538056fdc06a508e204}{start\_page}}()\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ current\_stream.clear();}
+\DoxyCodeLine{00053\ \ \ \ \ \}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_d_f_creator_ae64b32bbf6af5debd4f8f3116c6539ae}{end\_page}}()\ \{}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ page\_contents.push\_back(current\_stream);}
+\DoxyCodeLine{00061\ \ \ \ \ \}}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_p_d_f_creator_a692f35f487eb13864784b25c9758451f}{reserve\_object}}()\ \{}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ obj\_num\ =\ current\_object\_number++;}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ offsets.push\_back(0);}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ obj\_num;}
+\DoxyCodeLine{00071\ \ \ \ \ \}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_d_f_creator_aac5614e8a7d50b17758f86b9aba7df52}{add\_object}}(\textcolor{keywordtype}{int}\ obj\_num,\ \textcolor{keyword}{const}\ std::string\&\ content)\ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ offset\ =\ file.tellp();}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ file\ <<\ obj\_num\ <<\ \textcolor{stringliteral}{"{}\ 0\ obj\(\backslash\)n"{}}\ <<\ content\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)nendobj\(\backslash\)n"{}};}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ offsets.at(obj\_num)\ =\ offset;}
+\DoxyCodeLine{00082\ \ \ \ \ \}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_d_f_creator_a78bb764b6ca53115ef4ebbfd541f1cbf}{write\_header}}()\ \{}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ file\ <<\ \textcolor{stringliteral}{"{}\%PDF-\/1.4\(\backslash\)n"{}};}
+\DoxyCodeLine{00089\ \ \ \ \ \}}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_d_f_creator_ab5cd756d957af4415e6ea080a30c3988}{add\_text}}(\textcolor{keyword}{const}\ std::string\&\ text,\ \textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{float}\ size)\ \{}
+\DoxyCodeLine{00099\ \ \ \ \ current\_stream\ +=\ \textcolor{stringliteral}{"{}BT\ /F1\ "{}}\ +\ std::to\_string(size)\ +\ \textcolor{stringliteral}{"{}\ Tf\ "{}}\ +}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::to\_string(x)\ +\ \textcolor{stringliteral}{"{}\ "{}}\ +\ std::to\_string(y)\ +}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ Td\ ("{}}\ +\ text\ +\ \textcolor{stringliteral}{"{})\ Tj\ ET\(\backslash\)n"{}};}
+\DoxyCodeLine{00102\ \ \ \ \ \}}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_d_f_creator_aa4960fe1c6668db68a211c7aad6a93a7}{add\_line}}(\textcolor{keywordtype}{float}\ x1,\ \textcolor{keywordtype}{float}\ y1,\ \textcolor{keywordtype}{float}\ x2,\ \textcolor{keywordtype}{float}\ y2)\ \{}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ current\_stream\ +=\ std::to\_string(x1)\ +\ \textcolor{stringliteral}{"{}\ "{}}\ +\ std::to\_string(y1)\ +\ \textcolor{stringliteral}{"{}\ m\ "{}}\ +}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::to\_string(x2)\ +\ \textcolor{stringliteral}{"{}\ "{}}\ +\ std::to\_string(y2)\ +\ \textcolor{stringliteral}{"{}\ l\ S\(\backslash\)n"{}};}
+\DoxyCodeLine{00114\ \ \ \ \ \}}
+\DoxyCodeLine{00115\ \ \ \ \ }
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_d_f_creator_a3cb44e651c3d82a5c1cec176e5709e8f}{finalize}}()\ \{}
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{comment}{//\ Fuente}}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ font\_obj\ =\ \mbox{\hyperlink{class_p_d_f_creator_a692f35f487eb13864784b25c9758451f}{reserve\_object}}();}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_p_d_f_creator_aac5614e8a7d50b17758f86b9aba7df52}{add\_object}}(font\_obj,\ \textcolor{stringliteral}{"{}<<\ /Type\ /Font\ /Subtype\ /Type1\ /BaseFont\ /Helvetica\ >>"{}});}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Objetos\ de\ contenido\ y\ página}}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ content\ :\ page\_contents)\ \{}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ content\_obj\ =\ \mbox{\hyperlink{class_p_d_f_creator_a692f35f487eb13864784b25c9758451f}{reserve\_object}}();}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ page\_obj\ =\ \mbox{\hyperlink{class_p_d_f_creator_a692f35f487eb13864784b25c9758451f}{reserve\_object}}();}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ content\_objs.push\_back(content\_obj);}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ page\_objs.push\_back(page\_obj);}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ content\_stream\ =\ \textcolor{stringliteral}{"{}<<\ /Length\ "{}}\ +\ std::to\_string(content.size())\ +}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ >>\(\backslash\)nstream\(\backslash\)n"{}}\ +\ content\ +\ \textcolor{stringliteral}{"{}\(\backslash\)nendstream"{}};}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_p_d_f_creator_aac5614e8a7d50b17758f86b9aba7df52}{add\_object}}(content\_obj,\ content\_stream);}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ page\_content\ =\ \textcolor{stringliteral}{"{}<<\ /Type\ /Page\ /Parent\ "{}}\ +\ std::to\_string(pages\_obj)\ +}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ 0\ R\ /Resources\ <<\ /Font\ <<\ /F1\ "{}}\ +\ std::to\_string(font\_obj)\ +}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ 0\ R\ >>\ >>\ /MediaBox\ [0\ 0\ 612\ 792]\ /Contents\ "{}}\ +}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::to\_string(content\_obj)\ +\ \textcolor{stringliteral}{"{}\ 0\ R\ >>"{}};}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_p_d_f_creator_aac5614e8a7d50b17758f86b9aba7df52}{add\_object}}(page\_obj,\ page\_content);}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Objeto\ de\ páginas}}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ std::string\ kids;}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ page\_obj\ :\ page\_objs)}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ kids\ +=\ std::to\_string(page\_obj)\ +\ \textcolor{stringliteral}{"{}\ 0\ R\ "{}};}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ pages\_obj\ =\ \mbox{\hyperlink{class_p_d_f_creator_a692f35f487eb13864784b25c9758451f}{reserve\_object}}();}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ std::string\ pages\_content\ =\ \textcolor{stringliteral}{"{}<<\ /Type\ /Pages\ /Kids\ ["{}}\ +\ kids\ +\ \textcolor{stringliteral}{"{}]\ /Count\ "{}}\ +}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::to\_string(page\_objs.size())\ +\ \textcolor{stringliteral}{"{}\ >>"{}};}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_p_d_f_creator_aac5614e8a7d50b17758f86b9aba7df52}{add\_object}}(pages\_obj,\ pages\_content);}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Catálogo}}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ catalog\_obj\ =\ \mbox{\hyperlink{class_p_d_f_creator_a692f35f487eb13864784b25c9758451f}{reserve\_object}}();}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ std::string\ catalog\_content\ =\ \textcolor{stringliteral}{"{}<<\ /Type\ /Catalog\ /Pages\ "{}}\ +\ std::to\_string(pages\_obj)\ +\ \textcolor{stringliteral}{"{}\ 0\ R\ >>"{}};}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_p_d_f_creator_aac5614e8a7d50b17758f86b9aba7df52}{add\_object}}(catalog\_obj,\ catalog\_content);}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ XREF\ y\ trailer}}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ xref\_offset\ =\ file.tellp();}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ file\ <<\ \textcolor{stringliteral}{"{}xref\(\backslash\)n0\ "{}}\ <<\ current\_object\_number\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ file\ <<\ \textcolor{stringliteral}{"{}0000000000\ 65535\ f\ \(\backslash\)n"{}};}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <\ current\_object\_number;\ ++i)\ \{}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \ file\ <<\ std::setfill(\textcolor{charliteral}{'0'})\ <<\ std::setw(10)\ <<\ offsets[i]\ <<\ \textcolor{stringliteral}{"{}\ 00000\ n\ \(\backslash\)n"{}};}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ file\ <<\ \textcolor{stringliteral}{"{}trailer\(\backslash\)n<<\ /Size\ "{}}\ <<\ current\_object\_number\ <<\ \textcolor{stringliteral}{"{}\ /Root\ "{}}\ <<\ catalog\_obj\ <<}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ 0\ R\ >>\(\backslash\)nstartxref\(\backslash\)n"{}}\ <<\ xref\_offset\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\%\%EOF\(\backslash\)n"{}};}
+\DoxyCodeLine{00166\ \ \ \ \ \}}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00174\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_d_f_creator_a5fc179201c00651f368be6edf11ba3d5}{crearPDFPersonal}}(\mbox{\hyperlink{class_cliente}{Cliente}}*\ cliente,\ std::string\ carpeta,\ \textcolor{keyword}{const}\ std::string\&\ rutaFotoPng)\ \{}
+\DoxyCodeLine{00175\ \ \ \ \ std::string\ nombres\ =\ cliente-\/>getPrimerNombre()\ +\ \textcolor{stringliteral}{"{}\ "{}}\ +\ cliente-\/>getSegundoNombre();}
+\DoxyCodeLine{00176\ \ \ \ \ std::string\ apellidos\ =\ cliente-\/>getPrimerApellido()\ +\ \textcolor{stringliteral}{"{}\ "{}}\ +\ cliente-\/>getSegundoApellido();}
+\DoxyCodeLine{00177\ \ \ \ \ std::string\ cuenta\ =\ cliente-\/>getCuenta()-\/>getNumero();}
+\DoxyCodeLine{00178\ \ \ \ \ std::string\ cedula\ =\ cliente-\/>getCedula();}
+\DoxyCodeLine{00179\ \ \ \ \ std::string\ telefono\ =\ cliente-\/>getTelefono();}
+\DoxyCodeLine{00180\ \ \ \ \ std::string\ correo\ =\ cliente-\/>getCorreo();}
+\DoxyCodeLine{00181\ \ \ \ \ std::string\ fechaNac\ =\ cliente-\/>getFechaNacimiento().toString();}
+\DoxyCodeLine{00182\ \ \ \ \ std::string\ archivoPdf\ =\ carpeta\ +\ \textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)QRL\_"{}}\ +\ cedula\ +\ \textcolor{stringliteral}{"{}.pdf"{}};}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00184\ \ \ \ \ \textcolor{keywordflow}{if}\ (std::filesystem::exists(archivoPdf))\ \{}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ Utilidades::gotoxy(10,\ 10);}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}========================================================"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ \ Utilidades::gotoxy(10,\ 11);}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}=======\ EL\ ARCHIVO\ "{}}\ <<\ \textcolor{stringliteral}{"{}QRL\_"{}}\ +\ cedula\ +\ \textcolor{stringliteral}{"{}.pdf"{}}\ <<\ \textcolor{stringliteral}{"{}\ YA\ EXISTE\ ========"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ Utilidades::gotoxy(10,\ 12);}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}========================================================"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ \ Utilidades::gotoxy(10,\ 14);}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \ \ \ \ getch();}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00194\ \ \ \ \ \}}
+\DoxyCodeLine{00195\ \ \ \ \ \mbox{\hyperlink{class_p_d_f_creator_a2c97794a4e98c44ca659d2a5a175dd96}{PDFCreator}}\ pdf(archivoPdf);}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00197\ \ \ \ \ \textcolor{keywordtype}{float}\ x\ =\ 50,\ y\ =\ 750,\ font\_size\ =\ 12,\ line\_height\ =\ 18;}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00199\ \ \ \ \ \textcolor{comment}{//\ Título\ principal}}
+\DoxyCodeLine{00200\ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_ab5cd756d957af4415e6ea080a30c3988}{add\_text}}(\textcolor{stringliteral}{"{}BANCO\ XYZ\ -\/\ FORMULARIO\ DE\ DATOS\ PERSONALES"{}},\ x,\ y,\ 16);}
+\DoxyCodeLine{00201\ \ \ \ \ y\ -\/=\ line\_height\ *\ 2;}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00203\ \ \ \ \ \textcolor{comment}{//\ Espacio\ para\ la\ foto\ (solo\ recuadro\ y\ texto,\ no\ imagen\ real)}}
+\DoxyCodeLine{00204\ \ \ \ \ \textcolor{keywordtype}{float}\ foto\_x\ =\ 400,\ foto\_y\ =\ 730,\ foto\_w\ =\ 100,\ foto\_h\ =\ 120;}
+\DoxyCodeLine{00205\ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_aa4960fe1c6668db68a211c7aad6a93a7}{add\_line}}(foto\_x,\ foto\_y,\ foto\_x\ +\ foto\_w,\ foto\_y);\ \textcolor{comment}{//\ arriba}}
+\DoxyCodeLine{00206\ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_aa4960fe1c6668db68a211c7aad6a93a7}{add\_line}}(foto\_x,\ foto\_y,\ foto\_x,\ foto\_y\ -\/\ foto\_h);\ \textcolor{comment}{//\ izq}}
+\DoxyCodeLine{00207\ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_aa4960fe1c6668db68a211c7aad6a93a7}{add\_line}}(foto\_x\ +\ foto\_w,\ foto\_y,\ foto\_x\ +\ foto\_w,\ foto\_y\ -\/\ foto\_h);\ \textcolor{comment}{//\ der}}
+\DoxyCodeLine{00208\ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_aa4960fe1c6668db68a211c7aad6a93a7}{add\_line}}(foto\_x,\ foto\_y\ -\/\ foto\_h,\ foto\_x\ +\ foto\_w,\ foto\_y\ -\/\ foto\_h);\ \textcolor{comment}{//\ abajo}}
+\DoxyCodeLine{00209\ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_ab5cd756d957af4415e6ea080a30c3988}{add\_text}}(\textcolor{stringliteral}{"{}FOTO"{}},\ foto\_x\ +\ 30,\ foto\_y\ -\/\ 60,\ 14);}
+\DoxyCodeLine{00210\ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_ab5cd756d957af4415e6ea080a30c3988}{add\_text}}(rutaFotoPng,\ foto\_x\ +\ 5,\ foto\_y\ -\/\ foto\_h\ -\/\ 10,\ 7);\ \textcolor{comment}{//\ ruta\ del\ PNG}}
+\DoxyCodeLine{00211\ }
+\DoxyCodeLine{00212\ \ \ \ \ \textcolor{comment}{//\ Sección\ de\ datos\ personales}}
+\DoxyCodeLine{00213\ \ \ \ \ y\ -\/=\ 10;}
+\DoxyCodeLine{00214\ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_ab5cd756d957af4415e6ea080a30c3988}{add\_text}}(\textcolor{stringliteral}{"{}DATOS\ PERSONALES"{}},\ x,\ y,\ 13);}
+\DoxyCodeLine{00215\ \ \ \ \ y\ -\/=\ line\_height;}
+\DoxyCodeLine{00216\ }
+\DoxyCodeLine{00217\ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_ab5cd756d957af4415e6ea080a30c3988}{add\_text}}(\textcolor{stringliteral}{"{}Nombres:"{}},\ x,\ y,\ font\_size);}
+\DoxyCodeLine{00218\ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_ab5cd756d957af4415e6ea080a30c3988}{add\_text}}(nombres,\ x\ +\ 120,\ y,\ font\_size);}
+\DoxyCodeLine{00219\ \ \ \ \ y\ -\/=\ line\_height;}
+\DoxyCodeLine{00220\ }
+\DoxyCodeLine{00221\ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_ab5cd756d957af4415e6ea080a30c3988}{add\_text}}(\textcolor{stringliteral}{"{}Apellidos:"{}},\ x,\ y,\ font\_size);}
+\DoxyCodeLine{00222\ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_ab5cd756d957af4415e6ea080a30c3988}{add\_text}}(apellidos,\ x\ +\ 120,\ y,\ font\_size);}
+\DoxyCodeLine{00223\ \ \ \ \ y\ -\/=\ line\_height;}
+\DoxyCodeLine{00224\ }
+\DoxyCodeLine{00225\ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_ab5cd756d957af4415e6ea080a30c3988}{add\_text}}(\textcolor{stringliteral}{"{}Teléfono:"{}},\ x,\ y,\ font\_size);}
+\DoxyCodeLine{00226\ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_ab5cd756d957af4415e6ea080a30c3988}{add\_text}}(telefono,\ x\ +\ 120,\ y,\ font\_size);}
+\DoxyCodeLine{00227\ \ \ \ \ y\ -\/=\ line\_height;}
+\DoxyCodeLine{00228\ }
+\DoxyCodeLine{00229\ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_ab5cd756d957af4415e6ea080a30c3988}{add\_text}}(\textcolor{stringliteral}{"{}Correo:"{}},\ x,\ y,\ font\_size);}
+\DoxyCodeLine{00230\ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_ab5cd756d957af4415e6ea080a30c3988}{add\_text}}(correo,\ x\ +\ 120,\ y,\ font\_size);}
+\DoxyCodeLine{00231\ \ \ \ \ y\ -\/=\ line\_height;}
+\DoxyCodeLine{00232\ }
+\DoxyCodeLine{00233\ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_ab5cd756d957af4415e6ea080a30c3988}{add\_text}}(\textcolor{stringliteral}{"{}Fecha\ de\ Nacimiento:"{}},\ x,\ y,\ font\_size);}
+\DoxyCodeLine{00234\ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_ab5cd756d957af4415e6ea080a30c3988}{add\_text}}(fechaNac,\ x\ +\ 160,\ y,\ font\_size);}
+\DoxyCodeLine{00235\ \ \ \ \ y\ -\/=\ line\_height\ *\ 2;}
+\DoxyCodeLine{00236\ }
+\DoxyCodeLine{00237\ \ \ \ \ \textcolor{comment}{//\ Sección\ de\ cuenta}}
+\DoxyCodeLine{00238\ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_ab5cd756d957af4415e6ea080a30c3988}{add\_text}}(\textcolor{stringliteral}{"{}DATOS\ DE\ CUENTA"{}},\ x,\ y,\ 13);}
+\DoxyCodeLine{00239\ \ \ \ \ y\ -\/=\ line\_height;}
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00241\ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_ab5cd756d957af4415e6ea080a30c3988}{add\_text}}(\textcolor{stringliteral}{"{}Número\ de\ Cuenta:"{}},\ x,\ y,\ font\_size);}
+\DoxyCodeLine{00242\ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_ab5cd756d957af4415e6ea080a30c3988}{add\_text}}(cuenta,\ x\ +\ 160,\ y,\ font\_size);}
+\DoxyCodeLine{00243\ \ \ \ \ y\ -\/=\ line\_height\ *\ 2;}
+\DoxyCodeLine{00244\ }
+\DoxyCodeLine{00245\ \ \ \ \ \textcolor{comment}{//\ Línea\ para\ firma}}
+\DoxyCodeLine{00246\ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_aa4960fe1c6668db68a211c7aad6a93a7}{add\_line}}(x,\ y,\ x\ +\ 250,\ y);}
+\DoxyCodeLine{00247\ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_ab5cd756d957af4415e6ea080a30c3988}{add\_text}}(\textcolor{stringliteral}{"{}Firma\ del\ interesado"{}},\ x,\ y\ -\/\ 12,\ 10);}
+\DoxyCodeLine{00248\ }
+\DoxyCodeLine{00249\ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_a3cb44e651c3d82a5c1cec176e5709e8f}{finalize}}();}
+\DoxyCodeLine{00250\ \}}
+\DoxyCodeLine{00251\ \ \ \ \ }
+\DoxyCodeLine{00257\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_d_f_creator_aac4d0ae1749e8858a46a682d1c3e73a0}{createPDF}}(\textcolor{keyword}{const}\ std::string\&\ txtFile,\ \textcolor{keyword}{const}\ std::string\&\ pdfFile)\ \{}
+\DoxyCodeLine{00258\ \ \ \ \ std::ifstream\ inFile(txtFile);}
+\DoxyCodeLine{00259\ \ \ \ \ \textcolor{keywordflow}{if}\ (!inFile.is\_open())\ \{}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}Error:\ No\ se\ pudo\ abrir\ el\ archivo\ "{}}\ <<\ txtFile\ <<\ std::endl;}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00262\ \ \ \ \ \}}
+\DoxyCodeLine{00263\ }
+\DoxyCodeLine{00264\ \ \ \ \ std::vector<std::vector<std::string>>\ tablaDatos;}
+\DoxyCodeLine{00265\ \ \ \ \ std::string\ line;}
+\DoxyCodeLine{00266\ \ \ \ \ \textcolor{keywordflow}{while}\ (std::getline(inFile,\ line))\ \{}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ std::vector<std::string>\ campos;}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ start\ =\ 0,\ end;}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ ((end\ =\ line.find(\textcolor{charliteral}{'|'},\ start))\ !=\ std::string::npos)\ \{}
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \ \ \ \ campos.push\_back(line.substr(start,\ end\ -\/\ start));}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \ \ \ \ start\ =\ end\ +\ 1;}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ campos.push\_back(line.substr(start));}
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!campos.empty())\ \{}
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ \ \ \ \ tablaDatos.push\_back(campos);}
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00277\ \ \ \ \ \}}
+\DoxyCodeLine{00278\ \ \ \ \ inFile.close();}
+\DoxyCodeLine{00279\ }
+\DoxyCodeLine{00280\ \ \ \ \ \mbox{\hyperlink{class_p_d_f_creator_a2c97794a4e98c44ca659d2a5a175dd96}{PDFCreator}}\ pdf(pdfFile);}
+\DoxyCodeLine{00281\ }
+\DoxyCodeLine{00282\ \ \ \ \ \textcolor{keywordtype}{float}\ x\ =\ 50,\ y\ =\ 800,\ font\_size\ =\ 11,\ line\_height\ =\ 16;}
+\DoxyCodeLine{00283\ \ \ \ \ \textcolor{keywordtype}{bool}\ titulo\_impreso\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00284\ }
+\DoxyCodeLine{00285\ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_a08a40b2069090538056fdc06a508e204}{start\_page}}();\ \textcolor{comment}{//\ INICIA\ LA\ PRIMERA\ PÁGINA}}
+\DoxyCodeLine{00286\ }
+\DoxyCodeLine{00287\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ fila\ :\ tablaDatos)\ \{}
+\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Salto\ de\ página\ si\ es\ necesario}}
+\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (y\ <\ 120)\ \{}
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_ae64b32bbf6af5debd4f8f3116c6539ae}{end\_page}}();\ \ \ \ \ \ \textcolor{comment}{//\ Termina\ la\ página\ actual}}
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_a08a40b2069090538056fdc06a508e204}{start\_page}}();\ \ \ \ \textcolor{comment}{//\ Inicia\ una\ nueva\ página}}
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ \ \ \ \ y\ =\ 800;}
+\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ \ \ \ \ titulo\_impreso\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00295\ }
+\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!titulo\_impreso)\ \{}
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_ab5cd756d957af4415e6ea080a30c3988}{add\_text}}(\textcolor{stringliteral}{"{}BANCO"{}},\ x,\ y,\ 18);}
+\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ \ \ \ \ y\ -\/=\ line\_height\ *\ 2;}
+\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_ab5cd756d957af4415e6ea080a30c3988}{add\_text}}(\textcolor{stringliteral}{"{}Datos\ personales\ de\ clientes"{}},\ x,\ y,\ 14);}
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \ \ \ \ y\ -\/=\ line\_height\ *\ 2;}
+\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ \ \ \ \ titulo\_impreso\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00303\ }
+\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (fila.size()\ <\ 12)\ \textcolor{keywordflow}{continue};\ \textcolor{comment}{//\ Salta\ si\ faltan\ campos}}
+\DoxyCodeLine{00305\ }
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_ab5cd756d957af4415e6ea080a30c3988}{add\_text}}(\textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/"{}},\ x,\ y,\ font\_size);}
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ y\ -\/=\ line\_height;}
+\DoxyCodeLine{00308\ }
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ std::string\ nombre\ =\ fila[1]\ +\ \textcolor{stringliteral}{"{}\ "{}}\ +\ fila[2];}
+\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ std::string\ apellido\ =\ fila[3]\ +\ \textcolor{stringliteral}{"{}\ "{}}\ +\ fila[4];}
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_ab5cd756d957af4415e6ea080a30c3988}{add\_text}}(\textcolor{stringliteral}{"{}Nombre:\ "{}}\ +\ nombre,\ x,\ y,\ font\_size);}
+\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ y\ -\/=\ line\_height;}
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_ab5cd756d957af4415e6ea080a30c3988}{add\_text}}(\textcolor{stringliteral}{"{}Apellido:\ "{}}\ +\ apellido,\ x,\ y,\ font\_size);}
+\DoxyCodeLine{00314\ \ \ \ \ \ \ \ \ y\ -\/=\ line\_height;}
+\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_ab5cd756d957af4415e6ea080a30c3988}{add\_text}}(\textcolor{stringliteral}{"{}Telefono:\ "{}}\ +\ fila[5],\ x,\ y,\ font\_size);}
+\DoxyCodeLine{00316\ \ \ \ \ \ \ \ \ y\ -\/=\ line\_height;}
+\DoxyCodeLine{00317\ \ \ \ \ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_ab5cd756d957af4415e6ea080a30c3988}{add\_text}}(\textcolor{stringliteral}{"{}Correo:\ "{}}\ +\ fila[6],\ x,\ y,\ font\_size);}
+\DoxyCodeLine{00318\ \ \ \ \ \ \ \ \ y\ -\/=\ line\_height;}
+\DoxyCodeLine{00319\ \ \ \ \ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_ab5cd756d957af4415e6ea080a30c3988}{add\_text}}(\textcolor{stringliteral}{"{}Usuario:\ "{}}\ +\ fila[7],\ x,\ y,\ font\_size);}
+\DoxyCodeLine{00320\ \ \ \ \ \ \ \ \ y\ -\/=\ line\_height;}
+\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_ab5cd756d957af4415e6ea080a30c3988}{add\_text}}(\textcolor{stringliteral}{"{}Cuenta:\ "{}}\ +\ fila[9],\ x,\ y,\ font\_size);}
+\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ y\ -\/=\ line\_height;}
+\DoxyCodeLine{00323\ \ \ \ \ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_ab5cd756d957af4415e6ea080a30c3988}{add\_text}}(\textcolor{stringliteral}{"{}Saldo:\ "{}}\ +\ fila[10],\ x,\ y,\ font\_size);}
+\DoxyCodeLine{00324\ \ \ \ \ \ \ \ \ y\ -\/=\ line\_height;}
+\DoxyCodeLine{00325\ \ \ \ \ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_ab5cd756d957af4415e6ea080a30c3988}{add\_text}}(\textcolor{stringliteral}{"{}Fecha\ Nac.:\ "{}}\ +\ fila[11],\ x,\ y,\ font\_size);}
+\DoxyCodeLine{00326\ \ \ \ \ \ \ \ \ y\ -\/=\ line\_height;}
+\DoxyCodeLine{00327\ \ \ \ \ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_ab5cd756d957af4415e6ea080a30c3988}{add\_text}}(\textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/"{}},\ x,\ y,\ font\_size);}
+\DoxyCodeLine{00328\ \ \ \ \ \ \ \ \ y\ -\/=\ line\_height\ *\ 2;}
+\DoxyCodeLine{00329\ \ \ \ \ \}}
+\DoxyCodeLine{00330\ }
+\DoxyCodeLine{00331\ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_ae64b32bbf6af5debd4f8f3116c6539ae}{end\_page}}();\ \textcolor{comment}{//\ Termina\ la\ última\ página}}
+\DoxyCodeLine{00332\ \ \ \ \ pdf.\mbox{\hyperlink{class_p_d_f_creator_a3cb44e651c3d82a5c1cec176e5709e8f}{finalize}}();}
+\DoxyCodeLine{00333\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}PDF\ creado\ exitosamente:\ "{}}\ <<\ pdfFile\ <<\ std::endl;}
+\DoxyCodeLine{00334\ \}}
+\DoxyCodeLine{00335\ }
+\DoxyCodeLine{00336\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00337\ }
+\DoxyCodeLine{00338\ \ \ \ \ std::ofstream\ file;}
+\DoxyCodeLine{00339\ \ \ \ \ \textcolor{keywordtype}{int}\ current\_object\_number;}
+\DoxyCodeLine{00340\ \ \ \ \ std::vector<size\_t>\ offsets;}
+\DoxyCodeLine{00341\ \ \ \ \ \textcolor{keywordtype}{int}\ catalog\_obj,\ pages\_obj,\ font\_obj;}
+\DoxyCodeLine{00342\ \ \ \ \ std::vector<std::string>\ page\_contents;\ \textcolor{comment}{//\ Cada\ string\ es\ el\ contenido\ de\ una\ página}}
+\DoxyCodeLine{00343\ \ \ \ \ std::vector<int>\ page\_objs;\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Números\ de\ objeto\ de\ cada\ página}}
+\DoxyCodeLine{00344\ \ \ \ \ std::vector<int>\ content\_objs;\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Números\ de\ objeto\ de\ cada\ contenido}}
+\DoxyCodeLine{00345\ \ \ \ \ std::string\ current\_stream;\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Contenido\ de\ la\ página\ actual}}
+\DoxyCodeLine{00346\ \};}
+
+\end{DoxyCode}

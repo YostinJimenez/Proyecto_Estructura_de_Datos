@@ -1,38 +1,117 @@
 \doxysection{Banco Class Reference}
 \hypertarget{class_banco}{}\label{class_banco}\index{Banco@{Banco}}
+
+
+Clase principal que gestiona las operaciones bancarias. Permite crear cuentas, realizar transacciones, buscar clientes, generar reportes y administrar el sistema.  
+
+
+
+
+{\ttfamily \#include $<$Banco.\+h$>$}
+
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \Hypertarget{class_banco_a8b2579826f523f08509d51507c12ed99}\label{class_banco_a8b2579826f523f08509d51507c12ed99} 
 void {\bfseries generar\+Documentacion} ()
-\item 
-\Hypertarget{class_banco_a323cc9f9fe66949f9b92db30c50cacea}\label{class_banco_a323cc9f9fe66949f9b92db30c50cacea} 
-void {\bfseries generar\+QRL} ()
-\item 
-\Hypertarget{class_banco_abcebda6bb1d9df0b384ec385817a40ba}\label{class_banco_abcebda6bb1d9df0b384ec385817a40ba} 
-void {\bfseries mover\+\_\+cursor\+\_\+opciones} (int x, int y)
-\item 
-\Hypertarget{class_banco_a3522616922347c41e2163120f08744c8}\label{class_banco_a3522616922347c41e2163120f08744c8} 
-int {\bfseries seleccionar\+\_\+opcion} (const char \texorpdfstring{$\ast$}{*}titulo, const char \texorpdfstring{$\ast$}{*}opciones\mbox{[}$\,$\mbox{]}, int n, int fila\+\_\+inicio)
-\item 
-\Hypertarget{class_banco_aee077f3d465ed329312365846039ce61}\label{class_banco_aee077f3d465ed329312365846039ce61} 
-void {\bfseries mover\+\_\+cursor} (int x, int y)
-\item 
+\begin{DoxyCompactList}\small\item\em Genera la documentación del proyecto usando Doxygen y la abre en el navegador. \end{DoxyCompactList}\item 
+\Hypertarget{class_banco_a06ad2ffd6ef3a935a2643ee01d0cdbe6}\label{class_banco_a06ad2ffd6ef3a935a2643ee01d0cdbe6} 
+void {\bfseries generar\+QR} ()
+\begin{DoxyCompactList}\small\item\em Permite seleccionar un cliente y generar su código QR y PDF asociado. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_banco_a3522616922347c41e2163120f08744c8}{seleccionar\+\_\+opcion}} (const char \texorpdfstring{$\ast$}{*}titulo, const char \texorpdfstring{$\ast$}{*}opciones\mbox{[}$\,$\mbox{]}, int n, int fila\+\_\+inicio)
+\begin{DoxyCompactList}\small\item\em Permite seleccionar una opción de un menú usando el teclado (flechas, enter, esc). \end{DoxyCompactList}\item 
+\Hypertarget{class_banco_a686e51b219dc175e432e91559298b259}\label{class_banco_a686e51b219dc175e432e91559298b259} 
+{\bfseries Banco} ()
+\begin{DoxyCompactList}\small\item\em Constructor de la clase \doxylink{class_banco}{Banco}. Inicializa la lista de clientes y otros recursos. \end{DoxyCompactList}\item 
 \Hypertarget{class_banco_ac08f990d166e53475ee9591471ff0f91}\label{class_banco_ac08f990d166e53475ee9591471ff0f91} 
 void {\bfseries crear\+Cuenta} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Crea una nueva cuenta bancaria y la agrega a la lista de clientes. \end{DoxyCompactList}\item 
 \Hypertarget{class_banco_aa516953aaefe8e32ae542bea0fc8177f}\label{class_banco_aa516953aaefe8e32ae542bea0fc8177f} 
 void {\bfseries mostrar\+Menu\+Usuario} ()
-\item 
-\Hypertarget{class_banco_a8ca8bef5c1e5a29b1f1eae3cf9b1996b}\label{class_banco_a8ca8bef5c1e5a29b1f1eae3cf9b1996b} 
-void {\bfseries mostrar\+Menu\+Admin} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Muestra el menú de usuario para iniciar sesión y operar sobre su cuenta. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_banco_a8ca8bef5c1e5a29b1f1eae3cf9b1996b}{mostrar\+Menu\+Admin}} ()
+\begin{DoxyCompactList}\small\item\em Muestra el menú de administrador y permite gestionar el sistema. \end{DoxyCompactList}\item 
 \Hypertarget{class_banco_a08eba9f2b3bb91a5fd59a919b99f1c83}\label{class_banco_a08eba9f2b3bb91a5fd59a919b99f1c83} 
 void {\bfseries ejecutar} ()
-\item 
-\Hypertarget{class_banco_a612c2fea79fbda76961d2732d45ac1ba}\label{class_banco_a612c2fea79fbda76961d2732d45ac1ba} 
-string {\bfseries generar\+Numero\+Cuenta} (const string \&tipo\+Cuenta)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Ejecuta el menú principal del sistema bancario. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_banco_a612c2fea79fbda76961d2732d45ac1ba}{generar\+Numero\+Cuenta}} (const string \&tipo\+Cuenta)
+\begin{DoxyCompactList}\small\item\em Genera un número de cuenta único y válido para un tipo de cuenta. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Clase principal que gestiona las operaciones bancarias. Permite crear cuentas, realizar transacciones, buscar clientes, generar reportes y administrar el sistema. 
+
+\label{doc-func-members}
+\Hypertarget{class_banco_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_banco_a612c2fea79fbda76961d2732d45ac1ba}\index{Banco@{Banco}!generarNumeroCuenta@{generarNumeroCuenta}}
+\index{generarNumeroCuenta@{generarNumeroCuenta}!Banco@{Banco}}
+\doxysubsubsection{\texorpdfstring{generarNumeroCuenta()}{generarNumeroCuenta()}}
+{\footnotesize\ttfamily \label{class_banco_a612c2fea79fbda76961d2732d45ac1ba} 
+string Banco\+::generar\+Numero\+Cuenta (\begin{DoxyParamCaption}\item[{const string \&}]{tipo\+Cuenta}{}\end{DoxyParamCaption})}
+
+
+
+Genera un número de cuenta único y válido para un tipo de cuenta. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tipo\+Cuenta} & "{}\+Ahorros"{} o "{}\+Corriente"{}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Número de cuenta generado (formato IBAN). 
+\end{DoxyReturn}
+\Hypertarget{class_banco_a8ca8bef5c1e5a29b1f1eae3cf9b1996b}\index{Banco@{Banco}!mostrarMenuAdmin@{mostrarMenuAdmin}}
+\index{mostrarMenuAdmin@{mostrarMenuAdmin}!Banco@{Banco}}
+\doxysubsubsection{\texorpdfstring{mostrarMenuAdmin()}{mostrarMenuAdmin()}}
+{\footnotesize\ttfamily \label{class_banco_a8ca8bef5c1e5a29b1f1eae3cf9b1996b} 
+void Banco\+::mostrar\+Menu\+Admin (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Muestra el menú de administrador y permite gestionar el sistema. 
+
+Permite realizar backup, restaurar, gestionar clientes, cifrado, descifrado, verificar integridad, generar QR y PDF. \Hypertarget{class_banco_a3522616922347c41e2163120f08744c8}\index{Banco@{Banco}!seleccionar\_opcion@{seleccionar\_opcion}}
+\index{seleccionar\_opcion@{seleccionar\_opcion}!Banco@{Banco}}
+\doxysubsubsection{\texorpdfstring{seleccionar\_opcion()}{seleccionar\_opcion()}}
+{\footnotesize\ttfamily \label{class_banco_a3522616922347c41e2163120f08744c8} 
+int Banco\+::seleccionar\+\_\+opcion (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{titulo}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{opciones}{\mbox{[}$\,$\mbox{]}, }\item[{int}]{n}{, }\item[{int}]{fila\+\_\+inicio}{}\end{DoxyParamCaption})}
+
+
+
+Permite seleccionar una opción de un menú usando el teclado (flechas, enter, esc). 
+
+Permite seleccionar una opción de un menú usando el teclado.
+
+
+\begin{DoxyParams}{Parameters}
+{\em titulo} & Título del menú. \\
+\hline
+{\em opciones} & Arreglo de strings con las opciones. \\
+\hline
+{\em n} & Número de opciones. \\
+\hline
+{\em fila\+\_\+inicio} & Fila inicial para mostrar el menú. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Índice de la opción seleccionada (1-\/based), o 0 si se presiona ESC.
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em titulo} & Título del menú. \\
+\hline
+{\em opciones} & Arreglo de strings con las opciones. \\
+\hline
+{\em n} & Número de opciones. \\
+\hline
+{\em fila\+\_\+inicio} & Fila inicial para mostrar el menú. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Índice de la opción seleccionada (1-\/based). 
+\end{DoxyReturn}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

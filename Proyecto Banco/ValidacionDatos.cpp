@@ -16,22 +16,44 @@
 #include <ctime>
 #include <set>
 using namespace std;
+/** @brief Declaración de la marquesina. */
 extern Marquesina marquesina;
+/**
+ * @brief Verifica si un año es bisiesto.
+ * @param anio Año a verificar.
+ * @return true si es bisiesto, false en caso contrario.
+ */
 static bool esBisiesto(int anio) {
     return (anio % 4 == 0 && anio % 100 != 0) || (anio % 400 == 0);
 }
 
+/** * @brief Devuelve el número de días en un mes dado un año.
+ * @param mes Mes (1-12).
+ * @param anio Año para considerar los años bisiestos.
+ * @return Número de días en el mes.
+ */
 static int diasEnMes(int mes, int anio) {
     if (mes == 4 || mes == 6 || mes == 9 || mes == 11) return 30;
     if (mes == 2) return esBisiesto(anio) ? 29 : 28;
     return 31;
 }
 
+/** @brief Limpia la línea actual en la consola.
+ * @param mensaje Mensaje opcional a mostrar después de limpiar la línea.
+ * */
 void ValidacionDatos::limpiar_linea(const string& mensaje) {
     cout << "\r\033[K" << mensaje;
 }
 
+
+/** @brief Captura una fecha de forma interactiva.
+ * @param mensaje Mensaje a mostrar al usuario.
+ * @param esFechaNacimiento Indica si la fecha es de nacimiento.
+ * @param minFecha Fecha mínima permitida.
+ * @return Fecha capturada.
+ */
 Fecha ValidacionDatos::capturarFechaInteractiva(const string& mensaje, bool esFechaNacimiento, const Fecha* minFecha) {
+    system("cls");
     int dia = 1, mes = 1, anio = esFechaNacimiento ? 2000 : 2025;
     if (minFecha) {
         dia = minFecha->getDia();
@@ -40,17 +62,24 @@ Fecha ValidacionDatos::capturarFechaInteractiva(const string& mensaje, bool esFe
     }
     int campo = 0;
     bool salir = false;
-
+    int fila = 6; // O la fila que corresponda
+    cout << "\n\t\t_________________________________\n"
+            << "\t\t||    FECHA DE NACIMIENTO      ||\n"
+            << "\t\t||    FORMATO:(DD/MM/AAAA)     ||\n"
+            << "\t\t||_____________________________||";
     while (!salir) {
-        system("cls");
-        cout << mensaje << "\n\n";
-        cout << "Fecha: ";
+        // Limpia solo la línea donde se muestra la fecha
+        Utilidades::gotoxy(0, fila);
+        cout << "\r\033[K" << mensaje ;
+        Utilidades::gotoxy(0, fila + 1);
+        cout << "\r\033[KFecha: ";
         cout << (campo == 0 ? "[" : "") << setw(2) << setfill('0') << dia << (campo == 0 ? "]" : "");
         cout << "/";
         cout << (campo == 1 ? "[" : "") << setw(2) << setfill('0') << mes << (campo == 1 ? "]" : "");
         cout << "/";
         cout << (campo == 2 ? "[" : "") << setw(4) << anio << (campo == 2 ? "]" : "");
-        cout << "\n\nUse flechas izquierda/derecha para cambiar campo, arriba/abajo para ajustar, Enter para confirmar, Esc para volver.";
+        Utilidades::gotoxy(0, fila + 2);
+        cout << "\r\033[KUse flechas izquierda/derecha para cambiar campo, arriba/abajo para ajustar, Enter para confirmar, Esc para volver.";
 
         int tecla = _getch();
         if (tecla == 224 || tecla == 0) {
@@ -137,10 +166,22 @@ Fecha ValidacionDatos::capturarFechaInteractiva(const string& mensaje, bool esFe
     return Fecha();
 }
 
+/** @brief Captura una fecha de forma interactiva.
+ * @param mensaje Mensaje a mostrar al usuario.
+ * @param esFechaNacimiento Indica si la fecha es de nacimiento.
+ * @param minFecha Fecha mínima permitida.
+ * @return Fecha capturada.
+ */
+
 Fecha ValidacionDatos::capturarFechaInteractiva(const string& mensaje, bool esFechaNacimiento) {
     return capturarFechaInteractiva(mensaje, esFechaNacimiento, nullptr);
 }
 
+/** @brief Valida una fecha.
+ * @param fecha Fecha a validar.
+ * @param esFechaNacimiento Indica si la fecha es de nacimiento.
+ * @throws BancoException Si la fecha es inválida.
+ */
 void ValidacionDatos::validarFecha(const Fecha& fecha, bool esFechaNacimiento) {
     int dia = fecha.getDia();
     int mes = fecha.getMes();
@@ -174,25 +215,36 @@ void ValidacionDatos::validarFecha(const Fecha& fecha, bool esFechaNacimiento) {
     }
 }
 
+/** @brief Captura e interpreta una entrada según el tipo de dato.
+ * @param tipo Tipo de dato a capturar.
+ * @param mensaje Mensaje a mostrar al usuario.
+ * @param maxLongitud Longitud máxima permitida.
+ * @return Cadena de texto capturada y validada.
+ */
 string ValidacionDatos::capturarEntrada(TipoDato tipo, const string& mensaje, size_t maxLongitud) {
     string entrada;
-    int fila_entrada = marquesina.get_cursor_row(); // O pásala como parámetro si tienes control
+    int fila_entrada = marquesina.get_cursor_row();
     Utilidades::gotoxy(0, fila_entrada);
     cout << mensaje;
     cout.flush();
 
     while (true) {
         int tecla = _getch();
-        if (tecla == 27) { // Esc
+        if (tecla == 27) {
             Utilidades::gotoxy(0, fila_entrada);
             cout << "\r" << string(mensaje.length() + entrada.length(), ' ') << "\r";
-            return ""; // Retorna cadena vacía para indicar "Atrás"
+            return "";
         }
-        if (tecla == 13 && !entrada.empty()) { // Enter
+        if ((tipo == NOMBRE || tipo == APELLIDO) && tecla == 9) {
+            cout << endl;
+            return "_TAB_";
+        }
+        if (tecla == 13 && !entrada.empty()) {
             try {
                 switch (tipo) {
                     case CEDULA: validarCedula(entrada); break;
                     case NOMBRE: validarNombre(entrada); break;
+                    case APELLIDO: validarApellido(entrada); break;
                     case CORREO: validarCorreo(entrada); break;
                     case TELEFONO: validarTelefono(entrada); break;
                     case USUARIO: validarUsuario(entrada); break;
@@ -215,40 +267,36 @@ string ValidacionDatos::capturarEntrada(TipoDato tipo, const string& mensaje, si
                         break;
                     }
                     case MONTO: {
-                        size_t pos;
-                        double monto = stod(entrada, &pos);
-                        if (pos != entrada.length()) {
-                            throw BancoException("Monto inválido: contiene caracteres no numéricos.");
-                        }
-                        validarMonto(monto, false);
+                        validarMonto(entrada, false);
+                        double monto = stod(entrada);
                         break;
                     }
-                    case NOMBRE_ARCHIVO: validarNombreArchivo(entrada); break;
                     case CEDULA_PREFIJO: validarCedulaPrefijo(entrada); break;
+                    case NUM_CUENTA: validarNumCuenta(entrada); break;
                 }
                 cout << endl;
                 return entrada;
             } catch (const BancoException& e) {
                 Utilidades::gotoxy(40, fila_entrada);
-                cout << "\r\033[K" << "Error: " << e.what(); // Limpia y muestra el error
+                cout << "\r\033[K" << "Error: " << e.what();
                 Utilidades::gotoxy(0 + mensaje.length() + entrada.length(), fila_entrada);
-                getch(); // Espera a que el usuario vea el error
+                getch();
                 Utilidades::gotoxy(40, fila_entrada);
-                cout << "\r\033[K"; // Limpia la línea del error
+                cout << "\r\033[K";
                 Utilidades::gotoxy(0, fila_entrada);
-                cout << "\r\033[K" << mensaje; // Limpia y vuelve a mostrar el mensaje de entrada
+                cout << "\r\033[K" << mensaje;
                 Utilidades::gotoxy(0 + mensaje.length(), fila_entrada);
                 entrada.clear();
                 cout.flush();
                 continue;
             }
         }
-        else if (tecla == 8 && !entrada.empty()) { // Backspace
+        else if (tecla == 8 && !entrada.empty()) {
             entrada.pop_back();
             cout << "\b \b";
             cout.flush();
         }
-        else if (tecla >= 32 && tecla <= 126) { // Caracteres imprimibles
+        else if (tecla >= 32 && tecla <= 126) {
             char c = static_cast<char>(tecla);
             bool valido = false;
             switch (tipo) {
@@ -260,7 +308,10 @@ string ValidacionDatos::capturarEntrada(TipoDato tipo, const string& mensaje, si
                     }
                     break;
                 case NOMBRE:
-                    valido = isalpha(c) ;
+                    valido = isalpha(c);
+                    break;
+                case APELLIDO:
+                    valido = isalpha(c) || c == ' ';
                     break;
                 case CORREO:
                     valido = isalnum(c) || c == '@' || c == '.' || c == '-' || c == '_';
@@ -281,10 +332,10 @@ string ValidacionDatos::capturarEntrada(TipoDato tipo, const string& mensaje, si
                 case FECHA:
                     valido = isdigit(c) || c == ' ' || c == '/';
                     break;
-                case NOMBRE_ARCHIVO:
-                    valido = isalnum(c) || c == '.';
-                    break;
                 case CEDULA_PREFIJO:
+                    valido = isdigit(c);
+                    break;
+                case NUM_CUENTA:
                     valido = isdigit(c);
                     break;
             }
@@ -301,6 +352,11 @@ string ValidacionDatos::capturarEntrada(TipoDato tipo, const string& mensaje, si
     }
 }
 
+/**
+ * @brief Valida una cédula de identidad.
+ * @param cedula Cédula a validar.
+ * @throws BancoException Si la cédula es inválida.
+ */
 void ValidacionDatos::validarCedula(const string& entrada) {
     try {
         if (entrada.length() != 10 && entrada.length() != 22) {
@@ -393,6 +449,49 @@ void ValidacionDatos::validarCedula(const string& entrada) {
     }
 }
 
+/**
+ * @brief Valida un número de cuenta de 10 dígitos (comenzando con 22 o 23).
+ * @param numCuenta Número de cuenta a validar.
+ * @throws BancoException Si el número de cuenta es inválido.
+ */
+void ValidacionDatos::validarNumCuenta(const string& numCuenta) {
+    try {
+        if (numCuenta.length() != 10) {
+            throw BancoException("Debe tener exactamente 10 dígitos.");
+        }
+        if (!regex_match(numCuenta, regex("^(22|23)\\d{8}$"))) {
+            throw BancoException("Debe comenzar con 22 o 23 seguido de 8 dígitos numéricos.");
+        }
+        bool todosIguales = true;
+        char primerDigito = numCuenta[0];
+        for (char c : numCuenta) {
+            if (c != primerDigito) {
+                todosIguales = false;
+                break;
+            }
+        }
+        if (todosIguales) {
+            throw BancoException("No se permiten dígitos todos iguales.");
+        }
+        bool repetitivo = true;
+        for (size_t i = 0; i < numCuenta.length() - 5; ++i) {
+            if (numCuenta[i] != numCuenta[i + 5]) {
+                repetitivo = false;
+                break;
+            }
+        }
+        if (repetitivo) {
+            throw BancoException("No se permiten patrones repetitivos.");
+        }
+    } catch (const regex_error& e) {
+        throw BancoException("Error en la validación de número de cuenta.");
+    }
+}
+
+/** @brief Valida un número de cédula.
+ * @param cedula Número de cédula a validar.
+ * @throws BancoException Si el número de cédula es inválido.
+ */
 void ValidacionDatos::validarCedulaPrefijo(const string& numero) {
     try {
         if (numero.empty() || numero.length() > 50) {
@@ -467,6 +566,10 @@ void ValidacionDatos::validarCedulaPrefijo(const string& numero) {
     }
 }
 
+/** @brief Valida un número de teléfono.
+ * @param telefono Número de teléfono a validar.
+ * @throws BancoException Si el número de teléfono es inválido.
+ */
 void ValidacionDatos::validarTelefono(const string& telefono) {
     try {
         // Validar formato básico: 10 dígitos comenzando con 09
@@ -510,6 +613,10 @@ void ValidacionDatos::validarTelefono(const string& telefono) {
     }
 }
 
+/** @brief Valida un nombre de usuario.
+ * @param usuario Nombre de usuario a validar.
+ * @throws BancoException Si el nombre de usuario es inválido.
+ */
 void ValidacionDatos::validarUsuario(const string& usuario) {
     try {
         if (!regex_match(usuario, regex("^[a-zA-Z0-9._%+-]+$"))) {
@@ -523,6 +630,10 @@ void ValidacionDatos::validarUsuario(const string& usuario) {
     }
 }
 
+/** @brief Valida una contraseña.
+ * @param contrasenia Contraseña a validar.
+ * @throws BancoException Si la contraseña es inválida.
+ */
 void ValidacionDatos::validarContrasena(const string& contrasenia) {
     try {
         if (contrasenia.length() < 8 || contrasenia.length() > 20) {
@@ -536,7 +647,18 @@ void ValidacionDatos::validarContrasena(const string& contrasenia) {
     }
 }
 
-void ValidacionDatos::validarMonto(double monto, bool permitirCero) {
+/** @brief Valida un monto de dinero.
+ * @param montoStr Monto a validar (como cadena).
+ * @param permitirCero Indica si se permite el monto cero.
+ * @throws BancoException Si el monto es inválido.
+ */
+void ValidacionDatos::validarMonto(const std::string& montoStr, bool permitirCero) {
+    // Validar formato numérico y máximo 2 decimales
+    std::regex patron("^\\d{1,7}(\\.\\d{1,2})?$"); // Hasta 7 enteros y 2 decimales
+    if (!std::regex_match(montoStr, patron)) {
+        throw BancoException("Monto inválido. Máximo 2 decimales y hasta 7 dígitos enteros.");
+    }
+    double monto = stod(montoStr);
     if (!isfinite(monto)) {
         throw BancoException("Valor no numérico.");
     }
@@ -546,35 +668,31 @@ void ValidacionDatos::validarMonto(double monto, bool permitirCero) {
     if (permitirCero && monto < 0) {
         throw BancoException("El monto no puede ser negativo.");
     }
-    if (abs(monto) > 1000000.0) {
+    if (monto > 1000000.0) {
         throw BancoException("Excede el límite de $1,000,000.");
     }
-    ostringstream oss;
-    oss << fixed << setprecision(2) << monto;
-    string montoStr = oss.str();
-    size_t punto = montoStr.find('.');
-    if (punto != string::npos && montoStr.length() - punto - 1 > 2) {
-        throw BancoException("Máximo de 2 decimales.");
-    }
 }
 
-void ValidacionDatos::validarNombreArchivo(const string& entrada) {
-    try {
-        if (entrada.empty() || entrada.length() > 50) {
-            throw BancoException("Debe tener entre 1 y 50 caracteres.");
-        }
-        if (!regex_match(entrada, regex("^[a-zA-Z0-9._-]+\\.bin$"))) {
-            throw BancoException("Solo letras, números, puntos, guiones y extensión .bin.");
-        }
-    } catch (const regex_error& e) {
-        throw BancoException("Error en la validación de nombre de archivo.");
-    }
+/** @brief Valida un monto de dinero.
+ * @param monto Monto a validar.
+ * @param permitirCero Indica si se permite el monto cero.
+ * @throws BancoException Si el monto es inválido.
+ */
+void ValidacionDatos::validarMonto(double monto, bool permitirCero) {
+    std::ostringstream oss;
+    oss << std::fixed << std::setprecision(15) << monto;
+    validarMonto(oss.str(), permitirCero);
 }
 
+/**
+ * @brief Valida un nombre.
+ * @param nombre Nombre a validar.
+ * @throws BancoException Si el nombre es inválido.
+ */
 void ValidacionDatos::validarNombre(const string& nombre) {
     try {
-        if (nombre.empty() || nombre.length() > 50) {
-            throw BancoException("Debe tener entre 3 y 50 caracteres.");
+        if (nombre.empty() || nombre.length() < 2 || nombre.length() > 50) {
+            throw BancoException("Debe tener entre 2 y 50 caracteres.");
         }
         if (!regex_match(nombre, regex("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$"))) {
             throw BancoException("Solo se permiten letras y espacios.");
@@ -584,12 +702,56 @@ void ValidacionDatos::validarNombre(const string& nombre) {
     }
 }
 
+/**
+ * @brief Valida un apellido.
+ * @param apellido Apellido a validar.
+ * @throws BancoException Si el apellido es inválido.
+ */
+void ValidacionDatos::validarApellido(const string& apellido) {
+    try {
+        if (apellido.empty() || apellido.length() < 2 || apellido.length() > 50) {
+            throw BancoException("Debe tener entre 2 y 50 caracteres.");
+        }
+        if (apellido.front() == ' ' || apellido.back() == ' ') {
+            throw BancoException("No se permiten espacios al inicio o al final.");
+        }
+        if (apellido.find("  ") != string::npos) {
+            throw BancoException("No se permiten dos espacios seguidos en el apellido.");
+        }
+        if (!regex_match(apellido, regex("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$"))) {
+            throw BancoException("Solo se permiten letras y espacios.");
+        }
+    } catch (const regex_error& e) {
+        throw BancoException("Error en la validación de apellido.");
+    }
+}
+
+ /**
+ * @brief Valida un correo electrónico.
+ * @param correo Correo a validar.
+ * @throws BancoException Si el correo es inválido.
+ */
 void ValidacionDatos::validarCorreo(const string& correo) {
     try {
         if (correo.empty() || correo.length() > 254) {
             throw BancoException("Debe tener entre 1 y 254 caracteres.");
         }
-        if (!regex_match(correo, regex("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"))) {
+        if (correo.find("..") != string::npos) {
+            throw BancoException("No se permiten dos puntos seguidos en el correo.");
+        }
+        size_t atPos = correo.find('@');
+        if (atPos == string::npos) {
+            throw BancoException("El correo debe contener '@'.");
+        }
+        string local = correo.substr(0, atPos);
+        if (local.length() < 6 || local.length() > 30) {
+            throw BancoException("El correo debe tener entre 6 y 30 caracteres antes del @.");
+        }
+        if (local.front() == '.' || local.back() == '.') {
+            throw BancoException("El correo no puede empezar ni terminar con punto antes del @.");
+        }
+        regex patron("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+        if (!regex_match(correo, patron)) {
             throw BancoException("Formato incorrecto.");
         }
     } catch (const regex_error& e) {
@@ -597,6 +759,11 @@ void ValidacionDatos::validarCorreo(const string& correo) {
     }
 }
 
+/**
+ * @brief Solicita y valida un DNI.
+ * @param mensaje Mensaje a mostrar al usuario.
+ * @return El DNI ingresado.
+ */
 string ValidacionDatos::ingresar_dni(const string& mensaje) {
     char c;
     string palabra;
@@ -617,6 +784,10 @@ string ValidacionDatos::ingresar_dni(const string& mensaje) {
     }
 }
 
+/** @brief Valida una hora en formato HH:MM:SS.
+ * @param mensaje Mensaje a mostrar al usuario.
+ * @return Hora en formato HH:MM:SS.
+ */
 string ValidacionDatos::validarHora(const string& mensaje) {
     char buffer[7] = {0};
     char* palabra = buffer;
@@ -647,6 +818,11 @@ string ValidacionDatos::validarHora(const string& mensaje) {
     }
 }
 
+/**
+ * @brief Valida una fecha en formato DD/MM/AAAA.
+ * @param mensaje Mensaje a mostrar al usuario.
+ * @return Fecha en formato DD/MM/AAAA.
+ */
 string ValidacionDatos::validar_Fecha(const string& mensaje) {
     char buffer[11] = {0};
     char* palabra = buffer;
@@ -677,12 +853,26 @@ string ValidacionDatos::validar_Fecha(const string& mensaje) {
     }
 }
 
+/**
+ * @brief Valida una hora, minuto y segundo.
+ * @param hora Hora a validar.
+ * @param minuto Minuto a validar.
+ * @param segundo Segundo a validar.
+ * @return true si la hora, minuto y segundo son válidos, false en caso contrario.
+ */
 bool ValidacionDatos::validar_hora_minuto_segundo(int hora, int minuto, int segundo) {
     return (hora >= 0 && hora <= 23) &&
            (minuto >= 0 && minuto <= 59) &&
            (segundo >= 0 && segundo <= 59);
 }
 
+/**
+ * @brief Valida una fecha.
+ * @param anio Año a validar.
+ * @param mes Mes a validar.
+ * @param dia Día a validar.
+ * @return true si la fecha es válida, false en caso contrario.
+ */
 bool ValidacionDatos::es_fecha_valida(int anio, int mes, int dia) {
     if (anio < 1900 || anio > 2100) return false;
     if (mes < 1 || mes > 12) return false;
@@ -697,6 +887,11 @@ bool ValidacionDatos::es_fecha_valida(int anio, int mes, int dia) {
     return true;
 }
 
+/**
+ * @brief Valida un carácter.
+ * @param opcion Cadena de texto a validar.
+ * @return Cadena de texto validada.
+ */
 string ValidacionDatos::validarCaracter(string& opcion) {
     opcion[0] = toupper(opcion[0]);
     for (int i = 1; i < opcion.length(); i++) {

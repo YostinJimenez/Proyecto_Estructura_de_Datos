@@ -1,5 +1,6 @@
 // Incluye el archivo de encabezado que declara nuestras funciones
 #include "GeneradorQr.h"
+//#include <Magick++.h>
 
 // Inclusiones de librerías estándar de C++
 #include <iostream>
@@ -107,8 +108,8 @@ bool guardarQrComoPng(const QRcode *codigoQr, const string& nombreArchivo, int e
  * @brief Intenta convertir un archivo de imagen a PDF usando ImageMagick.
  */
 bool convertirImagenAPdf(const string& nombreArchivoEntrada, const string& nombreArchivoSalida) {
-    string comando = "convert \"" + nombreArchivoEntrada + "\" \"" + nombreArchivoSalida + "\"";
-    cout << "Intentando generar PDF usando ImageMagick: " << comando << endl;
+    string comando = "magick \"" + nombreArchivoEntrada + "\" \"" + nombreArchivoSalida + "\"";
+    cout << "Intentando generar PDF: " << comando << endl;
     
     int resultado = system(comando.c_str());
     
@@ -116,9 +117,7 @@ bool convertirImagenAPdf(const string& nombreArchivoEntrada, const string& nombr
         cout << "PDF generado exitosamente: " << nombreArchivoSalida << endl;
         return true;
     } else {
-        cerr << "Error al generar PDF con ImageMagick (código: " << resultado << ")." << endl;
-        cerr << "Asegúrate de que ImageMagick esté instalado y en tu PATH." << endl;
-        cerr << "Puedes instalarlo en macOS con: brew install imagemagick" << endl;
+        cerr << "Error al generar PDF" << endl;        
         return false;
     }
 }

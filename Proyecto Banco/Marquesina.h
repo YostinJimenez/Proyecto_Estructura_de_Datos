@@ -81,7 +81,7 @@ private:
 
     /** @brief Mutex específico para operaciones de salida en pantalla */
     std::mutex mtxPantalla;
-
+    
     /** @brief Buffer interno para evitar interferencias en la visualización */
     std::string bufferMarquesina;
 

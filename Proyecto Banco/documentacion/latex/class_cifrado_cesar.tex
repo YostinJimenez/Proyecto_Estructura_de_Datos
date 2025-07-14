@@ -3,30 +3,100 @@
 \doxysubsubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{class_cifrado_cesar_a19ce2c6dc89e11b62cfd6327bdb84264}\label{class_cifrado_cesar_a19ce2c6dc89e11b62cfd6327bdb84264} 
-static bool {\bfseries codificar\+Archivo} (const string \&archivo\+Entrada, const string \&archivo\+Salida, int clave)
-\item 
-\Hypertarget{class_cifrado_cesar_a070b393b01e6d6ae6c75387fdc9346cf}\label{class_cifrado_cesar_a070b393b01e6d6ae6c75387fdc9346cf} 
-static bool {\bfseries decodificar\+Archivo} (const string \&archivo\+Entrada, const string \&archivo\+Salida, int clave)
-\item 
-\Hypertarget{class_cifrado_cesar_a0702a6f5b69f742b593d5f5513c15014}\label{class_cifrado_cesar_a0702a6f5b69f742b593d5f5513c15014} 
-static void {\bfseries listar\+Archivos\+Txt} (int index)
-\item 
+static bool \mbox{\hyperlink{class_cifrado_cesar_a19ce2c6dc89e11b62cfd6327bdb84264}{codificar\+Archivo}} (const string \&archivo\+Entrada, const string \&archivo\+Salida, int clave)
+\begin{DoxyCompactList}\small\item\em Codifica un archivo usando el Cifrado César. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{class_cifrado_cesar_a070b393b01e6d6ae6c75387fdc9346cf}{decodificar\+Archivo}} (const string \&archivo\+Entrada, const string \&archivo\+Salida, int clave)
+\begin{DoxyCompactList}\small\item\em Decodifica un archivo cifrado usando el Cifrado César. Utiliza la clave negativa para revertir el cifrado. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_cifrado_cesar_a0702a6f5b69f742b593d5f5513c15014}{listar\+Archivos\+Txt}} (int index)
+\begin{DoxyCompactList}\small\item\em Lista los archivos de respaldo en el directorio actual. Permite al usuario seleccionar un archivo para cifrar o descifrar. \end{DoxyCompactList}\item 
 \Hypertarget{class_cifrado_cesar_a5d9fd8680c0f9a458d7ad3db4d3c4fcd}\label{class_cifrado_cesar_a5d9fd8680c0f9a458d7ad3db4d3c4fcd} 
 static void {\bfseries descifrar\+\_\+archivos\+\_\+txt} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Descifra un archivo cifrado seleccionado por el usuario usando el cifrado César. Genera el archivo descifrado y muestra el resultado. \end{DoxyCompactList}\item 
 \Hypertarget{class_cifrado_cesar_abe586c08274aefb691ed0606cd73145e}\label{class_cifrado_cesar_abe586c08274aefb691ed0606cd73145e} 
 static void {\bfseries cifrar\+\_\+archivos\+\_\+txt} ()
-\item 
-\Hypertarget{class_cifrado_cesar_a851388cc2826c2b36f2da00a4d4a3a4c}\label{class_cifrado_cesar_a851388cc2826c2b36f2da00a4d4a3a4c} 
-static bool {\bfseries verificar\+Integridad\+Cifrados} ()
-\item 
-\Hypertarget{class_cifrado_cesar_aeba8aaa739044f995948525a05e3207e}\label{class_cifrado_cesar_aeba8aaa739044f995948525a05e3207e} 
-static void {\bfseries create\+PDF} (const string \&txt\+File, const string \&pdf\+File)
-\item 
-\Hypertarget{class_cifrado_cesar_a6c42baed98c9b1c241089d91ce479d03}\label{class_cifrado_cesar_a6c42baed98c9b1c241089d91ce479d03} 
-static void {\bfseries crear\+PDFPersonal} (\mbox{\hyperlink{class_cliente}{Cliente}} \texorpdfstring{$\ast$}{*}cliente, string carpeta)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Cifra un archivo de respaldo seleccionado por el usuario usando el cifrado César. Genera el archivo cifrado, su hash y un PDF del contenido cifrado. \end{DoxyCompactList}\item 
+\Hypertarget{class_cifrado_cesar_a9ad1aa06832f9f981f781e5cbe44ead7}\label{class_cifrado_cesar_a9ad1aa06832f9f981f781e5cbe44ead7} 
+static void {\bfseries generar\+\_\+txt\+\_\+a\+\_\+pdf} ()
+\begin{DoxyCompactList}\small\item\em Genera un PDF a partir de un archivo de respaldo cifrado. Permite al usuario seleccionar el archivo y genera un PDF con su contenido. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{class_cifrado_cesar_a851388cc2826c2b36f2da00a4d4a3a4c}{verificar\+Integridad\+Cifrados}} ()
+\begin{DoxyCompactList}\small\item\em Verifica la integridad de los archivos cifrados comparando su hash actual con el guardado. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{class_cifrado_cesar_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_cifrado_cesar_a19ce2c6dc89e11b62cfd6327bdb84264}\index{CifradoCesar@{CifradoCesar}!codificarArchivo@{codificarArchivo}}
+\index{codificarArchivo@{codificarArchivo}!CifradoCesar@{CifradoCesar}}
+\doxysubsubsection{\texorpdfstring{codificarArchivo()}{codificarArchivo()}}
+{\footnotesize\ttfamily \label{class_cifrado_cesar_a19ce2c6dc89e11b62cfd6327bdb84264} 
+bool Cifrado\+Cesar\+::codificar\+Archivo (\begin{DoxyParamCaption}\item[{const string \&}]{archivo\+Entrada}{, }\item[{const string \&}]{archivo\+Salida}{, }\item[{int}]{clave}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Codifica un archivo usando el Cifrado César. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em archivo\+Entrada} & Ruta del archivo de entrada a codificar. \\
+\hline
+{\em archivo\+Salida} & Ruta del archivo de salida codificado. \\
+\hline
+{\em clave} & Clave de cifrado (número de posiciones a desplazar). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true si la operación fue exitosa, false en caso contrario. 
+\end{DoxyReturn}
+\Hypertarget{class_cifrado_cesar_a070b393b01e6d6ae6c75387fdc9346cf}\index{CifradoCesar@{CifradoCesar}!decodificarArchivo@{decodificarArchivo}}
+\index{decodificarArchivo@{decodificarArchivo}!CifradoCesar@{CifradoCesar}}
+\doxysubsubsection{\texorpdfstring{decodificarArchivo()}{decodificarArchivo()}}
+{\footnotesize\ttfamily \label{class_cifrado_cesar_a070b393b01e6d6ae6c75387fdc9346cf} 
+bool Cifrado\+Cesar\+::decodificar\+Archivo (\begin{DoxyParamCaption}\item[{const string \&}]{archivo\+Entrada}{, }\item[{const string \&}]{archivo\+Salida}{, }\item[{int}]{clave}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Decodifica un archivo cifrado usando el Cifrado César. Utiliza la clave negativa para revertir el cifrado. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em archivo\+Entrada} & Ruta del archivo de entrada cifrado. \\
+\hline
+{\em archivo\+Salida} & Ruta del archivo de salida descifrado. \\
+\hline
+{\em clave} & Clave de cifrado utilizada originalmente. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true si la operación fue exitosa, false en caso contrario. 
+\end{DoxyReturn}
+\Hypertarget{class_cifrado_cesar_a0702a6f5b69f742b593d5f5513c15014}\index{CifradoCesar@{CifradoCesar}!listarArchivosTxt@{listarArchivosTxt}}
+\index{listarArchivosTxt@{listarArchivosTxt}!CifradoCesar@{CifradoCesar}}
+\doxysubsubsection{\texorpdfstring{listarArchivosTxt()}{listarArchivosTxt()}}
+{\footnotesize\ttfamily \label{class_cifrado_cesar_a0702a6f5b69f742b593d5f5513c15014} 
+void Cifrado\+Cesar\+::listar\+Archivos\+Txt (\begin{DoxyParamCaption}\item[{int}]{index}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Lista los archivos de respaldo en el directorio actual. Permite al usuario seleccionar un archivo para cifrar o descifrar. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & 1 para cifrar, 2 para descifrar. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_cifrado_cesar_a851388cc2826c2b36f2da00a4d4a3a4c}\index{CifradoCesar@{CifradoCesar}!verificarIntegridadCifrados@{verificarIntegridadCifrados}}
+\index{verificarIntegridadCifrados@{verificarIntegridadCifrados}!CifradoCesar@{CifradoCesar}}
+\doxysubsubsection{\texorpdfstring{verificarIntegridadCifrados()}{verificarIntegridadCifrados()}}
+{\footnotesize\ttfamily \label{class_cifrado_cesar_a851388cc2826c2b36f2da00a4d4a3a4c} 
+bool Cifrado\+Cesar\+::verificar\+Integridad\+Cifrados (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Verifica la integridad de los archivos cifrados comparando su hash actual con el guardado. 
+
+\begin{DoxyReturn}{Returns}
+true si todos los archivos tienen integridad OK, false si alguno falla. 
+\end{DoxyReturn}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

@@ -1,151 +1,152 @@
 \doxysection{Hash.\+h}
 \hypertarget{_hash_8h_source}{}\label{_hash_8h_source}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ HASH\_H}}
-\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ HASH\_H}}
-\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}ListaDobleCircular.h"{}}}
-\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}Cliente.h"{}}}
-\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}Banco.h"{}}}
-\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <string>}}
-\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <vector>}}
-\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <sstream>}}
-\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <iomanip>}}
-\DoxyCodeLine{00010\ }
-\DoxyCodeLine{00011\ \textcolor{keyword}{using\ namespace\ }std;}
-\DoxyCodeLine{00012\ }
-\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }Hash\ \{}
-\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{string}\ valor\_original;}
-\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{string}\ valor\_hashed;}
-\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{int}\ value;}
-\DoxyCodeLine{00017\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00018\ \ \ \ \ Hash(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ valor,\ \textcolor{keywordtype}{int}\ val)\ :\ valor\_original(valor),\ value(val)\ \{}
-\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ valor\_hashed\ =\ calcularMD5(valor);\ \textcolor{comment}{//\ o\ la\ función\ hash\ que\ uses}}
-\DoxyCodeLine{00020\ \ \ \ \ \}}
-\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{string}\ getOriginal()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ valor\_original;\ \}}
-\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{string}\ getHash()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ valor\_hashed;\ \}}
-\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{int}\ getValue()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ value;\ \}}
-\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{void}\ setValue(\textcolor{keywordtype}{int}\ val)\ \{\ value\ =\ val;\ \}}
-\DoxyCodeLine{00025\ }
-\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{string}\ calcularMD5(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ str)\ \{}
-\DoxyCodeLine{00027\ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/\ INICIO\ IMPLEMENTACIÓN\ MD5\ -\/-\/-\/}}
-\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ uint32;}
-\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ uint32\ s[]\ =\ \{\ 7,12,17,22,\ 5,9,14,20,\ 4,11,16,23,\ 6,10,15,21\ \};}
-\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ uint32\ K[]\ =\ \{}
-\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ 0xd76aa478,0xe8c7b756,0x242070db,0xc1bdceee,0xf57c0faf,0x4787c62a,0xa8304613,0xfd469501,}
-\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ 0x698098d8,0x8b44f7af,0xffff5bb1,0x895cd7be,0x6b901122,0xfd987193,0xa679438e,0x49b40821,}
-\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ 0xf61e2562,0xc040b340,0x265e5a51,0xe9b6c7aa,0xd62f105d,0x02441453,0xd8a1e681,0xe7d3fbc8,}
-\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ 0x21e1cde6,0xc33707d6,0xf4d50d87,0x455a14ed,0xa9e3e905,0xfcefa3f8,0x676f02d9,0x8d2a4c8a,}
-\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ 0xfffa3942,0x8771f681,0x6d9d6122,0xfde5380c,0xa4beea44,0x4bdecfa9,0xf6bb4b60,0xbebfbc70,}
-\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ 0x289b7ec6,0xeaa127fa,0xd4ef3085,0x04881d05,0xd9d4d039,0xe6db99e5,0x1fa27cf8,0xc4ac5665,}
-\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ 0xf4292244,0x432aff97,0xab9423a7,0xfc93a039,0x655b59c3,0x8f0ccc92,0xffeff47d,0x85845dd1,}
-\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ 0x6fa87e4f,0xfe2ce6e0,0xa3014314,0x4e0811a1,0xf7537e82,0xbd3af235,0x2ad7d2bb,0xeb86d391}
-\DoxyCodeLine{00039\ \ \ \ \ \};}
-\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{auto}\ leftrotate\ =\ [](uint32\ x,\ uint32\ c)\ \{\ \textcolor{keywordflow}{return}\ (x\ <<\ c)\ |\ (x\ >>\ (32\ -\/\ c));\ \};}
-\DoxyCodeLine{00041\ }
-\DoxyCodeLine{00042\ \ \ \ \ \textcolor{comment}{//\ Inicializar\ variables}}
-\DoxyCodeLine{00043\ \ \ \ \ uint32\ a0\ =\ 0x67452301,\ b0\ =\ 0xefcdab89,\ c0\ =\ 0x98badcfe,\ d0\ =\ 0x10325476;}
-\DoxyCodeLine{00044\ }
-\DoxyCodeLine{00045\ \ \ \ \ \textcolor{comment}{//\ Preprocesamiento}}
-\DoxyCodeLine{00046\ \ \ \ \ vector<unsigned\ char>\ msg(str.begin(),\ str.end());}
-\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ orig\_len\_bits\ =\ msg.size()\ *\ 8;}
-\DoxyCodeLine{00048\ \ \ \ \ msg.push\_back(0x80);}
-\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordflow}{while}\ ((msg.size()\ *\ 8)\ \%\ 512\ !=\ 448)\ msg.push\_back(0);}
-\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 8;\ ++i)\ msg.push\_back((orig\_len\_bits\ >>\ (8\ *\ i))\ \&\ 0xFF);}
-\DoxyCodeLine{00051\ }
-\DoxyCodeLine{00052\ \ \ \ \ \textcolor{comment}{//\ Procesar\ en\ bloques\ de\ 512\ bits}}
-\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ offset\ =\ 0;\ offset\ <\ msg.size();\ offset\ +=\ 64)\ \{}
-\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ uint32\ M[16];}
-\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 16;\ ++i)\ \{}
-\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ M[i]\ =\ 0;}
-\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ 4;\ ++j)}
-\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ M[i]\ |=\ msg[offset\ +\ i\ *\ 4\ +\ j]\ <<\ (j\ *\ 8);}
-\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ uint32\ A\ =\ a0,\ B\ =\ b0,\ C\ =\ c0,\ D\ =\ d0;}
-\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 64;\ ++i)\ \{}
-\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ uint32\ F,\ g;}
-\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ <\ 16)\ \{\ F\ =\ (B\ \&\ C)\ |\ (\string~B\ \&\ D);\ g\ =\ i;\ \}}
-\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (i\ <\ 32)\ \{\ F\ =\ (D\ \&\ B)\ |\ (\string~D\ \&\ C);\ g\ =\ (5\ *\ i\ +\ 1)\ \%\ 16;\ \}}
-\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (i\ <\ 48)\ \{\ F\ =\ B\ \string^\ C\ \string^\ D;\ g\ =\ (3\ *\ i\ +\ 5)\ \%\ 16;\ \}}
-\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{\ F\ =\ C\ \string^\ (B\ |\ \string~D);\ g\ =\ (7\ *\ i)\ \%\ 16;\ \}}
-\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ uint32\ temp\ =\ D;}
-\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ D\ =\ C;}
-\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ C\ =\ B;}
-\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ B\ =\ B\ +\ leftrotate(A\ +\ F\ +\ K[i]\ +\ M[g],\ s[(i\ /\ 16)\ *\ 4\ +\ (i\ \%\ 4)]);}
-\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ A\ =\ temp;}
-\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ a0\ +=\ A;\ b0\ +=\ B;\ c0\ +=\ C;\ d0\ +=\ D;}
-\DoxyCodeLine{00074\ \ \ \ \ \}}
-\DoxyCodeLine{00075\ \ \ \ \ stringstream\ ss;}
-\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordflow}{for}\ (uint32\ v\ :\ \{a0,\ b0,\ c0,\ d0\})}
-\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 4;\ ++i)}
-\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ ss\ <<\ hex\ <<\ setw(2)\ <<\ setfill(\textcolor{charliteral}{'0'})\ <<\ ((v\ >>\ (8\ *\ i))\ \&\ 0xFF);}
-\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordflow}{return}\ ss.str();}
-\DoxyCodeLine{00080\ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/\ FIN\ IMPLEMENTACIÓN\ MD5\ -\/-\/-\/}}
-\DoxyCodeLine{00081\ \ \ \ \ \}}
-\DoxyCodeLine{00082\ \ \ \ \ \textcolor{comment}{/*}}
-\DoxyCodeLine{00083\ \textcolor{comment}{\ \ \ \ static\ string\ calcularSHA256(const\ string\&\ str)\ \{}}
-\DoxyCodeLine{00084\ \textcolor{comment}{\ \ \ \ \ \ \ \ unsigned\ char\ hash[SHA256\_DIGEST\_LENGTH];}}
-\DoxyCodeLine{00085\ \textcolor{comment}{\ \ \ \ \ \ \ \ SHA256\_CTX\ sha256;}}
-\DoxyCodeLine{00086\ \textcolor{comment}{\ \ \ \ \ \ \ \ SHA256\_Init(\&sha256);}}
-\DoxyCodeLine{00087\ \textcolor{comment}{\ \ \ \ \ \ \ \ SHA256\_Update(\&sha256,\ str.c\_str(),\ str.size());}}
-\DoxyCodeLine{00088\ \textcolor{comment}{\ \ \ \ \ \ \ \ SHA256\_Final(hash,\ \&sha256);}}
-\DoxyCodeLine{00089\ \textcolor{comment}{\ \ \ \ \ \ \ \ //\ Convertir\ el\ hash\ a\ una\ cadena\ hexadecimal}}
-\DoxyCodeLine{00090\ \textcolor{comment}{\ \ \ \ \ \ \ \ stringstream\ ss;}}
-\DoxyCodeLine{00091\ \textcolor{comment}{\ \ \ \ \ \ \ \ for(int\ i\ =\ 0;\ i\ <\ SHA256\_DIGEST\_LENGTH;\ ++i)}}
-\DoxyCodeLine{00092\ \textcolor{comment}{\ \ \ \ \ \ \ \ ss\ <<\ hex\ <<\ setw(2)\ <<\ setfill('0')\ <<\ (int)hash[i];}}
-\DoxyCodeLine{00093\ \textcolor{comment}{\ \ \ \ \ \ \ \ return\ ss.str();}}
-\DoxyCodeLine{00094\ \textcolor{comment}{\ \ \ \ \}}}
-\DoxyCodeLine{00095\ \textcolor{comment}{\ \ \ \ */}}
-\DoxyCodeLine{00096\ \};}
-\DoxyCodeLine{00097\ }
-\DoxyCodeLine{00098\ \textcolor{comment}{//\ Tabla\ hash}}
-\DoxyCodeLine{00099\ \textcolor{keyword}{class\ }TablaHash\ \{}
-\DoxyCodeLine{00100\ \ \ \ \ \textcolor{comment}{//\ Usamos\ ListaDoble\ para\ manejar\ colisiones}}
-\DoxyCodeLine{00101\ \ \ \ \ vector<ListaDobleCircular<Hash>*>\ table;}
-\DoxyCodeLine{00102\ \ \ \ \ \textcolor{comment}{//\ Capacidad\ de\ la\ tabla\ hash}}
-\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordtype}{int}\ capacidad;}
-\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordtype}{int}\ hashFunction(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ key)\ \{}
-\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ hash\ =\ 0;}
-\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{char}\ c\ :\ key)\ hash\ =\ (hash\ *\ 31\ +\ c)\ \%\ capacidad;}
-\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ hash;}
-\DoxyCodeLine{00108\ \ \ \ \ \}}
-\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00110\ \ \ \ \ TablaHash(\textcolor{keywordtype}{int}\ cap)\ :\ capacidad(cap),\ table(cap,\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_lista_doble_circular}{ListaDobleCircular<Hash>}}())\ \{\}}
-\DoxyCodeLine{00111\ \ \ \ \ \string~TablaHash()\ \{}
-\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}*\ lista\ :\ table)\ \{}
-\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ lista;}
-\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00115\ \ \ \ \ \}}
-\DoxyCodeLine{00116\ \ \ \ \ \textcolor{comment}{//\ Inserta\ un\ nuevo\ elemento\ o\ actualiza\ el\ valor\ si\ ya\ existe}}
-\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordtype}{void}\ insert(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ key,\ \textcolor{keywordtype}{int}\ value)\ \{}
-\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ idx\ =\ hashFunction(key);}
-\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}*\ lista\ =\ table[idx];}
-\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}*\ nodo\ =\ lista-\/>buscar([\&](\mbox{\hyperlink{class_hash}{Hash}}*\ e)\{\ \textcolor{keywordflow}{return}\ e-\/>getOriginal()\ ==\ key;\ \});}
-\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (nodo)\ \{}
-\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ nodo-\/>setValue(value);}
-\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ lista-\/>insertar(\textcolor{keyword}{new}\ \mbox{\hyperlink{class_hash}{Hash}}(key,\ value));}
-\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00126\ \ \ \ \ \}}
-\DoxyCodeLine{00127\ \ \ \ \ \textcolor{keywordtype}{bool}\ get(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ key,\ \textcolor{keywordtype}{int}\&\ value)\ \{}
-\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ idx\ =\ hashFunction(key);}
-\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}*\ lista\ =\ table[idx];}
-\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}*\ nodo\ =\ lista-\/>buscar([\&](\mbox{\hyperlink{class_hash}{Hash}}*\ e)\{\ \textcolor{keywordflow}{return}\ e-\/>getOriginal()\ ==\ key;\ \});}
-\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (nodo)\ \{}
-\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ value\ =\ nodo-\/>getValue();}
-\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00136\ \ \ \ \ \}}
-\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keywordtype}{void}\ remove(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ key)\ \{}
-\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ idx\ =\ hashFunction(key);}
-\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}*\ lista\ =\ table[idx];}
-\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}*\ nodo\ =\ lista-\/>buscar([\&](\mbox{\hyperlink{class_hash}{Hash}}*\ e)\{\ \textcolor{keywordflow}{return}\ e-\/>getOriginal()\ ==\ key;\ \});}
-\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (nodo)\ \{}
-\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ lista-\/>eliminar(nodo);}
-\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#ifndef\ HASH\_H}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ HASH\_H}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}ListaDobleCircular.h"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}Cliente.h"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}Banco.h"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <iomanip>}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }Hash\ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{string}\ valor\_original;}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{string}\ valor\_hashed;}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{int}\ value;}
+\DoxyCodeLine{00025\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00026\ \ \ \ \ Hash(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ valor,\ \textcolor{keywordtype}{int}\ val)\ :\ valor\_original(valor),\ value(val)\ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ valor\_hashed\ =\ calcularMD5(valor);\ \textcolor{comment}{//\ o\ la\ función\ hash\ que\ uses}}
+\DoxyCodeLine{00028\ \ \ \ \ \}}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{string}\ getOriginal()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ valor\_original;\ \}}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{string}\ getHash()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ valor\_hashed;\ \}}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{int}\ getValue()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ value;\ \}}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ setValue(\textcolor{keywordtype}{int}\ val)\ \{\ value\ =\ val;\ \}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{string}\ calcularMD5(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ str)\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/\ INICIO\ IMPLEMENTACIÓN\ MD5\ -\/-\/-\/}}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ uint32;}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ uint32\ s[]\ =\ \{\ 7,12,17,22,\ 5,9,14,20,\ 4,11,16,23,\ 6,10,15,21\ \};}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ uint32\ K[]\ =\ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ 0xd76aa478,0xe8c7b756,0x242070db,0xc1bdceee,0xf57c0faf,0x4787c62a,0xa8304613,0xfd469501,}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ 0x698098d8,0x8b44f7af,0xffff5bb1,0x895cd7be,0x6b901122,0xfd987193,0xa679438e,0x49b40821,}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ 0xf61e2562,0xc040b340,0x265e5a51,0xe9b6c7aa,0xd62f105d,0x02441453,0xd8a1e681,0xe7d3fbc8,}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ 0x21e1cde6,0xc33707d6,0xf4d50d87,0x455a14ed,0xa9e3e905,0xfcefa3f8,0x676f02d9,0x8d2a4c8a,}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ 0xfffa3942,0x8771f681,0x6d9d6122,0xfde5380c,0xa4beea44,0x4bdecfa9,0xf6bb4b60,0xbebfbc70,}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ 0x289b7ec6,0xeaa127fa,0xd4ef3085,0x04881d05,0xd9d4d039,0xe6db99e5,0x1fa27cf8,0xc4ac5665,}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ 0xf4292244,0x432aff97,0xab9423a7,0xfc93a039,0x655b59c3,0x8f0ccc92,0xffeff47d,0x85845dd1,}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ 0x6fa87e4f,0xfe2ce6e0,0xa3014314,0x4e0811a1,0xf7537e82,0xbd3af235,0x2ad7d2bb,0xeb86d391}
+\DoxyCodeLine{00047\ \ \ \ \ \};}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keyword}{auto}\ leftrotate\ =\ [](uint32\ x,\ uint32\ c)\ \{\ \textcolor{keywordflow}{return}\ (x\ <<\ c)\ |\ (x\ >>\ (32\ -\/\ c));\ \};}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{comment}{//\ Inicializar\ variables}}
+\DoxyCodeLine{00051\ \ \ \ \ uint32\ a0\ =\ 0x67452301,\ b0\ =\ 0xefcdab89,\ c0\ =\ 0x98badcfe,\ d0\ =\ 0x10325476;}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{comment}{//\ Preprocesamiento}}
+\DoxyCodeLine{00054\ \ \ \ \ vector<unsigned\ char>\ msg(str.begin(),\ str.end());}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ orig\_len\_bits\ =\ msg.size()\ *\ 8;}
+\DoxyCodeLine{00056\ \ \ \ \ msg.push\_back(0x80);}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordflow}{while}\ ((msg.size()\ *\ 8)\ \%\ 512\ !=\ 448)\ msg.push\_back(0);}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 8;\ ++i)\ msg.push\_back((orig\_len\_bits\ >>\ (8\ *\ i))\ \&\ 0xFF);}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{comment}{//\ Procesar\ en\ bloques\ de\ 512\ bits}}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ offset\ =\ 0;\ offset\ <\ msg.size();\ offset\ +=\ 64)\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ uint32\ M[16];}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 16;\ ++i)\ \{}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ M[i]\ =\ 0;}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ 4;\ ++j)}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ M[i]\ |=\ msg[offset\ +\ i\ *\ 4\ +\ j]\ <<\ (j\ *\ 8);}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ uint32\ A\ =\ a0,\ B\ =\ b0,\ C\ =\ c0,\ D\ =\ d0;}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 64;\ ++i)\ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ uint32\ F,\ g;}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ <\ 16)\ \{\ F\ =\ (B\ \&\ C)\ |\ (\string~B\ \&\ D);\ g\ =\ i;\ \}}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (i\ <\ 32)\ \{\ F\ =\ (D\ \&\ B)\ |\ (\string~D\ \&\ C);\ g\ =\ (5\ *\ i\ +\ 1)\ \%\ 16;\ \}}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (i\ <\ 48)\ \{\ F\ =\ B\ \string^\ C\ \string^\ D;\ g\ =\ (3\ *\ i\ +\ 5)\ \%\ 16;\ \}}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{\ F\ =\ C\ \string^\ (B\ |\ \string~D);\ g\ =\ (7\ *\ i)\ \%\ 16;\ \}}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ uint32\ temp\ =\ D;}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ D\ =\ C;}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ C\ =\ B;}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ B\ =\ B\ +\ leftrotate(A\ +\ F\ +\ K[i]\ +\ M[g],\ s[(i\ /\ 16)\ *\ 4\ +\ (i\ \%\ 4)]);}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ A\ =\ temp;}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ a0\ +=\ A;\ b0\ +=\ B;\ c0\ +=\ C;\ d0\ +=\ D;}
+\DoxyCodeLine{00082\ \ \ \ \ \}}
+\DoxyCodeLine{00083\ \ \ \ \ stringstream\ ss;}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordflow}{for}\ (uint32\ v\ :\ \{a0,\ b0,\ c0,\ d0\})}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 4;\ ++i)}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ ss\ <<\ hex\ <<\ setw(2)\ <<\ setfill(\textcolor{charliteral}{'0'})\ <<\ ((v\ >>\ (8\ *\ i))\ \&\ 0xFF);}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordflow}{return}\ ss.str();}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/\ FIN\ IMPLEMENTACIÓN\ MD5\ -\/-\/-\/}}
+\DoxyCodeLine{00089\ \ \ \ \ \}}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00091\ \textcolor{comment}{\ \ \ \ static\ string\ calcularSHA256(const\ string\&\ str)\ \{}}
+\DoxyCodeLine{00092\ \textcolor{comment}{\ \ \ \ \ \ \ \ unsigned\ char\ hash[SHA256\_DIGEST\_LENGTH];}}
+\DoxyCodeLine{00093\ \textcolor{comment}{\ \ \ \ \ \ \ \ SHA256\_CTX\ sha256;}}
+\DoxyCodeLine{00094\ \textcolor{comment}{\ \ \ \ \ \ \ \ SHA256\_Init(\&sha256);}}
+\DoxyCodeLine{00095\ \textcolor{comment}{\ \ \ \ \ \ \ \ SHA256\_Update(\&sha256,\ str.c\_str(),\ str.size());}}
+\DoxyCodeLine{00096\ \textcolor{comment}{\ \ \ \ \ \ \ \ SHA256\_Final(hash,\ \&sha256);}}
+\DoxyCodeLine{00097\ \textcolor{comment}{\ \ \ \ \ \ \ \ //\ Convertir\ el\ hash\ a\ una\ cadena\ hexadecimal}}
+\DoxyCodeLine{00098\ \textcolor{comment}{\ \ \ \ \ \ \ \ stringstream\ ss;}}
+\DoxyCodeLine{00099\ \textcolor{comment}{\ \ \ \ \ \ \ \ for(int\ i\ =\ 0;\ i\ <\ SHA256\_DIGEST\_LENGTH;\ ++i)}}
+\DoxyCodeLine{00100\ \textcolor{comment}{\ \ \ \ \ \ \ \ ss\ <<\ hex\ <<\ setw(2)\ <<\ setfill('0')\ <<\ (int)hash[i];}}
+\DoxyCodeLine{00101\ \textcolor{comment}{\ \ \ \ \ \ \ \ return\ ss.str();}}
+\DoxyCodeLine{00102\ \textcolor{comment}{\ \ \ \ \}}}
+\DoxyCodeLine{00103\ \textcolor{comment}{\ \ \ \ */}}
+\DoxyCodeLine{00104\ \};}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \textcolor{comment}{//\ Tabla\ hash}}
+\DoxyCodeLine{00107\ \textcolor{keyword}{class\ }TablaHash\ \{}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{comment}{//\ Usamos\ ListaDoble\ para\ manejar\ colisiones}}
+\DoxyCodeLine{00109\ \ \ \ \ vector<ListaDobleCircular<Hash>*>\ table;}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{comment}{//\ Capacidad\ de\ la\ tabla\ hash}}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordtype}{int}\ capacidad;}
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordtype}{int}\ hashFunction(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ key)\ \{}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ hash\ =\ 0;}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{char}\ c\ :\ key)\ hash\ =\ (hash\ *\ 31\ +\ c)\ \%\ capacidad;}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ hash;}
+\DoxyCodeLine{00116\ \ \ \ \ \}}
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00118\ \ \ \ \ TablaHash(\textcolor{keywordtype}{int}\ cap)\ :\ capacidad(cap),\ table(cap,\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_lista_doble_circular}{ListaDobleCircular<Hash>}}())\ \{\}}
+\DoxyCodeLine{00119\ \ \ \ \ \string~TablaHash()\ \{}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}*\ lista\ :\ table)\ \{}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ lista;}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00123\ \ \ \ \ \}}
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{comment}{//\ Inserta\ un\ nuevo\ elemento\ o\ actualiza\ el\ valor\ si\ ya\ existe}}
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordtype}{void}\ insert(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ key,\ \textcolor{keywordtype}{int}\ value)\ \{}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ idx\ =\ hashFunction(key);}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}*\ lista\ =\ table[idx];}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}*\ nodo\ =\ lista-\/>buscar([\&](\mbox{\hyperlink{class_hash}{Hash}}*\ e)\{\ \textcolor{keywordflow}{return}\ e-\/>getOriginal()\ ==\ key;\ \});}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (nodo)\ \{}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ nodo-\/>setValue(value);}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ lista-\/>insertar(\textcolor{keyword}{new}\ \mbox{\hyperlink{class_hash}{Hash}}(key,\ value));}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00134\ \ \ \ \ \}}
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keywordtype}{bool}\ get(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ key,\ \textcolor{keywordtype}{int}\&\ value)\ \{}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ idx\ =\ hashFunction(key);}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}*\ lista\ =\ table[idx];}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}*\ nodo\ =\ lista-\/>buscar([\&](\mbox{\hyperlink{class_hash}{Hash}}*\ e)\{\ \textcolor{keywordflow}{return}\ e-\/>getOriginal()\ ==\ key;\ \});}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (nodo)\ \{}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ value\ =\ nodo-\/>getValue();}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
 \DoxyCodeLine{00144\ \ \ \ \ \}}
-\DoxyCodeLine{00145\ \};}
-\DoxyCodeLine{00146\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ HASH\_H}}
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keywordtype}{void}\ remove(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ key)\ \{}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ idx\ =\ hashFunction(key);}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}*\ lista\ =\ table[idx];}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}*\ nodo\ =\ lista-\/>buscar([\&](\mbox{\hyperlink{class_hash}{Hash}}*\ e)\{\ \textcolor{keywordflow}{return}\ e-\/>getOriginal()\ ==\ key;\ \});}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (nodo)\ \{}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ \ \ lista-\/>eliminar(nodo);}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00152\ \ \ \ \ \}}
+\DoxyCodeLine{00153\ \};}
+\DoxyCodeLine{00154\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ HASH\_H}}
 
 \end{DoxyCode}

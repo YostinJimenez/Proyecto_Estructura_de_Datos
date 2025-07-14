@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sistema Bancario: BancoException Class Reference</title>
+<title>Proyecto Banco: BancoException Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Sistema Bancario
+   <div id="projectname">Proyecto Banco<span id="projectnumber">&#160;v 1.0</span>
    </div>
+   <div id="projectbrief">Proyecto Banco</div>
   </td>
  </tr>
  </tbody>
@@ -100,11 +101,37 @@ Inheritance diagram for BancoException:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a59bb0ff07d1c62bde26b4a7947310f3e" id="r_a59bb0ff07d1c62bde26b4a7947310f3e"><td class="memItemLeft" align="right" valign="top"><a id="a59bb0ff07d1c62bde26b4a7947310f3e" name="a59bb0ff07d1c62bde26b4a7947310f3e"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BancoException</b> (const string &amp;msg)</td></tr>
+<tr class="memitem:a59bb0ff07d1c62bde26b4a7947310f3e" id="r_a59bb0ff07d1c62bde26b4a7947310f3e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a59bb0ff07d1c62bde26b4a7947310f3e">BancoException</a> (const string &amp;msg)</td></tr>
+<tr class="memdesc:a59bb0ff07d1c62bde26b4a7947310f3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementa la clase de excepción personalizada <a class="el" href="class_banco_exception.html">BancoException</a> para manejar errores del sistema bancario.  <br /></td></tr>
 <tr class="memitem:a9f754d1bea8bb8edf2f6b5d5c5ba7290" id="r_a9f754d1bea8bb8edf2f6b5d5c5ba7290"><td class="memItemLeft" align="right" valign="top"><a id="a9f754d1bea8bb8edf2f6b5d5c5ba7290" name="a9f754d1bea8bb8edf2f6b5d5c5ba7290"></a>
 const char *&#160;</td><td class="memItemRight" valign="bottom"><b>what</b> () const noexcept override</td></tr>
 </table>
+<a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a59bb0ff07d1c62bde26b4a7947310f3e" name="a59bb0ff07d1c62bde26b4a7947310f3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59bb0ff07d1c62bde26b4a7947310f3e">&#9670;&#160;</a></span>BancoException()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BancoException::BancoException </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;</td>          <td class="paramname"><span class="paramname"><em>msg</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Implementa la clase de excepción personalizada <a class="el" href="class_banco_exception.html">BancoException</a> para manejar errores del sistema bancario. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">msg</td><td>Mensaje descriptivo del error que se almacenará en el objeto. Inicializa el mensaje de error y proporciona el método what() para devolverlo como una cadena C-style, permitiendo su uso en la gestión de excepciones dentro de las operaciones bancarias. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="_banco_exception_8h_source.html">BancoException.h</a></li>
 <li><b>BancoException.cpp</b></li>

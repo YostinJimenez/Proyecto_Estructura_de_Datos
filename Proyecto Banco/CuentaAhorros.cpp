@@ -24,10 +24,9 @@ CuentaAhorros::CuentaAhorros(string numero, Cliente* c, Fecha fecha, double tasa
 
 void CuentaAhorros::depositar(double monto, Fecha fecha, bool esTransferencia, string cuentaOrigen) {
     try {
-        ValidacionDatos::validarMonto(monto, false);
         monto = round(monto * 100) / 100;
         saldo += monto;
-        string tipo = esTransferencia ? "Deposito" : "Deposito";
+        string tipo = esTransferencia ? "Transferencia desde " + cuentaOrigen : "Depósito";
         transacciones.insertar(new Transaccion<double>(tipo, monto, fecha, numeroCuenta, esTransferencia, cuentaOrigen));
     } catch (const BancoException& e) {
         throw;
@@ -36,9 +35,8 @@ void CuentaAhorros::depositar(double monto, Fecha fecha, bool esTransferencia, s
 
 bool CuentaAhorros::retirar(double monto, Fecha fecha, bool esTransferencia, string cuentaDestino) {
     try {
-        ValidacionDatos::validarMonto(monto, false);
         if (!esTransferencia && retirosRealizados >= limiteMensualRetiros) {
-            throw BancoException("Limite de retiros mensuales alcanzado.");
+            throw BancoException("Límite de retiros mensuales alcanzado.");
         }
         if (monto > saldo) {
             throw BancoException("Saldo insuficiente.");

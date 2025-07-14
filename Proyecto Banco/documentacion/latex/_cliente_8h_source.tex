@@ -1,36 +1,37 @@
 \doxysection{Cliente.\+h}
 \hypertarget{_cliente_8h_source}{}\label{_cliente_8h_source}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ CLIENTE\_H}}
-\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ CLIENTE\_H}}
-\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <string>}}
-\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}Persona.h"{}}}
-\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}ValidacionDatos.h"{}}}
-\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}Cuenta.h"{}}}
-\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}Fecha.h"{}}}
-\DoxyCodeLine{00008\ \textcolor{keyword}{using\ namespace\ }std;}
-\DoxyCodeLine{00009\ }
-\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }Cliente\ :\ \textcolor{keyword}{public}\ Persona\ \{}
-\DoxyCodeLine{00011\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{string}\ codigoCliente;}
-\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{string}\ correo;}
-\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{string}\ usuario;}
-\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{string}\ contrasena;}
-\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{class_cuenta}{Cuenta}}*\ cuenta;}
-\DoxyCodeLine{00017\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00018\ \ \ \ \ Cliente(\textcolor{keywordtype}{string}\ cedula,\ \textcolor{keywordtype}{string}\ primerNombre,\ \textcolor{keywordtype}{string}\ segundoNombre,\ \textcolor{keywordtype}{string}\ primerApellido,\ \textcolor{keywordtype}{string}\ segundoApellido,}
-\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ telefono,\ \textcolor{keywordtype}{string}\ direccion,\ \mbox{\hyperlink{class_fecha}{Fecha}}\ fechaNacimiento,\ \textcolor{keywordtype}{string}\ codigo,\ \textcolor{keywordtype}{string}\ correo,\ \textcolor{keywordtype}{string}\ usuario,\ \textcolor{keywordtype}{string}\ contrasena);}
-\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{string}\ mostrarInformacion()\ \textcolor{keyword}{override};}
-\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{string}\ getCodigo()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{string}\ getCorreo()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{string}\ getUsuario()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{string}\ getContrasena()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{void}\ setContrasena(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ nuevaContrasena);}
-\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{class_cuenta}{Cuenta}}*\ getCuenta()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{void}\ setCuenta(\mbox{\hyperlink{class_cuenta}{Cuenta}}*\ c);}
-\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{string}\ serializar()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00029\ \ \ \ \ \string~Cliente();}
-\DoxyCodeLine{00030\ \};}
-\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#ifndef\ CLIENTE\_H}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ CLIENTE\_H}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ "{}Persona.h"{}}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ "{}ValidacionDatos.h"{}}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ "{}Cuenta.h"{}}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ "{}Fecha.h"{}}}
+\DoxyCodeLine{00025\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{class\ }Cliente\ :\ \textcolor{keyword}{public}\ Persona\ \{}
+\DoxyCodeLine{00028\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{string}\ codigoCliente;}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{string}\ correo;}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{string}\ usuario;}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{string}\ contrasena;}
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{class_cuenta}{Cuenta}}*\ cuenta;}
+\DoxyCodeLine{00034\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00035\ \ \ \ \ Cliente(\textcolor{keywordtype}{string}\ cedula,\ \textcolor{keywordtype}{string}\ primerNombre,\ \textcolor{keywordtype}{string}\ segundoNombre,\ \textcolor{keywordtype}{string}\ primerApellido,\ \textcolor{keywordtype}{string}\ segundoApellido,}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ telefono,\ \textcolor{keywordtype}{string}\ direccion,\ \mbox{\hyperlink{class_fecha}{Fecha}}\ fechaNacimiento,\ \textcolor{keywordtype}{string}\ codigo,\ \textcolor{keywordtype}{string}\ correo,\ \textcolor{keywordtype}{string}\ usuario,\ \textcolor{keywordtype}{string}\ contrasena);}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{string}\ mostrarInformacion()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{string}\ getCodigo()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{string}\ getCorreo()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{string}\ getUsuario()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{string}\ getContrasena()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{void}\ setContrasena(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ nuevaContrasena);}
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{class_cuenta}{Cuenta}}*\ getCuenta()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{void}\ setCuenta(\mbox{\hyperlink{class_cuenta}{Cuenta}}*\ c);}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{string}\ serializar()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00046\ \ \ \ \ \string~Cliente();}
+\DoxyCodeLine{00047\ \};}
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

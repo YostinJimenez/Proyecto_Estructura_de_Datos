@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sistema Bancario: ValidacionDatos.h Source File</title>
+<title>Proyecto Banco: ValidacionDatos.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Sistema Bancario
+   <div id="projectname">Proyecto Banco<span id="projectnumber">&#160;v 1.0</span>
    </div>
+   <div id="projectbrief">Proyecto Banco</div>
   </td>
  </tr>
  </tbody>
@@ -97,38 +98,43 @@ $(function(){initNavTree('_validacion_datos_8h_source.html','',''); });
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;set&gt;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;Fecha.h&quot;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;BancoException.h&quot;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="foldopen" id="foldopen00008" data-start="{" data-end="};">
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="class_validacion_datos.html">    8</a></span><span class="keyword">class </span><a class="code hl_class" href="class_validacion_datos.html">ValidacionDatos</a> {</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <span class="keyword">enum</span> TipoDato {CEDULA, NOMBRE, CORREO, TELEFONO, USUARIO, CONTRASENA, FECHA, MONTO, NOMBRE_ARCHIVO, CEDULA_PREFIJO};</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="keyword">static</span> std::string capturarEntrada(TipoDato tipo, <span class="keyword">const</span> std::string&amp; mensaje, <span class="keywordtype">size_t</span> maxLongitud);</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keyword">static</span> <a class="code hl_class" href="class_fecha.html">Fecha</a> capturarFechaInteractiva(<span class="keyword">const</span> std::string&amp; mensaje, <span class="keywordtype">bool</span> esFechaNacimiento = <span class="keyword">false</span>);</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keyword">static</span> <a class="code hl_class" href="class_fecha.html">Fecha</a> capturarFechaInteractiva(<span class="keyword">const</span> std::string&amp; mensaje, <span class="keywordtype">bool</span> esFechaNacimiento, <span class="keyword">const</span> <a class="code hl_class" href="class_fecha.html">Fecha</a>* minFecha);</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> validarFecha(<span class="keyword">const</span> <a class="code hl_class" href="class_fecha.html">Fecha</a>&amp; fecha, <span class="keywordtype">bool</span> esFechaNacimiento = <span class="keyword">false</span>);</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> validarCedula(<span class="keyword">const</span> std::string&amp; cedula);</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> validarCedulaPrefijo(<span class="keyword">const</span> std::string&amp; cedula);</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> limpiar_linea(<span class="keyword">const</span> std::string&amp; mensaje);</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> limpiar_linea_Error(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; mensaje, <span class="keywordtype">size_t</span> longitud_extra);</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> validarNombre(<span class="keyword">const</span> std::string&amp; nombre);</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> validarCorreo(<span class="keyword">const</span> std::string&amp; correo);</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> validarTelefono(<span class="keyword">const</span> std::string&amp; telefono);</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> validarUsuario(<span class="keyword">const</span> std::string&amp; usuario);</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> validarContrasena(<span class="keyword">const</span> std::string&amp; contrasena);</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> validarMonto(<span class="keywordtype">double</span> monto, <span class="keywordtype">bool</span> permitirCero);</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> validarNombreArchivo(<span class="keyword">const</span> std::string&amp; entrada);</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keyword">static</span> std::string ingresar_dni(<span class="keyword">const</span> std::string&amp; mensaje);</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keyword">static</span> std::string validarFecha(<span class="keyword">const</span> std::string&amp; fecha);</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keyword">static</span> std::string validarHora(<span class="keyword">const</span> std::string&amp; hora);</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> validar_hora_minuto_segundo(<span class="keywordtype">int</span> hora, <span class="keywordtype">int</span> minuto, <span class="keywordtype">int</span> segundo);</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> es_fecha_valida(<span class="keywordtype">int</span> dia, <span class="keywordtype">int</span> mes, <span class="keywordtype">int</span> anio);</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keyword">static</span> std::string validarCaracter(std::string&amp; opcion);</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>};</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="foldopen" id="foldopen00012" data-start="{" data-end="};">
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="class_validacion_datos.html">   12</a></span><span class="keyword">class </span><a class="code hl_class" href="class_validacion_datos.html">ValidacionDatos</a> {</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keyword">enum</span> TipoDato {CEDULA, NOMBRE, CORREO, TELEFONO, USUARIO, CONTRASENA, FECHA, MONTO, NOMBRE_ARCHIVO, CEDULA_PREFIJO};</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keyword">static</span> std::string <a class="code hl_function" href="class_validacion_datos.html#a47faaa03577241411f73b864cea84ee6">capturarEntrada</a>(TipoDato tipo, <span class="keyword">const</span> std::string&amp; mensaje, <span class="keywordtype">size_t</span> maxLongitud);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="class_validacion_datos.html#aa365ecc734065f4e2ae8c7c2cee02535">   29</a></span>    <span class="keyword">static</span> <a class="code hl_class" href="class_fecha.html">Fecha</a> <a class="code hl_function" href="class_validacion_datos.html#aa365ecc734065f4e2ae8c7c2cee02535">capturarFechaInteractiva</a>(<span class="keyword">const</span> std::string&amp; mensaje, <span class="keywordtype">bool</span> esFechaNacimiento = <span class="keyword">false</span>);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="class_validacion_datos.html#a9415859e92181d46b3be06446c2cbad1">   37</a></span>    <span class="keyword">static</span> <a class="code hl_class" href="class_fecha.html">Fecha</a> <a class="code hl_function" href="class_validacion_datos.html#a9415859e92181d46b3be06446c2cbad1">capturarFechaInteractiva</a>(<span class="keyword">const</span> std::string&amp; mensaje, <span class="keywordtype">bool</span> esFechaNacimiento, <span class="keyword">const</span> <a class="code hl_class" href="class_fecha.html">Fecha</a>* minFecha);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_validacion_datos.html#a4e64f8618fb12247ba4fa0c720cf4b03">validarFecha</a>(<span class="keyword">const</span> <a class="code hl_class" href="class_fecha.html">Fecha</a>&amp; fecha, <span class="keywordtype">bool</span> esFechaNacimiento = <span class="keyword">false</span>);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_validacion_datos.html#a773a653191f44403694fa4b92ab6ee01">validarCedula</a>(<span class="keyword">const</span> std::string&amp; cedula);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> validarCedulaPrefijo(<span class="keyword">const</span> std::string&amp; cedula);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> limpiar_linea(<span class="keyword">const</span> std::string&amp; mensaje);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> validarNombre(<span class="keyword">const</span> std::string&amp; nombre);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> validarCorreo(<span class="keyword">const</span> std::string&amp; correo);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> validarTelefono(<span class="keyword">const</span> std::string&amp; telefono);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> validarUsuario(<span class="keyword">const</span> std::string&amp; usuario);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> validarContrasena(<span class="keyword">const</span> std::string&amp; contrasena);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> validarMonto(<span class="keywordtype">double</span> monto, <span class="keywordtype">bool</span> permitirCero);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> validarNombreArchivo(<span class="keyword">const</span> std::string&amp; entrada);</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keyword">static</span> std::string ingresar_dni(<span class="keyword">const</span> std::string&amp; mensaje);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keyword">static</span> std::string validar_Fecha(<span class="keyword">const</span> std::string&amp; fecha);</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keyword">static</span> std::string validarHora(<span class="keyword">const</span> std::string&amp; hora);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> validar_hora_minuto_segundo(<span class="keywordtype">int</span> hora, <span class="keywordtype">int</span> minuto, <span class="keywordtype">int</span> segundo);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> es_fecha_valida(<span class="keywordtype">int</span> dia, <span class="keywordtype">int</span> mes, <span class="keywordtype">int</span> anio);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keyword">static</span> std::string validarCaracter(std::string&amp; opcion);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>};</div>
 </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclass_fecha_html"><div class="ttname"><a href="class_fecha.html">Fecha</a></div><div class="ttdef"><b>Definition</b> Fecha.h:7</div></div>
-<div class="ttc" id="aclass_validacion_datos_html"><div class="ttname"><a href="class_validacion_datos.html">ValidacionDatos</a></div><div class="ttdef"><b>Definition</b> ValidacionDatos.h:8</div></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclass_fecha_html"><div class="ttname"><a href="class_fecha.html">Fecha</a></div><div class="ttdef"><b>Definition</b> Fecha.h:13</div></div>
+<div class="ttc" id="aclass_validacion_datos_html"><div class="ttname"><a href="class_validacion_datos.html">ValidacionDatos</a></div><div class="ttdoc">Clase que proporciona métodos para validar diferentes tipos de datos de entrada.</div><div class="ttdef"><b>Definition</b> ValidacionDatos.h:12</div></div>
+<div class="ttc" id="aclass_validacion_datos_html_a47faaa03577241411f73b864cea84ee6"><div class="ttname"><a href="class_validacion_datos.html#a47faaa03577241411f73b864cea84ee6">ValidacionDatos::capturarEntrada</a></div><div class="ttdeci">static std::string capturarEntrada(TipoDato tipo, const std::string &amp;mensaje, size_t maxLongitud)</div><div class="ttdoc">Captura e interpreta una entrada según el tipo de dato.</div><div class="ttdef"><b>Definition</b> ValidacionDatos.cpp:177</div></div>
+<div class="ttc" id="aclass_validacion_datos_html_a4e64f8618fb12247ba4fa0c720cf4b03"><div class="ttname"><a href="class_validacion_datos.html#a4e64f8618fb12247ba4fa0c720cf4b03">ValidacionDatos::validarFecha</a></div><div class="ttdeci">static void validarFecha(const Fecha &amp;fecha, bool esFechaNacimiento=false)</div><div class="ttdoc">Valida una fecha dada.</div><div class="ttdef"><b>Definition</b> ValidacionDatos.cpp:144</div></div>
+<div class="ttc" id="aclass_validacion_datos_html_a773a653191f44403694fa4b92ab6ee01"><div class="ttname"><a href="class_validacion_datos.html#a773a653191f44403694fa4b92ab6ee01">ValidacionDatos::validarCedula</a></div><div class="ttdeci">static void validarCedula(const std::string &amp;cedula)</div><div class="ttdoc">Valida una cédula de identidad.</div><div class="ttdef"><b>Definition</b> ValidacionDatos.cpp:304</div></div>
+<div class="ttc" id="aclass_validacion_datos_html_a9415859e92181d46b3be06446c2cbad1"><div class="ttname"><a href="class_validacion_datos.html#a9415859e92181d46b3be06446c2cbad1">ValidacionDatos::capturarFechaInteractiva</a></div><div class="ttdeci">static Fecha capturarFechaInteractiva(const std::string &amp;mensaje, bool esFechaNacimiento, const Fecha *minFecha)</div><div class="ttdoc">Captura una fecha interactiva con un límite mínimo.</div></div>
+<div class="ttc" id="aclass_validacion_datos_html_aa365ecc734065f4e2ae8c7c2cee02535"><div class="ttname"><a href="class_validacion_datos.html#aa365ecc734065f4e2ae8c7c2cee02535">ValidacionDatos::capturarFechaInteractiva</a></div><div class="ttdeci">static Fecha capturarFechaInteractiva(const std::string &amp;mensaje, bool esFechaNacimiento=false)</div><div class="ttdoc">Captura una fecha de forma interactiva.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

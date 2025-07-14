@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sistema Bancario: Marquesina Class Reference</title>
+<title>Proyecto Banco: Marquesina Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Sistema Bancario
+   <div id="projectname">Proyecto Banco<span id="projectnumber">&#160;v 1.0</span>
    </div>
+   <div id="projectbrief">Proyecto Banco</div>
   </td>
  </tr>
  </tbody>
@@ -91,26 +92,384 @@ $(function(){initNavTree('class_marquesina.html','','class_marquesina-members');
   <div class="headertitle"><div class="title">Marquesina Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Clase que implementa una marquesina de texto deslizante.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_marquesina_8h_source.html">Marquesina.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a82c916074abbd0b8fb68239dcd198fe3" id="r_a82c916074abbd0b8fb68239dcd198fe3"><td class="memItemLeft" align="right" valign="top"><a id="a82c916074abbd0b8fb68239dcd198fe3" name="a82c916074abbd0b8fb68239dcd198fe3"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>get_cursor_row</b> ()</td></tr>
-<tr class="memitem:a81c06f5292b77d7bd169a9e38bf653ca" id="r_a81c06f5292b77d7bd169a9e38bf653ca"><td class="memItemLeft" align="right" valign="top"><a id="a81c06f5292b77d7bd169a9e38bf653ca" name="a81c06f5292b77d7bd169a9e38bf653ca"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Marquesina</b> (int x, int y, int ancho, const std::string &amp;archivoHTML, int velocidad=100)</td></tr>
-<tr class="memitem:a42a7b6c33db1deb208a381eda083a476" id="r_a42a7b6c33db1deb208a381eda083a476"><td class="memItemLeft" align="right" valign="top"><a id="a42a7b6c33db1deb208a381eda083a476" name="a42a7b6c33db1deb208a381eda083a476"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>iniciar</b> ()</td></tr>
-<tr class="memitem:a9fed251582657d7454cb3a06fbb1ee16" id="r_a9fed251582657d7454cb3a06fbb1ee16"><td class="memItemLeft" align="right" valign="top"><a id="a9fed251582657d7454cb3a06fbb1ee16" name="a9fed251582657d7454cb3a06fbb1ee16"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>detener</b> ()</td></tr>
-<tr class="memitem:ae33595e3e65b83e199e04e79739989eb" id="r_ae33595e3e65b83e199e04e79739989eb"><td class="memItemLeft" align="right" valign="top"><a id="ae33595e3e65b83e199e04e79739989eb" name="ae33595e3e65b83e199e04e79739989eb"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>pausar</b> ()</td></tr>
-<tr class="memitem:aaaa028056dca12f370ea4d828bd40171" id="r_aaaa028056dca12f370ea4d828bd40171"><td class="memItemLeft" align="right" valign="top"><a id="aaaa028056dca12f370ea4d828bd40171" name="aaaa028056dca12f370ea4d828bd40171"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>reanudar</b> ()</td></tr>
-<tr class="memitem:a281562e225650be428afa5808b093653" id="r_a281562e225650be428afa5808b093653"><td class="memItemLeft" align="right" valign="top"><a id="a281562e225650be428afa5808b093653" name="a281562e225650be428afa5808b093653"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>actualizarTexto</b> (const std::string &amp;nuevoTexto)</td></tr>
+<tr class="memitem:a81c06f5292b77d7bd169a9e38bf653ca" id="r_a81c06f5292b77d7bd169a9e38bf653ca"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a81c06f5292b77d7bd169a9e38bf653ca">Marquesina</a> (int x, int y, int ancho, const std::string &amp;archivoHTML, int velocidad=100)</td></tr>
+<tr class="memdesc:a81c06f5292b77d7bd169a9e38bf653ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor de la marquesina.  <br /></td></tr>
+<tr class="memitem:aa0c9f691911680b2ce26646e8283b046" id="r_aa0c9f691911680b2ce26646e8283b046"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa0c9f691911680b2ce26646e8283b046">~Marquesina</a> ()</td></tr>
+<tr class="memdesc:aa0c9f691911680b2ce26646e8283b046"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor de la marquesina.  <br /></td></tr>
+<tr class="memitem:a42a7b6c33db1deb208a381eda083a476" id="r_a42a7b6c33db1deb208a381eda083a476"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a42a7b6c33db1deb208a381eda083a476">iniciar</a> ()</td></tr>
+<tr class="memdesc:a42a7b6c33db1deb208a381eda083a476"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicia la ejecución de la marquesina.  <br /></td></tr>
+<tr class="memitem:a9fed251582657d7454cb3a06fbb1ee16" id="r_a9fed251582657d7454cb3a06fbb1ee16"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9fed251582657d7454cb3a06fbb1ee16">detener</a> ()</td></tr>
+<tr class="memdesc:a9fed251582657d7454cb3a06fbb1ee16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detiene permanentemente la ejecución de la marquesina.  <br /></td></tr>
+<tr class="memitem:ae33595e3e65b83e199e04e79739989eb" id="r_ae33595e3e65b83e199e04e79739989eb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae33595e3e65b83e199e04e79739989eb">pausar</a> ()</td></tr>
+<tr class="memdesc:ae33595e3e65b83e199e04e79739989eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pausa temporalmente la marquesina.  <br /></td></tr>
+<tr class="memitem:aaaa028056dca12f370ea4d828bd40171" id="r_aaaa028056dca12f370ea4d828bd40171"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaaa028056dca12f370ea4d828bd40171">reanudar</a> ()</td></tr>
+<tr class="memdesc:aaaa028056dca12f370ea4d828bd40171"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reanuda la ejecución de la marquesina pausada.  <br /></td></tr>
+<tr class="memitem:a281562e225650be428afa5808b093653" id="r_a281562e225650be428afa5808b093653"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a281562e225650be428afa5808b093653">actualizarTexto</a> (const std::string &amp;nuevoTexto)</td></tr>
+<tr class="memdesc:a281562e225650be428afa5808b093653"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actualiza el texto de la marquesina.  <br /></td></tr>
+<tr class="memitem:a173dc18c06673f9fb83e7bd1012dd41a" id="r_a173dc18c06673f9fb83e7bd1012dd41a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a173dc18c06673f9fb83e7bd1012dd41a">bloquear</a> ()</td></tr>
+<tr class="memdesc:a173dc18c06673f9fb83e7bd1012dd41a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bloquea temporalmente la marquesina.  <br /></td></tr>
+<tr class="memitem:a1e8de27731a32d4dc7a31c10625466c0" id="r_a1e8de27731a32d4dc7a31c10625466c0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1e8de27731a32d4dc7a31c10625466c0">desbloquear</a> ()</td></tr>
+<tr class="memdesc:a1e8de27731a32d4dc7a31c10625466c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Desbloquea la marquesina.  <br /></td></tr>
+<tr class="memitem:a4d1b8d42abcf0a8dea37049c159446d6" id="r_a4d1b8d42abcf0a8dea37049c159446d6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4d1b8d42abcf0a8dea37049c159446d6">marcarOperacionCritica</a> ()</td></tr>
+<tr class="memdesc:a4d1b8d42abcf0a8dea37049c159446d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Marca el inicio de una operación crítica de cursor.  <br /></td></tr>
+<tr class="memitem:a6d1b94cc50c3785f9f7a99196204fa65" id="r_a6d1b94cc50c3785f9f7a99196204fa65"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6d1b94cc50c3785f9f7a99196204fa65">finalizarOperacionCritica</a> ()</td></tr>
+<tr class="memdesc:a6d1b94cc50c3785f9f7a99196204fa65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Marca el fin de una operación crítica de cursor.  <br /></td></tr>
+<tr class="memitem:a62f40a4d1b82ec2c3bb5fc9ec298aec9" id="r_a62f40a4d1b82ec2c3bb5fc9ec298aec9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a62f40a4d1b82ec2c3bb5fc9ec298aec9">forzarActualizacion</a> ()</td></tr>
+<tr class="memdesc:a62f40a4d1b82ec2c3bb5fc9ec298aec9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fuerza una actualización inmediata de la marquesina.  <br /></td></tr>
 <tr class="memitem:a35d47b3670a39652ab61ee262340ee2a" id="r_a35d47b3670a39652ab61ee262340ee2a"><td class="memItemLeft" align="right" valign="top"><a id="a35d47b3670a39652ab61ee262340ee2a" name="a35d47b3670a39652ab61ee262340ee2a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>mostrarRutaArchivo</b> ()</td></tr>
+<tr class="memdesc:a35d47b3670a39652ab61ee262340ee2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Muestra la ruta del archivo HTML (para depuración) <br /></td></tr>
+<tr class="memitem:a2f4a7ec9c37da4db63663b178089570e" id="r_a2f4a7ec9c37da4db63663b178089570e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2f4a7ec9c37da4db63663b178089570e">estaVisible</a> () const</td></tr>
+<tr class="memdesc:a2f4a7ec9c37da4db63663b178089570e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifica si la marquesina está visible.  <br /></td></tr>
+<tr class="memitem:a82c916074abbd0b8fb68239dcd198fe3" id="r_a82c916074abbd0b8fb68239dcd198fe3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a82c916074abbd0b8fb68239dcd198fe3">get_cursor_row</a> ()</td></tr>
+<tr class="memdesc:a82c916074abbd0b8fb68239dcd198fe3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtiene la posición X actual del cursor de la marquesina.  <br /></td></tr>
 </table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Clase que implementa una marquesina de texto deslizante. </p>
+<p>Permite mostrar textos con efectos de desplazamiento horizontal en consola. Funciona en un hilo separado y puede ser controlada dinámicamente (pausar, detener, etc.). Admite formateo básico a través de archivos HTML simples. </p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a81c06f5292b77d7bd169a9e38bf653ca" name="a81c06f5292b77d7bd169a9e38bf653ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81c06f5292b77d7bd169a9e38bf653ca">&#9670;&#160;</a></span>Marquesina()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Marquesina::Marquesina </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>ancho</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>archivoHTML</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>velocidad</em></span><span class="paramdefsep"> = </span><span class="paramdefval">100</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor de la marquesina. </p>
+<p>Constructor de la clase <a class="el" href="class_marquesina.html" title="Clase que implementa una marquesina de texto deslizante.">Marquesina</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>Posición X en la consola </td></tr>
+    <tr><td class="paramname">y</td><td>Posición Y en la consola </td></tr>
+    <tr><td class="paramname">ancho</td><td>Ancho en caracteres de la marquesina </td></tr>
+    <tr><td class="paramname">archivoHTML</td><td>Ruta del archivo HTML con el contenido </td></tr>
+    <tr><td class="paramname">velocidad</td><td>Velocidad de desplazamiento (delay en ms, por defecto 100)</td></tr>
+    <tr><td class="paramname">x</td><td>Posición X en la consola </td></tr>
+    <tr><td class="paramname">y</td><td>Posición Y en la consola </td></tr>
+    <tr><td class="paramname">ancho</td><td>Ancho en caracteres de la marquesina </td></tr>
+    <tr><td class="paramname">archivoHTML</td><td>Ruta del archivo HTML que contiene el contenido de la marquesina </td></tr>
+    <tr><td class="paramname">velocidad</td><td>Velocidad de desplazamiento del texto (en milisegundos) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa0c9f691911680b2ce26646e8283b046" name="aa0c9f691911680b2ce26646e8283b046"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0c9f691911680b2ce26646e8283b046">&#9670;&#160;</a></span>~Marquesina()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Marquesina::~Marquesina </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Destructor de la marquesina. </p>
+<p>Destructor de la clase <a class="el" href="class_marquesina.html" title="Clase que implementa una marquesina de texto deslizante.">Marquesina</a>.</p>
+<p>Detiene el hilo y libera los recursos</p>
+<p>Detiene el hilo de la marquesina si está en ejecución </p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a281562e225650be428afa5808b093653" name="a281562e225650be428afa5808b093653"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a281562e225650be428afa5808b093653">&#9670;&#160;</a></span>actualizarTexto()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Marquesina::actualizarTexto </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>nuevoTexto</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Actualiza el texto de la marquesina. </p>
+<p>Función principal que se ejecuta en el hilo de la marquesina.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nuevoTexto</td><td>Nuevo texto a mostrar </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a173dc18c06673f9fb83e7bd1012dd41a" name="a173dc18c06673f9fb83e7bd1012dd41a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a173dc18c06673f9fb83e7bd1012dd41a">&#9670;&#160;</a></span>bloquear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Marquesina::bloquear </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Bloquea temporalmente la marquesina. </p>
+<p>Bloquea la marquesina impidiendo cualquier actualización.</p>
+<p>Impide que la marquesina se dibuje en pantalla </p>
+
+</div>
+</div>
+<a id="a1e8de27731a32d4dc7a31c10625466c0" name="a1e8de27731a32d4dc7a31c10625466c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e8de27731a32d4dc7a31c10625466c0">&#9670;&#160;</a></span>desbloquear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Marquesina::desbloquear </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Desbloquea la marquesina. </p>
+<p>Desbloquea la marquesina permitiendo actualizaciones.</p>
+<p>Permite que la marquesina reanude su visualización </p>
+
+</div>
+</div>
+<a id="a9fed251582657d7454cb3a06fbb1ee16" name="a9fed251582657d7454cb3a06fbb1ee16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fed251582657d7454cb3a06fbb1ee16">&#9670;&#160;</a></span>detener()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Marquesina::detener </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Detiene permanentemente la ejecución de la marquesina. </p>
+<p>Detiene la animación de la marquesina y finaliza el hilo. </p>
+
+</div>
+</div>
+<a id="a2f4a7ec9c37da4db63663b178089570e" name="a2f4a7ec9c37da4db63663b178089570e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f4a7ec9c37da4db63663b178089570e">&#9670;&#160;</a></span>estaVisible()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Marquesina::estaVisible </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Verifica si la marquesina está visible. </p>
+<dl class="section return"><dt>Returns</dt><dd>true si la marquesina está ejecutándose y es visible, false en caso contrario </dd></dl>
+
+</div>
+</div>
+<a id="a6d1b94cc50c3785f9f7a99196204fa65" name="a6d1b94cc50c3785f9f7a99196204fa65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d1b94cc50c3785f9f7a99196204fa65">&#9670;&#160;</a></span>finalizarOperacionCritica()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Marquesina::finalizarOperacionCritica </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Marca el fin de una operación crítica de cursor. </p>
+<p>Marca el fin de una operación crítica. </p>
+
+</div>
+</div>
+<a id="a62f40a4d1b82ec2c3bb5fc9ec298aec9" name="a62f40a4d1b82ec2c3bb5fc9ec298aec9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62f40a4d1b82ec2c3bb5fc9ec298aec9">&#9670;&#160;</a></span>forzarActualizacion()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Marquesina::forzarActualizacion </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fuerza una actualización inmediata de la marquesina. </p>
+<p>Actualiza el contenido del buffer de la marquesina. </p>
+
+</div>
+</div>
+<a id="a82c916074abbd0b8fb68239dcd198fe3" name="a82c916074abbd0b8fb68239dcd198fe3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82c916074abbd0b8fb68239dcd198fe3">&#9670;&#160;</a></span>get_cursor_row()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Marquesina::get_cursor_row </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Obtiene la posición X actual del cursor de la marquesina. </p>
+<dl class="section return"><dt>Returns</dt><dd>Posición X del cursor </dd></dl>
+
+</div>
+</div>
+<a id="a42a7b6c33db1deb208a381eda083a476" name="a42a7b6c33db1deb208a381eda083a476"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42a7b6c33db1deb208a381eda083a476">&#9670;&#160;</a></span>iniciar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Marquesina::iniciar </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Inicia la ejecución de la marquesina. </p>
+<p>Inicia la animación de la marquesina en un hilo separado. </p>
+
+</div>
+</div>
+<a id="a4d1b8d42abcf0a8dea37049c159446d6" name="a4d1b8d42abcf0a8dea37049c159446d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d1b8d42abcf0a8dea37049c159446d6">&#9670;&#160;</a></span>marcarOperacionCritica()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Marquesina::marcarOperacionCritica </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Marca el inicio de una operación crítica de cursor. </p>
+<p>Marca el inicio de una operación crítica que no debe ser interrumpida.</p>
+<p>Evita que la marquesina interfiera con operaciones de posicionamiento del cursor </p>
+
+</div>
+</div>
+<a id="ae33595e3e65b83e199e04e79739989eb" name="ae33595e3e65b83e199e04e79739989eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae33595e3e65b83e199e04e79739989eb">&#9670;&#160;</a></span>pausar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Marquesina::pausar </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pausa temporalmente la marquesina. </p>
+<p>Pausa temporalmente la animación de la marquesina. </p>
+
+</div>
+</div>
+<a id="aaaa028056dca12f370ea4d828bd40171" name="aaaa028056dca12f370ea4d828bd40171"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaaa028056dca12f370ea4d828bd40171">&#9670;&#160;</a></span>reanudar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Marquesina::reanudar </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reanuda la ejecución de la marquesina pausada. </p>
+<p>Reanuda la animación de la marquesina después de una pausa. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="_marquesina_8h_source.html">Marquesina.h</a></li>
 <li><b>Marquesina.cpp</b></li>

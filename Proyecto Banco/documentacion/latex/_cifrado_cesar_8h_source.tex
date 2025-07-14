@@ -1,36 +1,35 @@
 \doxysection{Cifrado\+Cesar.\+h}
 \hypertarget{_cifrado_cesar_8h_source}{}\label{_cifrado_cesar_8h_source}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ CIFRADOCESAR\_H}}
-\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ CIFRADOCESAR\_H}}
-\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}BancoException.h"{}}}
-\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}ValidacionDatos.h"{}}}
-\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}Cliente.h"{}}}
-\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}Hash.h"{}}}
-\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}Banco.h"{}}}
-\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}Marquesina.h"{}}}
-\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <conio.h>}}
-\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <string>}}
-\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <fstream>}}
-\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <iostream>}}
-\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <vector>}}
-\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <filesystem>}}
-\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <algorithm>}}
-\DoxyCodeLine{00016\ \textcolor{keyword}{namespace\ }fs\ =\ std::filesystem;}
-\DoxyCodeLine{00017\ \textcolor{keyword}{using\ namespace\ }std;}
-\DoxyCodeLine{00018\ }
-\DoxyCodeLine{00019\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_cifrado_cesar}{CifradoCesar}}\ \{}
-\DoxyCodeLine{00020\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ codificarArchivo(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ archivoEntrada,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ archivoSalida,\ \textcolor{keywordtype}{int}\ clave);}
-\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ decodificarArchivo(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ archivoEntrada,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ archivoSalida,\ \textcolor{keywordtype}{int}\ clave);}
-\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ listarArchivosTxt(\textcolor{keywordtype}{int}\ index);}
-\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ descifrar\_archivos\_txt();}
-\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ cifrar\_archivos\_txt();}
-\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ verificarIntegridadCifrados();}
-\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ createPDF(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ txtFile,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ pdfFile);}
-\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ crearPDFPersonal(\mbox{\hyperlink{class_cliente}{Cliente}}*\ cliente,\ \textcolor{keywordtype}{string}\ carpeta);}
-\DoxyCodeLine{00029\ \};}
-\DoxyCodeLine{00030\ }
-\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#ifndef\ CIFRADOCESAR\_H}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#define\ CIFRADOCESAR\_H}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}Marquesina.h"{}}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ "{}BancoException.h"{}}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}ValidacionDatos.h"{}}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}Hash.h"{}}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}Banco.h"{}}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <conio.h>}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ <filesystem>}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{00027\ \textcolor{keyword}{namespace\ }fs\ =\ std::filesystem;}
+\DoxyCodeLine{00028\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_cifrado_cesar}{CifradoCesar}}\ \{}
+\DoxyCodeLine{00031\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_cifrado_cesar_a19ce2c6dc89e11b62cfd6327bdb84264}{codificarArchivo}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ archivoEntrada,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ archivoSalida,\ \textcolor{keywordtype}{int}\ clave);}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_cifrado_cesar_a070b393b01e6d6ae6c75387fdc9346cf}{decodificarArchivo}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ archivoEntrada,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ archivoSalida,\ \textcolor{keywordtype}{int}\ clave);}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_cifrado_cesar_a0702a6f5b69f742b593d5f5513c15014}{listarArchivosTxt}}(\textcolor{keywordtype}{int}\ index);}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_cifrado_cesar_a5d9fd8680c0f9a458d7ad3db4d3c4fcd}{descifrar\_archivos\_txt}}();}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_cifrado_cesar_abe586c08274aefb691ed0606cd73145e}{cifrar\_archivos\_txt}}();}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_cifrado_cesar_a9ad1aa06832f9f981f781e5cbe44ead7}{generar\_txt\_a\_pdf}}();}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_cifrado_cesar_a851388cc2826c2b36f2da00a4d4a3a4c}{verificarIntegridadCifrados}}();}
+\DoxyCodeLine{00039\ \};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

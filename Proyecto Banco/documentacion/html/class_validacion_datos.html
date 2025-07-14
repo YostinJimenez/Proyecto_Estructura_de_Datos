@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sistema Bancario: ValidacionDatos Class Reference</title>
+<title>Proyecto Banco: ValidacionDatos Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Sistema Bancario
+   <div id="projectname">Proyecto Banco<span id="projectnumber">&#160;v 1.0</span>
    </div>
+   <div id="projectbrief">Proyecto Banco</div>
   </td>
  </tr>
  </tbody>
@@ -91,6 +92,11 @@ $(function(){initNavTree('class_validacion_datos.html','','class_validacion_dato
   <div class="headertitle"><div class="title">ValidacionDatos Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Clase que proporciona métodos para validar diferentes tipos de datos de entrada.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_validacion_datos_8h_source.html">ValidacionDatos.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
@@ -112,22 +118,20 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a47faaa03577241411f73b864cea84ee6" id="r_a47faaa03577241411f73b864cea84ee6"><td class="memItemLeft" align="right" valign="top"><a id="a47faaa03577241411f73b864cea84ee6" name="a47faaa03577241411f73b864cea84ee6"></a>
-static std::string&#160;</td><td class="memItemRight" valign="bottom"><b>capturarEntrada</b> (TipoDato tipo, const std::string &amp;mensaje, size_t maxLongitud)</td></tr>
-<tr class="memitem:aa365ecc734065f4e2ae8c7c2cee02535" id="r_aa365ecc734065f4e2ae8c7c2cee02535"><td class="memItemLeft" align="right" valign="top"><a id="aa365ecc734065f4e2ae8c7c2cee02535" name="aa365ecc734065f4e2ae8c7c2cee02535"></a>
-static <a class="el" href="class_fecha.html">Fecha</a>&#160;</td><td class="memItemRight" valign="bottom"><b>capturarFechaInteractiva</b> (const std::string &amp;mensaje, bool esFechaNacimiento=false)</td></tr>
-<tr class="memitem:a9415859e92181d46b3be06446c2cbad1" id="r_a9415859e92181d46b3be06446c2cbad1"><td class="memItemLeft" align="right" valign="top"><a id="a9415859e92181d46b3be06446c2cbad1" name="a9415859e92181d46b3be06446c2cbad1"></a>
-static <a class="el" href="class_fecha.html">Fecha</a>&#160;</td><td class="memItemRight" valign="bottom"><b>capturarFechaInteractiva</b> (const std::string &amp;mensaje, bool esFechaNacimiento, const <a class="el" href="class_fecha.html">Fecha</a> *minFecha)</td></tr>
-<tr class="memitem:a4e64f8618fb12247ba4fa0c720cf4b03" id="r_a4e64f8618fb12247ba4fa0c720cf4b03"><td class="memItemLeft" align="right" valign="top"><a id="a4e64f8618fb12247ba4fa0c720cf4b03" name="a4e64f8618fb12247ba4fa0c720cf4b03"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>validarFecha</b> (const <a class="el" href="class_fecha.html">Fecha</a> &amp;fecha, bool esFechaNacimiento=false)</td></tr>
-<tr class="memitem:a773a653191f44403694fa4b92ab6ee01" id="r_a773a653191f44403694fa4b92ab6ee01"><td class="memItemLeft" align="right" valign="top"><a id="a773a653191f44403694fa4b92ab6ee01" name="a773a653191f44403694fa4b92ab6ee01"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>validarCedula</b> (const std::string &amp;cedula)</td></tr>
+<tr class="memitem:a47faaa03577241411f73b864cea84ee6" id="r_a47faaa03577241411f73b864cea84ee6"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a47faaa03577241411f73b864cea84ee6">capturarEntrada</a> (TipoDato tipo, const std::string &amp;mensaje, size_t maxLongitud)</td></tr>
+<tr class="memdesc:a47faaa03577241411f73b864cea84ee6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Captura e interpreta una entrada según el tipo de dato.  <br /></td></tr>
+<tr class="memitem:aa365ecc734065f4e2ae8c7c2cee02535" id="r_aa365ecc734065f4e2ae8c7c2cee02535"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_fecha.html">Fecha</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa365ecc734065f4e2ae8c7c2cee02535">capturarFechaInteractiva</a> (const std::string &amp;mensaje, bool esFechaNacimiento=false)</td></tr>
+<tr class="memdesc:aa365ecc734065f4e2ae8c7c2cee02535"><td class="mdescLeft">&#160;</td><td class="mdescRight">Captura una fecha de forma interactiva.  <br /></td></tr>
+<tr class="memitem:a9415859e92181d46b3be06446c2cbad1" id="r_a9415859e92181d46b3be06446c2cbad1"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_fecha.html">Fecha</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9415859e92181d46b3be06446c2cbad1">capturarFechaInteractiva</a> (const std::string &amp;mensaje, bool esFechaNacimiento, const <a class="el" href="class_fecha.html">Fecha</a> *minFecha)</td></tr>
+<tr class="memdesc:a9415859e92181d46b3be06446c2cbad1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Captura una fecha interactiva con un límite mínimo.  <br /></td></tr>
+<tr class="memitem:a4e64f8618fb12247ba4fa0c720cf4b03" id="r_a4e64f8618fb12247ba4fa0c720cf4b03"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4e64f8618fb12247ba4fa0c720cf4b03">validarFecha</a> (const <a class="el" href="class_fecha.html">Fecha</a> &amp;fecha, bool esFechaNacimiento=false)</td></tr>
+<tr class="memdesc:a4e64f8618fb12247ba4fa0c720cf4b03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Valida una fecha dada.  <br /></td></tr>
+<tr class="memitem:a773a653191f44403694fa4b92ab6ee01" id="r_a773a653191f44403694fa4b92ab6ee01"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a773a653191f44403694fa4b92ab6ee01">validarCedula</a> (const std::string &amp;cedula)</td></tr>
+<tr class="memdesc:a773a653191f44403694fa4b92ab6ee01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Valida una cédula de identidad.  <br /></td></tr>
 <tr class="memitem:aa12b93790ecb6efdcea090d71f27e46a" id="r_aa12b93790ecb6efdcea090d71f27e46a"><td class="memItemLeft" align="right" valign="top"><a id="aa12b93790ecb6efdcea090d71f27e46a" name="aa12b93790ecb6efdcea090d71f27e46a"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>validarCedulaPrefijo</b> (const std::string &amp;cedula)</td></tr>
 <tr class="memitem:a517cf8329255dcd237c9f2e5e4379e22" id="r_a517cf8329255dcd237c9f2e5e4379e22"><td class="memItemLeft" align="right" valign="top"><a id="a517cf8329255dcd237c9f2e5e4379e22" name="a517cf8329255dcd237c9f2e5e4379e22"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>limpiar_linea</b> (const std::string &amp;mensaje)</td></tr>
-<tr class="memitem:a08c750b493cf5c7fdbec9dcbb3803633" id="r_a08c750b493cf5c7fdbec9dcbb3803633"><td class="memItemLeft" align="right" valign="top"><a id="a08c750b493cf5c7fdbec9dcbb3803633" name="a08c750b493cf5c7fdbec9dcbb3803633"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>limpiar_linea_Error</b> (const string &amp;mensaje, size_t longitud_extra)</td></tr>
 <tr class="memitem:a53745c6f147d472db072e7c352cf1b3a" id="r_a53745c6f147d472db072e7c352cf1b3a"><td class="memItemLeft" align="right" valign="top"><a id="a53745c6f147d472db072e7c352cf1b3a" name="a53745c6f147d472db072e7c352cf1b3a"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>validarNombre</b> (const std::string &amp;nombre)</td></tr>
 <tr class="memitem:ad140ac3eeb37961f495e18a59e62e090" id="r_ad140ac3eeb37961f495e18a59e62e090"><td class="memItemLeft" align="right" valign="top"><a id="ad140ac3eeb37961f495e18a59e62e090" name="ad140ac3eeb37961f495e18a59e62e090"></a>
@@ -144,8 +148,8 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>validarMonto</
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>validarNombreArchivo</b> (const std::string &amp;entrada)</td></tr>
 <tr class="memitem:a4089730b7345c5998e77bb906831ee6d" id="r_a4089730b7345c5998e77bb906831ee6d"><td class="memItemLeft" align="right" valign="top"><a id="a4089730b7345c5998e77bb906831ee6d" name="a4089730b7345c5998e77bb906831ee6d"></a>
 static std::string&#160;</td><td class="memItemRight" valign="bottom"><b>ingresar_dni</b> (const std::string &amp;mensaje)</td></tr>
-<tr class="memitem:abd0afd86a0c18b94fa0de63c4659e46e" id="r_abd0afd86a0c18b94fa0de63c4659e46e"><td class="memItemLeft" align="right" valign="top"><a id="abd0afd86a0c18b94fa0de63c4659e46e" name="abd0afd86a0c18b94fa0de63c4659e46e"></a>
-static std::string&#160;</td><td class="memItemRight" valign="bottom"><b>validarFecha</b> (const std::string &amp;fecha)</td></tr>
+<tr class="memitem:adcfea6d6dfc9913179985cc93c49ea7c" id="r_adcfea6d6dfc9913179985cc93c49ea7c"><td class="memItemLeft" align="right" valign="top"><a id="adcfea6d6dfc9913179985cc93c49ea7c" name="adcfea6d6dfc9913179985cc93c49ea7c"></a>
+static std::string&#160;</td><td class="memItemRight" valign="bottom"><b>validar_Fecha</b> (const std::string &amp;fecha)</td></tr>
 <tr class="memitem:a75b783f08e36184bef1fd344fd290853" id="r_a75b783f08e36184bef1fd344fd290853"><td class="memItemLeft" align="right" valign="top"><a id="a75b783f08e36184bef1fd344fd290853" name="a75b783f08e36184bef1fd344fd290853"></a>
 static std::string&#160;</td><td class="memItemRight" valign="bottom"><b>validarHora</b> (const std::string &amp;hora)</td></tr>
 <tr class="memitem:aca6cf1bfdeb2c23589caf7a1c453b74c" id="r_aca6cf1bfdeb2c23589caf7a1c453b74c"><td class="memItemLeft" align="right" valign="top"><a id="aca6cf1bfdeb2c23589caf7a1c453b74c" name="aca6cf1bfdeb2c23589caf7a1c453b74c"></a>
@@ -155,6 +159,209 @@ static bool&#160;</td><td class="memItemRight" valign="bottom"><b>es_fecha_valid
 <tr class="memitem:ac97e5da546b73e0c77dd4bfd5a77ebfd" id="r_ac97e5da546b73e0c77dd4bfd5a77ebfd"><td class="memItemLeft" align="right" valign="top"><a id="ac97e5da546b73e0c77dd4bfd5a77ebfd" name="ac97e5da546b73e0c77dd4bfd5a77ebfd"></a>
 static std::string&#160;</td><td class="memItemRight" valign="bottom"><b>validarCaracter</b> (std::string &amp;opcion)</td></tr>
 </table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Clase que proporciona métodos para validar diferentes tipos de datos de entrada. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a47faaa03577241411f73b864cea84ee6" name="a47faaa03577241411f73b864cea84ee6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47faaa03577241411f73b864cea84ee6">&#9670;&#160;</a></span>capturarEntrada()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">string ValidacionDatos::capturarEntrada </td>
+          <td>(</td>
+          <td class="paramtype">TipoDato</td>          <td class="paramname"><span class="paramname"><em>tipo</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>mensaje</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>maxLongitud</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Captura e interpreta una entrada según el tipo de dato. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tipo</td><td>Tipo de dato a capturar. </td></tr>
+    <tr><td class="paramname">mensaje</td><td>Mensaje a mostrar al usuario. </td></tr>
+    <tr><td class="paramname">maxLongitud</td><td>Longitud máxima permitida. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Cadena de texto capturada y validada. </dd></dl>
+
+</div>
+</div>
+<a id="a9415859e92181d46b3be06446c2cbad1" name="a9415859e92181d46b3be06446c2cbad1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9415859e92181d46b3be06446c2cbad1">&#9670;&#160;</a></span>capturarFechaInteractiva() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_fecha.html">Fecha</a> ValidacionDatos::capturarFechaInteractiva </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>mensaje</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>esFechaNacimiento</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="class_fecha.html">Fecha</a> *</td>          <td class="paramname"><span class="paramname"><em>minFecha</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Captura una fecha interactiva con un límite mínimo. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mensaje</td><td>Mensaje a mostrar. </td></tr>
+    <tr><td class="paramname">esFechaNacimiento</td><td>Indica si es una fecha de nacimiento. </td></tr>
+    <tr><td class="paramname">minFecha</td><td>Puntero a la fecha mínima permitida. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Objeto <a class="el" href="class_fecha.html">Fecha</a> ingresado. </dd></dl>
+
+</div>
+</div>
+<a id="aa365ecc734065f4e2ae8c7c2cee02535" name="aa365ecc734065f4e2ae8c7c2cee02535"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa365ecc734065f4e2ae8c7c2cee02535">&#9670;&#160;</a></span>capturarFechaInteractiva() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_fecha.html">Fecha</a> ValidacionDatos::capturarFechaInteractiva </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>mensaje</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>esFechaNacimiento</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Captura una fecha de forma interactiva. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mensaje</td><td>Mensaje a mostrar. </td></tr>
+    <tr><td class="paramname">esFechaNacimiento</td><td>Indica si es una fecha de nacimiento (por defecto false). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Objeto <a class="el" href="class_fecha.html">Fecha</a> ingresado. </dd></dl>
+
+</div>
+</div>
+<a id="a773a653191f44403694fa4b92ab6ee01" name="a773a653191f44403694fa4b92ab6ee01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a773a653191f44403694fa4b92ab6ee01">&#9670;&#160;</a></span>validarCedula()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ValidacionDatos::validarCedula </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>cedula</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Valida una cédula de identidad. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cedula</td><td>Cédula a validar. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a4e64f8618fb12247ba4fa0c720cf4b03" name="a4e64f8618fb12247ba4fa0c720cf4b03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e64f8618fb12247ba4fa0c720cf4b03">&#9670;&#160;</a></span>validarFecha()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ValidacionDatos::validarFecha </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_fecha.html">Fecha</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>fecha</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>esFechaNacimiento</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Valida una fecha dada. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fecha</td><td><a class="el" href="class_fecha.html">Fecha</a> a validar. </td></tr>
+    <tr><td class="paramname">esFechaNacimiento</td><td>Indica si se trata de una fecha de nacimiento. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="_validacion_datos_8h_source.html">ValidacionDatos.h</a></li>
 <li><b>ValidacionDatos.cpp</b></li>

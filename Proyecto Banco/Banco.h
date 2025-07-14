@@ -50,11 +50,8 @@ private:
      */
     ListaDobleCircular<Cliente> clientes;
 
-    /**
-     * @brief Campos de búsqueda para clientes.
-     */
+public:
     enum CampoBusqueda { CEDULA, PRIMER_NOMBRE, SEGUNDO_NOMBRE, PRIMER_APELLIDO, SEGUNDO_APELLIDO, SALDO };
-
     /**
      * @brief Muestra un cuadro de confirmación para operaciones monetarias.
      * @param monto Monto de la operación.
@@ -68,7 +65,18 @@ private:
      * @return Tipo de cuenta seleccionado o vacío si cancela.
      */
     string seleccionarTipoCuenta();
-
+    /**
+     * @brief Pausa la marquesina global.
+     */
+    static void pausarMarquesina();
+    /**
+     * @brief Reanuda la marquesina global.
+     */
+    static void reanudarMarquesina();
+    /**
+     * @brief Detiene la marquesina global.
+     */
+    static void detenerMarquesina();
     /**
      * @brief Muestra el menú de usuario autenticado y permite realizar operaciones.
      * @param cliente Puntero al cliente autenticado.
@@ -113,7 +121,22 @@ private:
      * @param ancho Ancho del cuadro.
      */
     void imprimirCuadroBusqueda(const std::string& texto, int ancho);
-public:
+
+    class NodoBST {
+    public:
+        string valor;
+        Cliente* cliente;
+        NodoBST* izquierda;
+        NodoBST* derecha;
+        NodoBST(const string& val, Cliente* c) : valor(val), cliente(c), izquierda(nullptr), derecha(nullptr) {}
+        ~NodoBST() {}
+    };
+    
+    /**
+     * @brief Libera la memoria del árbol binario de búsqueda.
+     * @param raiz Puntero al nodo raíz.
+     */
+    void liberarArbol(NodoBST* raiz);
     /**
      * @brief Genera la documentación del proyecto usando Doxygen y la abre en el navegador.
      */
@@ -165,6 +188,7 @@ public:
      * @return Número de cuenta generado (formato IBAN).
      */
     string generarNumeroCuenta(const string& tipoCuenta);
+
 };
 
 #endif

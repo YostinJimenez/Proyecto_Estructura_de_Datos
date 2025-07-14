@@ -1,5 +1,14 @@
 \doxysection{Validacion\+Datos Class Reference}
 \hypertarget{class_validacion_datos}{}\label{class_validacion_datos}\index{ValidacionDatos@{ValidacionDatos}}
+
+
+Clase que proporciona métodos para validar diferentes tipos de datos de entrada.  
+
+
+
+
+{\ttfamily \#include $<$Validacion\+Datos.\+h$>$}
+
 \doxysubsubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
@@ -22,29 +31,21 @@ enum {\bfseries Tipo\+Dato} \{ \newline
 \doxysubsubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{class_validacion_datos_a47faaa03577241411f73b864cea84ee6}\label{class_validacion_datos_a47faaa03577241411f73b864cea84ee6} 
-static std\+::string {\bfseries capturar\+Entrada} (Tipo\+Dato tipo, const std\+::string \&mensaje, size\+\_\+t max\+Longitud)
-\item 
-\Hypertarget{class_validacion_datos_aa365ecc734065f4e2ae8c7c2cee02535}\label{class_validacion_datos_aa365ecc734065f4e2ae8c7c2cee02535} 
-static \mbox{\hyperlink{class_fecha}{Fecha}} {\bfseries capturar\+Fecha\+Interactiva} (const std\+::string \&mensaje, bool es\+Fecha\+Nacimiento=false)
-\item 
-\Hypertarget{class_validacion_datos_a9415859e92181d46b3be06446c2cbad1}\label{class_validacion_datos_a9415859e92181d46b3be06446c2cbad1} 
-static \mbox{\hyperlink{class_fecha}{Fecha}} {\bfseries capturar\+Fecha\+Interactiva} (const std\+::string \&mensaje, bool es\+Fecha\+Nacimiento, const \mbox{\hyperlink{class_fecha}{Fecha}} \texorpdfstring{$\ast$}{*}min\+Fecha)
-\item 
-\Hypertarget{class_validacion_datos_a4e64f8618fb12247ba4fa0c720cf4b03}\label{class_validacion_datos_a4e64f8618fb12247ba4fa0c720cf4b03} 
-static void {\bfseries validar\+Fecha} (const \mbox{\hyperlink{class_fecha}{Fecha}} \&fecha, bool es\+Fecha\+Nacimiento=false)
-\item 
-\Hypertarget{class_validacion_datos_a773a653191f44403694fa4b92ab6ee01}\label{class_validacion_datos_a773a653191f44403694fa4b92ab6ee01} 
-static void {\bfseries validar\+Cedula} (const std\+::string \&cedula)
-\item 
+static std\+::string \mbox{\hyperlink{class_validacion_datos_a47faaa03577241411f73b864cea84ee6}{capturar\+Entrada}} (Tipo\+Dato tipo, const std\+::string \&mensaje, size\+\_\+t max\+Longitud)
+\begin{DoxyCompactList}\small\item\em Captura e interpreta una entrada según el tipo de dato. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{class_fecha}{Fecha}} \mbox{\hyperlink{class_validacion_datos_aa365ecc734065f4e2ae8c7c2cee02535}{capturar\+Fecha\+Interactiva}} (const std\+::string \&mensaje, bool es\+Fecha\+Nacimiento=false)
+\begin{DoxyCompactList}\small\item\em Captura una fecha de forma interactiva. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{class_fecha}{Fecha}} \mbox{\hyperlink{class_validacion_datos_a9415859e92181d46b3be06446c2cbad1}{capturar\+Fecha\+Interactiva}} (const std\+::string \&mensaje, bool es\+Fecha\+Nacimiento, const \mbox{\hyperlink{class_fecha}{Fecha}} \texorpdfstring{$\ast$}{*}min\+Fecha)
+\begin{DoxyCompactList}\small\item\em Captura una fecha interactiva con un límite mínimo. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_validacion_datos_a4e64f8618fb12247ba4fa0c720cf4b03}{validar\+Fecha}} (const \mbox{\hyperlink{class_fecha}{Fecha}} \&fecha, bool es\+Fecha\+Nacimiento=false)
+\begin{DoxyCompactList}\small\item\em Valida una fecha dada. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_validacion_datos_a773a653191f44403694fa4b92ab6ee01}{validar\+Cedula}} (const std\+::string \&cedula)
+\begin{DoxyCompactList}\small\item\em Valida una cédula de identidad. \end{DoxyCompactList}\item 
 \Hypertarget{class_validacion_datos_aa12b93790ecb6efdcea090d71f27e46a}\label{class_validacion_datos_aa12b93790ecb6efdcea090d71f27e46a} 
 static void {\bfseries validar\+Cedula\+Prefijo} (const std\+::string \&cedula)
 \item 
 \Hypertarget{class_validacion_datos_a517cf8329255dcd237c9f2e5e4379e22}\label{class_validacion_datos_a517cf8329255dcd237c9f2e5e4379e22} 
 static void {\bfseries limpiar\+\_\+linea} (const std\+::string \&mensaje)
-\item 
-\Hypertarget{class_validacion_datos_a08c750b493cf5c7fdbec9dcbb3803633}\label{class_validacion_datos_a08c750b493cf5c7fdbec9dcbb3803633} 
-static void {\bfseries limpiar\+\_\+linea\+\_\+\+Error} (const string \&mensaje, size\+\_\+t longitud\+\_\+extra)
 \item 
 \Hypertarget{class_validacion_datos_a53745c6f147d472db072e7c352cf1b3a}\label{class_validacion_datos_a53745c6f147d472db072e7c352cf1b3a} 
 static void {\bfseries validar\+Nombre} (const std\+::string \&nombre)
@@ -70,8 +71,8 @@ static void {\bfseries validar\+Nombre\+Archivo} (const std\+::string \&entrada)
 \Hypertarget{class_validacion_datos_a4089730b7345c5998e77bb906831ee6d}\label{class_validacion_datos_a4089730b7345c5998e77bb906831ee6d} 
 static std\+::string {\bfseries ingresar\+\_\+dni} (const std\+::string \&mensaje)
 \item 
-\Hypertarget{class_validacion_datos_abd0afd86a0c18b94fa0de63c4659e46e}\label{class_validacion_datos_abd0afd86a0c18b94fa0de63c4659e46e} 
-static std\+::string {\bfseries validar\+Fecha} (const std\+::string \&fecha)
+\Hypertarget{class_validacion_datos_adcfea6d6dfc9913179985cc93c49ea7c}\label{class_validacion_datos_adcfea6d6dfc9913179985cc93c49ea7c} 
+static std\+::string {\bfseries validar\+\_\+\+Fecha} (const std\+::string \&fecha)
 \item 
 \Hypertarget{class_validacion_datos_a75b783f08e36184bef1fd344fd290853}\label{class_validacion_datos_a75b783f08e36184bef1fd344fd290853} 
 static std\+::string {\bfseries validar\+Hora} (const std\+::string \&hora)
@@ -85,6 +86,110 @@ static bool {\bfseries es\+\_\+fecha\+\_\+valida} (int dia, int mes, int anio)
 \Hypertarget{class_validacion_datos_ac97e5da546b73e0c77dd4bfd5a77ebfd}\label{class_validacion_datos_ac97e5da546b73e0c77dd4bfd5a77ebfd} 
 static std\+::string {\bfseries validar\+Caracter} (std\+::string \&opcion)
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Clase que proporciona métodos para validar diferentes tipos de datos de entrada. 
+
+\label{doc-func-members}
+\Hypertarget{class_validacion_datos_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_validacion_datos_a47faaa03577241411f73b864cea84ee6}\index{ValidacionDatos@{ValidacionDatos}!capturarEntrada@{capturarEntrada}}
+\index{capturarEntrada@{capturarEntrada}!ValidacionDatos@{ValidacionDatos}}
+\doxysubsubsection{\texorpdfstring{capturarEntrada()}{capturarEntrada()}}
+{\footnotesize\ttfamily \label{class_validacion_datos_a47faaa03577241411f73b864cea84ee6} 
+string Validacion\+Datos\+::capturar\+Entrada (\begin{DoxyParamCaption}\item[{Tipo\+Dato}]{tipo}{, }\item[{const std\+::string \&}]{mensaje}{, }\item[{size\+\_\+t}]{max\+Longitud}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Captura e interpreta una entrada según el tipo de dato. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tipo} & Tipo de dato a capturar. \\
+\hline
+{\em mensaje} & Mensaje a mostrar al usuario. \\
+\hline
+{\em max\+Longitud} & Longitud máxima permitida. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Cadena de texto capturada y validada. 
+\end{DoxyReturn}
+\Hypertarget{class_validacion_datos_a9415859e92181d46b3be06446c2cbad1}\index{ValidacionDatos@{ValidacionDatos}!capturarFechaInteractiva@{capturarFechaInteractiva}}
+\index{capturarFechaInteractiva@{capturarFechaInteractiva}!ValidacionDatos@{ValidacionDatos}}
+\doxysubsubsection{\texorpdfstring{capturarFechaInteractiva()}{capturarFechaInteractiva()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_validacion_datos_a9415859e92181d46b3be06446c2cbad1} 
+\mbox{\hyperlink{class_fecha}{Fecha}} Validacion\+Datos\+::capturar\+Fecha\+Interactiva (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{mensaje}{, }\item[{bool}]{es\+Fecha\+Nacimiento}{, }\item[{const \mbox{\hyperlink{class_fecha}{Fecha}} \texorpdfstring{$\ast$}{*}}]{min\+Fecha}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Captura una fecha interactiva con un límite mínimo. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mensaje} & Mensaje a mostrar. \\
+\hline
+{\em es\+Fecha\+Nacimiento} & Indica si es una fecha de nacimiento. \\
+\hline
+{\em min\+Fecha} & Puntero a la fecha mínima permitida. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Objeto \doxylink{class_fecha}{Fecha} ingresado. 
+\end{DoxyReturn}
+\Hypertarget{class_validacion_datos_aa365ecc734065f4e2ae8c7c2cee02535}\index{ValidacionDatos@{ValidacionDatos}!capturarFechaInteractiva@{capturarFechaInteractiva}}
+\index{capturarFechaInteractiva@{capturarFechaInteractiva}!ValidacionDatos@{ValidacionDatos}}
+\doxysubsubsection{\texorpdfstring{capturarFechaInteractiva()}{capturarFechaInteractiva()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_validacion_datos_aa365ecc734065f4e2ae8c7c2cee02535} 
+\mbox{\hyperlink{class_fecha}{Fecha}} Validacion\+Datos\+::capturar\+Fecha\+Interactiva (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{mensaje}{, }\item[{bool}]{es\+Fecha\+Nacimiento}{ = {\ttfamily false}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Captura una fecha de forma interactiva. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mensaje} & Mensaje a mostrar. \\
+\hline
+{\em es\+Fecha\+Nacimiento} & Indica si es una fecha de nacimiento (por defecto false). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Objeto \doxylink{class_fecha}{Fecha} ingresado. 
+\end{DoxyReturn}
+\Hypertarget{class_validacion_datos_a773a653191f44403694fa4b92ab6ee01}\index{ValidacionDatos@{ValidacionDatos}!validarCedula@{validarCedula}}
+\index{validarCedula@{validarCedula}!ValidacionDatos@{ValidacionDatos}}
+\doxysubsubsection{\texorpdfstring{validarCedula()}{validarCedula()}}
+{\footnotesize\ttfamily \label{class_validacion_datos_a773a653191f44403694fa4b92ab6ee01} 
+void Validacion\+Datos\+::validar\+Cedula (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{cedula}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Valida una cédula de identidad. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cedula} & Cédula a validar. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_validacion_datos_a4e64f8618fb12247ba4fa0c720cf4b03}\index{ValidacionDatos@{ValidacionDatos}!validarFecha@{validarFecha}}
+\index{validarFecha@{validarFecha}!ValidacionDatos@{ValidacionDatos}}
+\doxysubsubsection{\texorpdfstring{validarFecha()}{validarFecha()}}
+{\footnotesize\ttfamily \label{class_validacion_datos_a4e64f8618fb12247ba4fa0c720cf4b03} 
+void Validacion\+Datos\+::validar\+Fecha (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_fecha}{Fecha}} \&}]{fecha}{, }\item[{bool}]{es\+Fecha\+Nacimiento}{ = {\ttfamily false}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Valida una fecha dada. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fecha} & \doxylink{class_fecha}{Fecha} a validar. \\
+\hline
+{\em es\+Fecha\+Nacimiento} & Indica si se trata de una fecha de nacimiento. \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

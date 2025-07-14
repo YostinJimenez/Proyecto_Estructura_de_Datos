@@ -29,6 +29,7 @@
 #include "recuperarCuenta.h"
 #include "ListaDobleCircular.h"
 #include "BackupManager.h"
+#include "ArbolB.h"
 #include <iostream>
 #include <string>
 #include <limits>
@@ -191,7 +192,7 @@ int Banco::seleccionar_opcion(const char *titulo, const char *opciones[], int n,
 /**
  * @brief Pausa temporalmente la marquesina durante operaciones críticas
  */
-static void pausarMarquesina() {
+void Banco::pausarMarquesina() {
 	if (marquesinaGlobal) {
 		marquesinaGlobal->pausar();
 	}
@@ -200,7 +201,7 @@ static void pausarMarquesina() {
 /**
  * @brief Reanuda la marquesina después de una operación crítica
  */
-static void reanudarMarquesina() {
+void Banco::reanudarMarquesina() {
 	if (marquesinaGlobal) {
 		marquesinaGlobal->reanudar();
 	}
@@ -209,7 +210,7 @@ static void reanudarMarquesina() {
 /**
  * @brief Detiene la marquesina global si está activa.
  */
-static void detenerMarquesina() {
+void Banco::detenerMarquesina() {
 	if (marquesinaGlobal) {
 		marquesinaGlobal->detener();
 	}
@@ -231,7 +232,7 @@ bool Banco::mostrarConfirmacion(double monto, const string& operacion) {
     cout << "\tMonto: $" << fixed << setprecision(2) << monto << "\n";
     cout << "\t¿Está seguro?\n\n";
     pausarMarquesina(); // Pausar marquesina antes de mostrar confirmación
-    int seleccion = seleccionar_opcion("", opciones, 5, 3);
+    int seleccion = seleccionar_opcion("", opciones, 2, 5);
     reanudarMarquesina(); // Reanudar marquesina después de la confirmación
     if (seleccion == 2) return false; // Atrás
     return (seleccion == 1); // Aceptar (true), Cancelar (false)
@@ -260,21 +261,53 @@ void Banco::crearCuenta() {
     cout << "\t||    CREACION DE CUENTA       ||\n";
     cout << "\t||_____________________________||\n";
     cout << "• Presione Esc para volver al menú principal.\n\n";
-    string primerNombre, segundoNombre, primerApellido, segundoApellido, cedula, telefono, correo, tipoCuenta, usuario, contrasena, repetirContrasena;
+    string primerNombre, segundoNombre, primerApellido, segundoApellido, cedula, telefono, correo, tipoCuenta, usuario, contrasena, repetirContrasena,tituloFecha;
     Fecha fechaNacimiento;
     try {
-        primerNombre = ValidacionDatos::capturarEntrada(ValidacionDatos::NOMBRE, "Primer nombre: ", 50);
-        if (primerNombre.empty()) return; // Atrás
-        ValidacionDatos::validarCaracter(primerNombre);
-        segundoNombre = ValidacionDatos::capturarEntrada(ValidacionDatos::NOMBRE, "Segundo nombre: ", 50);
-        if (segundoNombre.empty()) return;
-        ValidacionDatos::validarCaracter(segundoNombre);
-        primerApellido = ValidacionDatos::capturarEntrada(ValidacionDatos::NOMBRE, "Primer apellido: ", 50);
-        if (primerApellido.empty()) return;
-        ValidacionDatos::validarCaracter(primerApellido);
-        segundoApellido = ValidacionDatos::capturarEntrada(ValidacionDatos::NOMBRE, "Segundo apellido: ", 50);
-        if (segundoApellido.empty()) return;
-        ValidacionDatos::validarCaracter(segundoApellido);
+        while (true) {
+            primerNombre = ValidacionDatos::capturarEntrada(ValidacionDatos::NOMBRE, "Primer nombre: ", 50);
+            if (primerNombre.empty()) return;
+            if (primerNombre == "_TAB_") primerNombre = "";
+            else ValidacionDatos::validarCaracter(primerNombre);
+            segundoNombre = ValidacionDatos::capturarEntrada(ValidacionDatos::NOMBRE, "Segundo nombre: ", 50);
+            if (segundoNombre.empty()) return; // Permitir segundo nombre vacío
+            if (segundoNombre == "_TAB_") segundoNombre = "";
+            else ValidacionDatos::validarCaracter(segundoNombre);
+            if (primerNombre.empty()&& segundoNombre.empty()) {
+                Utilidades::gotoxy(0, 6);
+                std::cout << "\r\033[KError: Debe tener por lo menos un nombre.";
+                getch();
+                Utilidades::gotoxy(0, 6);
+                cout << "\r\033[K";
+                Utilidades::gotoxy(0, 7);
+                cout << "\r\033[K";
+                Utilidades::gotoxy(0, 6);
+                continue;
+            } 
+            break;
+            }
+        while (true) {
+            primerApellido = ValidacionDatos::capturarEntrada(ValidacionDatos::APELLIDO, "Primer apellido: ", 50);
+            if (primerApellido.empty()) return;
+            if (primerApellido == "_TAB_") primerApellido = "";
+            else ValidacionDatos::validarCaracter(primerApellido);
+            segundoApellido = ValidacionDatos::capturarEntrada(ValidacionDatos::APELLIDO, "Segundo apellido: ", 50);
+            if (segundoApellido.empty()) return; // Permitir segundo apellido vacío
+            if (segundoApellido == "_TAB_") segundoApellido = "";
+            else ValidacionDatos::validarCaracter(segundoApellido);
+            if (segundoApellido.empty()&&primerApellido.empty()) {
+                Utilidades::gotoxy(0, 8);
+                std::cout << "\r\033[KError: Debe tener por lo menos un apellido.";
+                getch();
+                Utilidades::gotoxy(0, 8);
+                std::cout << "\r\033[K";
+                Utilidades::gotoxy(0, 9);
+                cout << "\r\033[K";
+                Utilidades::gotoxy(0, 8);
+                continue;
+            }
+            break;
+        }
         cedula = ValidacionDatos::capturarEntrada(ValidacionDatos::CEDULA, "Cédula: ", 10);
         if (cedula.empty()) return;
         // Verificar unicidad de cédula
@@ -284,7 +317,7 @@ void Banco::crearCuenta() {
         if (telefono.empty()) return;
         correo = ValidacionDatos::capturarEntrada(ValidacionDatos::CORREO, "Correo: ", 254);
         if (correo.empty()) return;
-        fechaNacimiento = ValidacionDatos::capturarFechaInteractiva("Fecha de nacimiento (dd/mm/aaaa): ", true);
+        fechaNacimiento = ValidacionDatos::capturarFechaInteractiva("", true);
         if (!fechaNacimiento.esValida()) return; // Atrás
         tipoCuenta = seleccionarTipoCuenta();
         if (tipoCuenta.empty()) return;
@@ -297,12 +330,24 @@ void Banco::crearCuenta() {
         if (usuario.empty()) return;
         Cliente* existeUsuario = clientes.buscar([&](Cliente* c) { return c->getUsuario() == usuario; });
         if (existeUsuario) throw BancoException("El usuario ya existe.");
-        contrasena = ValidacionDatos::capturarEntrada(ValidacionDatos::CONTRASENA, "Contrasena: ", 20);
-        if (contrasena.empty()) return;
-        repetirContrasena = ValidacionDatos::capturarEntrada(ValidacionDatos::CONTRASENA, "Repetir contrasena: ", 20);
-        if (repetirContrasena.empty()) return;
-        if (contrasena != repetirContrasena) throw BancoException("Las contraseñas no coinciden.");
-
+        while (true) {
+            contrasena = ValidacionDatos::capturarEntrada(ValidacionDatos::CONTRASENA, "Contrasena: ", 20);
+            if (contrasena.empty()) return;
+            repetirContrasena = ValidacionDatos::capturarEntrada(ValidacionDatos::CONTRASENA, "Repetir contrasena: ", 20);
+            if (repetirContrasena.empty()) return;
+            if (contrasena != repetirContrasena) {
+                Utilidades::gotoxy(0, 7);
+                std::cout << "\r\033[KError: Las contraseñas no coinciden. Intente de nuevo.";
+                getch();
+                Utilidades::gotoxy(0, 7);
+                std::cout << "\r\033[K";
+                Utilidades::gotoxy(0, 8);
+                cout << "\r\033[K";
+                Utilidades::gotoxy(0, 7);
+                continue;
+            }
+            break;
+        }
         string numCuenta = generarNumeroCuenta(tipoCuenta);
         Cliente* cliente = new Cliente(cedula, primerNombre, segundoNombre, primerApellido, segundoApellido,
                                        telefono, "Direccion", fechaNacimiento, "COD" + cedula, correo, usuario, contrasena);
@@ -380,6 +425,8 @@ void Banco::mostrarMenuUsuario() {
  */
 void Banco::mostrarMenuUsuario(Cliente* cliente) {
     const char* opciones[] = {"Transferir", "Depositar", "Retirar", "Consultar Transacciones", "Atrás"};
+    const char* opcionesTransferencia[] = {"Por Cédula", "Por Número de Cuenta", "Atrás"};
+    const char* opcionAtras[] = {"Atrás"};
     bool salir = false;
     while (!salir) {
         system("cls");
@@ -389,47 +436,119 @@ void Banco::mostrarMenuUsuario(Cliente* cliente) {
         cout << "\tNúmero de cuenta: " << cuenta->getNumero() << "\n";
         cout << "\tTipo de cuenta: " << tipoCuenta << "\n";
         cout << "\tSaldo: $" << fixed << setprecision(2) << cuenta->getSaldo() << "\n\n";
-        pausarMarquesina(); // Pausar marquesina antes de mostrar opciones
+        pausarMarquesina();
         int seleccion = seleccionar_opcion("", opciones, 5, 6);
-        reanudarMarquesina(); // Reanudar marquesina después de la selección
+        reanudarMarquesina();
         if (seleccion == 5) {
             salir = true;
-            continue; // Atrás
+            continue;
         }
         system("cls");
         try {
             switch (seleccion) {
                 case 1: { // Transferir
-                    cout << "\n=== REALIZAR TRANSFERENCIA ===\n\n";
-                    cout << "Presione Esc para volver al menú de usuario.\n\n";
-                    string cuentaDestino = ValidacionDatos::capturarEntrada(ValidacionDatos::CEDULA, "Número de cuenta bancaria: ", 22);
-                    if (cuentaDestino.empty()) break; // Atrás
-                    if (cuentaDestino == cliente->getCuenta()->getNumero()) {
-                        throw BancoException("No se puede transferir a la misma cuenta.");
-                    }
-                    string inputMonto = ValidacionDatos::capturarEntrada(ValidacionDatos::MONTO, "Monto: $", 20);
-                    if (inputMonto.empty()) break;
-                    double monto = stod(inputMonto);
-                    Cliente* destino = clientes.buscar([&](Cliente* c) { return c->getCuenta()->getNumero() == cuentaDestino; });
-                    if (!destino) throw BancoException("Cuenta no encontrada.");
-                    if (mostrarConfirmacion(monto, "TRANSFERENCIA")) {
-                        if (cliente->getCuenta()->retirar(monto, Fecha(), true, cuentaDestino)) {
-                            destino->getCuenta()->depositar(monto, Fecha(), true, cliente->getCuenta()->getNumero());
-                            cout << "\n\n\tTransferencia de $" << fixed << setprecision(2) << monto << " realizada con éxito.\n";
+                    bool transferir = true;
+                    while (transferir) {
+                        system("cls");
+                        cout << "\n\t\t=== REALIZAR TRANSFERENCIA ===\n\n";
+                        pausarMarquesina();
+                        int opcionTransferencia = seleccionar_opcion("", opcionesTransferencia, 3, 4);
+                        reanudarMarquesina();
+                        if (opcionTransferencia == 3) break; // Atrás
+                        system("cls");
+                        cout << "\n\t\t=== REALIZAR TRANSFERENCIA ===\n\n";
+                        cout << "Presione Esc para volver al menú de transferencia.\n\n";
+                        string identificador;
+                        Cliente* destino = nullptr;
+                        bool identificadorValido = false;
+                        while (!identificadorValido) {
+                            if (opcionTransferencia == 1) {
+                                cout << "Cédula del destinatario: ";
+                                identificador = ValidacionDatos::capturarEntrada(ValidacionDatos::CEDULA, "Cédula del destinatario: ", 10);
+                            } else {
+                                cout << "Número de cuenta del destinatario (10 dígitos, ej. 22xxxxxxxx): ";
+                                identificador = ValidacionDatos::capturarEntrada(ValidacionDatos::NUM_CUENTA, "Número de cuenta del destinatario (10 dígitos, ej. 22xxxxxxxx): ", 10);
+                                if (!identificador.empty()) {
+                                    string ibanParcial = "EC0030100001" + identificador;
+                                    string codigoControl = calcularCodigoControl(ibanParcial);
+                                    identificador = "EC" + codigoControl + "30100001" + identificador;
+                                }
+                            }
+                            if (identificador.empty()) break; // Esc
+                            try {
+                                if (opcionTransferencia == 1) {
+                                    destino = clientes.buscar([&](Cliente* c) { return c->getCedula() == identificador; });
+                                } else {
+                                    destino = clientes.buscar([&](Cliente* c) { return c->getCuenta()->getNumero() == identificador; });
+                                }
+                                if (!destino) throw BancoException("Cuenta no encontrada.");
+                                if (destino == cliente) throw BancoException("No se puede transferir a la misma cuenta.");
+                                if (!destino->getCuenta()) throw BancoException("La cuenta destino no está inicializada.");
+                                identificadorValido = true;
+                            } catch (const BancoException& e) {
+                                cout << "\nError: " << e.what() << "\n";
+                                cout << "Presione Enter para reintentar o Esc para volver.\n";
+                                int tecla = getch();
+                                if (tecla == 27) break; // Esc
+                                system("cls");
+                                cout << "\n\t\t=== REALIZAR TRANSFERENCIA ===\n\n";
+                                cout << "Presione Esc para volver al menú de transferencia.\n\n";
+                            }
                         }
-                    } else {
-
-                        cout << "\nTransferencia cancelada o abortada.\n";
+                        if (!identificadorValido || identificador.empty()) continue; // Esc o error
+                        cout << "\nPresione Esc o seleccione Atrás para volver.\n\n";
+                        pausarMarquesina();
+                        int opcion = seleccionar_opcion("", opcionAtras, 1, 6);
+                        reanudarMarquesina();
+                        if (opcion == 1) continue; // Atrás
+                        bool transferenciaRealizada = false;
+                        while (!transferenciaRealizada) {
+                            system("cls");
+                            cout << "\n\t\t=== REALIZAR TRANSFERENCIA ===\n\n";
+                            cout << (opcionTransferencia == 1 ? "Cédula" : "Número de cuenta") << " del destinatario: " << (opcionTransferencia == 1 ? identificador : identificador.substr(12)) << "\n\n";
+                            string inputMonto = ValidacionDatos::capturarEntrada(ValidacionDatos::MONTO, "Monto: $", 20);
+                            if (inputMonto.empty()) break; // Esc
+                            double monto = stod(inputMonto);
+                            if (mostrarConfirmacion(monto, "TRANSFERENCIA")) {
+                                Fecha fechaActual;
+                                try {
+                                    if (!cliente->getCuenta()->retirar(monto, fechaActual, true, destino->getCuenta()->getNumero())) {
+                                        throw BancoException("No se pudo realizar el retiro. Verifique el saldo o el límite de retiros.");
+                                    }
+                                    try {
+                                        destino->getCuenta()->depositar(monto, fechaActual, true, cliente->getCuenta()->getNumero());
+                                        cout << "\n\n\tTransferencia de $" << fixed << setprecision(2) << monto << " realizada con éxito.\n";
+                                        cout << "\tSaldo origen: $" << fixed << setprecision(2) << cliente->getCuenta()->getSaldo() << "\n";
+                                        cout << "\tSaldo destino: $" << fixed << setprecision(2) << destino->getCuenta()->getSaldo() << "\n";
+                                        transferenciaRealizada = true;
+                                        transferir = false;
+                                    } catch (const BancoException& e) {
+                                        cliente->getCuenta()->depositar(monto, fechaActual, true, destino->getCuenta()->getNumero());
+                                        throw BancoException("Error al depositar en la cuenta destino: " + string(e.what()));
+                                    }
+                                } catch (const BancoException& e) {
+                                    cout << "\nError: " << e.what() << "\n";
+                                    cout << "Ingrese un nuevo monto o presione Esc para volver.\n";
+                                    cout << "Presiona Enter para continuar...";
+                                    getch();
+                                }
+                            } else {
+                                cout << "\nTransferencia cancelada. Ingrese un nuevo monto o presione Esc para volver.\n";
+                                cout << "Presiona Enter para continuar...";
+                                getch();
+                            }
+                        }
                     }
                     break;
                 }
+                
                 case 2: { // Depositar
                     cout << "\n=== REALIZAR DEPOSITO ===\n\n";
                     cout << "Presione Esc para volver al menú de usuario.\n\n";
                     bool depositoRealizado = false;
                     while (!depositoRealizado) {
                         string inputMonto = ValidacionDatos::capturarEntrada(ValidacionDatos::MONTO, "Monto: $", 20);
-                        if (inputMonto.empty()) break; // Atrás
+                        if (inputMonto.empty()) break;
                         double monto = stod(inputMonto);
                         if (mostrarConfirmacion(monto, "DEPOSITO")) {
                             cliente->getCuenta()->depositar(monto);
@@ -438,9 +557,9 @@ void Banco::mostrarMenuUsuario(Cliente* cliente) {
                         } else {
                             cout << "\nDepósito cancelado. Ingrese un nuevo monto o presione Esc para volver.\n";
                             cout << "Presiona Enter para continuar...";
-                            _getch();
+                            getch();
                             system("cls");
-                            cout << "=== REALIZAR DEPOSITO ===\n\n";
+                            cout << "\n=== REALIZAR DEPOSITO ===\n\n";
                             cout << "Presione Esc para volver al menú de usuario.\n\n";
                         }
                     }
@@ -452,75 +571,86 @@ void Banco::mostrarMenuUsuario(Cliente* cliente) {
                     bool retiroRealizado = false;
                     while (!retiroRealizado) {
                         string inputMonto = ValidacionDatos::capturarEntrada(ValidacionDatos::MONTO, "Monto: $", 20);
-                        if (inputMonto.empty()) break; // Atrás
+                        if (inputMonto.empty()) break;
                         double monto = stod(inputMonto);
                         if (mostrarConfirmacion(monto, "RETIRO")) {
-                            if (cliente->getCuenta()->retirar(monto)) {
-                                cout << "\nRetiro de $" << fixed << setprecision(2) << monto << " realizado con éxito.\n";
-                                retiroRealizado = true;
+                            try {
+                                if (cliente->getCuenta()->retirar(monto)) {
+                                    cout << "\nRetiro de $" << fixed << setprecision(2) << monto << " realizado con éxito.\n";
+                                    cout << "\tSaldo actual: $" << fixed << setprecision(2) << cliente->getCuenta()->getSaldo() << "\n";
+                                    retiroRealizado = true;
+                                }
+                            } catch (const BancoException& e) {
+                                cout << "\nError: " << e.what() << "\n";
+                                cout << "Ingrese un nuevo monto o presione Esc para volver.\n";
+                                cout << "Presiona Enter para continuar...";
+                                getch();
+                                system("cls");
+                                cout << "\n=== REALIZAR RETIRO ===\n\n";
+                                cout << "Presione Esc para volver al menú de usuario.\n\n";
                             }
                         } else {
                             cout << "\nRetiro cancelado. Ingrese un nuevo monto o presione Esc para volver.\n";
                             cout << "Presiona Enter para continuar...";
-                            _getch();
+                            getch();
                             system("cls");
-                            cout << "=== REALIZAR RETIRO ===\n\n";
+                            cout << "\n=== REALIZAR RETIRO ===\n\n";
                             cout << "Presione Esc para volver al menú de usuario.\n\n";
                         }
                     }
                     break;
                 }
                 case 4: { // Consultar Transacciones
-                int seleccion = 0;
-                do {
-                    system("cls");
-                    const char* opciones_Transacciones[] = {"Rango de Fechas", "Monto Mínimo", "General", "Atrás"};
-                    pausarMarquesina();
-                    seleccion = seleccionar_opcion("\t\t=== CONSULTAR TRANSACCIONES ===\n\n", opciones_Transacciones, 4, 2);
-                    reanudarMarquesina();
-                    string tituloConsulta = "\n\t=== CONSULTAR TRANSACCIONES ===\n\nPresione Esc para volver al menú de usuario.\n\n";
-                    switch (seleccion) {
-                        case 1: { // Rango de Fechas
-                            system("cls");
-                            Fecha inicio = ValidacionDatos::capturarFechaInteractiva("Ingrese fecha de inicio (dd/mm/aaaa):");
-                            if (!inicio.esValida()) break; // Atrás
-                            Fecha fin = ValidacionDatos::capturarFechaInteractiva("Fecha de fin (dd/mm/aaaa):", false, &inicio);
-                            cout << "\n\n";
-                            if (!fin.esValida()) break;
-                            cliente->getCuenta()->consultaRangoFechas(inicio, fin, [](const Transaccion<double>* t) {
-                                cout << t->resumenTransaccion() << endl;
-                            });
-                            getch(); // Esperar a que el usuario vea las transacciones
-                            break;
+                    int seleccion = 0;
+                    do {
+                        system("cls");
+                        const char* opciones_Transacciones[] = {"Rango de Fechas", "Monto Mínimo", "General", "Atrás"};
+                        pausarMarquesina();
+                        seleccion = seleccionar_opcion("\t\t=== CONSULTAR TRANSACCIONES ===\n\n", opciones_Transacciones, 4, 2);
+                        reanudarMarquesina();
+                        string tituloConsulta = "\n\t=== CONSULTAR TRANSACCIONES ===\n\nPresione Esc para volver al menú de usuario.\n\n";
+                        switch (seleccion) {
+                            case 1: {
+                                system("cls");
+                                Fecha inicio = ValidacionDatos::capturarFechaInteractiva("Ingrese fecha de inicio (dd/mm/aaaa):");
+                                if (!inicio.esValida()) break;
+                                Fecha fin = ValidacionDatos::capturarFechaInteractiva("Fecha de fin (dd/mm/aaaa):", false, &inicio);
+                                cout << "\n\n";
+                                if (!fin.esValida()) break;
+                                cliente->getCuenta()->consultaRangoFechas(inicio, fin, [](const Transaccion<double>* t) {
+                                    cout << t->resumenTransaccion() << endl;
+                                });
+                                getch();
+                                break;
+                            }
+                            case 2: {
+                                system("cls");
+                                cout << tituloConsulta;
+                                string inputMonto = ValidacionDatos::capturarEntrada(ValidacionDatos::MONTO, "Monto mínimo: $", 20);
+                                if (inputMonto.empty()) break;
+                                double minMonto = stod(inputMonto);
+                                cliente->getCuenta()->consultaPersonalizada(minMonto, [](const Transaccion<double>* t) {
+                                    cout << t->resumenTransaccion() << endl;
+                                });
+                                getch();
+                                break;
+                            }
+                            case 3: {
+                                system("cls");
+                                cout << tituloConsulta;
+                                cliente->getCuenta()->consultaGeneral([](const Transaccion<double>* t) {
+                                    cout << t->resumenTransaccion() << endl;
+                                });
+                                getch();
+                                break;
+                            }
+                            case 4:
+                                break;
                         }
-                        case 2: { // Monto Mínimo
-                            system("cls");
-                            cout << tituloConsulta;
-                            string inputMonto = ValidacionDatos::capturarEntrada(ValidacionDatos::MONTO, "Monto mínimo: $", 20);
-                            if (inputMonto.empty()) break;
-                            double minMonto = stod(inputMonto);
-                            cliente->getCuenta()->consultaPersonalizada(minMonto, [](const Transaccion<double>* t) {
-                                cout << t->resumenTransaccion() << endl;
-                            });
-                            getch(); // Esperar a que el usuario vea las transacciones
-                            break;
-                        }
-                        case 3: { // General
-                            system("cls");
-                            cout << tituloConsulta;
-                            cliente->getCuenta()->consultaGeneral([](const Transaccion<double>* t) {
-                                cout << t->resumenTransaccion() << endl;
-                            });
-                            getch(); // Esperar a que el usuario vea las transacciones
-                            break;
-                        }
-                        case 4: // Atrás
-                            break;
-                    }
-                } while (seleccion != 4);
-                break;
-            }
-            }
+                    } while (seleccion != 4);
+                    break;
+                }
+            }            
         } catch (const BancoException& e) {
             cout << "\nError: " << e.what() << endl;
         } catch (const std::invalid_argument&) {
@@ -528,6 +658,8 @@ void Banco::mostrarMenuUsuario(Cliente* cliente) {
         } catch (const std::out_of_range&) {
             cout << "\nError: Entrada excede el rango permitido.\n";
         }
+        cout << "\nPresiona Enter para continuar...";
+        getch();
     }
 }
 
@@ -538,13 +670,30 @@ void Banco::mostrarMenuUsuario(Cliente* cliente) {
  * @param resultados Vector donde se almacenan los clientes encontrados.
  */
 void Banco::buscarPorPrefijo(CampoBusqueda campo, const string& valor, vector<Cliente*>& resultados) {
-    // Extraer clientes a un vector
+    NodoBST* raiz = nullptr;
+    string primerCoincidencia;
+
+    
     vector<Cliente*> clientesVector;
     clientes.recorrer([&](Cliente* c) {
         clientesVector.push_back(c);
+        string valorCliente;
+        switch (campo) {
+            case CEDULA: valorCliente = c->getCedula(); break;
+            case PRIMER_NOMBRE: valorCliente = c->getPrimerNombre(); break;
+            case SEGUNDO_NOMBRE: valorCliente = c->getSegundoNombre(); break;
+            case PRIMER_APELLIDO: valorCliente = c->getPrimerApellido(); break;
+            case SEGUNDO_APELLIDO: valorCliente = c->getSegundoApellido(); break;
+            default: break;
+        }
+        ArbolB::insertarNodoArbol(raiz, valorCliente, c);
+        // Verificar si es una coincidencia y guardar la primera
+        if (valorCliente.substr(0, valor.length()) == valor && primerCoincidencia.empty()) {
+            primerCoincidencia = valorCliente;
+        }
     });
 
-    // Ordenar según el campo
+    // Ordenar según el campo para la búsqueda binaria
     sort(clientesVector.begin(), clientesVector.end(), [&](Cliente* a, Cliente* b) {
         switch (campo) {
             case CEDULA: return a->getCedula() < b->getCedula();
@@ -597,6 +746,14 @@ void Banco::buscarPorPrefijo(CampoBusqueda campo, const string& valor, vector<Cl
             }
         }
     }
+
+    // Mostrar la tabla de resultados ordenada
+    ordenarCuentas(resultados, campo);
+
+    // Dibujar el árbol y mostrar el resultado
+    ArbolB::dibujarArbolGrafico(raiz, campo, valor, primerCoincidencia);
+    ArbolB::liberarArbol(raiz);
+    getch(); // Esperar a que el usuario vea el resultado
 }
 
 /**
@@ -605,10 +762,18 @@ void Banco::buscarPorPrefijo(CampoBusqueda campo, const string& valor, vector<Cl
  * @param resultados Vector donde se almacenan los clientes encontrados.
  */
 void Banco::buscarPorRangoSaldo(double valor, vector<Cliente*>& resultados) {
-    // Extraer clientes a un vector
+    // Crear árbol binario de búsqueda
+    NodoBST* raiz = nullptr;
+    string primerCoincidencia;
+
+    // Extraer clientes y construir el árbol
     vector<Cliente*> clientesVector;
     clientes.recorrer([&](Cliente* c) {
         clientesVector.push_back(c);
+        ostringstream oss;
+        oss << fixed << setprecision(2) << c->getCuenta()->getSaldo();
+        string valorCliente = oss.str();
+        ArbolB::insertarNodoArbol(raiz, valorCliente, c);
     });
 
     // Ordenar por saldo
@@ -634,8 +799,23 @@ void Banco::buscarPorRangoSaldo(double valor, vector<Cliente*>& resultados) {
     if (inicio != -1) {
         for (int i = inicio; i < clientesVector.size() && clientesVector[i]->getCuenta()->getSaldo() <= max; ++i) {
             resultados.push_back(clientesVector[i]);
+            if (primerCoincidencia.empty()) {
+                ostringstream oss;
+                oss << fixed << setprecision(2) << clientesVector[i]->getCuenta()->getSaldo();
+                primerCoincidencia = oss.str();
+            }
         }
     }
+
+    // Mostrar la tabla de resultados ordenada
+    ordenarCuentas(resultados, SALDO);
+
+    // Dibujar el árbol y mostrar el resultado
+    ostringstream oss;
+    oss << fixed << setprecision(2) << valor;
+    ArbolB::dibujarArbolGrafico(raiz, SALDO, oss.str(), primerCoincidencia);
+    ArbolB::liberarArbol(raiz);
+    getch(); // Esperar a que el usuario vea el resultado
 }
 
 /**
@@ -699,7 +879,6 @@ void Banco::ordenarCuentas(const vector<Cliente*>& resultados, CampoBusqueda cam
  * @brief Permite seleccionar un cliente y generar su código QR y PDF asociado.
  */
 void Banco::generarQR() {
-    while (true) {
         system("cls");
         if (clientes.estaVacia()) {
             cout << "\n\t\t===================================\n";
@@ -709,40 +888,27 @@ void Banco::generarQR() {
             getch();
             return;
         }
-        // Mostrar lista de clientes numerada
+        // Mostrar lista de clientes
         vector<Cliente*> listaClientes;
         clientes.recorrer([&](Cliente* c) { listaClientes.push_back(c); });
-        cout << "\n\t\t===============================================\n";
-        cout << "\t\t==== SELECCIONE UN CLIENTE PARA GENERAR QR ====\n";
-        cout << "\t\t===============================================\n\n";
-        cout << left<< "| " << setw(4)  << "#" << "| " << setw(12) << "Cédula" << "| " << setw(35) << "Nombre Completo" << "| " << setw(22) << "Cuenta" << "|" << endl;
-        cout << "-------------------------------------------------------------------------------\n";
-        for (size_t i = 0; i < listaClientes.size(); ++i) {
-            Cliente* c = listaClientes[i];
-            cout << left<< "| " << setw(4)  << (i + 1)<< "| " << setw(12) << c->getCedula()<< "| " << setw(35) << (c->getPrimerNombre() + " " + c->getSegundoNombre() + " " + c->getPrimerApellido() + " " + c->getSegundoApellido()) << "| " << setw(22) << c->getCuenta()->getNumero()<< "|" << endl;
-        }
-        cout << "-------------------------------------------------------------------------------\n";
-        string numero;
-        int seleccion = 0;
-        do {
-            ValidacionDatos::limpiar_linea("• Ingrese el número del cliente (o ESC para volver): ");
-            numero = ValidacionDatos::ingresar_dni("");
-            if (numero == "__ESC__") return; // Volver
-            if (!numero.empty()) {
-                try {
-                    seleccion = stoi(numero);
-                } catch (...) {
-                    seleccion = 0;
-                }
+        cout << "\n\t\t================================================\n";
+        cout << "\t\t=== SELECCIONE UN CLIENTE PARA GENERAR EL QR ===\n";
+        cout << "\t\t================================================\n\n";
+        cout << "Ingrese la cédula del cliente para la generación del QR: \n";
+        string cedula = ValidacionDatos::capturarEntrada(ValidacionDatos::CEDULA, "Cédula: ", 10);
+        if (cedula.empty()) return;
+
+        // Buscar cliente por cédula
+        Cliente* cliente = nullptr;
+        for (auto* c : listaClientes) {
+            if (c->getCedula() == cedula) {
+                cliente = c;
+                break;
             }
-        } while (seleccion < 1 || seleccion > static_cast<int>(listaClientes.size()));
-        cout << endl;
-        // Validar selección
-        Cliente* cliente = listaClientes[seleccion - 1];
+        }
         string nombres = cliente->getPrimerNombre() + " " + cliente->getSegundoNombre();
         string apellidos = cliente->getPrimerApellido() + " " + cliente->getSegundoApellido();
         string cuenta = cliente->getCuenta()->getNumero();
-        string cedula = cliente->getCedula();
         // Carpeta de salida
         string carpeta = "QRCodes";
         CreateDirectoryA(carpeta.c_str(), NULL);
@@ -752,26 +918,7 @@ void Banco::generarQR() {
 
         bool exito = generarQrPersonal(nombres, apellidos, cuenta, archivoPng, archivoPdf, 8);
         getch();
-        while (true) {
-            system("cls");
-            const char* opciones[] = {"Sí, generar PDF", "Volver a la lista de clientes", "Atrás"};
-            cout<<"\n\n\t\t=====================================\n";
-            cout << "\t\t====== DESEA GENERAR PDF DEL QR =====\n";
-            cout << "\t\t=====================================\n";
-            cout << "\t\t SELECCIONE UNA OPCIÓN:\n";
-            pausarMarquesina(); // Pausar marquesina antes de mostrar opciones
-            int opcion = seleccionar_opcion("", opciones, 3, 4);
-            reanudarMarquesina(); // Reanudar marquesina después de la selección
-            if (opcion == 1) {
-                PDFCreator pdf;
-                pdf.crearPDFPersonal(cliente, carpeta,archivoPng);
-            } else if (opcion == 2) {
-                break; // Volver a la lista
-            } else if (opcion == 3 || opcion == 27) {
-                return; // Volver al menú admin
-            }
-        }
-    }
+
 }
 
 /**
@@ -1017,13 +1164,12 @@ string Banco::generarNumeroCuenta(const string& tipoCuenta) {
  * @brief Ejecuta el menú principal del sistema bancario.
  */
 void Banco::ejecutar() {
-    const int NUM_OPCIONES = 7;
+    const int NUM_OPCIONES = 6; 
     int contador = 6; 
     const char* OPCIONES[NUM_OPCIONES] = {
         "Ingresar como Admin",
         "Ingresar como Usuario",
         "Crear Cuenta",
-        "Recuperar Cuenta",
         "Más Información",
         "Documentación",
         "Salir"
@@ -1041,7 +1187,7 @@ void Banco::ejecutar() {
         cout << "\n\t\t=== MENÚ PRINCIPAL ===\n";
         pausarMarquesina();
         opcion = seleccionar_opcion("", OPCIONES, NUM_OPCIONES, contador);
-		reanudarMarquesina();
+        reanudarMarquesina();
         switch (opcion) {
                 case 1: // Administrador
                     mostrarMenuAdmin();
@@ -1052,20 +1198,17 @@ void Banco::ejecutar() {
                 case 3:// Crear cuenta
                     crearCuenta(); 
                     break;
-                case 4: // Recuperar Cuenta
-                    recuperarCuenta(clientes);
-                    break;
-                case 5: // Más Información
+                case 4: // Más Información
                     mostrar_ayuda_tecnica();
                     break;
-                case 6: // Documentación
+                case 5: // Documentación
                     generarDocumentacion();
                     break;
-                case 7: // Salir
+                case 6: // Salir
                     return;
             }
             reanudarMarquesina();
-        } while (opcion != NUM_OPCIONES); // 7 = Salir
+        } while (opcion != NUM_OPCIONES); // 6 = Salir
     } catch (const BancoException& e) {
         cout << "\nError: " << e.what() << endl;
         cout << "\nPresiona Enter para volver...";

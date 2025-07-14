@@ -8,7 +8,7 @@ Compression=lzma
 SolidCompression=yes
 
 [Files]
-Source: "D:\UNI\Software\6to\ED\Programas ED\Proyecto Banco\banco.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\ariel\Desktop\Final\Proyecto_Estructura_de_Datos-main\Proyecto Banco\banco.exe"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\banco"; Filename: "{app}\banco.exe"

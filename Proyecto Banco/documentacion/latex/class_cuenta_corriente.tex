@@ -1,5 +1,14 @@
 \doxysection{Cuenta\+Corriente Class Reference}
 \hypertarget{class_cuenta_corriente}{}\label{class_cuenta_corriente}\index{CuentaCorriente@{CuentaCorriente}}
+
+
+Define una clase para cuentas corrientes, heredada de la clase \doxylink{class_cuenta}{Cuenta}, que incluye un límite de sobregiro permitido.  
+
+
+
+
+{\ttfamily \#include $<$Cuenta\+Corriente.\+h$>$}
+
 Inheritance diagram for Cuenta\+Corriente\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -9,9 +18,8 @@ Inheritance diagram for Cuenta\+Corriente\+:\begin{figure}[H]
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{class_cuenta_corriente_a12e08e8895a7c29996f3eb103f6257c7}\label{class_cuenta_corriente_a12e08e8895a7c29996f3eb103f6257c7} 
-{\bfseries Cuenta\+Corriente} (string numero, \mbox{\hyperlink{class_cliente}{Cliente}} \texorpdfstring{$\ast$}{*}c, \mbox{\hyperlink{class_fecha}{Fecha}} fecha, double sobregiro)
-\item 
+\mbox{\hyperlink{class_cuenta_corriente_a12e08e8895a7c29996f3eb103f6257c7}{Cuenta\+Corriente}} (string numero, \mbox{\hyperlink{class_cliente}{Cliente}} \texorpdfstring{$\ast$}{*}c, \mbox{\hyperlink{class_fecha}{Fecha}} fecha, double sobregiro)
+\begin{DoxyCompactList}\small\item\em Implementa las operaciones de una cuenta corriente, incluyendo depósitos, retiros y resumen, con manejo de sobregiro. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_cuenta_corriente_a56673035f304ac7e10a6d36aa066b543}{depositar}} (double monto, \mbox{\hyperlink{class_fecha}{Fecha}} fecha=\mbox{\hyperlink{class_fecha}{Fecha}}(), bool es\+Transferencia=false, string cuenta\+Origen="{}"{}) override
 \item 
 bool \mbox{\hyperlink{class_cuenta_corriente_a7a74b38597cfa78d2432e3703b7e57b3}{retirar}} (double monto, \mbox{\hyperlink{class_fecha}{Fecha}} fecha=\mbox{\hyperlink{class_fecha}{Fecha}}(), bool es\+Transferencia=false, string cuenta\+Destino="{}"{}) override
@@ -51,6 +59,48 @@ double {\bfseries saldo}
 \item 
 \mbox{\hyperlink{class_lista_doble_circular}{Lista\+Doble\+Circular}}$<$ \mbox{\hyperlink{class_transaccion}{Transaccion}}$<$ double $>$ $>$ {\bfseries transacciones}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Define una clase para cuentas corrientes, heredada de la clase \doxylink{class_cuenta}{Cuenta}, que incluye un límite de sobregiro permitido. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em numero} & Número identificador de la cuenta. \\
+\hline
+{\em c} & Puntero al cliente asociado a la cuenta. \\
+\hline
+{\em fecha} & \doxylink{class_fecha}{Fecha} de creación o modificación de la cuenta. \\
+\hline
+{\em sobregiro} & Límite de sobregiro permitido para la cuenta. Proporciona métodos para depositar, retirar fondos y mostrar un resumen, con soporte para transferencias y fechas personalizadas. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-constructors}
+\Hypertarget{class_cuenta_corriente_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_cuenta_corriente_a12e08e8895a7c29996f3eb103f6257c7}\index{CuentaCorriente@{CuentaCorriente}!CuentaCorriente@{CuentaCorriente}}
+\index{CuentaCorriente@{CuentaCorriente}!CuentaCorriente@{CuentaCorriente}}
+\doxysubsubsection{\texorpdfstring{CuentaCorriente()}{CuentaCorriente()}}
+{\footnotesize\ttfamily \label{class_cuenta_corriente_a12e08e8895a7c29996f3eb103f6257c7} 
+Cuenta\+Corriente\+::\+Cuenta\+Corriente (\begin{DoxyParamCaption}\item[{string}]{numero}{, }\item[{\mbox{\hyperlink{class_cliente}{Cliente}} \texorpdfstring{$\ast$}{*}}]{c}{, }\item[{\mbox{\hyperlink{class_fecha}{Fecha}}}]{fecha}{, }\item[{double}]{sobregiro}{}\end{DoxyParamCaption})}
+
+
+
+Implementa las operaciones de una cuenta corriente, incluyendo depósitos, retiros y resumen, con manejo de sobregiro. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em numero} & Número identificador de la cuenta. \\
+\hline
+{\em c} & Puntero al cliente asociado a la cuenta. \\
+\hline
+{\em fecha} & \doxylink{class_fecha}{Fecha} de la transacción o creación. \\
+\hline
+{\em sobregiro} & Límite de sobregiro permitido para la cuenta. Permite depositar fondos, retirar hasta el saldo más el sobregiro, y genera un resumen con el saldo actual. Incluye validación de montos y redondeo a dos decimales. \\
+\hline
+\end{DoxyParams}
 
 
 \label{doc-func-members}

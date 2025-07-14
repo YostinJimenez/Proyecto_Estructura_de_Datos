@@ -1,20 +1,21 @@
 \doxysection{Cuenta\+Corriente.\+h}
 \hypertarget{_cuenta_corriente_8h_source}{}\label{_cuenta_corriente_8h_source}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ CUENTACORRIENTE\_H}}
-\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ CUENTACORRIENTE\_H}}
-\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}Cuenta.h"{}}}
-\DoxyCodeLine{00004\ }
-\DoxyCodeLine{00005\ \textcolor{keyword}{class\ }CuentaCorriente\ :\ \textcolor{keyword}{public}\ Cuenta\ \{}
-\DoxyCodeLine{00006\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00007\ \ \ \ \ \textcolor{keywordtype}{double}\ sobregiroPermitido;}
-\DoxyCodeLine{00008\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00009\ \ \ \ \ CuentaCorriente(\textcolor{keywordtype}{string}\ numero,\ \mbox{\hyperlink{class_cliente}{Cliente}}*\ c,\ \mbox{\hyperlink{class_fecha}{Fecha}}\ fecha,\ \textcolor{keywordtype}{double}\ sobregiro);}
-\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keywordtype}{void}\ depositar(\textcolor{keywordtype}{double}\ monto,\ \mbox{\hyperlink{class_fecha}{Fecha}}\ fecha\ =\ \mbox{\hyperlink{class_fecha}{Fecha}}(),\ \textcolor{keywordtype}{bool}\ esTransferencia\ =\ \textcolor{keyword}{false},\ \textcolor{keywordtype}{string}\ cuentaOrigen\ =\ \textcolor{stringliteral}{"{}"{}})\ \textcolor{keyword}{override};}
-\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keywordtype}{bool}\ retirar(\textcolor{keywordtype}{double}\ monto,\ \mbox{\hyperlink{class_fecha}{Fecha}}\ fecha\ =\ \mbox{\hyperlink{class_fecha}{Fecha}}(),\ \textcolor{keywordtype}{bool}\ esTransferencia\ =\ \textcolor{keyword}{false},\ \textcolor{keywordtype}{string}\ cuentaDestino\ =\ \textcolor{stringliteral}{"{}"{}})\ \textcolor{keyword}{override};}
-\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{string}\ mostrarResumen()\ \textcolor{keyword}{override};}
-\DoxyCodeLine{00013\ \};}
-\DoxyCodeLine{00014\ }
-\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#ifndef\ CUENTACORRIENTE\_H}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ CUENTACORRIENTE\_H}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}Cuenta.h"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_cuenta_corriente_a12e08e8895a7c29996f3eb103f6257c7}{CuentaCorriente}}\ :\ \textcolor{keyword}{public}\ Cuenta\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{double}\ sobregiroPermitido;}
+\DoxyCodeLine{00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{class_cuenta_corriente_a12e08e8895a7c29996f3eb103f6257c7}{CuentaCorriente}}(\textcolor{keywordtype}{string}\ numero,\ \mbox{\hyperlink{class_cliente}{Cliente}}*\ c,\ \mbox{\hyperlink{class_fecha}{Fecha}}\ fecha,\ \textcolor{keywordtype}{double}\ sobregiro);}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{void}\ depositar(\textcolor{keywordtype}{double}\ monto,\ \mbox{\hyperlink{class_fecha}{Fecha}}\ fecha\ =\ \mbox{\hyperlink{class_fecha}{Fecha}}(),\ \textcolor{keywordtype}{bool}\ esTransferencia\ =\ \textcolor{keyword}{false},\ \textcolor{keywordtype}{string}\ cuentaOrigen\ =\ \textcolor{stringliteral}{"{}"{}})\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{bool}\ retirar(\textcolor{keywordtype}{double}\ monto,\ \mbox{\hyperlink{class_fecha}{Fecha}}\ fecha\ =\ \mbox{\hyperlink{class_fecha}{Fecha}}(),\ \textcolor{keywordtype}{bool}\ esTransferencia\ =\ \textcolor{keyword}{false},\ \textcolor{keywordtype}{string}\ cuentaDestino\ =\ \textcolor{stringliteral}{"{}"{}})\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{string}\ mostrarResumen()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00021\ \};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sistema Bancario: Banco.h Source File</title>
+<title>Proyecto Banco: Banco.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Sistema Bancario
+   <div id="projectname">Proyecto Banco<span id="projectnumber">&#160;v 1.0</span>
    </div>
+   <div id="projectbrief">Proyecto Banco</div>
   </td>
  </tr>
  </tbody>
@@ -91,50 +92,75 @@ $(function(){initNavTree('_banco_8h_source.html','',''); });
   <div class="headertitle"><div class="title">Banco.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef BANCO_H</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define BANCO_H</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;cstdlib&gt;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;Cliente.h&quot;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;ListaDobleCircular.h&quot;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#define TECLA_ARRIBA 72</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#define TECLA_ABAJO 80</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#define ENTER 13</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">using namespace </span>std;</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="foldopen" id="foldopen00013" data-start="{" data-end="};">
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="class_banco.html">   13</a></span><span class="keyword">class </span>Banco {</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <a class="code hl_class" href="class_lista_doble_circular.html">ListaDobleCircular&lt;Cliente&gt;</a> clientes;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keyword">enum</span> CampoBusqueda { CEDULA, PRIMER_NOMBRE, SEGUNDO_NOMBRE, PRIMER_APELLIDO, SEGUNDO_APELLIDO, SALDO };</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keywordtype">bool</span> mostrarConfirmacion(<span class="keywordtype">double</span> monto, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; operacion);</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keywordtype">string</span> seleccionarTipoCuenta();</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordtype">void</span> mostrarMenuUsuario(<a class="code hl_class" href="class_cliente.html">Cliente</a>* cliente);</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordtype">void</span> buscarPorPrefijo(CampoBusqueda campo, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; valor, vector&lt;Cliente*&gt;&amp; resultados);</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordtype">void</span> buscarPorRangoSaldo(<span class="keywordtype">double</span> valor, vector&lt;Cliente*&gt;&amp; resultados);</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordtype">void</span> ordenarCuentas(<span class="keyword">const</span> vector&lt;Cliente*&gt;&amp; resultados, CampoBusqueda campo);</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordtype">void</span> mostrar_ayuda_tecnica();</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keywordtype">void</span> mostrarBaseDatos();</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordtype">void</span> generarDocumentacion();</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keywordtype">void</span> generarQRL();</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordtype">void</span> mover_cursor_opciones(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keywordtype">int</span> seleccionar_opcion(<span class="keyword">const</span> <span class="keywordtype">char</span>* titulo, <span class="keyword">const</span> <span class="keywordtype">char</span>* opciones[], <span class="keywordtype">int</span> n, <span class="keywordtype">int</span> fila_inicio);</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    Banco();</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keywordtype">void</span> mover_cursor(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keywordtype">void</span> crearCuenta();</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordtype">void</span> mostrarMenuUsuario();</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordtype">void</span> mostrarMenuAdmin();</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordtype">void</span> ejecutar();</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordtype">string</span> generarNumeroCuenta(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; tipoCuenta);</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>};</div>
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#ifndef BANCO_H</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#define BANCO_H</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &quot;Cliente.h&quot;</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &quot;ListaDobleCircular.h&quot;</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#include &lt;cstdlib&gt;</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#define TECLA_ARRIBA 72</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#define TECLA_ABAJO 80</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#define ENTER 13</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keyword">using namespace </span>std;</div>
+<div class="foldopen" id="foldopen00046" data-start="{" data-end="};">
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="class_banco.html">   46</a></span><span class="keyword">class </span><a class="code hl_function" href="class_banco.html#a686e51b219dc175e432e91559298b259">Banco</a> {</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <a class="code hl_class" href="class_lista_doble_circular.html">ListaDobleCircular&lt;Cliente&gt;</a> clientes;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keyword">enum</span> CampoBusqueda { CEDULA, PRIMER_NOMBRE, SEGUNDO_NOMBRE, PRIMER_APELLIDO, SEGUNDO_APELLIDO, SALDO };</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keywordtype">bool</span> mostrarConfirmacion(<span class="keywordtype">double</span> monto, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; operacion);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keywordtype">string</span> seleccionarTipoCuenta();</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_banco.html#aa516953aaefe8e32ae542bea0fc8177f">mostrarMenuUsuario</a>(<a class="code hl_class" href="class_cliente.html">Cliente</a>* cliente);</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keywordtype">void</span> buscarPorPrefijo(CampoBusqueda campo, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; valor, vector&lt;Cliente*&gt;&amp; resultados);</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keywordtype">void</span> buscarPorRangoSaldo(<span class="keywordtype">double</span> valor, vector&lt;Cliente*&gt;&amp; resultados);</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="keywordtype">void</span> ordenarCuentas(<span class="keyword">const</span> vector&lt;Cliente*&gt;&amp; resultados, CampoBusqueda campo);</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <span class="keywordtype">void</span> mostrar_ayuda_tecnica();</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="keywordtype">void</span> mostrarBaseDatos();</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="keywordtype">void</span> imprimirCuadroBusqueda(<span class="keyword">const</span> std::string&amp; texto, <span class="keywordtype">int</span> ancho);</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_banco.html#a8b2579826f523f08509d51507c12ed99">generarDocumentacion</a>();</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_banco.html#a06ad2ffd6ef3a935a2643ee01d0cdbe6">generarQR</a>();</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="class_banco.html#a3522616922347c41e2163120f08744c8">seleccionar_opcion</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* titulo, <span class="keyword">const</span> <span class="keywordtype">char</span>* opciones[], <span class="keywordtype">int</span> n, <span class="keywordtype">int</span> fila_inicio);</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span></div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    <a class="code hl_function" href="class_banco.html#a686e51b219dc175e432e91559298b259">Banco</a>();</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span></div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_banco.html#ac08f990d166e53475ee9591471ff0f91">crearCuenta</a>();</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span></div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_banco.html#aa516953aaefe8e32ae542bea0fc8177f">mostrarMenuUsuario</a>();</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span></div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_banco.html#a8ca8bef5c1e5a29b1f1eae3cf9b1996b">mostrarMenuAdmin</a>();</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span></div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_banco.html#a08eba9f2b3bb91a5fd59a919b99f1c83">ejecutar</a>();</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span></div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    <span class="keywordtype">string</span> <a class="code hl_function" href="class_banco.html#a612c2fea79fbda76961d2732d45ac1ba">generarNumeroCuenta</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; tipoCuenta);</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>};</div>
 </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclass_cliente_html"><div class="ttname"><a href="class_cliente.html">Cliente</a></div><div class="ttdef"><b>Definition</b> Cliente.h:10</div></div>
-<div class="ttc" id="aclass_lista_doble_circular_html"><div class="ttname"><a href="class_lista_doble_circular.html">ListaDobleCircular</a></div><div class="ttdef"><b>Definition</b> ListaDobleCircular.h:7</div></div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span> </div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclass_banco_html_a06ad2ffd6ef3a935a2643ee01d0cdbe6"><div class="ttname"><a href="class_banco.html#a06ad2ffd6ef3a935a2643ee01d0cdbe6">Banco::generarQR</a></div><div class="ttdeci">void generarQR()</div><div class="ttdoc">Permite seleccionar un cliente y generar su código QR y PDF asociado.</div><div class="ttdef"><b>Definition</b> Banco.cpp:701</div></div>
+<div class="ttc" id="aclass_banco_html_a08eba9f2b3bb91a5fd59a919b99f1c83"><div class="ttname"><a href="class_banco.html#a08eba9f2b3bb91a5fd59a919b99f1c83">Banco::ejecutar</a></div><div class="ttdeci">void ejecutar()</div><div class="ttdoc">Ejecuta el menú principal del sistema bancario.</div><div class="ttdef"><b>Definition</b> Banco.cpp:1019</div></div>
+<div class="ttc" id="aclass_banco_html_a3522616922347c41e2163120f08744c8"><div class="ttname"><a href="class_banco.html#a3522616922347c41e2163120f08744c8">Banco::seleccionar_opcion</a></div><div class="ttdeci">int seleccionar_opcion(const char *titulo, const char *opciones[], int n, int fila_inicio)</div><div class="ttdoc">Permite seleccionar una opción de un menú usando el teclado (flechas, enter, esc).</div><div class="ttdef"><b>Definition</b> Banco.cpp:137</div></div>
+<div class="ttc" id="aclass_banco_html_a612c2fea79fbda76961d2732d45ac1ba"><div class="ttname"><a href="class_banco.html#a612c2fea79fbda76961d2732d45ac1ba">Banco::generarNumeroCuenta</a></div><div class="ttdeci">string generarNumeroCuenta(const string &amp;tipoCuenta)</div><div class="ttdoc">Genera un número de cuenta único y válido para un tipo de cuenta.</div><div class="ttdef"><b>Definition</b> Banco.cpp:991</div></div>
+<div class="ttc" id="aclass_banco_html_a686e51b219dc175e432e91559298b259"><div class="ttname"><a href="class_banco.html#a686e51b219dc175e432e91559298b259">Banco::Banco</a></div><div class="ttdeci">Banco()</div><div class="ttdoc">Constructor de la clase Banco. Inicializa la lista de clientes y otros recursos.</div><div class="ttdef"><b>Definition</b> Banco.cpp:83</div></div>
+<div class="ttc" id="aclass_banco_html_a8b2579826f523f08509d51507c12ed99"><div class="ttname"><a href="class_banco.html#a8b2579826f523f08509d51507c12ed99">Banco::generarDocumentacion</a></div><div class="ttdeci">void generarDocumentacion()</div><div class="ttdoc">Genera la documentación del proyecto usando Doxygen y la abre en el navegador.</div><div class="ttdef"><b>Definition</b> Banco.cpp:119</div></div>
+<div class="ttc" id="aclass_banco_html_a8ca8bef5c1e5a29b1f1eae3cf9b1996b"><div class="ttname"><a href="class_banco.html#a8ca8bef5c1e5a29b1f1eae3cf9b1996b">Banco::mostrarMenuAdmin</a></div><div class="ttdeci">void mostrarMenuAdmin()</div><div class="ttdoc">Muestra el menú de administrador y permite gestionar el sistema.</div><div class="ttdef"><b>Definition</b> Banco.cpp:781</div></div>
+<div class="ttc" id="aclass_banco_html_aa516953aaefe8e32ae542bea0fc8177f"><div class="ttname"><a href="class_banco.html#aa516953aaefe8e32ae542bea0fc8177f">Banco::mostrarMenuUsuario</a></div><div class="ttdeci">void mostrarMenuUsuario()</div><div class="ttdoc">Muestra el menú de usuario para iniciar sesión y operar sobre su cuenta.</div><div class="ttdef"><b>Definition</b> Banco.cpp:348</div></div>
+<div class="ttc" id="aclass_banco_html_ac08f990d166e53475ee9591471ff0f91"><div class="ttname"><a href="class_banco.html#ac08f990d166e53475ee9591471ff0f91">Banco::crearCuenta</a></div><div class="ttdeci">void crearCuenta()</div><div class="ttdoc">Crea una nueva cuenta bancaria y la agrega a la lista de clientes.</div><div class="ttdef"><b>Definition</b> Banco.cpp:257</div></div>
+<div class="ttc" id="aclass_cliente_html"><div class="ttname"><a href="class_cliente.html">Cliente</a></div><div class="ttdef"><b>Definition</b> Cliente.h:27</div></div>
+<div class="ttc" id="aclass_lista_doble_circular_html"><div class="ttname"><a href="class_lista_doble_circular.html">ListaDobleCircular</a></div><div class="ttdoc">Clase plantilla que implementa una lista doblemente enlazada circular para gestionar elementos de tip...</div><div class="ttdef"><b>Definition</b> ListaDobleCircular.h:18</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

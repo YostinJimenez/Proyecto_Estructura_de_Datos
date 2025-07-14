@@ -41,7 +41,6 @@ template<typename T>
 Transaccion<T>::Transaccion(string tipo, T monto, Fecha fecha, string numCuenta, bool esTransferencia, string cuentaRelacionada)
     : tipo(tipo), monto(monto), fecha(fecha), numeroCuenta(numCuenta), esTransferencia(esTransferencia), cuentaRelacionada(cuentaRelacionada) {
     try {
-        ValidacionDatos::validarMonto(monto, false);
         ValidacionDatos::validarFecha(fecha);
     } catch (const BancoException& e) {
         throw;
